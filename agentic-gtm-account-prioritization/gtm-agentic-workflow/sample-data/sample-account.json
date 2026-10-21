@@ -1,0 +1,20 @@
+{
+  "account_id": "demo-acct-1042",
+  "account_context": {
+    "account_name": "Northstar Field Services",
+    "industry": "Business Services",
+    "region": "North America",
+    "priority_score": 0.87,
+    "growth_vector": "Expansion fit",
+    "contact_readiness": "2 of 4 buying-group roles represented",
+    "contacts": [
+      {"name": "Riley Chen", "title": "Operations Director", "role_hypothesis": "likely champion", "source": "synthetic fixture", "verified": false},
+      {"name": "Jordan Patel", "title": "VP, Business Systems", "role_hypothesis": "possible buyer", "source": "synthetic fixture", "verified": false}
+    ],
+    "evidence": [
+      {"key": "signal-001", "summary": "Synthetic example of recent workflow growth", "source": "fictional Snowflake fixture", "freshness": "demo only"},
+      {"key": "signal-002", "summary": "Synthetic example of missing technical evaluator coverage", "source": "fictional CRM fixture", "freshness": "demo only"}
+    ],
+    "sequence_catalog": ["Expansion discovery", "New customer discovery"]
+  }
+}

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1480" viewBox="0 0 1800 1480" role="img" aria-labelledby="title desc">
+<title id="title">GTM AI Account Prioritization and Multi-Agent Architecture</title>
+<desc id="desc">Light professional architecture diagram showing Salesforce and Gong as data inputs to Snowflake, scoring, CrewAI multi-agent workflow, and Slack AE review.</desc>
+<defs>
+ <linearGradient id="canvas" x2="0" y2="1"><stop stop-color="#f7fafc"/><stop offset="1" stop-color="#edf3f7"/></linearGradient>
+ <linearGradient id="hero" x2="1"><stop stop-color="#e6f1fb"/><stop offset="1" stop-color="#eeeafa"/></linearGradient>
+ <filter id="shadow" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#36516e" flood-opacity=".10"/></filter>
+ <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#8299ae"/></marker>
+ <marker id="arrowTeal" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#24868a"/></marker>
+ <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#7b67a8"/></marker>
+ <style>
+ .title{font:700 34px Inter,Arial,sans-serif;fill:#17324c;letter-spacing:-.5px}.subtitle{font:16px Inter,Arial,sans-serif;fill:#536a80}.section{font:700 13px Inter,Arial,sans-serif;fill:#257982;letter-spacing:1.6px}.h{font:700 17px Inter,Arial,sans-serif;fill:#203b55}.body{font:13px Inter,Arial,sans-serif;fill:#405a73}.small{font:11px Inter,Arial,sans-serif;fill:#667d92}.mono{font:11px ui-monospace,Menlo,monospace;fill:#637b91}.tag{font:700 10px ui-monospace,Menlo,monospace;fill:#59728a;letter-spacing:.5px}.blue{fill:#316e9e}.teal{fill:#247d80}.purple{fill:#70569e}.amber{fill:#9a681c}.white{fill:#fff}
+ </style>
+</defs>
+<rect width="1800" height="1480" fill="url(#canvas)"/>
+<rect x="48" y="38" width="1704" height="130" rx="20" fill="url(#hero)" stroke="#d8e4ee"/>
+<text x="82" y="76" class="section">GTM AI · TECHNICAL INTERVIEW WALKTHROUGH</text>
+<text x="82" y="118" class="title">Account intelligence → multi-agent preparation → AE decision</text>
+<text x="82" y="147" class="subtitle">Salesforce + Gong inputs · Snowflake data foundation · scored account queue · CrewAI orchestration · Slack AE interface</text>
+<rect x="1460" y="66" width="246" height="38" rx="19" fill="#fff8e9" stroke="#ead29f"/><circle cx="1483" cy="85" r="5" fill="#d39a37"/><text x="1498" y="89" class="tag amber">TARGET DESIGN · SIMULATED</text>
+
+<!-- 1 data sources -->
+<text x="64" y="211" class="section">01 · DATA INPUTS → SNOWFLAKE FOUNDATION</text>
+<rect x="60" y="230" width="1680" height="325" rx="18" fill="#fff" stroke="#dbe5ed"/>
+<g filter="url(#shadow)"><rect x="92" y="276" width="280" height="106" rx="14" fill="#f0f6fc" stroke="#bdd4e7"/><rect x="92" y="276" width="6" height="106" rx="3" fill="#4b87b6"/></g>
+<text x="116" y="307" class="tag blue">CRM SOURCE</text><text x="116" y="339" class="h">Salesforce</text><text x="116" y="363" class="body">All account records · opportunities · owners</text>
+<g filter="url(#shadow)"><rect x="92" y="408" width="280" height="106" rx="14" fill="#f7f3fb" stroke="#d6c8e8"/><rect x="92" y="408" width="6" height="106" rx="3" fill="#8972ac"/></g>
+<text x="116" y="439" class="tag purple">CONVERSATION SOURCE</text><text x="116" y="471" class="h">Gong</text><text x="116" y="495" class="body">Calls · transcripts · tracker results</text>
+<path d="M372 329H419V371H447" fill="none" stroke="#8299ae" stroke-width="2.2" marker-end="url(#arrow)"/>
+<path d="M372 461H419V414H447" fill="none" stroke="#8299ae" stroke-width="2.2" marker-end="url(#arrow)"/>
+<g filter="url(#shadow)"><rect x="459" y="273" width="460" height="247" rx="16" fill="#f0f8f8" stroke="#b7d8d6"/><rect x="459" y="273" width="7" height="247" rx="3" fill="#378c8c"/></g>
+<text x="488" y="307" class="tag teal">GOVERNED DATA + SEMANTIC LAYER</text><text x="488" y="339" class="h">Snowflake</text>
+<rect x="488" y="357" width="402" height="43" rx="8" fill="#fff" stroke="#dbe8e8"/><text x="505" y="384" class="body">CRM foundation · account + opportunity joins</text>
+<rect x="488" y="409" width="402" height="43" rx="8" fill="#fff" stroke="#dbe8e8"/><text x="505" y="436" class="body">Gong Foundation · tracker metadata + results</text>
+<rect x="488" y="461" width="402" height="43" rx="8" fill="#fff" stroke="#dbe8e8"/><text x="505" y="488" class="body">Conversational Insights · themes + evidence</text>
+<path d="M919 395H975" fill="none" stroke="#24868a" stroke-width="2.5" marker-end="url(#arrowTeal)"/>
+<g filter="url(#shadow)"><rect x="987" y="273" width="340" height="247" rx="16" fill="#fff" stroke="#cbd9e6"/></g>
+<text x="1015" y="307" class="tag blue">ANALYTICAL CONSUMPTION</text><text x="1015" y="339" class="h">Ask Athena / Snowflake</text><text x="1015" y="367" class="body">Query account + conversation context</text><text x="1015" y="390" class="body">Explore tracker and insight patterns</text><text x="1015" y="413" class="body">Join themes to segment / opportunity</text>
+<rect x="1015" y="438" width="282" height="56" rx="9" fill="#f7f9fb" stroke="#e0e8ef"/><text x="1030" y="461" class="small">Illustrative Gong tracker examples from prior discussion:</text><text x="1030" y="481" class="small">competitor terms · pricing concern · integration · HR use case</text>
+<path d="M1327 395H1384" fill="none" stroke="#8299ae" stroke-width="2.2" marker-end="url(#arrow)"/>
+<g><rect x="1396" y="302" width="300" height="186" rx="16" fill="#fffaf0" stroke="#ead8ae"/><text x="1422" y="337" class="tag amber">LINEAGE / TRUST</text><text x="1422" y="370" class="h">Evidence stays attached</text><text x="1422" y="399" class="body">Source · timestamp · account key</text><text x="1422" y="422" class="body">Quote / tracker / insight reference</text><text x="1422" y="455" class="small">Examples are not a verified tracker inventory.</text></g>
+
+<!-- 2 scoring -->
+<text x="64" y="603" class="section">02 · ACCOUNT PRIORITIZATION</text>
+<rect x="60" y="622" width="1680" height="276" rx="18" fill="#fff" stroke="#dbe5ed"/>
+<g filter="url(#shadow)"><rect x="92" y="672" width="570" height="169" rx="15" fill="#f6f3fb" stroke="#d8cdea"/></g>
+<text x="118" y="705" class="tag purple">MODEL-OWNED FEATURE VECTOR · SCORES FROM USER CONTEXT</text>
+<rect x="118" y="726" width="240" height="42" rx="8" fill="#fff" stroke="#e4deef"/><text x="134" y="752" class="body">EWGS score</text>
+<rect x="374" y="726" width="260" height="42" rx="8" fill="#fff" stroke="#e4deef"/><text x="390" y="752" class="body">intent_score</text>
+<rect x="118" y="780" width="240" height="42" rx="8" fill="#fff" stroke="#e4deef"/><text x="134" y="806" class="body">engagement score</text>
+<rect x="374" y="780" width="260" height="42" rx="8" fill="#fff" stroke="#e4deef"/><text x="390" y="806" class="body">critical_events score</text>
+<path d="M662 756H712" fill="none" stroke="#7b67a8" stroke-width="2.4" marker-end="url(#arrowPurple)"/>
+<g filter="url(#shadow)"><rect x="724" y="672" width="270" height="169" rx="15" fill="#f1f7fb" stroke="#c9dce9"/></g>
+<text x="749" y="705" class="tag blue">ADDITIONAL SIGNAL</text><text x="749" y="740" class="h">PTB / ROP score</text><text x="749" y="771" class="body">Feed into model-owned ranker</text><text x="749" y="798" class="small">Acronym + applicability to confirm</text>
+<path d="M994 756H1044" fill="none" stroke="#7b67a8" stroke-width="2.4" marker-end="url(#arrowPurple)"/>
+<g filter="url(#shadow)"><rect x="1056" y="672" width="282" height="169" rx="15" fill="#edf7f6" stroke="#bfdfdc"/></g>
+<text x="1082" y="705" class="tag teal">RANKER / ANALYTICS</text><text x="1082" y="740" class="h">Composite priority</text><text x="1082" y="771" class="body">PRIORITY_SCORE + rationale</text><text x="1082" y="798" class="small">Weights / calibration are model-owned</text>
+<path d="M1338 756H1388" fill="none" stroke="#24868a" stroke-width="2.4" marker-end="url(#arrowTeal)"/>
+<g><rect x="1400" y="672" width="296" height="169" rx="15" fill="#fffaf0" stroke="#ead8ae"/><text x="1425" y="705" class="tag amber">SEPARATE CONTEXT</text><text x="1425" y="740" class="h">Growth + readiness</text><text x="1425" y="771" class="body">Growth Vector · contact coverage</text><text x="1425" y="798" class="small">Displayed separately; rank effect TBD</text></g>
+<text x="92" y="870" class="small">Preserve unscored and unknown states. Do not substitute the LLM for the priority model; show score version, freshness, rationale, and evidence lineage.</text>
+
+<!-- 3 control/agents -->
+<text x="64" y="946" class="section">03 · EVENT-DRIVEN MULTI-AGENT WORKFLOW · SLACK IS THE AE INTERFACE</text>
+<rect x="60" y="965" width="1680" height="397" rx="18" fill="#fff" stroke="#dbe5ed"/>
+<!-- Slack queue -->
+<g filter="url(#shadow)"><rect x="92" y="1031" width="270" height="204" rx="15" fill="#f8f3f8" stroke="#dfcfe2"/></g><text x="118" y="1067" class="tag purple">SELLER CONTROL SURFACE</text><text x="118" y="1100" class="h">Slack AE queue</text><text x="118" y="1129" class="body">Rank · score · rationale</text><text x="118" y="1152" class="body">Evidence · contact gap</text><rect x="118" y="1176" width="214" height="35" rx="8" fill="#fff" stroke="#ddcfe2"/><text x="133" y="1199" class="small">Accept · defer · dismiss</text>
+<path d="M362 1133H412" fill="none" stroke="#8299ae" stroke-width="2.3" marker-end="url(#arrow)"/>
+<!-- Flow -->
+<g filter="url(#shadow)"><rect x="424" y="1031" width="300" height="204" rx="15" fill="#f2eff9" stroke="#d5c9e8"/></g><text x="450" y="1067" class="tag purple">CONTROL PLANE</text><text x="450" y="1100" class="h">CrewAI Flow</text><text x="450" y="1129" class="body">Structured state + routing</text><text x="450" y="1152" class="body">Retries · idempotency · gates</text><text x="450" y="1187" class="small">Crew is invoked after AE accepts</text>
+<path d="M724 1133H772" fill="none" stroke="#7b67a8" stroke-width="2.3" marker-end="url(#arrowPurple)"/>
+<!-- Crew boundary -->
+<rect x="784" y="1004" width="657" height="257" rx="17" fill="#f5fafb" stroke="#c6dddf" stroke-dasharray="8 5"/><text x="810" y="1038" class="tag teal">CREWAI CREW · FOUR SPECIALIST AGENTS</text>
+<rect x="810" y="1060" width="292" height="72" rx="10" fill="#fff" stroke="#cfe0e8"/><circle cx="835" cy="1084" r="13" fill="#e5f0f8"/><text x="831" y="1088" class="tag blue">1</text><text x="859" y="1087" class="h" style="font-size:14px">Identifier Agent</text><text x="859" y="1111" class="small">Sequence + permitted contact candidates</text>
+<rect x="1118" y="1060" width="297" height="72" rx="10" fill="#fff" stroke="#cfe0e8"/><circle cx="1143" cy="1084" r="13" fill="#e4f3f1"/><text x="1139" y="1088" class="tag teal">2</text><text x="1167" y="1087" class="h" style="font-size:14px">Research Agent</text><text x="1167" y="1111" class="small">Snowflake + Gong evidence, cited</text>
+<rect x="810" y="1145" width="292" height="72" rx="10" fill="#fff" stroke="#cfe0e8"/><circle cx="835" cy="1169" r="13" fill="#f1ebf8"/><text x="831" y="1173" class="tag purple">3</text><text x="859" y="1172" class="h" style="font-size:14px">Composer Agent</text><text x="859" y="1196" class="small">Draft only · claim-to-evidence references</text>
+<rect x="1118" y="1145" width="297" height="72" rx="10" fill="#fffaf1" stroke="#ebd9b6"/><circle cx="1143" cy="1169" r="13" fill="#faefd8"/><text x="1139" y="1173" class="tag amber">4</text><text x="1167" y="1172" class="h" style="font-size:14px">Validator Agent</text><text x="1167" y="1196" class="small">Evidence · policy · completeness checks</text>
+<path d="M1441 1133H1490" fill="none" stroke="#24868a" stroke-width="2.3" marker-end="url(#arrowTeal)"/>
+<!-- Slack review -->
+<g filter="url(#shadow)"><rect x="1502" y="1031" width="194" height="204" rx="15" fill="#f8f3f8" stroke="#dfcfe2"/></g><text x="1524" y="1067" class="tag purple">RESULT → SLACK</text><text x="1524" y="1100" class="h">Review card</text><text x="1524" y="1129" class="body">Draft + sources</text><text x="1524" y="1152" class="body">AE edit / approve / reject</text><text x="1524" y="1187" class="small">No automatic send</text>
+<path d="M1597 1235V1286H559V1235" fill="none" stroke="#8299ae" stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+<text x="803" y="1317" class="small">AE decision returns as a signed, deduplicated workflow event · delivery adapter remains separately gated</text>
+
+<text x="64" y="1420" class="small">KNOWN: Salesforce → Snowflake account flow · Gong conversation inputs · score names supplied · four agent roles from workflow design. TBD: score formulas/weights, exact Gong tracker inventory, and signal-to-score lineage.</text>
+</svg>

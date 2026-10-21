@@ -1,0 +1,5 @@
+[
+  {"name":"Northstar Field Services","industry":"Business Services","region":"North America","priority_score":0.87,"growth_signal":"Expansion fit","buying_group_coverage":"2 of 4","gap":"Technical evaluator missing","evidence":"Recent workflow growth in synthetic demo data"},
+  {"name":"Juniper Ridge Health","industry":"Healthcare Technology","region":"EMEA","priority_score":0.81,"growth_signal":"New customer fit","buying_group_coverage":"3 of 4","gap":"Executive sponsor needs verification","evidence":"Strong fit indicators in synthetic demo data"},
+  {"name":"Cobalt Ledger Systems","industry":"Financial Software","region":"North America","priority_score":0.76,"growth_signal":"Upgrade opportunity","buying_group_coverage":"1 of 4","gap":"Contact data incomplete","evidence":"Usage signal in synthetic demo data"}
+]
