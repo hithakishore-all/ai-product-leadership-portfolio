@@ -1,0 +1,30 @@
+display_information:
+  name: GTM Orbit
+  description: Ask about an account, discover missing contacts, or get an outreach brief.
+  long_description: "GTM Orbit is your account intelligence and AI workflow workspace. Every account has a next move; Orbit helps you find it. Discover, Research, Compose and Validate run as agents on governed Snowflake data, then you approve. Nothing is sent. Commands: /orbit, /orbit account <name>, /orbit contacts <name>, /orbit brief <name>, /orbit reset."
+  background_color: "#13233a"
+features:
+  bot_user:
+    display_name: GTM Orbit
+    always_online: true
+  slash_commands:
+    - command: /orbit
+      description: Ranked accounts, account briefs, missing contacts
+      usage_hint: "[queue | account <name> | contacts <name> | brief <name> | reset | help]"
+      should_escape: false
+oauth_config:
+  scopes:
+    bot:
+      - app_mentions:read
+      - chat:write
+      - chat:write.public
+      - commands
+settings:
+  event_subscriptions:
+    bot_events:
+      - app_mention
+  interactivity:
+    is_enabled: true
+  org_deploy_enabled: false
+  socket_mode_enabled: true
+  token_rotation_enabled: false

@@ -1,0 +1,4036 @@
+{
+ "generated_from": "Salesforce export + Snowflake seeds + 07_scripted_agents.sql",
+ "as_of": "2026-10-23",
+ "owner": {
+  "id": "005jV0000035er7QAA",
+  "name": "Alex Rivera",
+  "email": "ae@acme.example"
+ },
+ "queue": [
+  {
+   "QUEUE_RANK": 1,
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht777QAB",
+   "ACCOUNT_KEY": "GTM-0001",
+   "ACCOUNT_NAME": "Northstar Field Services",
+   "INDUSTRY": "Consulting",
+   "REGION": "NA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.87,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORE_FRESHNESS": "fresh",
+   "SCORE_AGE_DAYS": 0,
+   "SCORE_RATIONALE": "Open expansion opportunity, plus recent calls about consolidating scheduling tools across regions.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "present",
+    "PTB_ROP": "present"
+   },
+   "GROWTH_VECTOR": "Expansion",
+   "ROLES_COVERED": 2,
+   "MISSING_ROLES": [
+    "economic_buyer",
+    "technical_evaluator"
+   ]
+  },
+  {
+   "QUEUE_RANK": 2,
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht778QAB",
+   "ACCOUNT_KEY": "GTM-0002",
+   "ACCOUNT_NAME": "Juniper Ridge Health",
+   "INDUSTRY": "Healthcare",
+   "REGION": "EMEA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.81,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORE_FRESHNESS": "fresh",
+   "SCORE_AGE_DAYS": 1,
+   "SCORE_RATIONALE": "Strong ICP fit and rising intent; integration timelines came up on a discovery call.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "unknown",
+    "PTB_ROP": "present"
+   },
+   "GROWTH_VECTOR": "New logo",
+   "ROLES_COVERED": 3,
+   "MISSING_ROLES": [
+    "executive_sponsor"
+   ]
+  },
+  {
+   "QUEUE_RANK": 3,
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht779QAB",
+   "ACCOUNT_KEY": "GTM-0003",
+   "ACCOUNT_NAME": "Cobalt Ledger Systems",
+   "INDUSTRY": "Finance",
+   "REGION": "NA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.76,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORE_FRESHNESS": "stale",
+   "SCORE_AGE_DAYS": 6,
+   "SCORE_RATIONALE": "Upgrade propensity from seat usage and a recent support case about higher-tier features. No recent calls.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "present",
+    "PTB_ROP": "unscored"
+   },
+   "GROWTH_VECTOR": "Upgrade",
+   "ROLES_COVERED": 1,
+   "MISSING_ROLES": [
+    "champion",
+    "technical_evaluator",
+    "executive_sponsor"
+   ]
+  },
+  {
+   "QUEUE_RANK": 4,
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht77BQAR",
+   "ACCOUNT_KEY": "GTM-0005",
+   "ACCOUNT_NAME": "Verdant Grid Energy",
+   "INDUSTRY": "Energy",
+   "REGION": "EMEA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.72,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORE_FRESHNESS": "fresh",
+   "SCORE_AGE_DAYS": 2,
+   "SCORE_RATIONALE": "Very high intent on crew scheduling and an RFP signal from an inbound demo.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "unknown",
+    "CRITICAL_EVENTS": "present",
+    "PTB_ROP": "present"
+   },
+   "GROWTH_VECTOR": "New logo",
+   "ROLES_COVERED": 0,
+   "MISSING_ROLES": [
+    "champion",
+    "economic_buyer",
+    "technical_evaluator",
+    "executive_sponsor"
+   ]
+  },
+  {
+   "QUEUE_RANK": 5,
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht77AQAR",
+   "ACCOUNT_KEY": "GTM-0004",
+   "ACCOUNT_NAME": "Harborline Logistics",
+   "INDUSTRY": "Transportation",
+   "REGION": "NA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.69,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORE_FRESHNESS": "fresh",
+   "SCORE_AGE_DAYS": 0,
+   "SCORE_RATIONALE": "Renewal within 90 days with an escalated integration case and declining active seats.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "present",
+    "PTB_ROP": "present"
+   },
+   "GROWTH_VECTOR": "Retention",
+   "ROLES_COVERED": 3,
+   "MISSING_ROLES": [
+    "economic_buyer"
+   ]
+  },
+  {
+   "QUEUE_RANK": 6,
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht77FQAR",
+   "ACCOUNT_KEY": "GTM-0009",
+   "ACCOUNT_NAME": "Brightwater Insurance",
+   "INDUSTRY": "Insurance",
+   "REGION": "NA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.66,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORE_FRESHNESS": "fresh",
+   "SCORE_AGE_DAYS": 1,
+   "SCORE_RATIONALE": "Expansion at proposal stage with steady usage growth and an active buying group.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "present",
+    "PTB_ROP": "present"
+   },
+   "GROWTH_VECTOR": "Expansion",
+   "ROLES_COVERED": 4,
+   "MISSING_ROLES": []
+  },
+  {
+   "QUEUE_RANK": 7,
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht77EQAR",
+   "ACCOUNT_KEY": "GTM-0008",
+   "ACCOUNT_NAME": "Lumen Arc Media",
+   "INDUSTRY": "Media",
+   "REGION": "NA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.63,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORE_FRESHNESS": "fresh",
+   "SCORE_AGE_DAYS": 0,
+   "SCORE_RATIONALE": "Previously lost on budget; budget reopened on a recent call.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "present",
+    "PTB_ROP": "unknown"
+   },
+   "GROWTH_VECTOR": "Re-engage",
+   "ROLES_COVERED": 2,
+   "MISSING_ROLES": [
+    "champion",
+    "economic_buyer"
+   ]
+  },
+  {
+   "QUEUE_RANK": 8,
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht77CQAR",
+   "ACCOUNT_KEY": "GTM-0006",
+   "ACCOUNT_NAME": "Tessellate Retail Group",
+   "INDUSTRY": "Retail",
+   "REGION": "APAC",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.58,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORE_FRESHNESS": "fresh",
+   "SCORE_AGE_DAYS": 3,
+   "SCORE_RATIONALE": "Moderate intent after a webinar; pilot interest from retail technology.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "unknown",
+    "PTB_ROP": "present"
+   },
+   "GROWTH_VECTOR": "New logo",
+   "ROLES_COVERED": 2,
+   "MISSING_ROLES": [
+    "economic_buyer",
+    "executive_sponsor"
+   ]
+  },
+  {
+   "QUEUE_RANK": 9,
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht77GQAR",
+   "ACCOUNT_KEY": "GTM-0010",
+   "ACCOUNT_NAME": "Kestrel Biotech",
+   "INDUSTRY": "Biotechnology",
+   "REGION": "EMEA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.41,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORE_FRESHNESS": "stale",
+   "SCORE_AGE_DAYS": 4,
+   "SCORE_RATIONALE": "Low intent and no budget before 2027.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "unknown",
+    "PTB_ROP": "unknown"
+   },
+   "GROWTH_VECTOR": "New logo",
+   "ROLES_COVERED": 2,
+   "MISSING_ROLES": [
+    "economic_buyer",
+    "executive_sponsor"
+   ]
+  },
+  {
+   "QUEUE_RANK": 10,
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht77DQAR",
+   "ACCOUNT_KEY": "GTM-0007",
+   "ACCOUNT_NAME": "Quarry & Pine Manufacturing",
+   "INDUSTRY": "Machinery",
+   "REGION": "NA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": null,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORE_FRESHNESS": "unscored",
+   "SCORE_AGE_DAYS": null,
+   "SCORE_RATIONALE": "Not yet scored: account entered model scope after the last scoring run.",
+   "FEATURE_STATUS": {
+    "EWGS": "unscored",
+    "INTENT": "unscored",
+    "ENGAGEMENT": "unscored",
+    "CRITICAL_EVENTS": "unscored",
+    "PTB_ROP": "unscored"
+   },
+   "GROWTH_VECTOR": "Expansion",
+   "ROLES_COVERED": 3,
+   "MISSING_ROLES": [
+    "economic_buyer"
+   ]
+  }
+ ],
+ "contexts": {
+  "GTM-0001": {
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht777QAB",
+   "ACCOUNT_KEY": "GTM-0001",
+   "ACCOUNT_NAME": "Northstar Field Services",
+   "INDUSTRY": "Consulting",
+   "ACCOUNT_TYPE": "Customer - Direct",
+   "REGION": "NA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_NAME": "Alex Rivera",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.87,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORED_AT": "2026-10-23 06:00:00",
+   "SCORE_RATIONALE": "Open expansion opportunity, plus recent calls about consolidating scheduling tools across regions.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "present",
+    "PTB_ROP": "present"
+   },
+   "SCORE_AGE_DAYS": 0,
+   "SCORE_FRESHNESS": "fresh",
+   "GROWTH_VECTOR": "Expansion",
+   "ALLOWED_SEQUENCES": [
+    "EXPANSION_3TOUCH"
+   ],
+   "CONTACT_READINESS": {
+    "roles_covered": 2,
+    "roles_total": 4,
+    "missing_roles": [
+     "economic_buyer",
+     "technical_evaluator"
+    ],
+    "contacts_total": 3,
+    "contacts_permitted": 2,
+    "opted_out_count": 1,
+    "incomplete_records": 0,
+    "permitted_contacts": [
+     {
+      "contact_id": "003jV00000F38YHQAZ",
+      "name": "Riley Chen",
+      "title": "Director, Field Operations",
+      "email": "riley.chen@northstarfield.example",
+      "role_hypothesis": "champion"
+     },
+     {
+      "contact_id": "003jV00000F38YIQAZ",
+      "name": "Jordan Patel",
+      "title": "VP, Business Systems",
+      "email": "jordan.patel@northstarfield.example",
+      "role_hypothesis": "executive_sponsor"
+     }
+    ]
+   },
+   "EVIDENCE": [
+    {
+     "ref_id": "SF-OPP-006jV000002P58EQAS",
+     "source": "Salesforce",
+     "ts": "2026-10-23 23:48:08",
+     "excerpt": "Opportunity \u00b7 Northstar - Regional Scheduling Expansion \u00b7 Qualification \u00b7 $185,000 \u00b7 next step: Confirm technical evaluator; scope dispatch integration",
+     "url": null
+    },
+    {
+     "ref_id": "SF-CASE-00001026",
+     "source": "Salesforce",
+     "ts": "2026-10-23 23:48:08",
+     "excerpt": "Case \u00b7 Closed \u00b7 Low priority \u00b7 Add second region to scheduling workspace",
+     "url": null
+    },
+    {
+     "ref_id": "INTENT-0001-FIELD_SERVICE_SCHEDULING",
+     "source": "Intent",
+     "ts": "2026-10-19 00:00:00",
+     "excerpt": "Intent: \"field service scheduling\" at 70/100, from 48 four weeks earlier",
+     "url": null
+    },
+    {
+     "ref_id": "GONG-8812#2",
+     "source": "Gong",
+     "ts": "2026-10-14 00:00:00",
+     "excerpt": "Tracker: Consolidation \u00b7 Oct 14 call \u00b7 \"We're running three different scheduling tools across our field regions. It's a mess for dispatch.\"",
+     "url": "https://gong.example/call/GONG-8812"
+    },
+    {
+     "ref_id": "GONG-8812#3",
+     "source": "Gong",
+     "ts": "2026-10-14 00:00:00",
+     "excerpt": "Tracker: Consolidation \u00b7 Oct 14 call \u00b7 \"The goal is to consolidate scheduling onto one platform and keep dispatch data in one place.\"",
+     "url": "https://gong.example/call/GONG-8812"
+    },
+    {
+     "ref_id": "GONG-8812#4",
+     "source": "Gong",
+     "ts": "2026-10-14 00:00:00",
+     "excerpt": "Tracker: Integration \u00b7 Oct 14 call \u00b7 \"The big question is integration. Our dispatch system has to stay the source for job status.\"",
+     "url": "https://gong.example/call/GONG-8812"
+    },
+    {
+     "ref_id": "GONG-8812#6",
+     "source": "Gong",
+     "ts": "2026-10-14 00:00:00",
+     "excerpt": "Tracker: Timeline \u00b7 Oct 14 call \u00b7 \"Jordan wants a decision before Q1 planning closes.\"",
+     "url": "https://gong.example/call/GONG-8812"
+    },
+    {
+     "ref_id": "GONG-8812#8",
+     "source": "Gong",
+     "ts": "2026-10-14 00:00:00",
+     "excerpt": "Tracker: Next steps \u00b7 Oct 14 call \u00b7 \"I'll send a short outline of how others sequenced it.\"",
+     "url": "https://gong.example/call/GONG-8812"
+    },
+    {
+     "ref_id": "SNOW-USG-0001",
+     "source": "Snowflake",
+     "ts": "2026-10-01 00:00:00",
+     "excerpt": "Seat usage at 91% of plan (274 of 300 seats), up 23 seats over 3 months",
+     "url": null
+    },
+    {
+     "ref_id": "GONG-8650#4",
+     "source": "Gong",
+     "ts": "2026-09-02 00:00:00",
+     "excerpt": "Tracker: Consolidation \u00b7 Sep 02 call \u00b7 \"We have a lot of overlapping tools. That's one of the things I've been asked to clean up.\"",
+     "url": "https://gong.example/call/GONG-8650"
+    },
+    {
+     "ref_id": "GONG-8650#6",
+     "source": "Gong",
+     "ts": "2026-09-02 00:00:00",
+     "excerpt": "Tracker: Consolidation \u00b7 Sep 02 call \u00b7 \"Scheduling. Each region picked its own tool before we standardized dispatch.\"",
+     "url": "https://gong.example/call/GONG-8650"
+    },
+    {
+     "ref_id": "GONG-8650#7",
+     "source": "Gong",
+     "ts": "2026-09-02 00:00:00",
+     "excerpt": "Tracker: Next steps \u00b7 Sep 02 call \u00b7 \"Let's pick that up next month once I have the inventory done.\"",
+     "url": "https://gong.example/call/GONG-8650"
+    },
+    {
+     "ref_id": "EVT-0001-20260804",
+     "source": "Signals",
+     "ts": "2026-08-04 00:00:00",
+     "excerpt": "Executive hire \u00b7 New VP, Business Systems (Jordan Patel) joined",
+     "url": null
+    }
+   ],
+   "BILLING_CITY": "Denver",
+   "BILLING_COUNTRY": "United States",
+   "EMPLOYEES": 2400,
+   "ANNUAL_REVENUE": 410000000
+  },
+  "GTM-0002": {
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht778QAB",
+   "ACCOUNT_KEY": "GTM-0002",
+   "ACCOUNT_NAME": "Juniper Ridge Health",
+   "INDUSTRY": "Healthcare",
+   "ACCOUNT_TYPE": "Prospect",
+   "REGION": "EMEA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_NAME": "Alex Rivera",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.81,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORED_AT": "2026-10-22 06:00:00",
+   "SCORE_RATIONALE": "Strong ICP fit and rising intent; integration timelines came up on a discovery call.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "unknown",
+    "PTB_ROP": "present"
+   },
+   "SCORE_AGE_DAYS": 1,
+   "SCORE_FRESHNESS": "fresh",
+   "GROWTH_VECTOR": "New logo",
+   "ALLOWED_SEQUENCES": [
+    "NEW_LOGO_4TOUCH"
+   ],
+   "CONTACT_READINESS": {
+    "roles_covered": 3,
+    "roles_total": 4,
+    "missing_roles": [
+     "executive_sponsor"
+    ],
+    "contacts_total": 3,
+    "contacts_permitted": 3,
+    "opted_out_count": 0,
+    "incomplete_records": 0,
+    "permitted_contacts": [
+     {
+      "contact_id": "003jV00000F38YKQAZ",
+      "name": "Amara Okafor",
+      "title": "Head of Clinical Operations",
+      "email": "amara.okafor@juniperridgehealth.example",
+      "role_hypothesis": "champion"
+     },
+     {
+      "contact_id": "003jV00000F38YLQAZ",
+      "name": "Lukas Brandt",
+      "title": "IT Director",
+      "email": "lukas.brandt@juniperridgehealth.example",
+      "role_hypothesis": "technical_evaluator"
+     },
+     {
+      "contact_id": "003jV00000F38YMQAZ",
+      "name": "Priya Nair",
+      "title": "Chief Financial Officer",
+      "email": "priya.nair@juniperridgehealth.example",
+      "role_hypothesis": "economic_buyer"
+     }
+    ]
+   },
+   "EVIDENCE": [
+    {
+     "ref_id": "SF-OPP-006jV000002P58FQAS",
+     "source": "Salesforce",
+     "ts": "2026-10-23 23:48:08",
+     "excerpt": "Opportunity \u00b7 Juniper Ridge - Clinical Ops Workflow \u00b7 Needs Analysis \u00b7 $260,000 \u00b7 next step: Map rollout sequencing against EHR go-live",
+     "url": null
+    },
+    {
+     "ref_id": "INTENT-0002-CLINICAL_WORKFLOW_AUTOMATION",
+     "source": "Intent",
+     "ts": "2026-10-19 00:00:00",
+     "excerpt": "Intent: \"clinical workflow automation\" at 78/100, from 38 four weeks earlier",
+     "url": null
+    },
+    {
+     "ref_id": "INTENT-0002-EHR_INTEGRATION",
+     "source": "Intent",
+     "ts": "2026-10-19 00:00:00",
+     "excerpt": "Intent: \"EHR integration\" at 64/100, from 33 four weeks earlier",
+     "url": null
+    },
+    {
+     "ref_id": "GONG-9034#2",
+     "source": "Gong",
+     "ts": "2026-10-09 00:00:00",
+     "excerpt": "Tracker: Integration, Timeline \u00b7 Oct 09 call \u00b7 \"Clinics go live in waves. Integration timelines with the EHR vendor keep slipping.\"",
+     "url": "https://gong.example/call/GONG-9034"
+    },
+    {
+     "ref_id": "GONG-9034#3",
+     "source": "Gong",
+     "ts": "2026-10-09 00:00:00",
+     "excerpt": "Tracker: Security \u00b7 Oct 09 call \u00b7 \"Anything new needs to pass our security review and data residency checks in the EU.\"",
+     "url": "https://gong.example/call/GONG-9034"
+    },
+    {
+     "ref_id": "GONG-9034#4",
+     "source": "Gong",
+     "ts": "2026-10-09 00:00:00",
+     "excerpt": "Tracker: Competitor \u00b7 Oct 09 call \u00b7 \"We looked at FlowBridge last year but it couldn't handle the EHR events.\"",
+     "url": "https://gong.example/call/GONG-9034"
+    },
+    {
+     "ref_id": "GONG-9034#6",
+     "source": "Gong",
+     "ts": "2026-10-09 00:00:00",
+     "excerpt": "Tracker: Budget \u00b7 Oct 09 call \u00b7 \"Our CFO would need to sign off on anything over budget, I'd have to check with her.\"",
+     "url": "https://gong.example/call/GONG-9034"
+    },
+    {
+     "ref_id": "GONG-9034#7",
+     "source": "Gong",
+     "ts": "2026-10-09 00:00:00",
+     "excerpt": "Tracker: Next steps \u00b7 Oct 09 call \u00b7 \"I'll share how other health-tech teams sequenced rollout around their EHR go-live.\"",
+     "url": "https://gong.example/call/GONG-9034"
+    },
+    {
+     "ref_id": "GONG-8977#2",
+     "source": "Gong",
+     "ts": "2026-09-24 00:00:00",
+     "excerpt": "Tracker: Integration \u00b7 Sep 24 call \u00b7 \"We're rolling out a new EHR across our clinics and clinical ops workflows are still on spreadsheets.\"",
+     "url": "https://gong.example/call/GONG-8977"
+    },
+    {
+     "ref_id": "GONG-8977#3",
+     "source": "Gong",
+     "ts": "2026-09-24 00:00:00",
+     "excerpt": "Tracker: Next steps \u00b7 Sep 24 call \u00b7 \"I'd want our IT director involved before we go further.\"",
+     "url": "https://gong.example/call/GONG-8977"
+    }
+   ],
+   "BILLING_CITY": "Dublin",
+   "BILLING_COUNTRY": "Ireland",
+   "EMPLOYEES": 1100,
+   "ANNUAL_REVENUE": 180000000
+  },
+  "GTM-0003": {
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht779QAB",
+   "ACCOUNT_KEY": "GTM-0003",
+   "ACCOUNT_NAME": "Cobalt Ledger Systems",
+   "INDUSTRY": "Finance",
+   "ACCOUNT_TYPE": "Customer - Direct",
+   "REGION": "NA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_NAME": "Alex Rivera",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.76,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORED_AT": "2026-10-17 06:00:00",
+   "SCORE_RATIONALE": "Upgrade propensity from seat usage and a recent support case about higher-tier features. No recent calls.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "present",
+    "PTB_ROP": "unscored"
+   },
+   "SCORE_AGE_DAYS": 6,
+   "SCORE_FRESHNESS": "stale",
+   "GROWTH_VECTOR": "Upgrade",
+   "ALLOWED_SEQUENCES": [
+    "UPGRADE_2TOUCH"
+   ],
+   "CONTACT_READINESS": {
+    "roles_covered": 1,
+    "roles_total": 4,
+    "missing_roles": [
+     "champion",
+     "technical_evaluator",
+     "executive_sponsor"
+    ],
+    "contacts_total": 2,
+    "contacts_permitted": 1,
+    "opted_out_count": 0,
+    "incomplete_records": 1,
+    "permitted_contacts": [
+     {
+      "contact_id": "003jV00000F38YNQAZ",
+      "name": "Sam Okoro",
+      "title": "Corporate Controller",
+      "email": "sam.okoro@cobaltledger.example",
+      "role_hypothesis": "economic_buyer"
+     }
+    ]
+   },
+   "EVIDENCE": [
+    {
+     "ref_id": "SF-CASE-00001027",
+     "source": "Salesforce",
+     "ts": "2026-10-23 23:48:08",
+     "excerpt": "Case \u00b7 Working \u00b7 Medium priority \u00b7 Question about Enterprise tier features",
+     "url": null
+    },
+    {
+     "ref_id": "SF-CASE-00001028",
+     "source": "Salesforce",
+     "ts": "2026-10-23 23:48:08",
+     "excerpt": "Case \u00b7 New \u00b7 Low priority \u00b7 Seat limit warning on finance workspace",
+     "url": null
+    },
+    {
+     "ref_id": "GONG-none",
+     "source": "Gong",
+     "ts": "2026-10-23 00:00:00",
+     "excerpt": "No calls in the last 90 days (unknown, not negative)",
+     "url": null
+    },
+    {
+     "ref_id": "SNOW-USG-0003",
+     "source": "Snowflake",
+     "ts": "2026-10-01 00:00:00",
+     "excerpt": "Seat usage at 92% of plan (92 of 100 seats), up 9 seats over 3 months",
+     "url": null
+    },
+    {
+     "ref_id": "EVT-0003-20261001",
+     "source": "Signals",
+     "ts": "2026-10-01 00:00:00",
+     "excerpt": "Usage threshold \u00b7 Seat usage crossed 90% of plan",
+     "url": null
+    }
+   ],
+   "BILLING_CITY": "Charlotte",
+   "BILLING_COUNTRY": "United States",
+   "EMPLOYEES": 650,
+   "ANNUAL_REVENUE": 95000000
+  },
+  "GTM-0004": {
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht77AQAR",
+   "ACCOUNT_KEY": "GTM-0004",
+   "ACCOUNT_NAME": "Harborline Logistics",
+   "INDUSTRY": "Transportation",
+   "ACCOUNT_TYPE": "Customer - Direct",
+   "REGION": "NA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_NAME": "Alex Rivera",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.69,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORED_AT": "2026-10-23 06:00:00",
+   "SCORE_RATIONALE": "Renewal within 90 days with an escalated integration case and declining active seats.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "present",
+    "PTB_ROP": "present"
+   },
+   "SCORE_AGE_DAYS": 0,
+   "SCORE_FRESHNESS": "fresh",
+   "GROWTH_VECTOR": "Retention",
+   "ALLOWED_SEQUENCES": [
+    "RENEWAL_SAVE_3TOUCH"
+   ],
+   "CONTACT_READINESS": {
+    "roles_covered": 3,
+    "roles_total": 4,
+    "missing_roles": [
+     "economic_buyer"
+    ],
+    "contacts_total": 4,
+    "contacts_permitted": 4,
+    "opted_out_count": 0,
+    "incomplete_records": 0,
+    "permitted_contacts": [
+     {
+      "contact_id": "003jV00000F38YPQAZ",
+      "name": "Marcus Bell",
+      "title": "VP, Supply Chain",
+      "email": "marcus.bell@harborline.example",
+      "role_hypothesis": "executive_sponsor"
+     },
+     {
+      "contact_id": "003jV00000F38YQQAZ",
+      "name": "Nina Alvarez",
+      "title": "Director, IT Applications",
+      "email": "nina.alvarez@harborline.example",
+      "role_hypothesis": "technical_evaluator"
+     },
+     {
+      "contact_id": "003jV00000F38YRQAZ",
+      "name": "Owen Price",
+      "title": "Procurement Manager",
+      "email": "owen.price@harborline.example",
+      "role_hypothesis": "champion"
+     },
+     {
+      "contact_id": "003jV00000F38YSQAZ",
+      "name": "Grace Kim",
+      "title": "Dispatch Lead",
+      "email": "grace.kim@harborline.example",
+      "role_hypothesis": "champion"
+     }
+    ]
+   },
+   "EVIDENCE": [
+    {
+     "ref_id": "SF-OPP-006jV000002P58IQAS",
+     "source": "Salesforce",
+     "ts": "2026-10-23 23:48:08",
+     "excerpt": "Opportunity \u00b7 Harborline - FY27 Renewal \u00b7 Negotiation/Review \u00b7 $520,000 \u00b7 next step: Resolve TMS sync escalation before pricing discussion",
+     "url": null
+    },
+    {
+     "ref_id": "SF-CASE-00001029",
+     "source": "Salesforce",
+     "ts": "2026-10-23 23:48:08",
+     "excerpt": "Case \u00b7 Escalated \u00b7 High priority \u00b7 Repeated sync failures with TMS integration",
+     "url": null
+    },
+    {
+     "ref_id": "SF-CASE-00001030",
+     "source": "Salesforce",
+     "ts": "2026-10-23 23:48:08",
+     "excerpt": "Case \u00b7 Closed \u00b7 Medium priority \u00b7 Dispatch dashboard latency",
+     "url": null
+    },
+    {
+     "ref_id": "INTENT-0004-TMS_INTEGRATION",
+     "source": "Intent",
+     "ts": "2026-10-19 00:00:00",
+     "excerpt": "Intent: \"TMS integration\" at 67/100, from 26 four weeks earlier",
+     "url": null
+    },
+    {
+     "ref_id": "INTENT-0004-ROUTESPHERE",
+     "source": "Intent",
+     "ts": "2026-10-19 00:00:00",
+     "excerpt": "Intent: \"RouteSphere\" at 51/100, from 5 four weeks earlier",
+     "url": null
+    },
+    {
+     "ref_id": "GONG-9101#2",
+     "source": "Gong",
+     "ts": "2026-10-16 00:00:00",
+     "excerpt": "Tracker: Churn risk, Integration \u00b7 Oct 16 call \u00b7 \"Honestly, the sync failures have hurt. My team has lost confidence.\"",
+     "url": "https://gong.example/call/GONG-9101"
+    },
+    {
+     "ref_id": "GONG-9101#3",
+     "source": "Gong",
+     "ts": "2026-10-16 00:00:00",
+     "excerpt": "Tracker: Competitor \u00b7 Oct 16 call \u00b7 \"We're also taking a look at RouteSphere. They pitched a native TMS connector.\"",
+     "url": "https://gong.example/call/GONG-9101"
+    },
+    {
+     "ref_id": "GONG-9101#4",
+     "source": "Gong",
+     "ts": "2026-10-16 00:00:00",
+     "excerpt": "Tracker: Pricing \u00b7 Oct 16 call \u00b7 \"Procurement will need a stronger price if we renew with the issues we've had.\"",
+     "url": "https://gong.example/call/GONG-9101"
+    },
+    {
+     "ref_id": "GONG-9101#5",
+     "source": "Gong",
+     "ts": "2026-10-16 00:00:00",
+     "excerpt": "Tracker: Next steps \u00b7 Oct 16 call \u00b7 \"Fix the sync and show me it's stable for a month, then we can talk.\"",
+     "url": "https://gong.example/call/GONG-9101"
+    },
+    {
+     "ref_id": "SNOW-USG-0004",
+     "source": "Snowflake",
+     "ts": "2026-10-01 00:00:00",
+     "excerpt": "Seat usage at 64% of plan (515 of 800 seats), down 96 seats over 3 months",
+     "url": null
+    },
+    {
+     "ref_id": "EVT-0004-20261001",
+     "source": "Signals",
+     "ts": "2026-10-01 00:00:00",
+     "excerpt": "Renewal window \u00b7 Renewal date 2026-12-31 within 90 days",
+     "url": null
+    },
+    {
+     "ref_id": "GONG-8890#1",
+     "source": "Gong",
+     "ts": "2026-09-18 00:00:00",
+     "excerpt": "Tracker: Churn risk, Integration \u00b7 Sep 18 call \u00b7 \"The TMS sync is failing several times a week. Dispatch is re-keying shipment status by hand.\"",
+     "url": "https://gong.example/call/GONG-8890"
+    },
+    {
+     "ref_id": "GONG-8890#2",
+     "source": "Gong",
+     "ts": "2026-09-18 00:00:00",
+     "excerpt": "Tracker: Churn risk \u00b7 Sep 18 call \u00b7 \"My team has stopped trusting the dashboard. They check the TMS directly now.\"",
+     "url": "https://gong.example/call/GONG-8890"
+    },
+    {
+     "ref_id": "GONG-8890#3",
+     "source": "Gong",
+     "ts": "2026-09-18 00:00:00",
+     "excerpt": "Tracker: Next steps \u00b7 Sep 18 call \u00b7 \"That's on us. Engineering has a fix in testing and I'll get you a date.\"",
+     "url": "https://gong.example/call/GONG-8890"
+    },
+    {
+     "ref_id": "EVT-0004-20260915",
+     "source": "Signals",
+     "ts": "2026-09-15 00:00:00",
+     "excerpt": "Escalation \u00b7 High-priority integration case escalated",
+     "url": null
+    }
+   ],
+   "BILLING_CITY": "Oakland",
+   "BILLING_COUNTRY": "United States",
+   "EMPLOYEES": 3800,
+   "ANNUAL_REVENUE": 720000000
+  },
+  "GTM-0005": {
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht77BQAR",
+   "ACCOUNT_KEY": "GTM-0005",
+   "ACCOUNT_NAME": "Verdant Grid Energy",
+   "INDUSTRY": "Energy",
+   "ACCOUNT_TYPE": "Prospect",
+   "REGION": "EMEA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_NAME": "Alex Rivera",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.72,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORED_AT": "2026-10-21 06:00:00",
+   "SCORE_RATIONALE": "Very high intent on crew scheduling and an RFP signal from an inbound demo.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "unknown",
+    "CRITICAL_EVENTS": "present",
+    "PTB_ROP": "present"
+   },
+   "SCORE_AGE_DAYS": 2,
+   "SCORE_FRESHNESS": "fresh",
+   "GROWTH_VECTOR": "New logo",
+   "ALLOWED_SEQUENCES": [
+    "NEW_LOGO_4TOUCH"
+   ],
+   "CONTACT_READINESS": {
+    "roles_covered": 0,
+    "roles_total": 4,
+    "missing_roles": [
+     "champion",
+     "economic_buyer",
+     "technical_evaluator",
+     "executive_sponsor"
+    ],
+    "contacts_total": 3,
+    "contacts_permitted": 0,
+    "opted_out_count": 3,
+    "incomplete_records": 0,
+    "permitted_contacts": []
+   },
+   "EVIDENCE": [
+    {
+     "ref_id": "INTENT-0005-CREW_SCHEDULING_SOFTWARE",
+     "source": "Intent",
+     "ts": "2026-10-19 00:00:00",
+     "excerpt": "Intent: \"crew scheduling software\" at 84/100, from 47 four weeks earlier",
+     "url": null
+    },
+    {
+     "ref_id": "GONG-8740#1",
+     "source": "Gong",
+     "ts": "2026-09-10 00:00:00",
+     "excerpt": "Tracker: Consolidation \u00b7 Sep 10 call \u00b7 \"We schedule grid maintenance crews across the region and it's all manual today.\"",
+     "url": "https://gong.example/call/GONG-8740"
+    },
+    {
+     "ref_id": "GONG-8740#2",
+     "source": "Gong",
+     "ts": "2026-09-10 00:00:00",
+     "excerpt": "Tracker: Timeline \u00b7 Sep 10 call \u00b7 \"We'll be publishing an RFP for crew scheduling software. Please don't contact the team directly until then.\"",
+     "url": "https://gong.example/call/GONG-8740"
+    },
+    {
+     "ref_id": "EVT-0005-20260910",
+     "source": "Signals",
+     "ts": "2026-09-10 00:00:00",
+     "excerpt": "RFP planned \u00b7 Prospect stated an RFP for crew scheduling is coming",
+     "url": null
+    }
+   ],
+   "BILLING_CITY": "Rotterdam",
+   "BILLING_COUNTRY": "Netherlands",
+   "EMPLOYEES": 900,
+   "ANNUAL_REVENUE": 240000000
+  },
+  "GTM-0006": {
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht77CQAR",
+   "ACCOUNT_KEY": "GTM-0006",
+   "ACCOUNT_NAME": "Tessellate Retail Group",
+   "INDUSTRY": "Retail",
+   "ACCOUNT_TYPE": "Prospect",
+   "REGION": "APAC",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_NAME": "Alex Rivera",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.58,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORED_AT": "2026-10-20 06:00:00",
+   "SCORE_RATIONALE": "Moderate intent after a webinar; pilot interest from retail technology.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "unknown",
+    "PTB_ROP": "present"
+   },
+   "SCORE_AGE_DAYS": 3,
+   "SCORE_FRESHNESS": "fresh",
+   "GROWTH_VECTOR": "New logo",
+   "ALLOWED_SEQUENCES": [
+    "NEW_LOGO_4TOUCH"
+   ],
+   "CONTACT_READINESS": {
+    "roles_covered": 2,
+    "roles_total": 4,
+    "missing_roles": [
+     "economic_buyer",
+     "executive_sponsor"
+    ],
+    "contacts_total": 3,
+    "contacts_permitted": 3,
+    "opted_out_count": 0,
+    "incomplete_records": 0,
+    "permitted_contacts": [
+     {
+      "contact_id": "003jV00000F38YWQAZ",
+      "name": "Wei Ling Tan",
+      "title": "Head of Store Operations",
+      "email": "wei.tan@tessellateretail.example",
+      "role_hypothesis": "champion"
+     },
+     {
+      "contact_id": "003jV00000F38YXQAZ",
+      "name": "Arjun Mehta",
+      "title": "Director, Retail Technology",
+      "email": "arjun.mehta@tessellateretail.example",
+      "role_hypothesis": "technical_evaluator"
+     },
+     {
+      "contact_id": "003jV00000F38YYQAZ",
+      "name": "Hana Sato",
+      "title": "Marketing Operations Manager",
+      "email": "hana.sato@tessellateretail.example",
+      "role_hypothesis": "champion"
+     }
+    ]
+   },
+   "EVIDENCE": [
+    {
+     "ref_id": "SF-OPP-006jV000002P58JQAS",
+     "source": "Salesforce",
+     "ts": "2026-10-23 23:48:08",
+     "excerpt": "Opportunity \u00b7 Tessellate - Store Ops Pilot \u00b7 Prospecting \u00b7 $140,000 \u00b7 next step: Pilot scope for 20 stores",
+     "url": null
+    },
+    {
+     "ref_id": "INTENT-0006-STORE_TASK_MANAGEMENT",
+     "source": "Intent",
+     "ts": "2026-10-19 00:00:00",
+     "excerpt": "Intent: \"store task management\" at 45/100, from 22 four weeks earlier",
+     "url": null
+    },
+    {
+     "ref_id": "GONG-9050#2",
+     "source": "Gong",
+     "ts": "2026-10-11 00:00:00",
+     "excerpt": "Tracker: Competitor \u00b7 Oct 11 call \u00b7 \"We trialed TaskNimbus but store managers found it too heavy.\"",
+     "url": "https://gong.example/call/GONG-9050"
+    },
+    {
+     "ref_id": "GONG-9050#3",
+     "source": "Gong",
+     "ts": "2026-10-11 00:00:00",
+     "excerpt": "Tracker: Budget, Next steps \u00b7 Oct 11 call \u00b7 \"A 20-store pilot would be the way in. Our head of store ops owns the budget.\"",
+     "url": "https://gong.example/call/GONG-9050"
+    }
+   ],
+   "BILLING_CITY": "Singapore",
+   "BILLING_COUNTRY": "Singapore",
+   "EMPLOYEES": 5200,
+   "ANNUAL_REVENUE": 1100000000
+  },
+  "GTM-0007": {
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht77DQAR",
+   "ACCOUNT_KEY": "GTM-0007",
+   "ACCOUNT_NAME": "Quarry & Pine Manufacturing",
+   "INDUSTRY": "Machinery",
+   "ACCOUNT_TYPE": "Customer - Direct",
+   "REGION": "NA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_NAME": "Alex Rivera",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": null,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORED_AT": null,
+   "SCORE_RATIONALE": "Not yet scored: account entered model scope after the last scoring run.",
+   "FEATURE_STATUS": {
+    "EWGS": "unscored",
+    "INTENT": "unscored",
+    "ENGAGEMENT": "unscored",
+    "CRITICAL_EVENTS": "unscored",
+    "PTB_ROP": "unscored"
+   },
+   "SCORE_AGE_DAYS": null,
+   "SCORE_FRESHNESS": "unscored",
+   "GROWTH_VECTOR": "Expansion",
+   "ALLOWED_SEQUENCES": [
+    "EXPANSION_3TOUCH"
+   ],
+   "CONTACT_READINESS": {
+    "roles_covered": 3,
+    "roles_total": 4,
+    "missing_roles": [
+     "economic_buyer"
+    ],
+    "contacts_total": 3,
+    "contacts_permitted": 3,
+    "opted_out_count": 0,
+    "incomplete_records": 0,
+    "permitted_contacts": [
+     {
+      "contact_id": "003jV00000F38YZQAZ",
+      "name": "Greg Novak",
+      "title": "Plant Manager",
+      "email": "greg.novak@quarrypine.example",
+      "role_hypothesis": "champion"
+     },
+     {
+      "contact_id": "003jV00000F38YaQAJ",
+      "name": "Linda Ortiz",
+      "title": "VP, Operations",
+      "email": "linda.ortiz@quarrypine.example",
+      "role_hypothesis": "executive_sponsor"
+     },
+     {
+      "contact_id": "003jV00000F38YbQAJ",
+      "name": "Tom Becker",
+      "title": "IT Manager",
+      "email": "tom.becker@quarrypine.example",
+      "role_hypothesis": "technical_evaluator"
+     }
+    ]
+   },
+   "EVIDENCE": [
+    {
+     "ref_id": "SF-OPP-006jV000002P58LQAS",
+     "source": "Salesforce",
+     "ts": "2026-10-23 23:48:08",
+     "excerpt": "Opportunity \u00b7 Quarry & Pine - Plant 2 Rollout \u00b7 Prospecting \u00b7 $70,000 \u00b7 next step: Plant 2 onboarding plan",
+     "url": null
+    },
+    {
+     "ref_id": "SF-CASE-00001031",
+     "source": "Salesforce",
+     "ts": "2026-10-23 23:48:08",
+     "excerpt": "Case \u00b7 New \u00b7 Low priority \u00b7 Plant 2 onboarding questions",
+     "url": null
+    },
+    {
+     "ref_id": "SNOW-USG-0007",
+     "source": "Snowflake",
+     "ts": "2026-10-01 00:00:00",
+     "excerpt": "Seat usage at 80% of plan (160 of 200 seats), up 8 seats over 3 months",
+     "url": null
+    },
+    {
+     "ref_id": "GONG-8601#1",
+     "source": "Gong",
+     "ts": "2026-08-28 00:00:00",
+     "excerpt": "Tracker: Timeline \u00b7 Aug 28 call \u00b7 \"Plant 2 comes online in the spring. We'd like to clone our plant 1 workflows.\"",
+     "url": "https://gong.example/call/GONG-8601"
+    },
+    {
+     "ref_id": "GONG-8601#2",
+     "source": "Gong",
+     "ts": "2026-08-28 00:00:00",
+     "excerpt": "Tracker: Budget \u00b7 Aug 28 call \u00b7 \"Linda will want to see plant 1 results before approving more licenses.\"",
+     "url": "https://gong.example/call/GONG-8601"
+    },
+    {
+     "ref_id": "SF-OPP-006jV000002P58KQAS",
+     "source": "Salesforce",
+     "ts": "2025-11-15 00:00:00",
+     "excerpt": "Opportunity \u00b7 Quarry & Pine - Platform \u00b7 Closed Won \u00b7 $150,000",
+     "url": null
+    }
+   ],
+   "BILLING_CITY": "Grand Rapids",
+   "BILLING_COUNTRY": "United States",
+   "EMPLOYEES": 1500,
+   "ANNUAL_REVENUE": 300000000
+  },
+  "GTM-0008": {
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht77EQAR",
+   "ACCOUNT_KEY": "GTM-0008",
+   "ACCOUNT_NAME": "Lumen Arc Media",
+   "INDUSTRY": "Media",
+   "ACCOUNT_TYPE": "Prospect",
+   "REGION": "NA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_NAME": "Alex Rivera",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.63,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORED_AT": "2026-10-23 06:00:00",
+   "SCORE_RATIONALE": "Previously lost on budget; budget reopened on a recent call.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "present",
+    "PTB_ROP": "unknown"
+   },
+   "SCORE_AGE_DAYS": 0,
+   "SCORE_FRESHNESS": "fresh",
+   "GROWTH_VECTOR": "Re-engage",
+   "ALLOWED_SEQUENCES": [
+    "REENGAGE_2TOUCH"
+   ],
+   "CONTACT_READINESS": {
+    "roles_covered": 2,
+    "roles_total": 4,
+    "missing_roles": [
+     "champion",
+     "economic_buyer"
+    ],
+    "contacts_total": 2,
+    "contacts_permitted": 2,
+    "opted_out_count": 0,
+    "incomplete_records": 0,
+    "permitted_contacts": [
+     {
+      "contact_id": "003jV00000F38YcQAJ",
+      "name": "Jasmine Reed",
+      "title": "VP, Content Operations",
+      "email": "jasmine.reed@lumenarc.example",
+      "role_hypothesis": "executive_sponsor"
+     },
+     {
+      "contact_id": "003jV00000F38YdQAJ",
+      "name": "Carlos Mendez",
+      "title": "Head of Engineering",
+      "email": "carlos.mendez@lumenarc.example",
+      "role_hypothesis": "technical_evaluator"
+     }
+    ]
+   },
+   "EVIDENCE": [
+    {
+     "ref_id": "GONG-9120#1",
+     "source": "Gong",
+     "ts": "2026-10-20 00:00:00",
+     "excerpt": "Tracker: Budget, Timeline \u00b7 Oct 20 call \u00b7 \"Good timing. Budget for content tooling reopened in our FY27 plan.\"",
+     "url": "https://gong.example/call/GONG-9120"
+    },
+    {
+     "ref_id": "GONG-9120#2",
+     "source": "Gong",
+     "ts": "2026-10-20 00:00:00",
+     "excerpt": "Tracker: Pricing \u00b7 Oct 20 call \u00b7 \"Price was the sticking point last time, so we'd want a smaller starting scope.\"",
+     "url": "https://gong.example/call/GONG-9120"
+    },
+    {
+     "ref_id": "GONG-9120#3",
+     "source": "Gong",
+     "ts": "2026-10-20 00:00:00",
+     "excerpt": "Tracker: Next steps \u00b7 Oct 20 call \u00b7 \"That's easy to do. I'll come back with a phased option.\"",
+     "url": "https://gong.example/call/GONG-9120"
+    },
+    {
+     "ref_id": "EVT-0008-20261020",
+     "source": "Signals",
+     "ts": "2026-10-20 00:00:00",
+     "excerpt": "Budget reopened \u00b7 FY27 budget for content tooling reopened",
+     "url": null
+    },
+    {
+     "ref_id": "INTENT-0008-CONTENT_OPERATIONS_PLATFORM",
+     "source": "Intent",
+     "ts": "2026-10-19 00:00:00",
+     "excerpt": "Intent: \"content operations platform\" at 38/100, from 12 four weeks earlier",
+     "url": null
+    },
+    {
+     "ref_id": "SF-OPP-006jV000002P58MQAS",
+     "source": "Salesforce",
+     "ts": "2026-04-10 00:00:00",
+     "excerpt": "Opportunity \u00b7 Lumen Arc - Content Workflow \u00b7 Closed Lost \u00b7 $95,000 \u00b7 next step: Lost on budget; revisit for FY27",
+     "url": null
+    }
+   ],
+   "BILLING_CITY": "Austin",
+   "BILLING_COUNTRY": "United States",
+   "EMPLOYEES": 420,
+   "ANNUAL_REVENUE": 60000000
+  },
+  "GTM-0009": {
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht77FQAR",
+   "ACCOUNT_KEY": "GTM-0009",
+   "ACCOUNT_NAME": "Brightwater Insurance",
+   "INDUSTRY": "Insurance",
+   "ACCOUNT_TYPE": "Customer - Direct",
+   "REGION": "NA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_NAME": "Alex Rivera",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.66,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORED_AT": "2026-10-22 06:00:00",
+   "SCORE_RATIONALE": "Expansion at proposal stage with steady usage growth and an active buying group.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "present",
+    "PTB_ROP": "present"
+   },
+   "SCORE_AGE_DAYS": 1,
+   "SCORE_FRESHNESS": "fresh",
+   "GROWTH_VECTOR": "Expansion",
+   "ALLOWED_SEQUENCES": [
+    "EXPANSION_3TOUCH"
+   ],
+   "CONTACT_READINESS": {
+    "roles_covered": 4,
+    "roles_total": 4,
+    "missing_roles": [],
+    "contacts_total": 4,
+    "contacts_permitted": 4,
+    "opted_out_count": 0,
+    "incomplete_records": 0,
+    "permitted_contacts": [
+     {
+      "contact_id": "003jV00000F38YeQAJ",
+      "name": "Rachel Stone",
+      "title": "SVP, Claims Operations",
+      "email": "rachel.stone@brightwaterins.example",
+      "role_hypothesis": "executive_sponsor"
+     },
+     {
+      "contact_id": "003jV00000F38YfQAJ",
+      "name": "David Park",
+      "title": "Director, Enterprise Architecture",
+      "email": "david.park@brightwaterins.example",
+      "role_hypothesis": "technical_evaluator"
+     },
+     {
+      "contact_id": "003jV00000F38YgQAJ",
+      "name": "Monica Hayes",
+      "title": "VP, Finance",
+      "email": "monica.hayes@brightwaterins.example",
+      "role_hypothesis": "economic_buyer"
+     },
+     {
+      "contact_id": "003jV00000F38YhQAJ",
+      "name": "Kevin Liu",
+      "title": "Claims Systems Manager",
+      "email": "kevin.liu@brightwaterins.example",
+      "role_hypothesis": "champion"
+     }
+    ]
+   },
+   "EVIDENCE": [
+    {
+     "ref_id": "SF-OPP-006jV000002P58OQAS",
+     "source": "Salesforce",
+     "ts": "2026-10-23 23:48:08",
+     "excerpt": "Opportunity \u00b7 Brightwater - Claims Automation Expansion \u00b7 Proposal/Price Quote \u00b7 $340,000 \u00b7 next step: Security questionnaire due; procurement review",
+     "url": null
+    },
+    {
+     "ref_id": "SF-CASE-00001032",
+     "source": "Salesforce",
+     "ts": "2026-10-23 23:48:08",
+     "excerpt": "Case \u00b7 Working \u00b7 Medium priority \u00b7 SSO configuration for new claims team",
+     "url": null
+    },
+    {
+     "ref_id": "INTENT-0009-CLAIMS_AUTOMATION",
+     "source": "Intent",
+     "ts": "2026-10-19 00:00:00",
+     "excerpt": "Intent: \"claims automation\" at 60/100, from 47 four weeks earlier",
+     "url": null
+    },
+    {
+     "ref_id": "GONG-9077#1",
+     "source": "Gong",
+     "ts": "2026-10-13 00:00:00",
+     "excerpt": "Tracker: ROI \u00b7 Oct 13 call \u00b7 \"The expansion makes sense. Claims cycle time is the metric I'm measured on.\"",
+     "url": "https://gong.example/call/GONG-9077"
+    },
+    {
+     "ref_id": "GONG-9077#2",
+     "source": "Gong",
+     "ts": "2026-10-13 00:00:00",
+     "excerpt": "Tracker: Pricing, ROI \u00b7 Oct 13 call \u00b7 \"I need the ROI model before this goes to procurement.\"",
+     "url": "https://gong.example/call/GONG-9077"
+    },
+    {
+     "ref_id": "GONG-9077#3",
+     "source": "Gong",
+     "ts": "2026-10-13 00:00:00",
+     "excerpt": "Tracker: Security, Timeline \u00b7 Oct 13 call \u00b7 \"Security questionnaire has to be back before November 15.\"",
+     "url": "https://gong.example/call/GONG-9077"
+    },
+    {
+     "ref_id": "GONG-9077#4",
+     "source": "Gong",
+     "ts": "2026-10-13 00:00:00",
+     "excerpt": "Tracker: Next steps \u00b7 Oct 13 call \u00b7 \"I'll send the ROI model this week and get the questionnaire to our security team today.\"",
+     "url": "https://gong.example/call/GONG-9077"
+    },
+    {
+     "ref_id": "EVT-0009-20261013",
+     "source": "Signals",
+     "ts": "2026-10-13 00:00:00",
+     "excerpt": "Procurement deadline \u00b7 Security questionnaire due 2026-11-15",
+     "url": null
+    },
+    {
+     "ref_id": "SNOW-USG-0009",
+     "source": "Snowflake",
+     "ts": "2026-10-01 00:00:00",
+     "excerpt": "Seat usage at 95% of plan (615 of 650 seats), up 49 seats over 3 months",
+     "url": null
+    },
+    {
+     "ref_id": "GONG-8833#1",
+     "source": "Gong",
+     "ts": "2026-09-29 00:00:00",
+     "excerpt": "Tracker: Integration \u00b7 Sep 29 call \u00b7 \"Claims intake has to integrate with our policy admin system through the existing API gateway.\"",
+     "url": "https://gong.example/call/GONG-8833"
+    },
+    {
+     "ref_id": "GONG-8833#2",
+     "source": "Gong",
+     "ts": "2026-09-29 00:00:00",
+     "excerpt": "Tracker: Security \u00b7 Sep 29 call \u00b7 \"The new claims team is 120 people. SSO group mapping has to work on day one.\"",
+     "url": "https://gong.example/call/GONG-8833"
+    }
+   ],
+   "BILLING_CITY": "Hartford",
+   "BILLING_COUNTRY": "United States",
+   "EMPLOYEES": 2900,
+   "ANNUAL_REVENUE": 880000000
+  },
+  "GTM-0010": {
+   "SALESFORCE_ACCOUNT_ID": "001jV00000Ht77GQAR",
+   "ACCOUNT_KEY": "GTM-0010",
+   "ACCOUNT_NAME": "Kestrel Biotech",
+   "INDUSTRY": "Biotechnology",
+   "ACCOUNT_TYPE": "Prospect",
+   "REGION": "EMEA",
+   "OWNER_ID": "005jV0000035er7QAA",
+   "OWNER_NAME": "Alex Rivera",
+   "OWNER_EMAIL": "ae@acme.example",
+   "PRIORITY_SCORE": 0.41,
+   "SCORE_VERSION": "ps_v3.2",
+   "SCORED_AT": "2026-10-19 06:00:00",
+   "SCORE_RATIONALE": "Low intent and no budget before 2027.",
+   "FEATURE_STATUS": {
+    "EWGS": "present",
+    "INTENT": "present",
+    "ENGAGEMENT": "present",
+    "CRITICAL_EVENTS": "unknown",
+    "PTB_ROP": "unknown"
+   },
+   "SCORE_AGE_DAYS": 4,
+   "SCORE_FRESHNESS": "stale",
+   "GROWTH_VECTOR": "New logo",
+   "ALLOWED_SEQUENCES": [
+    "NEW_LOGO_4TOUCH"
+   ],
+   "CONTACT_READINESS": {
+    "roles_covered": 2,
+    "roles_total": 4,
+    "missing_roles": [
+     "economic_buyer",
+     "executive_sponsor"
+    ],
+    "contacts_total": 2,
+    "contacts_permitted": 2,
+    "opted_out_count": 0,
+    "incomplete_records": 0,
+    "permitted_contacts": [
+     {
+      "contact_id": "003jV00000F38YiQAJ",
+      "name": "Isabelle Roux",
+      "title": "Head of Lab Operations",
+      "email": "isabelle.roux@kestrelbio.example",
+      "role_hypothesis": "champion"
+     },
+     {
+      "contact_id": "003jV00000F38YjQAJ",
+      "name": "Matthias Weber",
+      "title": "IT Lead",
+      "email": "matthias.weber@kestrelbio.example",
+      "role_hypothesis": "technical_evaluator"
+     }
+    ]
+   },
+   "EVIDENCE": [
+    {
+     "ref_id": "SF-OPP-006jV000002P58PQAS",
+     "source": "Salesforce",
+     "ts": "2026-10-23 23:48:08",
+     "excerpt": "Opportunity \u00b7 Kestrel - Lab Ops Discovery \u00b7 Prospecting \u00b7 $45,000 \u00b7 next step: Budget not before 2027",
+     "url": null
+    },
+    {
+     "ref_id": "INTENT-0010-LAB_OPERATIONS_SOFTWARE",
+     "source": "Intent",
+     "ts": "2026-10-19 00:00:00",
+     "excerpt": "Intent: \"lab operations software\" at 14/100, from 9 four weeks earlier",
+     "url": null
+    },
+    {
+     "ref_id": "GONG-8920#1",
+     "source": "Gong",
+     "ts": "2026-09-21 00:00:00",
+     "excerpt": "Tracker: Budget, Timeline \u00b7 Sep 21 call \u00b7 \"We're interested but there's no budget for new tools until 2027.\"",
+     "url": "https://gong.example/call/GONG-8920"
+    }
+   ],
+   "BILLING_CITY": "Basel",
+   "BILLING_COUNTRY": "Switzerland",
+   "EMPLOYEES": 300,
+   "ANNUAL_REVENUE": 40000000
+  }
+ },
+ "contacts": {
+  "GTM-0001": [
+   {
+    "contact_id": "003jV00000F38YHQAZ",
+    "name": "Riley Chen",
+    "title": "Director, Field Operations",
+    "email": "riley.chen@northstarfield.example",
+    "role_hypothesis": "champion",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YIQAZ",
+    "name": "Jordan Patel",
+    "title": "VP, Business Systems",
+    "email": "jordan.patel@northstarfield.example",
+    "role_hypothesis": "executive_sponsor",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YJQAZ",
+    "name": "Morgan Ellis",
+    "title": "Operations Manager",
+    "email": "morgan.ellis@northstarfield.example",
+    "role_hypothesis": "champion",
+    "opted_out": true,
+    "do_not_call": false,
+    "permitted": false,
+    "incomplete": false
+   }
+  ],
+  "GTM-0002": [
+   {
+    "contact_id": "003jV00000F38YKQAZ",
+    "name": "Amara Okafor",
+    "title": "Head of Clinical Operations",
+    "email": "amara.okafor@juniperridgehealth.example",
+    "role_hypothesis": "champion",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YLQAZ",
+    "name": "Lukas Brandt",
+    "title": "IT Director",
+    "email": "lukas.brandt@juniperridgehealth.example",
+    "role_hypothesis": "technical_evaluator",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YMQAZ",
+    "name": "Priya Nair",
+    "title": "Chief Financial Officer",
+    "email": "priya.nair@juniperridgehealth.example",
+    "role_hypothesis": "economic_buyer",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   }
+  ],
+  "GTM-0003": [
+   {
+    "contact_id": "003jV00000F38YNQAZ",
+    "name": "Sam Okoro",
+    "title": "Corporate Controller",
+    "email": "sam.okoro@cobaltledger.example",
+    "role_hypothesis": "economic_buyer",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YOQAZ",
+    "name": "Chris Lam",
+    "title": null,
+    "email": null,
+    "role_hypothesis": null,
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": false,
+    "incomplete": true
+   }
+  ],
+  "GTM-0004": [
+   {
+    "contact_id": "003jV00000F38YPQAZ",
+    "name": "Marcus Bell",
+    "title": "VP, Supply Chain",
+    "email": "marcus.bell@harborline.example",
+    "role_hypothesis": "executive_sponsor",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YQQAZ",
+    "name": "Nina Alvarez",
+    "title": "Director, IT Applications",
+    "email": "nina.alvarez@harborline.example",
+    "role_hypothesis": "technical_evaluator",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YRQAZ",
+    "name": "Owen Price",
+    "title": "Procurement Manager",
+    "email": "owen.price@harborline.example",
+    "role_hypothesis": "champion",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YSQAZ",
+    "name": "Grace Kim",
+    "title": "Dispatch Lead",
+    "email": "grace.kim@harborline.example",
+    "role_hypothesis": "champion",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   }
+  ],
+  "GTM-0005": [
+   {
+    "contact_id": "003jV00000F38YTQAZ",
+    "name": "Sven de Jong",
+    "title": "Head of Grid Operations",
+    "email": "sven.dejong@verdantgrid.example",
+    "role_hypothesis": "champion",
+    "opted_out": true,
+    "do_not_call": false,
+    "permitted": false,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YUQAZ",
+    "name": "Femke Bakker",
+    "title": "Procurement Lead",
+    "email": "femke.bakker@verdantgrid.example",
+    "role_hypothesis": "champion",
+    "opted_out": true,
+    "do_not_call": false,
+    "permitted": false,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YVQAZ",
+    "name": "Pieter Smit",
+    "title": "Chief Technology Officer",
+    "email": "pieter.smit@verdantgrid.example",
+    "role_hypothesis": "technical_evaluator",
+    "opted_out": true,
+    "do_not_call": true,
+    "permitted": false,
+    "incomplete": false
+   }
+  ],
+  "GTM-0006": [
+   {
+    "contact_id": "003jV00000F38YWQAZ",
+    "name": "Wei Ling Tan",
+    "title": "Head of Store Operations",
+    "email": "wei.tan@tessellateretail.example",
+    "role_hypothesis": "champion",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YXQAZ",
+    "name": "Arjun Mehta",
+    "title": "Director, Retail Technology",
+    "email": "arjun.mehta@tessellateretail.example",
+    "role_hypothesis": "technical_evaluator",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YYQAZ",
+    "name": "Hana Sato",
+    "title": "Marketing Operations Manager",
+    "email": "hana.sato@tessellateretail.example",
+    "role_hypothesis": "champion",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   }
+  ],
+  "GTM-0007": [
+   {
+    "contact_id": "003jV00000F38YZQAZ",
+    "name": "Greg Novak",
+    "title": "Plant Manager",
+    "email": "greg.novak@quarrypine.example",
+    "role_hypothesis": "champion",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YaQAJ",
+    "name": "Linda Ortiz",
+    "title": "VP, Operations",
+    "email": "linda.ortiz@quarrypine.example",
+    "role_hypothesis": "executive_sponsor",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YbQAJ",
+    "name": "Tom Becker",
+    "title": "IT Manager",
+    "email": "tom.becker@quarrypine.example",
+    "role_hypothesis": "technical_evaluator",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   }
+  ],
+  "GTM-0008": [
+   {
+    "contact_id": "003jV00000F38YcQAJ",
+    "name": "Jasmine Reed",
+    "title": "VP, Content Operations",
+    "email": "jasmine.reed@lumenarc.example",
+    "role_hypothesis": "executive_sponsor",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YdQAJ",
+    "name": "Carlos Mendez",
+    "title": "Head of Engineering",
+    "email": "carlos.mendez@lumenarc.example",
+    "role_hypothesis": "technical_evaluator",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   }
+  ],
+  "GTM-0009": [
+   {
+    "contact_id": "003jV00000F38YeQAJ",
+    "name": "Rachel Stone",
+    "title": "SVP, Claims Operations",
+    "email": "rachel.stone@brightwaterins.example",
+    "role_hypothesis": "executive_sponsor",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YfQAJ",
+    "name": "David Park",
+    "title": "Director, Enterprise Architecture",
+    "email": "david.park@brightwaterins.example",
+    "role_hypothesis": "technical_evaluator",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YgQAJ",
+    "name": "Monica Hayes",
+    "title": "VP, Finance",
+    "email": "monica.hayes@brightwaterins.example",
+    "role_hypothesis": "economic_buyer",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YhQAJ",
+    "name": "Kevin Liu",
+    "title": "Claims Systems Manager",
+    "email": "kevin.liu@brightwaterins.example",
+    "role_hypothesis": "champion",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   }
+  ],
+  "GTM-0010": [
+   {
+    "contact_id": "003jV00000F38YiQAJ",
+    "name": "Isabelle Roux",
+    "title": "Head of Lab Operations",
+    "email": "isabelle.roux@kestrelbio.example",
+    "role_hypothesis": "champion",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   },
+   {
+    "contact_id": "003jV00000F38YjQAJ",
+    "name": "Matthias Weber",
+    "title": "IT Lead",
+    "email": "matthias.weber@kestrelbio.example",
+    "role_hypothesis": "technical_evaluator",
+    "opted_out": false,
+    "do_not_call": false,
+    "permitted": true,
+    "incomplete": false
+   }
+  ]
+ },
+ "runs": {
+  "GTM-0001": {
+   "package": {
+    "flow_id": "flow_062257",
+    "model": "scripted (no LLM on trial account)",
+    "account": {
+     "id": "001jV00000Ht777QAB",
+     "key": "GTM-0001",
+     "name": "Northstar Field Services",
+     "industry": "Consulting",
+     "region": "NA",
+     "owner": "Alex Rivera"
+    },
+    "score": {
+     "priority_score": 0.87,
+     "version": "ps_v3.2",
+     "freshness": "fresh",
+     "rationale": "Open expansion opportunity, plus recent calls about consolidating scheduling tools across regions.",
+     "feature_status": {
+      "EWGS": "present",
+      "INTENT": "present",
+      "ENGAGEMENT": "present",
+      "CRITICAL_EVENTS": "present",
+      "PTB_ROP": "present"
+     }
+    },
+    "growth_vector": "Expansion",
+    "contact_readiness": {
+     "roles_covered": 2,
+     "roles_total": 4,
+     "missing_roles": [
+      "economic_buyer",
+      "technical_evaluator"
+     ],
+     "opted_out_count": 1
+    },
+    "warnings": [],
+    "status": "ready_for_review",
+    "sequence": "EXPANSION_3TOUCH",
+    "contacts": [
+     {
+      "contact_id": "003jV00000F38YHQAZ",
+      "role": "champion",
+      "confidence": 0.82,
+      "why": "Director, Field Operations: title suggests champion",
+      "name": "Riley Chen",
+      "title": "Director, Field Operations",
+      "email": "riley.chen@northstarfield.example"
+     },
+     {
+      "contact_id": "003jV00000F38YIQAZ",
+      "role": "executive_sponsor",
+      "confidence": 0.65,
+      "why": "VP, Business Systems: title suggests executive sponsor",
+      "name": "Jordan Patel",
+      "title": "VP, Business Systems",
+      "email": "jordan.patel@northstarfield.example"
+     }
+    ],
+    "primary_contact_id": "003jV00000F38YHQAZ",
+    "research_summary": "Open expansion opportunity, and on Oct 14 the champion described three scheduling tools to consolidate before Q1 planning closes.",
+    "facts": [
+     {
+      "ref_id": "GONG-8812#3",
+      "fact": "Tracker: Consolidation \u00b7 Oct 14 call \u00b7 \"The goal is to consolidate scheduling onto one platform and keep dispatch data in one place.\""
+     },
+     {
+      "ref_id": "GONG-8650#4",
+      "fact": "Tracker: Consolidation \u00b7 Sep 02 call \u00b7 \"We have a lot of overlapping tools. That's one of the things I've been asked to clean up.\""
+     },
+     {
+      "ref_id": "SF-OPP-006jV000002P58EQAS",
+      "fact": "Opportunity \u00b7 Northstar - Regional Scheduling Expansion \u00b7 Qualification \u00b7 $185,000 \u00b7 next step: Confirm technical evaluator; scope dispatch integration"
+     },
+     {
+      "ref_id": "SF-CASE-00001026",
+      "fact": "Case \u00b7 Closed \u00b7 Low priority \u00b7 Add second region to scheduling workspace"
+     },
+     {
+      "ref_id": "SNOW-USG-0001",
+      "fact": "Seat usage at 91% of plan (274 of 300 seats), up 23 seats over 3 months"
+     }
+    ],
+    "draft": {
+     "subject": "Consolidating scheduling across regions",
+     "body": "Hi Riley,\n\nOn your recent call, the team mentioned consolidating scheduling tools across field regions. We've worked with other service operators on the same problem, mostly around keeping dispatch data in one place.\n\nWould 20 minutes next week be useful to compare notes?\n\nBest,\nAlex",
+     "version": 2
+    },
+    "claims": [
+     {
+      "claim": "On your recent call, the team mentioned consolidating scheduling tools across field regions.",
+      "ref_id": "GONG-8812#3"
+     }
+    ],
+    "validator": {
+     "passed": true,
+     "flagged_claims": [],
+     "reasons": [],
+     "word_count": 46
+    },
+    "retries": 1
+   },
+   "events": [
+    {
+     "EVENT": "ae.accepted",
+     "ACTOR": "user:web",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "account": "Northstar Field Services",
+      "level": "HUMAN"
+     },
+     "LEVEL": "HUMAN"
+    },
+    {
+     "EVENT": "flow.state.validated",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "context.loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "evidence": 13,
+      "permitted_contacts": 2,
+      "freshness": "fresh",
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.context_loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.crew_running",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.identifier.done",
+     "ACTOR": "agent:identifier",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "sequence": "EXPANSION_3TOUCH",
+      "contacts": [
+       "Riley Chen (champion, 0.82)",
+       "Jordan Patel (executive_sponsor, 0.65)"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.researcher.done",
+     "ACTOR": "agent:researcher",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "facts": 5,
+      "dropped_uncited": 0,
+      "refs": [
+       "GONG-8812#3",
+       "GONG-8650#4",
+       "SF-OPP-006jV000002P58EQAS",
+       "SF-CASE-00001026",
+       "SNOW-USG-0001"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.composer.done",
+     "ACTOR": "agent:composer",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "claims": 2,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.validating",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.validator.failed",
+     "ACTOR": "agent:validator",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "flagged_claims": [
+       "I saw Northstar is expanding into three new regions this year."
+      ],
+      "retry": 1,
+      "max_retries": 2,
+      "level": "WARN"
+     },
+     "LEVEL": "WARN"
+    },
+    {
+     "EVENT": "crew.composer.done",
+     "ACTOR": "agent:composer",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 2,
+      "claims": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.validating",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.validator.passed",
+     "ACTOR": "agent:validator",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 2,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.awaiting_ae",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    }
+   ]
+  },
+  "GTM-0002": {
+   "package": {
+    "flow_id": "flow_4c5ad1",
+    "model": "scripted (no LLM on trial account)",
+    "account": {
+     "id": "001jV00000Ht778QAB",
+     "key": "GTM-0002",
+     "name": "Juniper Ridge Health",
+     "industry": "Healthcare",
+     "region": "EMEA",
+     "owner": "Alex Rivera"
+    },
+    "score": {
+     "priority_score": 0.81,
+     "version": "ps_v3.2",
+     "freshness": "fresh",
+     "rationale": "Strong ICP fit and rising intent; integration timelines came up on a discovery call.",
+     "feature_status": {
+      "EWGS": "present",
+      "INTENT": "present",
+      "ENGAGEMENT": "present",
+      "CRITICAL_EVENTS": "unknown",
+      "PTB_ROP": "present"
+     }
+    },
+    "growth_vector": "New logo",
+    "contact_readiness": {
+     "roles_covered": 3,
+     "roles_total": 4,
+     "missing_roles": [
+      "executive_sponsor"
+     ],
+     "opted_out_count": 0
+    },
+    "warnings": [
+     "Model inputs not present: CRITICAL_EVENTS=unknown"
+    ],
+    "status": "ready_for_review",
+    "sequence": "NEW_LOGO_4TOUCH",
+    "contacts": [
+     {
+      "contact_id": "003jV00000F38YKQAZ",
+      "role": "champion",
+      "confidence": 0.82,
+      "why": "Head of Clinical Operations: title suggests champion",
+      "name": "Amara Okafor",
+      "title": "Head of Clinical Operations",
+      "email": "amara.okafor@juniperridgehealth.example"
+     },
+     {
+      "contact_id": "003jV00000F38YMQAZ",
+      "role": "economic_buyer",
+      "confidence": 0.71,
+      "why": "Chief Financial Officer: title suggests economic buyer",
+      "name": "Priya Nair",
+      "title": "Chief Financial Officer",
+      "email": "priya.nair@juniperridgehealth.example"
+     }
+    ],
+    "primary_contact_id": "003jV00000F38YKQAZ",
+    "research_summary": "Intent on clinical workflow automation is rising, and the Oct 9 discovery call surfaced EHR integration timelines.",
+    "facts": [
+     {
+      "ref_id": "GONG-9034#2",
+      "fact": "Tracker: Integration, Timeline \u00b7 Oct 09 call \u00b7 \"Clinics go live in waves. Integration timelines with the EHR vendor keep slipping.\""
+     },
+     {
+      "ref_id": "GONG-8977#2",
+      "fact": "Tracker: Integration \u00b7 Sep 24 call \u00b7 \"We're rolling out a new EHR across our clinics and clinical ops workflows are still on spreadsheets.\""
+     },
+     {
+      "ref_id": "SF-OPP-006jV000002P58FQAS",
+      "fact": "Opportunity \u00b7 Juniper Ridge - Clinical Ops Workflow \u00b7 Needs Analysis \u00b7 $260,000 \u00b7 next step: Map rollout sequencing against EHR go-live"
+     },
+     {
+      "ref_id": "INTENT-0002-CLINICAL_WORKFLOW_AUTOMATION",
+      "fact": "Intent: \"clinical workflow automation\" at 78/100, from 38 four weeks earlier"
+     },
+     {
+      "ref_id": "INTENT-0002-EHR_INTEGRATION",
+      "fact": "Intent: \"EHR integration\" at 64/100, from 33 four weeks earlier"
+     }
+    ],
+    "draft": {
+     "subject": "EHR rollout sequencing",
+     "body": "Hi Amara,\n\nYour team raised integration timelines with your EHR vendor on a recent call. Other health-tech teams we work with ran into the same sequencing issue during rollout.\n\nOpen to a short call next week to share what worked for them?\n\nBest,\nAlex",
+     "version": 2
+    },
+    "claims": [
+     {
+      "claim": "Your team raised integration timelines with your EHR vendor on a recent call.",
+      "ref_id": "GONG-9034#2"
+     }
+    ],
+    "validator": {
+     "passed": true,
+     "flagged_claims": [],
+     "reasons": [],
+     "word_count": 45
+    },
+    "retries": 1
+   },
+   "events": [
+    {
+     "EVENT": "ae.accepted",
+     "ACTOR": "user:web",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "account": "Juniper Ridge Health",
+      "level": "HUMAN"
+     },
+     "LEVEL": "HUMAN"
+    },
+    {
+     "EVENT": "flow.state.validated",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "context.loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "evidence": 10,
+      "permitted_contacts": 3,
+      "freshness": "fresh",
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.context_loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.crew_running",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.identifier.done",
+     "ACTOR": "agent:identifier",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "sequence": "NEW_LOGO_4TOUCH",
+      "contacts": [
+       "Amara Okafor (champion, 0.82)",
+       "Priya Nair (economic_buyer, 0.71)"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.researcher.done",
+     "ACTOR": "agent:researcher",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "facts": 5,
+      "dropped_uncited": 0,
+      "refs": [
+       "GONG-9034#2",
+       "GONG-8977#2",
+       "SF-OPP-006jV000002P58FQAS",
+       "INTENT-0002-CLINICAL_WORKFLOW_AUTOMATION",
+       "INTENT-0002-EHR_INTEGRATION"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.composer.done",
+     "ACTOR": "agent:composer",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "claims": 2,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.validating",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.validator.failed",
+     "ACTOR": "agent:validator",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "flagged_claims": [
+       "Congratulations on the Series C funding round."
+      ],
+      "retry": 1,
+      "max_retries": 2,
+      "level": "WARN"
+     },
+     "LEVEL": "WARN"
+    },
+    {
+     "EVENT": "crew.composer.done",
+     "ACTOR": "agent:composer",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 2,
+      "claims": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.validating",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.validator.passed",
+     "ACTOR": "agent:validator",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 2,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.awaiting_ae",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    }
+   ]
+  },
+  "GTM-0003": {
+   "package": {
+    "flow_id": "flow_4a7538",
+    "model": "scripted (no LLM on trial account)",
+    "account": {
+     "id": "001jV00000Ht779QAB",
+     "key": "GTM-0003",
+     "name": "Cobalt Ledger Systems",
+     "industry": "Finance",
+     "region": "NA",
+     "owner": "Alex Rivera"
+    },
+    "score": {
+     "priority_score": 0.76,
+     "version": "ps_v3.2",
+     "freshness": "stale",
+     "rationale": "Upgrade propensity from seat usage and a recent support case about higher-tier features. No recent calls.",
+     "feature_status": {
+      "EWGS": "present",
+      "INTENT": "present",
+      "ENGAGEMENT": "present",
+      "CRITICAL_EVENTS": "present",
+      "PTB_ROP": "unscored"
+     }
+    },
+    "growth_vector": "Upgrade",
+    "contact_readiness": {
+     "roles_covered": 1,
+     "roles_total": 4,
+     "missing_roles": [
+      "champion",
+      "technical_evaluator",
+      "executive_sponsor"
+     ],
+     "opted_out_count": 0
+    },
+    "warnings": [
+     "Score is 6 days old (stale)",
+     "Model inputs not present: PTB_ROP=unscored"
+    ],
+    "status": "ready_for_review",
+    "sequence": "UPGRADE_2TOUCH",
+    "contacts": [
+     {
+      "contact_id": "003jV00000F38YNQAZ",
+      "role": "economic_buyer",
+      "confidence": 0.71,
+      "why": "Corporate Controller: title suggests economic buyer",
+      "name": "Sam Okoro",
+      "title": "Corporate Controller",
+      "email": "sam.okoro@cobaltledger.example"
+     }
+    ],
+    "primary_contact_id": "003jV00000F38YNQAZ",
+    "research_summary": "Seat usage is at 92% of plan and an open case asks about higher-tier features. No calls in 90 days, so context is thinner.",
+    "facts": [
+     {
+      "ref_id": "SF-CASE-00001027",
+      "fact": "Case \u00b7 Working \u00b7 Medium priority \u00b7 Question about Enterprise tier features"
+     },
+     {
+      "ref_id": "SF-CASE-00001028",
+      "fact": "Case \u00b7 New \u00b7 Low priority \u00b7 Seat limit warning on finance workspace"
+     },
+     {
+      "ref_id": "GONG-none",
+      "fact": "No calls in the last 90 days (unknown, not negative)"
+     },
+     {
+      "ref_id": "SNOW-USG-0003",
+      "fact": "Seat usage at 92% of plan (92 of 100 seats), up 9 seats over 3 months"
+     },
+     {
+      "ref_id": "EVT-0003-20261001",
+      "fact": "Usage threshold \u00b7 Seat usage crossed 90% of plan"
+     }
+    ],
+    "draft": {
+     "subject": "Upgrade options for your finance team",
+     "body": "Hi Sam,\n\nYour finance team asked about upgrade options on a support case, and seat usage is close to your plan limit. I can walk through what changes in the higher tier and what a migration usually involves.\n\nWould a 20-minute call next week help?\n\nBest,\nAlex",
+     "version": 2
+    },
+    "claims": [
+     {
+      "claim": "Your finance team asked about upgrade options on a support case, and seat usage is close to your plan limit.",
+      "ref_id": "SF-CASE-00001027"
+     }
+    ],
+    "validator": {
+     "passed": true,
+     "flagged_claims": [],
+     "reasons": [],
+     "word_count": 48
+    },
+    "retries": 1
+   },
+   "events": [
+    {
+     "EVENT": "ae.accepted",
+     "ACTOR": "user:web",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "account": "Cobalt Ledger Systems",
+      "level": "HUMAN"
+     },
+     "LEVEL": "HUMAN"
+    },
+    {
+     "EVENT": "flow.state.validated",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "context.loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "evidence": 5,
+      "permitted_contacts": 1,
+      "freshness": "stale",
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.context_loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.crew_running",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.identifier.done",
+     "ACTOR": "agent:identifier",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "sequence": "UPGRADE_2TOUCH",
+      "contacts": [
+       "Sam Okoro (economic_buyer, 0.71)"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.researcher.done",
+     "ACTOR": "agent:researcher",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "facts": 5,
+      "dropped_uncited": 0,
+      "refs": [
+       "SF-CASE-00001027",
+       "SF-CASE-00001028",
+       "GONG-none",
+       "SNOW-USG-0003",
+       "EVT-0003-20261001"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.composer.done",
+     "ACTOR": "agent:composer",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "claims": 2,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.validating",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.validator.failed",
+     "ACTOR": "agent:validator",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "flagged_claims": [
+       "Since you're replacing your ERP next quarter, this seemed like a good time to reach out."
+      ],
+      "retry": 1,
+      "max_retries": 2,
+      "level": "WARN"
+     },
+     "LEVEL": "WARN"
+    },
+    {
+     "EVENT": "crew.composer.done",
+     "ACTOR": "agent:composer",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 2,
+      "claims": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.validating",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.validator.passed",
+     "ACTOR": "agent:validator",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 2,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.awaiting_ae",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    }
+   ]
+  },
+  "GTM-0004": {
+   "package": {
+    "flow_id": "flow_22f79c",
+    "model": "scripted (no LLM on trial account)",
+    "account": {
+     "id": "001jV00000Ht77AQAR",
+     "key": "GTM-0004",
+     "name": "Harborline Logistics",
+     "industry": "Transportation",
+     "region": "NA",
+     "owner": "Alex Rivera"
+    },
+    "score": {
+     "priority_score": 0.69,
+     "version": "ps_v3.2",
+     "freshness": "fresh",
+     "rationale": "Renewal within 90 days with an escalated integration case and declining active seats.",
+     "feature_status": {
+      "EWGS": "present",
+      "INTENT": "present",
+      "ENGAGEMENT": "present",
+      "CRITICAL_EVENTS": "present",
+      "PTB_ROP": "present"
+     }
+    },
+    "growth_vector": "Retention",
+    "contact_readiness": {
+     "roles_covered": 3,
+     "roles_total": 4,
+     "missing_roles": [
+      "economic_buyer"
+     ],
+     "opted_out_count": 0
+    },
+    "warnings": [],
+    "status": "ready_for_review",
+    "sequence": "RENEWAL_SAVE_3TOUCH",
+    "contacts": [
+     {
+      "contact_id": "003jV00000F38YPQAZ",
+      "role": "executive_sponsor",
+      "confidence": 0.65,
+      "why": "VP, Supply Chain: title suggests executive sponsor",
+      "name": "Marcus Bell",
+      "title": "VP, Supply Chain",
+      "email": "marcus.bell@harborline.example"
+     },
+     {
+      "contact_id": "003jV00000F38YRQAZ",
+      "role": "champion",
+      "confidence": 0.82,
+      "why": "Procurement Manager: title suggests champion",
+      "name": "Owen Price",
+      "title": "Procurement Manager",
+      "email": "owen.price@harborline.example"
+     }
+    ],
+    "primary_contact_id": "003jV00000F38YPQAZ",
+    "research_summary": "Renewal is within 90 days, active seats are falling, and a competitor came up on the Oct 16 call. Lead with the fix, not price.",
+    "facts": [
+     {
+      "ref_id": "GONG-9101#2",
+      "fact": "Tracker: Churn risk, Integration \u00b7 Oct 16 call \u00b7 \"Honestly, the sync failures have hurt. My team has lost confidence.\""
+     },
+     {
+      "ref_id": "GONG-8890#1",
+      "fact": "Tracker: Churn risk, Integration \u00b7 Sep 18 call \u00b7 \"The TMS sync is failing several times a week. Dispatch is re-keying shipment status by hand.\""
+     },
+     {
+      "ref_id": "SF-OPP-006jV000002P58IQAS",
+      "fact": "Opportunity \u00b7 Harborline - FY27 Renewal \u00b7 Negotiation/Review \u00b7 $520,000 \u00b7 next step: Resolve TMS sync escalation before pricing discussion"
+     },
+     {
+      "ref_id": "SF-CASE-00001029",
+      "fact": "Case \u00b7 Escalated \u00b7 High priority \u00b7 Repeated sync failures with TMS integration"
+     },
+     {
+      "ref_id": "SF-CASE-00001030",
+      "fact": "Case \u00b7 Closed \u00b7 Medium priority \u00b7 Dispatch dashboard latency"
+     }
+    ],
+    "draft": {
+     "subject": "TMS sync fix and next steps",
+     "body": "Hi Marcus,\n\nThanks for being direct about the TMS sync failures on our renewal call. Engineering's fix is in testing, and I'd like to walk your team through it and agree on what a stable month looks like before we discuss renewal terms.\n\nCould we set up 30 minutes with your dispatch lead next week?\n\nBest,\nAlex",
+     "version": 1
+    },
+    "claims": [
+     {
+      "claim": "Thanks for being direct about the TMS sync failures on our renewal call.",
+      "ref_id": "GONG-9101#2"
+     }
+    ],
+    "validator": {
+     "passed": true,
+     "flagged_claims": [],
+     "reasons": [],
+     "word_count": 59
+    },
+    "retries": 0
+   },
+   "events": [
+    {
+     "EVENT": "ae.accepted",
+     "ACTOR": "user:web",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "account": "Harborline Logistics",
+      "level": "HUMAN"
+     },
+     "LEVEL": "HUMAN"
+    },
+    {
+     "EVENT": "flow.state.validated",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "context.loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "evidence": 15,
+      "permitted_contacts": 4,
+      "freshness": "fresh",
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.context_loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.crew_running",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.identifier.done",
+     "ACTOR": "agent:identifier",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "sequence": "RENEWAL_SAVE_3TOUCH",
+      "contacts": [
+       "Marcus Bell (executive_sponsor, 0.65)",
+       "Owen Price (champion, 0.82)"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.researcher.done",
+     "ACTOR": "agent:researcher",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "facts": 5,
+      "dropped_uncited": 0,
+      "refs": [
+       "GONG-9101#2",
+       "GONG-8890#1",
+       "SF-OPP-006jV000002P58IQAS",
+       "SF-CASE-00001029",
+       "SF-CASE-00001030"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.composer.done",
+     "ACTOR": "agent:composer",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "claims": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.validating",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.validator.passed",
+     "ACTOR": "agent:validator",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.awaiting_ae",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    }
+   ]
+  },
+  "GTM-0005": {
+   "package": {
+    "flow_id": "flow_f40fd1",
+    "model": "scripted (no LLM on trial account)",
+    "account": {
+     "id": "001jV00000Ht77BQAR",
+     "key": "GTM-0005",
+     "name": "Verdant Grid Energy",
+     "industry": "Energy",
+     "region": "EMEA",
+     "owner": "Alex Rivera"
+    },
+    "score": {
+     "priority_score": 0.72,
+     "version": "ps_v3.2",
+     "freshness": "fresh",
+     "rationale": "Very high intent on crew scheduling and an RFP signal from an inbound demo.",
+     "feature_status": {
+      "EWGS": "present",
+      "INTENT": "present",
+      "ENGAGEMENT": "unknown",
+      "CRITICAL_EVENTS": "present",
+      "PTB_ROP": "present"
+     }
+    },
+    "growth_vector": "New logo",
+    "contact_readiness": {
+     "roles_covered": 0,
+     "roles_total": 4,
+     "missing_roles": [
+      "champion",
+      "economic_buyer",
+      "technical_evaluator",
+      "executive_sponsor"
+     ],
+     "opted_out_count": 3
+    },
+    "warnings": [
+     "Model inputs not present: ENGAGEMENT=unknown"
+    ],
+    "status": "no_permitted_contact",
+    "contacts": [],
+    "draft": null,
+    "gap": "No permitted contact: 3 of 3 contacts opted out. No draft was written."
+   },
+   "events": [
+    {
+     "EVENT": "ae.accepted",
+     "ACTOR": "user:web",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "account": "Verdant Grid Energy",
+      "level": "HUMAN"
+     },
+     "LEVEL": "HUMAN"
+    },
+    {
+     "EVENT": "flow.state.validated",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "context.loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "evidence": 4,
+      "permitted_contacts": 0,
+      "freshness": "fresh",
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.context_loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.crew_running",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.identifier.no_contact",
+     "ACTOR": "agent:identifier",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "opted_out": 3,
+      "contacts_total": 3,
+      "level": "WARN"
+     },
+     "LEVEL": "WARN"
+    },
+    {
+     "EVENT": "flow.state.awaiting_ae",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    }
+   ]
+  },
+  "GTM-0006": {
+   "package": {
+    "flow_id": "flow_69889f",
+    "model": "scripted (no LLM on trial account)",
+    "account": {
+     "id": "001jV00000Ht77CQAR",
+     "key": "GTM-0006",
+     "name": "Tessellate Retail Group",
+     "industry": "Retail",
+     "region": "APAC",
+     "owner": "Alex Rivera"
+    },
+    "score": {
+     "priority_score": 0.58,
+     "version": "ps_v3.2",
+     "freshness": "fresh",
+     "rationale": "Moderate intent after a webinar; pilot interest from retail technology.",
+     "feature_status": {
+      "EWGS": "present",
+      "INTENT": "present",
+      "ENGAGEMENT": "present",
+      "CRITICAL_EVENTS": "unknown",
+      "PTB_ROP": "present"
+     }
+    },
+    "growth_vector": "New logo",
+    "contact_readiness": {
+     "roles_covered": 2,
+     "roles_total": 4,
+     "missing_roles": [
+      "economic_buyer",
+      "executive_sponsor"
+     ],
+     "opted_out_count": 0
+    },
+    "warnings": [
+     "Model inputs not present: CRITICAL_EVENTS=unknown"
+    ],
+    "status": "ready_for_review",
+    "sequence": "NEW_LOGO_4TOUCH",
+    "contacts": [
+     {
+      "contact_id": "003jV00000F38YXQAZ",
+      "role": "technical_evaluator",
+      "confidence": 0.68,
+      "why": "Director, Retail Technology: title suggests technical evaluator",
+      "name": "Arjun Mehta",
+      "title": "Director, Retail Technology",
+      "email": "arjun.mehta@tessellateretail.example"
+     },
+     {
+      "contact_id": "003jV00000F38YWQAZ",
+      "role": "champion",
+      "confidence": 0.82,
+      "why": "Head of Store Operations: title suggests champion",
+      "name": "Wei Ling Tan",
+      "title": "Head of Store Operations",
+      "email": "wei.tan@tessellateretail.example"
+     }
+    ],
+    "primary_contact_id": "003jV00000F38YXQAZ",
+    "research_summary": "Webinar follow-up surfaced a 20-store pilot idea; intent on store task management is climbing.",
+    "facts": [
+     {
+      "ref_id": "GONG-9050#3",
+      "fact": "Tracker: Budget, Next steps \u00b7 Oct 11 call \u00b7 \"A 20-store pilot would be the way in. Our head of store ops owns the budget.\""
+     },
+     {
+      "ref_id": "SF-OPP-006jV000002P58JQAS",
+      "fact": "Opportunity \u00b7 Tessellate - Store Ops Pilot \u00b7 Prospecting \u00b7 $140,000 \u00b7 next step: Pilot scope for 20 stores"
+     },
+     {
+      "ref_id": "INTENT-0006-STORE_TASK_MANAGEMENT",
+      "fact": "Intent: \"store task management\" at 45/100, from 22 four weeks earlier"
+     },
+     {
+      "ref_id": "GONG-9050#2",
+      "fact": "Tracker: Competitor \u00b7 Oct 11 call \u00b7 \"We trialed TaskNimbus but store managers found it too heavy.\""
+     }
+    ],
+    "draft": {
+     "subject": "A 20-store pilot",
+     "body": "Hi Arjun,\n\nOn our call after the webinar, you mentioned a 20-store pilot would be the right way to start. Happy to share how other retailers scoped a pilot like that and what they measured.\n\nWould a short call next week to scope it be useful?\n\nBest,\nAlex",
+     "version": 1
+    },
+    "claims": [
+     {
+      "claim": "On our call after the webinar, you mentioned a 20-store pilot would be the right way to start.",
+      "ref_id": "GONG-9050#3"
+     }
+    ],
+    "validator": {
+     "passed": true,
+     "flagged_claims": [],
+     "reasons": [],
+     "word_count": 49
+    },
+    "retries": 0
+   },
+   "events": [
+    {
+     "EVENT": "ae.accepted",
+     "ACTOR": "user:web",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "account": "Tessellate Retail Group",
+      "level": "HUMAN"
+     },
+     "LEVEL": "HUMAN"
+    },
+    {
+     "EVENT": "flow.state.validated",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "context.loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "evidence": 4,
+      "permitted_contacts": 3,
+      "freshness": "fresh",
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.context_loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.crew_running",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.identifier.done",
+     "ACTOR": "agent:identifier",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "sequence": "NEW_LOGO_4TOUCH",
+      "contacts": [
+       "Arjun Mehta (technical_evaluator, 0.68)",
+       "Wei Ling Tan (champion, 0.82)"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.researcher.done",
+     "ACTOR": "agent:researcher",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "facts": 4,
+      "dropped_uncited": 0,
+      "refs": [
+       "GONG-9050#3",
+       "SF-OPP-006jV000002P58JQAS",
+       "INTENT-0006-STORE_TASK_MANAGEMENT",
+       "GONG-9050#2"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.composer.done",
+     "ACTOR": "agent:composer",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "claims": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.validating",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.validator.passed",
+     "ACTOR": "agent:validator",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.awaiting_ae",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    }
+   ]
+  },
+  "GTM-0007": {
+   "package": {
+    "flow_id": "flow_b4027b",
+    "model": "scripted (no LLM on trial account)",
+    "account": {
+     "id": "001jV00000Ht77DQAR",
+     "key": "GTM-0007",
+     "name": "Quarry & Pine Manufacturing",
+     "industry": "Machinery",
+     "region": "NA",
+     "owner": "Alex Rivera"
+    },
+    "score": {
+     "priority_score": null,
+     "version": "ps_v3.2",
+     "freshness": "unscored",
+     "rationale": "Not yet scored: account entered model scope after the last scoring run.",
+     "feature_status": {
+      "EWGS": "unscored",
+      "INTENT": "unscored",
+      "ENGAGEMENT": "unscored",
+      "CRITICAL_EVENTS": "unscored",
+      "PTB_ROP": "unscored"
+     }
+    },
+    "growth_vector": "Expansion",
+    "contact_readiness": {
+     "roles_covered": 3,
+     "roles_total": 4,
+     "missing_roles": [
+      "economic_buyer"
+     ],
+     "opted_out_count": 0
+    },
+    "warnings": [
+     "Account is not scored yet; priority unknown, not low",
+     "Model inputs not present: EWGS=unscored, INTENT=unscored, ENGAGEMENT=unscored, CRITICAL_EVENTS=unscored, PTB_ROP=unscored"
+    ],
+    "status": "ready_for_review",
+    "sequence": "EXPANSION_3TOUCH",
+    "contacts": [
+     {
+      "contact_id": "003jV00000F38YZQAZ",
+      "role": "champion",
+      "confidence": 0.82,
+      "why": "Plant Manager: title suggests champion",
+      "name": "Greg Novak",
+      "title": "Plant Manager",
+      "email": "greg.novak@quarrypine.example"
+     },
+     {
+      "contact_id": "003jV00000F38YbQAJ",
+      "role": "technical_evaluator",
+      "confidence": 0.68,
+      "why": "IT Manager: title suggests technical evaluator",
+      "name": "Tom Becker",
+      "title": "IT Manager",
+      "email": "tom.becker@quarrypine.example"
+     }
+    ],
+    "primary_contact_id": "003jV00000F38YZQAZ",
+    "research_summary": "Not scored yet, so priority is unknown. Plant 2 timing and steady plant 1 usage make it worth a look.",
+    "facts": [
+     {
+      "ref_id": "GONG-8601#1",
+      "fact": "Tracker: Timeline \u00b7 Aug 28 call \u00b7 \"Plant 2 comes online in the spring. We'd like to clone our plant 1 workflows.\""
+     },
+     {
+      "ref_id": "SF-OPP-006jV000002P58LQAS",
+      "fact": "Opportunity \u00b7 Quarry & Pine - Plant 2 Rollout \u00b7 Prospecting \u00b7 $70,000 \u00b7 next step: Plant 2 onboarding plan"
+     },
+     {
+      "ref_id": "SF-CASE-00001031",
+      "fact": "Case \u00b7 New \u00b7 Low priority \u00b7 Plant 2 onboarding questions"
+     },
+     {
+      "ref_id": "SF-OPP-006jV000002P58KQAS",
+      "fact": "Opportunity \u00b7 Quarry & Pine - Platform \u00b7 Closed Won \u00b7 $150,000"
+     },
+     {
+      "ref_id": "SNOW-USG-0007",
+      "fact": "Seat usage at 80% of plan (160 of 200 seats), up 8 seats over 3 months"
+     }
+    ],
+    "draft": {
+     "subject": "Plant 2 rollout",
+     "body": "Hi Greg,\n\nYou mentioned plant 2 comes online in the spring and you'd like to reuse your plant 1 workflows. I can pull together plant 1 adoption results first, so the plant 2 decision is based on real numbers.\n\nWould 20 minutes next week work to review them?\n\nBest,\nAlex",
+     "version": 1
+    },
+    "claims": [
+     {
+      "claim": "You mentioned plant 2 comes online in the spring and you'd like to reuse your plant 1 workflows.",
+      "ref_id": "GONG-8601#1"
+     }
+    ],
+    "validator": {
+     "passed": true,
+     "flagged_claims": [],
+     "reasons": [],
+     "word_count": 51
+    },
+    "retries": 0
+   },
+   "events": [
+    {
+     "EVENT": "ae.accepted",
+     "ACTOR": "user:web",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "account": "Quarry & Pine Manufacturing",
+      "level": "HUMAN"
+     },
+     "LEVEL": "HUMAN"
+    },
+    {
+     "EVENT": "flow.state.validated",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "context.loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "evidence": 6,
+      "permitted_contacts": 3,
+      "freshness": "unscored",
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.context_loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.crew_running",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.identifier.done",
+     "ACTOR": "agent:identifier",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "sequence": "EXPANSION_3TOUCH",
+      "contacts": [
+       "Greg Novak (champion, 0.82)",
+       "Tom Becker (technical_evaluator, 0.68)"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.researcher.done",
+     "ACTOR": "agent:researcher",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "facts": 5,
+      "dropped_uncited": 0,
+      "refs": [
+       "GONG-8601#1",
+       "SF-OPP-006jV000002P58LQAS",
+       "SF-CASE-00001031",
+       "SF-OPP-006jV000002P58KQAS",
+       "SNOW-USG-0007"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.composer.done",
+     "ACTOR": "agent:composer",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "claims": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.validating",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.validator.passed",
+     "ACTOR": "agent:validator",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.awaiting_ae",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    }
+   ]
+  },
+  "GTM-0008": {
+   "package": {
+    "flow_id": "flow_3a8c0c",
+    "model": "scripted (no LLM on trial account)",
+    "account": {
+     "id": "001jV00000Ht77EQAR",
+     "key": "GTM-0008",
+     "name": "Lumen Arc Media",
+     "industry": "Media",
+     "region": "NA",
+     "owner": "Alex Rivera"
+    },
+    "score": {
+     "priority_score": 0.63,
+     "version": "ps_v3.2",
+     "freshness": "fresh",
+     "rationale": "Previously lost on budget; budget reopened on a recent call.",
+     "feature_status": {
+      "EWGS": "present",
+      "INTENT": "present",
+      "ENGAGEMENT": "present",
+      "CRITICAL_EVENTS": "present",
+      "PTB_ROP": "unknown"
+     }
+    },
+    "growth_vector": "Re-engage",
+    "contact_readiness": {
+     "roles_covered": 2,
+     "roles_total": 4,
+     "missing_roles": [
+      "champion",
+      "economic_buyer"
+     ],
+     "opted_out_count": 0
+    },
+    "warnings": [
+     "Model inputs not present: PTB_ROP=unknown"
+    ],
+    "status": "ready_for_review",
+    "sequence": "REENGAGE_2TOUCH",
+    "contacts": [
+     {
+      "contact_id": "003jV00000F38YcQAJ",
+      "role": "executive_sponsor",
+      "confidence": 0.65,
+      "why": "VP, Content Operations: title suggests executive sponsor",
+      "name": "Jasmine Reed",
+      "title": "VP, Content Operations",
+      "email": "jasmine.reed@lumenarc.example"
+     },
+     {
+      "contact_id": "003jV00000F38YdQAJ",
+      "role": "technical_evaluator",
+      "confidence": 0.68,
+      "why": "Head of Engineering: title suggests technical evaluator",
+      "name": "Carlos Mendez",
+      "title": "Head of Engineering",
+      "email": "carlos.mendez@lumenarc.example"
+     }
+    ],
+    "primary_contact_id": "003jV00000F38YcQAJ",
+    "research_summary": "Lost on budget in April; on Oct 20 the buyer said FY27 budget reopened.",
+    "facts": [
+     {
+      "ref_id": "GONG-9120#1",
+      "fact": "Tracker: Budget, Timeline \u00b7 Oct 20 call \u00b7 \"Good timing. Budget for content tooling reopened in our FY27 plan.\""
+     },
+     {
+      "ref_id": "SF-OPP-006jV000002P58MQAS",
+      "fact": "Opportunity \u00b7 Lumen Arc - Content Workflow \u00b7 Closed Lost \u00b7 $95,000 \u00b7 next step: Lost on budget; revisit for FY27"
+     },
+     {
+      "ref_id": "EVT-0008-20261020",
+      "fact": "Budget reopened \u00b7 FY27 budget for content tooling reopened"
+     },
+     {
+      "ref_id": "INTENT-0008-CONTENT_OPERATIONS_PLATFORM",
+      "fact": "Intent: \"content operations platform\" at 38/100, from 12 four weeks earlier"
+     },
+     {
+      "ref_id": "GONG-9120#2",
+      "fact": "Tracker: Pricing \u00b7 Oct 20 call \u00b7 \"Price was the sticking point last time, so we'd want a smaller starting scope.\""
+     }
+    ],
+    "draft": {
+     "subject": "A phased option for FY27",
+     "body": "Hi Jasmine,\n\nGood to hear budget for content tooling reopened in your FY27 plan. As promised, I put together a phased option with a smaller starting scope.\n\nCould we walk through it in a 20-minute call next week?\n\nBest,\nAlex",
+     "version": 1
+    },
+    "claims": [
+     {
+      "claim": "Good to hear budget for content tooling reopened in your FY27 plan.",
+      "ref_id": "GONG-9120#1"
+     }
+    ],
+    "validator": {
+     "passed": true,
+     "flagged_claims": [],
+     "reasons": [],
+     "word_count": 41
+    },
+    "retries": 0
+   },
+   "events": [
+    {
+     "EVENT": "ae.accepted",
+     "ACTOR": "user:web",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "account": "Lumen Arc Media",
+      "level": "HUMAN"
+     },
+     "LEVEL": "HUMAN"
+    },
+    {
+     "EVENT": "flow.state.validated",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "context.loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "evidence": 6,
+      "permitted_contacts": 2,
+      "freshness": "fresh",
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.context_loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.crew_running",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.identifier.done",
+     "ACTOR": "agent:identifier",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "sequence": "REENGAGE_2TOUCH",
+      "contacts": [
+       "Jasmine Reed (executive_sponsor, 0.65)",
+       "Carlos Mendez (technical_evaluator, 0.68)"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.researcher.done",
+     "ACTOR": "agent:researcher",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "facts": 5,
+      "dropped_uncited": 0,
+      "refs": [
+       "GONG-9120#1",
+       "SF-OPP-006jV000002P58MQAS",
+       "EVT-0008-20261020",
+       "INTENT-0008-CONTENT_OPERATIONS_PLATFORM",
+       "GONG-9120#2"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.composer.done",
+     "ACTOR": "agent:composer",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "claims": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.validating",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.validator.passed",
+     "ACTOR": "agent:validator",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.awaiting_ae",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    }
+   ]
+  },
+  "GTM-0009": {
+   "package": {
+    "flow_id": "flow_b5e998",
+    "model": "scripted (no LLM on trial account)",
+    "account": {
+     "id": "001jV00000Ht77FQAR",
+     "key": "GTM-0009",
+     "name": "Brightwater Insurance",
+     "industry": "Insurance",
+     "region": "NA",
+     "owner": "Alex Rivera"
+    },
+    "score": {
+     "priority_score": 0.66,
+     "version": "ps_v3.2",
+     "freshness": "fresh",
+     "rationale": "Expansion at proposal stage with steady usage growth and an active buying group.",
+     "feature_status": {
+      "EWGS": "present",
+      "INTENT": "present",
+      "ENGAGEMENT": "present",
+      "CRITICAL_EVENTS": "present",
+      "PTB_ROP": "present"
+     }
+    },
+    "growth_vector": "Expansion",
+    "contact_readiness": {
+     "roles_covered": 4,
+     "roles_total": 4,
+     "missing_roles": [],
+     "opted_out_count": 0
+    },
+    "warnings": [],
+    "status": "ready_for_review",
+    "sequence": "EXPANSION_3TOUCH",
+    "contacts": [
+     {
+      "contact_id": "003jV00000F38YgQAJ",
+      "role": "economic_buyer",
+      "confidence": 0.71,
+      "why": "VP, Finance: title suggests economic buyer",
+      "name": "Monica Hayes",
+      "title": "VP, Finance",
+      "email": "monica.hayes@brightwaterins.example"
+     },
+     {
+      "contact_id": "003jV00000F38YhQAJ",
+      "role": "champion",
+      "confidence": 0.82,
+      "why": "Claims Systems Manager: title suggests champion",
+      "name": "Kevin Liu",
+      "title": "Claims Systems Manager",
+      "email": "kevin.liu@brightwaterins.example"
+     }
+    ],
+    "primary_contact_id": "003jV00000F38YgQAJ",
+    "research_summary": "Proposal stage with all four buying roles covered; ROI model and security questionnaire are the open items.",
+    "facts": [
+     {
+      "ref_id": "GONG-9077#2",
+      "fact": "Tracker: Pricing, ROI \u00b7 Oct 13 call \u00b7 \"I need the ROI model before this goes to procurement.\""
+     },
+     {
+      "ref_id": "GONG-8833#1",
+      "fact": "Tracker: Integration \u00b7 Sep 29 call \u00b7 \"Claims intake has to integrate with our policy admin system through the existing API gateway.\""
+     },
+     {
+      "ref_id": "SF-OPP-006jV000002P58OQAS",
+      "fact": "Opportunity \u00b7 Brightwater - Claims Automation Expansion \u00b7 Proposal/Price Quote \u00b7 $340,000 \u00b7 next step: Security questionnaire due; procurement review"
+     },
+     {
+      "ref_id": "SF-CASE-00001032",
+      "fact": "Case \u00b7 Working \u00b7 Medium priority \u00b7 SSO configuration for new claims team"
+     },
+     {
+      "ref_id": "SNOW-USG-0009",
+      "fact": "Seat usage at 95% of plan (615 of 650 seats), up 49 seats over 3 months"
+     }
+    ],
+    "draft": {
+     "subject": "ROI model for the claims expansion",
+     "body": "Hi Monica,\n\nYou mentioned you need the ROI model before the expansion goes to procurement. I'll send it this week, built around claims cycle time, and our security team is already on the questionnaire.\n\nWould a 20-minute call next week to review the model help?\n\nBest,\nAlex",
+     "version": 1
+    },
+    "claims": [
+     {
+      "claim": "You mentioned you need the ROI model before the expansion goes to procurement.",
+      "ref_id": "GONG-9077#2"
+     }
+    ],
+    "validator": {
+     "passed": true,
+     "flagged_claims": [],
+     "reasons": [],
+     "word_count": 49
+    },
+    "retries": 0
+   },
+   "events": [
+    {
+     "EVENT": "ae.accepted",
+     "ACTOR": "user:web",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "account": "Brightwater Insurance",
+      "level": "HUMAN"
+     },
+     "LEVEL": "HUMAN"
+    },
+    {
+     "EVENT": "flow.state.validated",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "context.loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "evidence": 11,
+      "permitted_contacts": 4,
+      "freshness": "fresh",
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.context_loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.crew_running",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.identifier.done",
+     "ACTOR": "agent:identifier",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "sequence": "EXPANSION_3TOUCH",
+      "contacts": [
+       "Monica Hayes (economic_buyer, 0.71)",
+       "Kevin Liu (champion, 0.82)"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.researcher.done",
+     "ACTOR": "agent:researcher",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "facts": 5,
+      "dropped_uncited": 0,
+      "refs": [
+       "GONG-9077#2",
+       "GONG-8833#1",
+       "SF-OPP-006jV000002P58OQAS",
+       "SF-CASE-00001032",
+       "SNOW-USG-0009"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.composer.done",
+     "ACTOR": "agent:composer",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "claims": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.validating",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.validator.passed",
+     "ACTOR": "agent:validator",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.awaiting_ae",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    }
+   ]
+  },
+  "GTM-0010": {
+   "package": {
+    "flow_id": "flow_69eb24",
+    "model": "scripted (no LLM on trial account)",
+    "account": {
+     "id": "001jV00000Ht77GQAR",
+     "key": "GTM-0010",
+     "name": "Kestrel Biotech",
+     "industry": "Biotechnology",
+     "region": "EMEA",
+     "owner": "Alex Rivera"
+    },
+    "score": {
+     "priority_score": 0.41,
+     "version": "ps_v3.2",
+     "freshness": "stale",
+     "rationale": "Low intent and no budget before 2027.",
+     "feature_status": {
+      "EWGS": "present",
+      "INTENT": "present",
+      "ENGAGEMENT": "present",
+      "CRITICAL_EVENTS": "unknown",
+      "PTB_ROP": "unknown"
+     }
+    },
+    "growth_vector": "New logo",
+    "contact_readiness": {
+     "roles_covered": 2,
+     "roles_total": 4,
+     "missing_roles": [
+      "economic_buyer",
+      "executive_sponsor"
+     ],
+     "opted_out_count": 0
+    },
+    "warnings": [
+     "Score is 4 days old (stale)",
+     "Model inputs not present: CRITICAL_EVENTS=unknown, PTB_ROP=unknown"
+    ],
+    "status": "ready_for_review",
+    "sequence": "NEW_LOGO_4TOUCH",
+    "contacts": [
+     {
+      "contact_id": "003jV00000F38YiQAJ",
+      "role": "champion",
+      "confidence": 0.82,
+      "why": "Head of Lab Operations: title suggests champion",
+      "name": "Isabelle Roux",
+      "title": "Head of Lab Operations",
+      "email": "isabelle.roux@kestrelbio.example"
+     },
+     {
+      "contact_id": "003jV00000F38YjQAJ",
+      "role": "technical_evaluator",
+      "confidence": 0.68,
+      "why": "IT Lead: title suggests technical evaluator",
+      "name": "Matthias Weber",
+      "title": "IT Lead",
+      "email": "matthias.weber@kestrelbio.example"
+     }
+    ],
+    "primary_contact_id": "003jV00000F38YiQAJ",
+    "research_summary": "Low intent and no budget before 2027.",
+    "facts": [
+     {
+      "ref_id": "GONG-8920#1",
+      "fact": "Tracker: Budget, Timeline \u00b7 Sep 21 call \u00b7 \"We're interested but there's no budget for new tools until 2027.\""
+     },
+     {
+      "ref_id": "SF-OPP-006jV000002P58PQAS",
+      "fact": "Opportunity \u00b7 Kestrel - Lab Ops Discovery \u00b7 Prospecting \u00b7 $45,000 \u00b7 next step: Budget not before 2027"
+     },
+     {
+      "ref_id": "INTENT-0010-LAB_OPERATIONS_SOFTWARE",
+      "fact": "Intent: \"lab operations software\" at 14/100, from 9 four weeks earlier"
+     }
+    ],
+    "draft": {
+     "subject": "Staying in touch for 2027",
+     "body": "Hi Isabelle,\n\nYou mentioned there is no budget for new tools until 2027. Happy to stay in touch and share what other lab operations teams are doing in the meantime.\n\nWould a short check-in early next year be useful?\n\nBest,\nAlex",
+     "version": 1
+    },
+    "claims": [
+     {
+      "claim": "You mentioned there is no budget for new tools until 2027.",
+      "ref_id": "GONG-8920#1"
+     }
+    ],
+    "validator": {
+     "passed": true,
+     "flagged_claims": [],
+     "reasons": [],
+     "word_count": 42
+    },
+    "retries": 0
+   },
+   "events": [
+    {
+     "EVENT": "ae.accepted",
+     "ACTOR": "user:web",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "account": "Kestrel Biotech",
+      "level": "HUMAN"
+     },
+     "LEVEL": "HUMAN"
+    },
+    {
+     "EVENT": "flow.state.validated",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "context.loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "evidence": 3,
+      "permitted_contacts": 2,
+      "freshness": "stale",
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.context_loaded",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.crew_running",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.identifier.done",
+     "ACTOR": "agent:identifier",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "sequence": "NEW_LOGO_4TOUCH",
+      "contacts": [
+       "Isabelle Roux (champion, 0.82)",
+       "Matthias Weber (technical_evaluator, 0.68)"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.researcher.done",
+     "ACTOR": "agent:researcher",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "facts": 3,
+      "dropped_uncited": 0,
+      "refs": [
+       "GONG-8920#1",
+       "SF-OPP-006jV000002P58PQAS",
+       "INTENT-0010-LAB_OPERATIONS_SOFTWARE"
+      ],
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.composer.done",
+     "ACTOR": "agent:composer",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "claims": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.validating",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "crew.validator.passed",
+     "ACTOR": "agent:validator",
+     "DURATION_MS": 0,
+     "DETAIL": {
+      "draft_version": 1,
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    },
+    {
+     "EVENT": "flow.state.awaiting_ae",
+     "ACTOR": "system:flow",
+     "DURATION_MS": null,
+     "DETAIL": {
+      "level": "INFO"
+     },
+     "LEVEL": "INFO"
+    }
+   ]
+  }
+ }
+}

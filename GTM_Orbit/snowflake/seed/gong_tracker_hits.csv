@@ -1,0 +1,47 @@
+CALL_ID,UTTERANCE_NUM,TRACKER,SNIPPET
+GONG-8650,4,Consolidation,We have a lot of overlapping tools. That's one of the things I've been asked to clean up.
+GONG-8650,6,Consolidation,Scheduling. Each region picked its own tool before we standardized dispatch.
+GONG-8650,7,Next steps,Let's pick that up next month once I have the inventory done.
+GONG-8812,2,Consolidation,We're running three different scheduling tools across our field regions. It's a mess for dispatch.
+GONG-8812,3,Consolidation,The goal is to consolidate scheduling onto one platform and keep dispatch data in one place.
+GONG-8812,4,Integration,The big question is integration. Our dispatch system has to stay the source for job status.
+GONG-8812,6,Timeline,Jordan wants a decision before Q1 planning closes.
+GONG-8812,8,Next steps,I'll send a short outline of how others sequenced it.
+GONG-8977,2,Integration,We're rolling out a new EHR across our clinics and clinical ops workflows are still on spreadsheets.
+GONG-8977,3,Next steps,I'd want our IT director involved before we go further.
+GONG-9034,2,Integration,Clinics go live in waves. Integration timelines with the EHR vendor keep slipping.
+GONG-9034,2,Timeline,Clinics go live in waves. Integration timelines with the EHR vendor keep slipping.
+GONG-9034,3,Security,Anything new needs to pass our security review and data residency checks in the EU.
+GONG-9034,4,Competitor,We looked at FlowBridge last year but it couldn't handle the EHR events.
+GONG-9034,6,Budget,"Our CFO would need to sign off on anything over budget, I'd have to check with her."
+GONG-9034,7,Next steps,I'll share how other health-tech teams sequenced rollout around their EHR go-live.
+GONG-8890,1,Integration,The TMS sync is failing several times a week. Dispatch is re-keying shipment status by hand.
+GONG-8890,1,Churn risk,The TMS sync is failing several times a week. Dispatch is re-keying shipment status by hand.
+GONG-8890,2,Churn risk,My team has stopped trusting the dashboard. They check the TMS directly now.
+GONG-8890,3,Next steps,That's on us. Engineering has a fix in testing and I'll get you a date.
+GONG-9101,2,Churn risk,"Honestly, the sync failures have hurt. My team has lost confidence."
+GONG-9101,2,Integration,"Honestly, the sync failures have hurt. My team has lost confidence."
+GONG-9101,3,Competitor,We're also taking a look at RouteSphere. They pitched a native TMS connector.
+GONG-9101,4,Pricing,Procurement will need a stronger price if we renew with the issues we've had.
+GONG-9101,5,Next steps,"Fix the sync and show me it's stable for a month, then we can talk."
+GONG-8740,1,Consolidation,We schedule grid maintenance crews across the region and it's all manual today.
+GONG-8740,2,Timeline,We'll be publishing an RFP for crew scheduling software. Please don't contact the team directly until then.
+GONG-9050,2,Competitor,We trialed TaskNimbus but store managers found it too heavy.
+GONG-9050,3,Budget,A 20-store pilot would be the way in. Our head of store ops owns the budget.
+GONG-9050,3,Next steps,A 20-store pilot would be the way in. Our head of store ops owns the budget.
+GONG-8601,1,Timeline,Plant 2 comes online in the spring. We'd like to clone our plant 1 workflows.
+GONG-8601,2,Budget,Linda will want to see plant 1 results before approving more licenses.
+GONG-9120,1,Budget,Good timing. Budget for content tooling reopened in our FY27 plan.
+GONG-9120,1,Timeline,Good timing. Budget for content tooling reopened in our FY27 plan.
+GONG-9120,2,Pricing,"Price was the sticking point last time, so we'd want a smaller starting scope."
+GONG-9120,3,Next steps,That's easy to do. I'll come back with a phased option.
+GONG-8833,1,Integration,Claims intake has to integrate with our policy admin system through the existing API gateway.
+GONG-8833,2,Security,The new claims team is 120 people. SSO group mapping has to work on day one.
+GONG-9077,1,ROI,The expansion makes sense. Claims cycle time is the metric I'm measured on.
+GONG-9077,2,ROI,I need the ROI model before this goes to procurement.
+GONG-9077,2,Pricing,I need the ROI model before this goes to procurement.
+GONG-9077,3,Security,Security questionnaire has to be back before November 15.
+GONG-9077,3,Timeline,Security questionnaire has to be back before November 15.
+GONG-9077,4,Next steps,I'll send the ROI model this week and get the questionnaire to our security team today.
+GONG-8920,1,Budget,We're interested but there's no budget for new tools until 2027.
+GONG-8920,1,Timeline,We're interested but there's no budget for new tools until 2027.

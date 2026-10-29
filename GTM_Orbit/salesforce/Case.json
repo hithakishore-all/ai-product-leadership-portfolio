@@ -1,0 +1,95 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Case",
+        "referenceId": "Case01"
+      },
+      "AccountId": "@Acct0001",
+      "ContactId": "@Con0001Chen",
+      "Subject": "Add second region to scheduling workspace",
+      "Description": "Customer asked how to add another regional workspace and share crew calendars.",
+      "Status": "Closed",
+      "Priority": "Low",
+      "Origin": "Email"
+    },
+    {
+      "attributes": {
+        "type": "Case",
+        "referenceId": "Case02"
+      },
+      "AccountId": "@Acct0003",
+      "ContactId": "@Con0003Okoro",
+      "Subject": "Question about Enterprise tier features",
+      "Description": "Finance team asked what audit trails, SSO and approval chains are included in the higher tier.",
+      "Status": "Working",
+      "Priority": "Medium",
+      "Origin": "Email"
+    },
+    {
+      "attributes": {
+        "type": "Case",
+        "referenceId": "Case03"
+      },
+      "AccountId": "@Acct0003",
+      "ContactId": "@Con0003Okoro",
+      "Subject": "Seat limit warning on finance workspace",
+      "Description": "Admin received a warning that the workspace is near its seat limit.",
+      "Status": "New",
+      "Priority": "Low",
+      "Origin": "Web"
+    },
+    {
+      "attributes": {
+        "type": "Case",
+        "referenceId": "Case04"
+      },
+      "AccountId": "@Acct0004",
+      "ContactId": "@Con0004Alvarez",
+      "Subject": "Repeated sync failures with TMS integration",
+      "Description": "Shipment status updates from the TMS fail to sync several times a week; dispatch team re-keys data.",
+      "Status": "Escalated",
+      "Priority": "High",
+      "Origin": "Phone"
+    },
+    {
+      "attributes": {
+        "type": "Case",
+        "referenceId": "Case05"
+      },
+      "AccountId": "@Acct0004",
+      "ContactId": "@Con0004Kim",
+      "Subject": "Dispatch dashboard latency",
+      "Description": "Dispatch dashboard took 20+ seconds to load during peak hours.",
+      "Status": "Closed",
+      "Priority": "Medium",
+      "Origin": "Web"
+    },
+    {
+      "attributes": {
+        "type": "Case",
+        "referenceId": "Case06"
+      },
+      "AccountId": "@Acct0007",
+      "ContactId": "@Con0007Novak",
+      "Subject": "Plant 2 onboarding questions",
+      "Description": "Questions about cloning plant 1 workflows for the second plant.",
+      "Status": "New",
+      "Priority": "Low",
+      "Origin": "Email"
+    },
+    {
+      "attributes": {
+        "type": "Case",
+        "referenceId": "Case07"
+      },
+      "AccountId": "@Acct0009",
+      "ContactId": "@Con0009Park",
+      "Subject": "SSO configuration for new claims team",
+      "Description": "Needs SAML group mapping for a new claims team of 120 users.",
+      "Status": "Working",
+      "Priority": "Medium",
+      "Origin": "Email"
+    }
+  ]
+}

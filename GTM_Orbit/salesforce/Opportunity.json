@@ -1,0 +1,181 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "referenceId": "Opp01"
+      },
+      "AccountId": "@Acct0001",
+      "Name": "Northstar - Platform",
+      "StageName": "Closed Won",
+      "Type": "New Customer",
+      "Amount": 240000,
+      "CloseDate": "2025-06-30",
+      "LeadSource": "Web"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "referenceId": "Opp02"
+      },
+      "AccountId": "@Acct0001",
+      "Name": "Northstar - Regional Scheduling Expansion",
+      "StageName": "Qualification",
+      "Type": "Existing Customer - Upgrade",
+      "Amount": 185000,
+      "CloseDate": "2026-12-15",
+      "LeadSource": "Other",
+      "NextStep": "Confirm technical evaluator; scope dispatch integration"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "referenceId": "Opp03"
+      },
+      "AccountId": "@Acct0002",
+      "Name": "Juniper Ridge - Clinical Ops Workflow",
+      "StageName": "Needs Analysis",
+      "Type": "New Customer",
+      "Amount": 260000,
+      "CloseDate": "2027-01-31",
+      "LeadSource": "Web",
+      "NextStep": "Map rollout sequencing against EHR go-live"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "referenceId": "Opp04"
+      },
+      "AccountId": "@Acct0003",
+      "Name": "Cobalt Ledger - Initial Platform",
+      "StageName": "Closed Won",
+      "Type": "New Customer",
+      "Amount": 90000,
+      "CloseDate": "2025-09-30",
+      "LeadSource": "Web"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "referenceId": "Opp05"
+      },
+      "AccountId": "@Acct0004",
+      "Name": "Harborline - Platform",
+      "StageName": "Closed Won",
+      "Type": "New Customer",
+      "Amount": 480000,
+      "CloseDate": "2024-12-31",
+      "LeadSource": "Web"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "referenceId": "Opp06"
+      },
+      "AccountId": "@Acct0004",
+      "Name": "Harborline - FY27 Renewal",
+      "StageName": "Negotiation/Review",
+      "Type": "Existing Customer - Replacement",
+      "Amount": 520000,
+      "CloseDate": "2026-12-31",
+      "LeadSource": "Other",
+      "NextStep": "Resolve TMS sync escalation before pricing discussion"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "referenceId": "Opp07"
+      },
+      "AccountId": "@Acct0006",
+      "Name": "Tessellate - Store Ops Pilot",
+      "StageName": "Prospecting",
+      "Type": "New Customer",
+      "Amount": 140000,
+      "CloseDate": "2027-03-31",
+      "LeadSource": "Web",
+      "NextStep": "Pilot scope for 20 stores"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "referenceId": "Opp08"
+      },
+      "AccountId": "@Acct0007",
+      "Name": "Quarry & Pine - Platform",
+      "StageName": "Closed Won",
+      "Type": "New Customer",
+      "Amount": 150000,
+      "CloseDate": "2025-11-15",
+      "LeadSource": "Web"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "referenceId": "Opp09"
+      },
+      "AccountId": "@Acct0007",
+      "Name": "Quarry & Pine - Plant 2 Rollout",
+      "StageName": "Prospecting",
+      "Type": "Existing Customer - Upgrade",
+      "Amount": 70000,
+      "CloseDate": "2027-02-28",
+      "LeadSource": "Other",
+      "NextStep": "Plant 2 onboarding plan"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "referenceId": "Opp10"
+      },
+      "AccountId": "@Acct0008",
+      "Name": "Lumen Arc - Content Workflow",
+      "StageName": "Closed Lost",
+      "Type": "New Customer",
+      "Amount": 95000,
+      "CloseDate": "2026-04-10",
+      "LeadSource": "Web",
+      "NextStep": "Lost on budget; revisit for FY27"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "referenceId": "Opp11"
+      },
+      "AccountId": "@Acct0009",
+      "Name": "Brightwater - Platform",
+      "StageName": "Closed Won",
+      "Type": "New Customer",
+      "Amount": 410000,
+      "CloseDate": "2024-08-30",
+      "LeadSource": "Web"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "referenceId": "Opp12"
+      },
+      "AccountId": "@Acct0009",
+      "Name": "Brightwater - Claims Automation Expansion",
+      "StageName": "Proposal/Price Quote",
+      "Type": "Existing Customer - Upgrade",
+      "Amount": 340000,
+      "CloseDate": "2026-11-30",
+      "LeadSource": "Other",
+      "NextStep": "Security questionnaire due; procurement review"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "referenceId": "Opp13"
+      },
+      "AccountId": "@Acct0010",
+      "Name": "Kestrel - Lab Ops Discovery",
+      "StageName": "Prospecting",
+      "Type": "New Customer",
+      "Amount": 45000,
+      "CloseDate": "2027-06-30",
+      "LeadSource": "Web",
+      "NextStep": "Budget not before 2027"
+    }
+  ]
+}

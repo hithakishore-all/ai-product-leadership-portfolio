@@ -1,0 +1,15 @@
+CALL_ID,ACCOUNT_KEY,CALL_DATE,TITLE,DURATION_MIN,DIRECTION,CALL_URL
+GONG-8650,GTM-0001,2026-09-02,Northstar | Quarterly business review,45,Outbound,https://gong.example/call/GONG-8650
+GONG-8812,GTM-0001,2026-10-14,Northstar | Scheduling consolidation check-in,30,Outbound,https://gong.example/call/GONG-8812
+GONG-8977,GTM-0002,2026-09-24,Juniper Ridge | Intro call,25,Outbound,https://gong.example/call/GONG-8977
+GONG-9034,GTM-0002,2026-10-09,Juniper Ridge | Discovery,50,Outbound,https://gong.example/call/GONG-9034
+GONG-7120,GTM-0003,2026-05-12,Cobalt Ledger | Onboarding wrap-up,20,Outbound,https://gong.example/call/GONG-7120
+GONG-8890,GTM-0004,2026-09-18,Harborline | Escalation review,40,Inbound,https://gong.example/call/GONG-8890
+GONG-9101,GTM-0004,2026-10-16,Harborline | FY27 renewal discussion,45,Outbound,https://gong.example/call/GONG-9101
+GONG-8740,GTM-0005,2026-09-10,Verdant Grid | Inbound demo,35,Inbound,https://gong.example/call/GONG-8740
+GONG-9050,GTM-0006,2026-10-11,Tessellate | Webinar follow-up,30,Inbound,https://gong.example/call/GONG-9050
+GONG-8601,GTM-0007,2026-08-28,Quarry & Pine | Plant 2 planning,30,Inbound,https://gong.example/call/GONG-8601
+GONG-9120,GTM-0008,2026-10-20,Lumen Arc | Reconnect,25,Inbound,https://gong.example/call/GONG-9120
+GONG-8833,GTM-0009,2026-09-29,Brightwater | Technical deep dive,55,Inbound,https://gong.example/call/GONG-8833
+GONG-9077,GTM-0009,2026-10-13,Brightwater | Proposal review,45,Inbound,https://gong.example/call/GONG-9077
+GONG-8920,GTM-0010,2026-09-21,Kestrel | Discovery,25,Inbound,https://gong.example/call/GONG-8920

@@ -1,0 +1,435 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0001Chen"
+      },
+      "AccountId": "@Acct0001",
+      "FirstName": "Riley",
+      "LastName": "Chen",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Director, Field Operations",
+      "Department": "Operations",
+      "Email": "riley.chen@northstarfield.example",
+      "Phone": "+1-555-0101-00"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0001Patel"
+      },
+      "AccountId": "@Acct0001",
+      "FirstName": "Jordan",
+      "LastName": "Patel",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "VP, Business Systems",
+      "Department": "IT",
+      "Email": "jordan.patel@northstarfield.example",
+      "Phone": "+1-555-0101-01"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0001Ellis"
+      },
+      "AccountId": "@Acct0001",
+      "FirstName": "Morgan",
+      "LastName": "Ellis",
+      "HasOptedOutOfEmail": true,
+      "DoNotCall": false,
+      "Title": "Operations Manager",
+      "Department": "Operations",
+      "Email": "morgan.ellis@northstarfield.example",
+      "Phone": "+1-555-0101-02"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0002Okafor"
+      },
+      "AccountId": "@Acct0002",
+      "FirstName": "Amara",
+      "LastName": "Okafor",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Head of Clinical Operations",
+      "Department": "Clinical Operations",
+      "Email": "amara.okafor@juniperridgehealth.example",
+      "Phone": "+1-555-0102-00"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0002Brandt"
+      },
+      "AccountId": "@Acct0002",
+      "FirstName": "Lukas",
+      "LastName": "Brandt",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "IT Director",
+      "Department": "IT",
+      "Email": "lukas.brandt@juniperridgehealth.example",
+      "Phone": "+1-555-0102-01"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0002Nair"
+      },
+      "AccountId": "@Acct0002",
+      "FirstName": "Priya",
+      "LastName": "Nair",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Chief Financial Officer",
+      "Department": "Finance",
+      "Email": "priya.nair@juniperridgehealth.example",
+      "Phone": "+1-555-0102-02"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0003Okoro"
+      },
+      "AccountId": "@Acct0003",
+      "FirstName": "Sam",
+      "LastName": "Okoro",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Corporate Controller",
+      "Department": "Finance",
+      "Email": "sam.okoro@cobaltledger.example",
+      "Phone": "+1-555-0103-00"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0003Lam"
+      },
+      "AccountId": "@Acct0003",
+      "FirstName": "Chris",
+      "LastName": "Lam",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0004Bell"
+      },
+      "AccountId": "@Acct0004",
+      "FirstName": "Marcus",
+      "LastName": "Bell",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "VP, Supply Chain",
+      "Department": "Operations",
+      "Email": "marcus.bell@harborline.example",
+      "Phone": "+1-555-0104-00"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0004Alvarez"
+      },
+      "AccountId": "@Acct0004",
+      "FirstName": "Nina",
+      "LastName": "Alvarez",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Director, IT Applications",
+      "Department": "IT",
+      "Email": "nina.alvarez@harborline.example",
+      "Phone": "+1-555-0104-01"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0004Price"
+      },
+      "AccountId": "@Acct0004",
+      "FirstName": "Owen",
+      "LastName": "Price",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Procurement Manager",
+      "Department": "Procurement",
+      "Email": "owen.price@harborline.example",
+      "Phone": "+1-555-0104-02"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0004Kim"
+      },
+      "AccountId": "@Acct0004",
+      "FirstName": "Grace",
+      "LastName": "Kim",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Dispatch Lead",
+      "Department": "Operations",
+      "Email": "grace.kim@harborline.example",
+      "Phone": "+1-555-0104-03"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0005deJong"
+      },
+      "AccountId": "@Acct0005",
+      "FirstName": "Sven",
+      "LastName": "de Jong",
+      "HasOptedOutOfEmail": true,
+      "DoNotCall": false,
+      "Title": "Head of Grid Operations",
+      "Department": "Operations",
+      "Email": "sven.dejong@verdantgrid.example",
+      "Phone": "+1-555-0105-00"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0005Bakker"
+      },
+      "AccountId": "@Acct0005",
+      "FirstName": "Femke",
+      "LastName": "Bakker",
+      "HasOptedOutOfEmail": true,
+      "DoNotCall": false,
+      "Title": "Procurement Lead",
+      "Department": "Procurement",
+      "Email": "femke.bakker@verdantgrid.example",
+      "Phone": "+1-555-0105-01"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0005Smit"
+      },
+      "AccountId": "@Acct0005",
+      "FirstName": "Pieter",
+      "LastName": "Smit",
+      "HasOptedOutOfEmail": true,
+      "DoNotCall": true,
+      "Title": "Chief Technology Officer",
+      "Department": "Technology",
+      "Email": "pieter.smit@verdantgrid.example",
+      "Phone": "+1-555-0105-02"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0006Tan"
+      },
+      "AccountId": "@Acct0006",
+      "FirstName": "Wei Ling",
+      "LastName": "Tan",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Head of Store Operations",
+      "Department": "Operations",
+      "Email": "wei.tan@tessellateretail.example",
+      "Phone": "+1-555-0106-00"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0006Mehta"
+      },
+      "AccountId": "@Acct0006",
+      "FirstName": "Arjun",
+      "LastName": "Mehta",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Director, Retail Technology",
+      "Department": "IT",
+      "Email": "arjun.mehta@tessellateretail.example",
+      "Phone": "+1-555-0106-01"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0006Sato"
+      },
+      "AccountId": "@Acct0006",
+      "FirstName": "Hana",
+      "LastName": "Sato",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Marketing Operations Manager",
+      "Department": "Marketing",
+      "Email": "hana.sato@tessellateretail.example",
+      "Phone": "+1-555-0106-02"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0007Novak"
+      },
+      "AccountId": "@Acct0007",
+      "FirstName": "Greg",
+      "LastName": "Novak",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Plant Manager",
+      "Department": "Operations",
+      "Email": "greg.novak@quarrypine.example",
+      "Phone": "+1-555-0107-00"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0007Ortiz"
+      },
+      "AccountId": "@Acct0007",
+      "FirstName": "Linda",
+      "LastName": "Ortiz",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "VP, Operations",
+      "Department": "Operations",
+      "Email": "linda.ortiz@quarrypine.example",
+      "Phone": "+1-555-0107-01"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0007Becker"
+      },
+      "AccountId": "@Acct0007",
+      "FirstName": "Tom",
+      "LastName": "Becker",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "IT Manager",
+      "Department": "IT",
+      "Email": "tom.becker@quarrypine.example",
+      "Phone": "+1-555-0107-02"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0008Reed"
+      },
+      "AccountId": "@Acct0008",
+      "FirstName": "Jasmine",
+      "LastName": "Reed",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "VP, Content Operations",
+      "Department": "Operations",
+      "Email": "jasmine.reed@lumenarc.example",
+      "Phone": "+1-555-0108-00"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0008Mendez"
+      },
+      "AccountId": "@Acct0008",
+      "FirstName": "Carlos",
+      "LastName": "Mendez",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Head of Engineering",
+      "Department": "Engineering",
+      "Email": "carlos.mendez@lumenarc.example",
+      "Phone": "+1-555-0108-01"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0009Stone"
+      },
+      "AccountId": "@Acct0009",
+      "FirstName": "Rachel",
+      "LastName": "Stone",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "SVP, Claims Operations",
+      "Department": "Claims",
+      "Email": "rachel.stone@brightwaterins.example",
+      "Phone": "+1-555-0109-00"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0009Park"
+      },
+      "AccountId": "@Acct0009",
+      "FirstName": "David",
+      "LastName": "Park",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Director, Enterprise Architecture",
+      "Department": "IT",
+      "Email": "david.park@brightwaterins.example",
+      "Phone": "+1-555-0109-01"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0009Hayes"
+      },
+      "AccountId": "@Acct0009",
+      "FirstName": "Monica",
+      "LastName": "Hayes",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "VP, Finance",
+      "Department": "Finance",
+      "Email": "monica.hayes@brightwaterins.example",
+      "Phone": "+1-555-0109-02"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0009Liu"
+      },
+      "AccountId": "@Acct0009",
+      "FirstName": "Kevin",
+      "LastName": "Liu",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Claims Systems Manager",
+      "Department": "Claims",
+      "Email": "kevin.liu@brightwaterins.example",
+      "Phone": "+1-555-0109-03"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0010Roux"
+      },
+      "AccountId": "@Acct0010",
+      "FirstName": "Isabelle",
+      "LastName": "Roux",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "Head of Lab Operations",
+      "Department": "Operations",
+      "Email": "isabelle.roux@kestrelbio.example",
+      "Phone": "+1-555-0110-00"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "referenceId": "Con0010Weber"
+      },
+      "AccountId": "@Acct0010",
+      "FirstName": "Matthias",
+      "LastName": "Weber",
+      "HasOptedOutOfEmail": false,
+      "DoNotCall": false,
+      "Title": "IT Lead",
+      "Department": "IT",
+      "Email": "matthias.weber@kestrelbio.example",
+      "Phone": "+1-555-0110-01"
+    }
+  ]
+}

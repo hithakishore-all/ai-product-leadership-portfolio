@@ -1,0 +1,6 @@
+SEQUENCE_ID,SEQUENCE_NAME,GROWTH_VECTOR,TOUCHES,DESCRIPTION
+EXPANSION_3TOUCH,Expansion - 3 touch,Expansion,3,"Existing customer, new team or use case"
+NEW_LOGO_4TOUCH,New logo - 4 touch,New logo,4,First outreach to a prospect
+UPGRADE_2TOUCH,Upgrade - 2 touch,Upgrade,2,Tier upgrade for an existing customer
+RENEWAL_SAVE_3TOUCH,Renewal save - 3 touch,Retention,3,"At-risk renewal; lead with the fix, not price"
+REENGAGE_2TOUCH,Re-engage - 2 touch,Re-engage,2,Previously lost or dormant opportunity

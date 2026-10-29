@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTM Orbit</title>
+<meta name="description" content="GTM Orbit: your account intelligence and AI workflow workspace.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%230F766E' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%231D2B36'/%3E%3Ccircle cx='26' cy='9' r='3.5' fill='%23C2410C'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="/" aria-label="GTM Orbit home">
+    <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="2.6"/><circle cx="16" cy="16" r="4" class="mark-core"/><circle cx="26" cy="9" r="3.4" class="mark-moon"/></svg>
+    <span class="brand-name">GTM Orbit</span>
+  </a>
+  <p class="promise">Every account has a next move. Orbit helps you find it.</p>
+  <div class="status" id="status" aria-live="polite"></div>
+  <button class="ghost" id="resetBtn" type="button">Reset demo runs</button>
+</header>
+
+<main class="shell">
+  <!-- Discover: the ranked queue -->
+  <section class="rail" aria-labelledby="discoverTitle">
+    <div class="rail-head">
+      <h2 id="discoverTitle">Discover</h2>
+      <p class="sub">Ranked by the approved scoring model</p>
+      <label class="search"><span class="sr">Find an account</span>
+        <input id="search" type="search" placeholder="Find an account" autocomplete="off"></label>
+    </div>
+    <ol class="queue" id="queue" aria-label="Ranked accounts"></ol>
+    <p class="rail-foot">Stale or unscored accounts are flagged, never treated as low priority.</p>
+  </section>
+
+  <!-- Account workspace -->
+  <section class="workspace" id="workspace" aria-live="polite">
+    <div class="empty">Choose an account to see its signals, buying group and next move.</div>
+  </section>
+
+  <!-- Brief: run + human approval -->
+  <aside class="brief" id="brief" aria-labelledby="briefTitle">
+    <h2 id="briefTitle">Outreach brief</h2>
+    <div id="briefBody"><p class="muted">Orbit prepares a brief in five steps: it discovers who to contact, researches cited facts, composes a draft, validates every claim, then waits for your approval. Nothing is ever sent.</p></div>
+  </aside>
+</main>
+
+<section class="trail" aria-labelledby="trailTitle">
+  <div class="trail-head">
+    <h2 id="trailTitle">Audit trail</h2>
+    <p class="sub" id="trailSub">Every step writes one event to Snowflake. Pick a run to see it.</p>
+    <div class="runs" id="runs" role="tablist" aria-label="Recent runs"></div>
+  </div>
+  <div class="trail-table-wrap"><table class="trail-table" id="trail"><thead><tr><th>Time</th><th>Who</th><th>Event</th><th>Detail</th><th class="num">ms</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<footer class="foot">Fictional accounts and people. Salesforce, Gong (simulated) and product signals meet in Snowflake; agents read one governed view; nothing leaves the system without a human.</footer>
+
+<dialog id="rejectDialog">
+  <form method="dialog" class="dlg">
+    <h3>Reject this brief</h3>
+    <label for="rejectReason">What should change? This helps tune the workflow.</label>
+    <textarea id="rejectReason" rows="4" required></textarea>
+    <div class="dlg-actions"><button value="cancel" class="ghost" type="submit" formnovalidate>Cancel</button><button value="ok" class="danger" type="submit">Reject brief</button></div>
+  </form>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>

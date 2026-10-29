@@ -1,0 +1,170 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "Acct0001"
+      },
+      "Name": "Northstar Field Services",
+      "AccountNumber": "GTM-0001",
+      "Industry": "Consulting",
+      "Type": "Customer - Direct",
+      "BillingCity": "Denver",
+      "BillingCountryCode": "US",
+      "NumberOfEmployees": 2400,
+      "AnnualRevenue": 410000000,
+      "Website": "https://northstarfield.example",
+      "Description": "Field service operator running dispatch and scheduling across regional crews.",
+      "BillingStateCode": "CO"
+    },
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "Acct0002"
+      },
+      "Name": "Juniper Ridge Health",
+      "AccountNumber": "GTM-0002",
+      "Industry": "Healthcare",
+      "Type": "Prospect",
+      "BillingCity": "Dublin",
+      "BillingCountryCode": "IE",
+      "NumberOfEmployees": 1100,
+      "AnnualRevenue": 180000000,
+      "Website": "https://juniperridgehealth.example",
+      "Description": "Health-tech provider rolling out a new EHR across clinics."
+    },
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "Acct0003"
+      },
+      "Name": "Cobalt Ledger Systems",
+      "AccountNumber": "GTM-0003",
+      "Industry": "Finance",
+      "Type": "Customer - Direct",
+      "BillingCity": "Charlotte",
+      "BillingCountryCode": "US",
+      "NumberOfEmployees": 650,
+      "AnnualRevenue": 95000000,
+      "Website": "https://cobaltledger.example",
+      "Description": "Mid-market financial software company; finance team runs close workflows on Acme.",
+      "BillingStateCode": "NC"
+    },
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "Acct0004"
+      },
+      "Name": "Harborline Logistics",
+      "AccountNumber": "GTM-0004",
+      "Industry": "Transportation",
+      "Type": "Customer - Direct",
+      "BillingCity": "Oakland",
+      "BillingCountryCode": "US",
+      "NumberOfEmployees": 3800,
+      "AnnualRevenue": 720000000,
+      "Website": "https://harborline.example",
+      "Description": "Freight and last-mile logistics operator; Acme integrates with their TMS.",
+      "BillingStateCode": "CA"
+    },
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "Acct0005"
+      },
+      "Name": "Verdant Grid Energy",
+      "AccountNumber": "GTM-0005",
+      "Industry": "Energy",
+      "Type": "Prospect",
+      "BillingCity": "Rotterdam",
+      "BillingCountryCode": "NL",
+      "NumberOfEmployees": 900,
+      "AnnualRevenue": 240000000,
+      "Website": "https://verdantgrid.example",
+      "Description": "Grid maintenance and field crew operator."
+    },
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "Acct0006"
+      },
+      "Name": "Tessellate Retail Group",
+      "AccountNumber": "GTM-0006",
+      "Industry": "Retail",
+      "Type": "Prospect",
+      "BillingCity": "Singapore",
+      "BillingCountryCode": "SG",
+      "NumberOfEmployees": 5200,
+      "AnnualRevenue": 1100000000,
+      "Website": "https://tessellateretail.example",
+      "Description": "Multi-banner retailer with ~400 stores across Southeast Asia."
+    },
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "Acct0007"
+      },
+      "Name": "Quarry & Pine Manufacturing",
+      "AccountNumber": "GTM-0007",
+      "Industry": "Machinery",
+      "Type": "Customer - Direct",
+      "BillingCity": "Grand Rapids",
+      "BillingCountryCode": "US",
+      "NumberOfEmployees": 1500,
+      "AnnualRevenue": 300000000,
+      "Website": "https://quarrypine.example",
+      "Description": "Industrial equipment manufacturer with two plants.",
+      "BillingStateCode": "MI"
+    },
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "Acct0008"
+      },
+      "Name": "Lumen Arc Media",
+      "AccountNumber": "GTM-0008",
+      "Industry": "Media",
+      "Type": "Prospect",
+      "BillingCity": "Austin",
+      "BillingCountryCode": "US",
+      "NumberOfEmployees": 420,
+      "AnnualRevenue": 60000000,
+      "Website": "https://lumenarc.example",
+      "Description": "Digital media studio producing branded content.",
+      "BillingStateCode": "TX"
+    },
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "Acct0009"
+      },
+      "Name": "Brightwater Insurance",
+      "AccountNumber": "GTM-0009",
+      "Industry": "Insurance",
+      "Type": "Customer - Direct",
+      "BillingCity": "Hartford",
+      "BillingCountryCode": "US",
+      "NumberOfEmployees": 2900,
+      "AnnualRevenue": 880000000,
+      "Website": "https://brightwaterins.example",
+      "Description": "Regional P&C insurer automating claims operations.",
+      "BillingStateCode": "CT"
+    },
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "Acct0010"
+      },
+      "Name": "Kestrel Biotech",
+      "AccountNumber": "GTM-0010",
+      "Industry": "Biotechnology",
+      "Type": "Prospect",
+      "BillingCity": "Basel",
+      "BillingCountryCode": "CH",
+      "NumberOfEmployees": 300,
+      "AnnualRevenue": 40000000,
+      "Website": "https://kestrelbio.example",
+      "Description": "Early-stage biotech with a growing lab operations team."
+    }
+  ]
+}

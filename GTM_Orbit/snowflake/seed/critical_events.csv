@@ -1,0 +1,8 @@
+ACCOUNT_KEY,EVENT_TYPE,EVENT_DATE,DESCRIPTION,SOURCE
+GTM-0001,Executive hire,2026-08-04,"New VP, Business Systems (Jordan Patel) joined",Salesforce contact created
+GTM-0003,Usage threshold,2026-10-01,Seat usage crossed 90% of plan,Product usage
+GTM-0004,Renewal window,2026-10-01,Renewal date 2026-12-31 within 90 days,Salesforce opportunity
+GTM-0004,Escalation,2026-09-15,High-priority integration case escalated,Salesforce case
+GTM-0005,RFP planned,2026-09-10,Prospect stated an RFP for crew scheduling is coming,Gong call
+GTM-0008,Budget reopened,2026-10-20,FY27 budget for content tooling reopened,Gong call
+GTM-0009,Procurement deadline,2026-10-13,Security questionnaire due 2026-11-15,Gong call
