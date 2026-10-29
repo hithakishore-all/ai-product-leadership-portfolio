@@ -1,0 +1,58 @@
+{
+  "pack_version": "1.0",
+  "generated_at": "2026-10-28",
+  "generated_by": "company-intel-pack skill (web research) · reviewed by H. Kishore",
+  "is_synthetic": false,
+  "sources": [
+    {"id": "s1", "publisher": "Munich Startup", "title": "ClearOps raises €8.6 million", "url": "https://www.munich-startup.de/en/news/clearops-raises-e8-6-million", "published": "2026-05-27", "retrieved": "2026-10-28", "kind": "press"},
+    {"id": "s2", "publisher": "The SaaS News", "title": "ClearOps raises 8.6 million Series A", "url": "https://www.thesaasnews.com/news/clearops-raises-8-6-million-series-a/", "published": "2026-05-22", "retrieved": "2026-10-28", "kind": "press"},
+    {"id": "s3", "publisher": "StartupHub.ai", "title": "ClearOps company profile", "url": "https://www.startuphub.ai/startups/clearops", "published": "2026-10-05", "retrieved": "2026-10-28", "kind": "database"},
+    {"id": "s4", "publisher": "Pulse (summarizing EU-Startups)", "title": "Munich-Based ClearOps Raises €8.6 Million Series A", "url": "https://www.pulse.bot/entrepreneurship/news/munich-based-clearops-raises-86-million-series-a-to-build-ai-operating-system-for-industrial-after-s-420074b3-58bd-4f14-9e54-d83089fc59c1/", "published": "2026-05-21", "retrieved": "2026-10-28", "kind": "press"},
+    {"id": "s5", "publisher": "Startup Researcher", "title": "ClearOps Secures €8.6 Million Series A", "url": "https://www.startupresearcher.com/news/clearops-secures-8-6-million-series-a-for-ai-powered-after-sales-platform", "published": "2026-05-22", "retrieved": "2026-10-28", "kind": "press"}
+  ],
+  "account": {
+    "name": "ClearOps",
+    "slug": "clearops",
+    "record_type": "Startup",
+    "description": "AI operating system for industrial after-sales: connects OEMs, dealers, service partners and machines",
+    "website": "clearops.io",
+    "billing_city": "Munich",
+    "billing_country": "Germany",
+    "founded_year": 2020,
+    "number_of_employees": 60,
+    "company_stage": "Series A",
+    "sub_segment": "Parts & Service Orchestration",
+    "segments": [{"segment_id": "po", "is_primary": true}]
+  },
+  "contacts": [
+    {"name": "William Barkawi", "title": "Founder & CEO", "domain_evidence": "Named founder and CEO in the Series A announcement. Prior operating background not covered by these sources.", "evidence_status": "third", "source": "s1"}
+  ],
+  "funding_rounds": [
+    {"id": "clearops-series-a", "stage": "Series A", "quarter": "2026 Q2", "announced": "2026-05", "amount_local": "€8.6M", "amount_usd_m": 9.4, "segment_id": "po",
+     "investors": [{"name": "Hitachi Ventures", "role": "lead"}, {"name": "Schoeller Group", "role": "participant"}, {"name": "Barkawi Group", "role": "participant"}],
+     "source": "s1"}
+  ],
+  "claims": [
+    {"id": "co-arr", "name": "ARR", "value": null, "status": "missing", "critical": true, "note": "Not public. Request an ARR ledger in the data room."},
+    {"id": "co-nrr", "name": "Net revenue retention", "value": null, "status": "missing", "critical": true, "note": "Not public. Request a customer-level ARR export to recompute it."},
+    {"id": "co-grr", "name": "Gross revenue retention", "value": null, "status": "missing", "critical": true, "note": "Not public."},
+    {"id": "co-gm", "name": "Gross margin", "value": null, "status": "missing", "critical": true, "note": "Not public. Ask for subscription vs services split."},
+    {"id": "co-burn", "name": "Cash and monthly burn", "value": null, "status": "missing", "critical": true, "note": "Not public."},
+    {"id": "co-conc", "name": "Largest customer share of ARR", "value": null, "status": "missing", "critical": true, "note": "Not public. Four named OEM customers suggest possible concentration."},
+    {"id": "co-raise", "name": "Series A amount", "value": "€8.6M", "status": "third", "critical": true, "source": "s1", "note": "Four independent reports agree on €8.6M."},
+    {"id": "co-raise-usd", "name": "Series A amount in USD", "value": "$9.0M–$9.4M", "status": "disputed", "critical": true, "source": "s4", "note": "Sources convert differently: $9.0M (StartupHub.ai), $9.3M (The SaaS News), ~$9.4M (EU-Startups via Pulse). Use the EUR figure."},
+    {"id": "co-customers", "name": "Named customers", "value": "AGCO, Terex, Jungheinrich, Lippert", "status": "company", "critical": true, "source": "s1", "note": "Named by the company; Startup Researcher lists three of the four."},
+    {"id": "co-impact", "name": "Customer outcomes", "value": "Parts availability up to +40%; parts sales +5–15%; repairs up to 2 days faster", "status": "company", "critical": true, "source": "s5", "note": "Company-reported ranges across customer networks, not audited. Verify in reference calls."},
+    {"id": "co-lead", "name": "Lead investor", "value": "Hitachi Ventures", "status": "third", "critical": false, "source": "s1"},
+    {"id": "co-first-inst", "name": "Prior institutional funding", "value": "None; Series A is the first institutional round", "status": "third", "critical": false, "source": "s1"},
+    {"id": "co-founded", "name": "Founded", "value": "2020", "status": "third", "critical": false, "source": "s2"},
+    {"id": "co-employees", "name": "Employees", "value": "60", "status": "third", "critical": false, "source": "s3", "note": "Third-party database estimate; confirm headcount."},
+    {"id": "co-offices", "name": "Offices", "value": "Munich, Lisbon, Atlanta, San José", "status": "third", "critical": false, "source": "s2"},
+    {"id": "co-site-a", "name": "Website", "value": "clearops.io", "status": "disputed", "critical": false, "source": "s3", "note": "Sources disagree: StartupHub.ai lists clearops.io, The SaaS News lists clearops.com."},
+    {"id": "co-site-b", "name": "Website", "value": "clearops.com", "status": "disputed", "critical": false, "source": "s2", "note": "Sources disagree: see clearops.io."},
+    {"id": "co-competitor", "name": "Listed competitor", "value": "ServiceNow", "status": "third", "critical": false, "source": "s3"},
+    {"id": "co-related", "name": "Possible related-party investor", "value": "Barkawi Group shares the CEO's surname", "status": "inferred", "critical": false, "source": "s1", "note": "Relationship is not stated in any source. Confirm whether Barkawi Group is affiliated with the founder."}
+  ],
+  "customer_arr": [],
+  "opportunity": {"id": "clearops", "fund_id": "f2", "stage_name": "Identified", "round_label": "Track for Series B", "owner_name": "H. Kishore", "flag": "Financials not public"}
+}

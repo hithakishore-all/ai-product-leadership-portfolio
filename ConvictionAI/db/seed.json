@@ -1,0 +1,800 @@
+{
+  "segments": [
+    {
+      "id": "po",
+      "name": "Physical Operations AI",
+      "short": "Physical Ops AI",
+      "adoption": 64,
+      "funding": 89,
+      "tech": 88,
+      "talent": 80,
+      "whitespace": 86,
+      "catalysts": 88,
+      "coverage": 0.78,
+      "tamMid": 9.75,
+      "narrative": "Workflow embedding plus vision and voice open new field-service opportunities.",
+      "contrary": "Long OEM sales cycles; implementation-heavy deployments may cap software margins.",
+      "tree": [
+        "Knowledge Retrieval",
+        "Workflow Execution",
+        "Ambient Capture",
+        "Asset Diagnostics"
+      ]
+    },
+    {
+      "id": "me",
+      "name": "Model Evaluation & Observability",
+      "short": "Model Eval",
+      "adoption": 71,
+      "funding": 73,
+      "tech": 82,
+      "talent": 74,
+      "whitespace": 70,
+      "catalysts": 86,
+      "coverage": 0.85,
+      "tamMid": 4.2,
+      "narrative": "Governance and evaluation maturity raise buying urgency.",
+      "contrary": "Cloud and model vendors are bundling evaluation features for free."
+    },
+    {
+      "id": "as",
+      "name": "Enterprise Agent Security",
+      "short": "Agent Security",
+      "adoption": 57,
+      "funding": 92,
+      "tech": 90,
+      "talent": 91,
+      "whitespace": 96,
+      "catalysts": 96,
+      "coverage": 0.74,
+      "tamMid": 6.8,
+      "narrative": "Identity, permissions and monitoring follow agent deployment.",
+      "contrary": "Two mega-rounds account for most dollars; paid adoption still early."
+    },
+    {
+      "id": "ha",
+      "name": "Healthcare Administration AI",
+      "short": "Healthcare Admin",
+      "adoption": 61,
+      "funding": 68,
+      "tech": 74,
+      "talent": 66,
+      "whitespace": 72,
+      "catalysts": 82,
+      "coverage": 0.72,
+      "tamMid": 12.4,
+      "narrative": "Administrative burden offers clear ROI, but go-to-market is regulated.",
+      "contrary": "Payer-provider dynamics slow procurement; reimbursement rules can shift."
+    },
+    {
+      "id": "ir",
+      "name": "Industrial Robotics Orchestration",
+      "short": "Robotics Orch.",
+      "adoption": 42,
+      "funding": 91,
+      "tech": 96,
+      "talent": 88,
+      "whitespace": 84,
+      "catalysts": 95,
+      "coverage": 0.61,
+      "tamMid": 8.1,
+      "narrative": "Technical progress is ahead of near-term commercial adoption.",
+      "contrary": "Funding is concentrated in two very large rounds; few paid deployments."
+    },
+    {
+      "id": "dc",
+      "name": "Data Center Energy Efficiency",
+      "short": "DC Energy",
+      "adoption": 69,
+      "funding": 66,
+      "tech": 78,
+      "talent": 70,
+      "whitespace": 72,
+      "catalysts": 83,
+      "coverage": 0.8,
+      "tamMid": 5.3,
+      "narrative": "Energy constraints create operational demand, with long sales cycles.",
+      "contrary": "Hyperscalers build in-house; buyer concentration is very high."
+    }
+  ],
+  "rounds": [
+    {
+      "id": "r01",
+      "company": "HelioOps",
+      "seg": "po",
+      "stage": "Series A",
+      "q": "2025 Q3",
+      "amount": 18,
+      "investors": [
+        "Northline Ventures",
+        "Atlas Peak"
+      ]
+    },
+    {
+      "id": "r02",
+      "company": "FieldLoop",
+      "seg": "po",
+      "stage": "Seed",
+      "q": "2025 Q4",
+      "amount": 6,
+      "investors": [
+        "Atlas Peak"
+      ]
+    },
+    {
+      "id": "r03",
+      "company": "Servient",
+      "seg": "po",
+      "stage": "Series B",
+      "q": "2026 Q1",
+      "amount": 42,
+      "investors": [
+        "Granite Bay Capital",
+        "Northline Ventures"
+      ]
+    },
+    {
+      "id": "r04",
+      "company": "Wrenchly AI",
+      "seg": "po",
+      "stage": "Series A",
+      "q": "2026 Q2",
+      "amount": 22,
+      "investors": [
+        "Meridian Growth"
+      ]
+    },
+    {
+      "id": "r05",
+      "company": "Tessel Ops",
+      "seg": "po",
+      "stage": "Series C",
+      "q": "2026 Q3",
+      "amount": 120,
+      "investors": [
+        "Granite Bay Capital",
+        "Halcyon Partners"
+      ]
+    },
+    {
+      "id": "r06",
+      "company": "FieldLoop",
+      "seg": "po",
+      "stage": "Series A",
+      "q": "2026 Q3",
+      "amount": 16,
+      "investors": [
+        "Atlas Peak",
+        "Lumen Fund"
+      ]
+    },
+    {
+      "id": "r07",
+      "company": "EvalForge",
+      "seg": "me",
+      "stage": "Series B",
+      "q": "2025 Q4",
+      "amount": 60,
+      "investors": [
+        "Ridgeway Capital"
+      ]
+    },
+    {
+      "id": "r08",
+      "company": "Tracewell",
+      "seg": "me",
+      "stage": "Series A",
+      "q": "2026 Q1",
+      "amount": 24,
+      "investors": [
+        "Lumen Fund"
+      ]
+    },
+    {
+      "id": "r09",
+      "company": "Benchline",
+      "seg": "me",
+      "stage": "Series C",
+      "q": "2026 Q2",
+      "amount": 310,
+      "investors": [
+        "Halcyon Partners",
+        "Cobalt Crest"
+      ]
+    },
+    {
+      "id": "r10",
+      "company": "Tracewell",
+      "seg": "me",
+      "stage": "Series B",
+      "q": "2026 Q3",
+      "amount": 70,
+      "investors": [
+        "Ridgeway Capital",
+        "Lumen Fund"
+      ]
+    },
+    {
+      "id": "r11",
+      "company": "Warden Labs",
+      "seg": "as",
+      "stage": "Series B",
+      "q": "2025 Q4",
+      "amount": 85,
+      "investors": [
+        "Cobalt Crest"
+      ]
+    },
+    {
+      "id": "r12",
+      "company": "KeyPath AI",
+      "seg": "as",
+      "stage": "Series A",
+      "q": "2026 Q1",
+      "amount": 30,
+      "investors": [
+        "Northline Ventures"
+      ]
+    },
+    {
+      "id": "r13",
+      "company": "Warden Labs",
+      "seg": "as",
+      "stage": "Series C",
+      "q": "2026 Q2",
+      "amount": 900,
+      "investors": [
+        "Halcyon Partners",
+        "Cobalt Crest"
+      ]
+    },
+    {
+      "id": "r14",
+      "company": "Sentra Agents",
+      "seg": "as",
+      "stage": "Series B",
+      "q": "2026 Q3",
+      "amount": 410,
+      "investors": [
+        "Halcyon Partners",
+        "Ridgeway Capital"
+      ]
+    },
+    {
+      "id": "r15",
+      "company": "Claimwise",
+      "seg": "ha",
+      "stage": "Series B",
+      "q": "2025 Q3",
+      "amount": 55,
+      "investors": [
+        "Meridian Growth"
+      ]
+    },
+    {
+      "id": "r16",
+      "company": "PriorAuth Labs",
+      "seg": "ha",
+      "stage": "Series A",
+      "q": "2026 Q1",
+      "amount": 20,
+      "investors": [
+        "Lumen Fund"
+      ]
+    },
+    {
+      "id": "r17",
+      "company": "Charta Health",
+      "seg": "ha",
+      "stage": "Series C",
+      "q": "2026 Q2",
+      "amount": 140,
+      "investors": [
+        "Meridian Growth",
+        "Granite Bay Capital"
+      ]
+    },
+    {
+      "id": "r18",
+      "company": "Claimwise",
+      "seg": "ha",
+      "stage": "Series C",
+      "q": "2026 Q3",
+      "amount": 95,
+      "investors": [
+        "Meridian Growth",
+        "Ridgeway Capital"
+      ]
+    },
+    {
+      "id": "r19",
+      "company": "Gridwise",
+      "seg": "dc",
+      "seg2": "ir",
+      "stage": "Series B",
+      "q": "2025 Q4",
+      "amount": 75,
+      "investors": [
+        "Granite Bay Capital"
+      ]
+    },
+    {
+      "id": "r20",
+      "company": "Kinetica Robotics",
+      "seg": "ir",
+      "stage": "Series D",
+      "q": "2026 Q1",
+      "amount": 1200,
+      "investors": [
+        "Halcyon Partners",
+        "Cobalt Crest"
+      ]
+    },
+    {
+      "id": "r21",
+      "company": "Orchestra Robotics",
+      "seg": "ir",
+      "stage": "Series B",
+      "q": "2026 Q2",
+      "amount": 160,
+      "investors": [
+        "Northline Ventures",
+        "Atlas Peak"
+      ]
+    },
+    {
+      "id": "r22",
+      "company": "Motive Arms",
+      "seg": "ir",
+      "stage": "Series C",
+      "q": "2026 Q3",
+      "amount": 520,
+      "investors": [
+        "Cobalt Crest"
+      ]
+    },
+    {
+      "id": "r23",
+      "company": "Coolant AI",
+      "seg": "dc",
+      "stage": "Series A",
+      "q": "2025 Q3",
+      "amount": 25,
+      "investors": [
+        "Lumen Fund"
+      ]
+    },
+    {
+      "id": "r24",
+      "company": "ThermaGrid",
+      "seg": "dc",
+      "stage": "Series B",
+      "q": "2026 Q1",
+      "amount": 65,
+      "investors": [
+        "Ridgeway Capital"
+      ]
+    },
+    {
+      "id": "r25",
+      "company": "PUE Labs",
+      "seg": "dc",
+      "stage": "Series A",
+      "q": "2026 Q2",
+      "amount": 18,
+      "investors": [
+        "Atlas Peak"
+      ]
+    },
+    {
+      "id": "r26",
+      "company": "Gridwise",
+      "seg": "dc",
+      "seg2": "ir",
+      "stage": "Series C",
+      "q": "2026 Q3",
+      "amount": 110,
+      "investors": [
+        "Granite Bay Capital",
+        "Meridian Growth"
+      ]
+    }
+  ],
+  "investors": [
+    "Northline Ventures",
+    "Atlas Peak",
+    "Granite Bay Capital",
+    "Meridian Growth",
+    "Halcyon Partners",
+    "Ridgeway Capital",
+    "Lumen Fund",
+    "Cobalt Crest"
+  ],
+  "marketMap": [
+    {
+      "name": "HelioOps",
+      "sub": "Workflow Execution",
+      "maturity": 62,
+      "growth": 78,
+      "observed": true,
+      "customer": "Equipment OEMs, service providers",
+      "deploy": "Cloud + mobile",
+      "pricing": "Per-technician seat + platform",
+      "risk": "Customer concentration"
+    },
+    {
+      "name": "Tessel Ops",
+      "sub": "Workflow Execution",
+      "maturity": 74,
+      "growth": 52,
+      "observed": true,
+      "customer": "Large field-service orgs",
+      "deploy": "Cloud",
+      "pricing": "Enterprise license",
+      "risk": "Slowing growth"
+    },
+    {
+      "name": "Servient",
+      "sub": "Ambient Capture",
+      "maturity": 58,
+      "growth": 60,
+      "observed": false,
+      "customer": "HVAC and utilities",
+      "deploy": "Mobile, on-device",
+      "pricing": "Per-job",
+      "risk": "Depends on frontier model costs"
+    },
+    {
+      "name": "Wrenchly AI",
+      "sub": "Asset Diagnostics",
+      "maturity": 45,
+      "growth": 66,
+      "observed": false,
+      "customer": "Industrial equipment owners",
+      "deploy": "Edge + cloud",
+      "pricing": "Per-asset",
+      "risk": "Sensor data access"
+    },
+    {
+      "name": "FieldLoop",
+      "sub": "Knowledge Retrieval",
+      "maturity": 38,
+      "growth": 55,
+      "observed": false,
+      "customer": "Mid-market service firms",
+      "deploy": "Cloud",
+      "pricing": "Per-seat",
+      "risk": "Easily replicated by incumbents"
+    }
+  ],
+  "helio": {
+    "name": "HelioOps",
+    "tagline": "AI workflow execution for industrial field service",
+    "segmentPath": [
+      "Enterprise AI",
+      "Physical Operations",
+      "Field Service",
+      "Workflow Execution"
+    ],
+    "stage": "Series B",
+    "hq": "Austin, TX (fictional)",
+    "founded": 2022,
+    "employees": 64,
+    "arrNow": 6.4,
+    "arrPrior": 3,
+    "claimedNrr": 1.24,
+    "grossMargin": 0.78,
+    "cash": 4.9,
+    "burn": 0.35,
+    "largestShare": 0.215,
+    "top3Share": 0.39,
+    "raise": 14,
+    "preMoney": 72,
+    "postMoney": 86,
+    "founders": [
+      {
+        "name": "Dana Whitfield (fictional)",
+        "role": "CEO",
+        "evidence": "8+ years running field-service operations at an equipment OEM",
+        "status": "company"
+      },
+      {
+        "name": "Arjun Mehra (fictional)",
+        "role": "CTO",
+        "evidence": "Built dispatch optimization software; prior exit claimed in deck",
+        "status": "missing"
+      }
+    ]
+  },
+  "cohort": [
+    {
+      "customer": "C01 Meridian Equipment Co.",
+      "opening": 906,
+      "ending": 1376
+    },
+    {
+      "customer": "C02 Tri-State Service Group",
+      "opening": 560,
+      "ending": 640
+    },
+    {
+      "customer": "C03 Lakeshore Industrial",
+      "opening": 420,
+      "ending": 480
+    },
+    {
+      "customer": "C04 Apex Field Partners",
+      "opening": 140,
+      "ending": 180
+    },
+    {
+      "customer": "C05 Northgate HVAC",
+      "opening": 95,
+      "ending": 120
+    },
+    {
+      "customer": "C06 Clearwater Utilities",
+      "opening": 60,
+      "ending": 75
+    },
+    {
+      "customer": "C07 Granite Machines",
+      "opening": 180,
+      "ending": 120
+    },
+    {
+      "customer": "C08 Bluestem Elevators",
+      "opening": 130,
+      "ending": 85
+    },
+    {
+      "customer": "C09 Redline Compressors",
+      "opening": 90,
+      "ending": 60
+    },
+    {
+      "customer": "C10 Summit Pumps",
+      "opening": 90,
+      "ending": 0
+    },
+    {
+      "customer": "C11 Ironbridge Services",
+      "opening": 75,
+      "ending": 0
+    },
+    {
+      "customer": "C12 Westfield Mechanical",
+      "opening": 70,
+      "ending": 70
+    },
+    {
+      "customer": "C13 Harbor Cranes",
+      "opening": 60,
+      "ending": 60
+    },
+    {
+      "customer": "C14 Pinecrest Boilers",
+      "opening": 50,
+      "ending": 50
+    },
+    {
+      "customer": "C15 Delta Fire Systems",
+      "opening": 40,
+      "ending": 40
+    },
+    {
+      "customer": "C16 Copperline Generators",
+      "opening": 34,
+      "ending": 34
+    }
+  ],
+  "documents": [
+    {
+      "id": "deck",
+      "name": "HelioOps_SeriesB_Deck.pdf",
+      "type": "Pitch deck",
+      "size": "4.2 MB",
+      "detail": "18 pages · 14 claims extracted"
+    },
+    {
+      "id": "cohort",
+      "name": "customer_cohort_FY26.csv",
+      "type": "Cohort export",
+      "size": "3 KB",
+      "detail": "16 opening-cohort customers"
+    },
+    {
+      "id": "ledger",
+      "name": "arr_ledger_sep2026.csv",
+      "type": "ARR ledger",
+      "size": "9 KB",
+      "detail": "41 active contracts"
+    },
+    {
+      "id": "pl",
+      "name": "management_PL_Q3.xlsx",
+      "type": "Management P&L",
+      "size": "88 KB",
+      "detail": "Unaudited, 8 quarters"
+    }
+  ],
+  "claims": [
+    {
+      "id": "cl-arr",
+      "prop": "ARR (Sep 30, 2026)",
+      "value": "$6.4M",
+      "status": "company",
+      "source": "arr_ledger_sep2026.csv · rows 2–42",
+      "critical": true
+    },
+    {
+      "id": "cl-arr0",
+      "prop": "ARR (Sep 30, 2025)",
+      "value": "$3.0M",
+      "status": "company",
+      "source": "arr_ledger_sep2026.csv · prior snapshot",
+      "critical": true
+    },
+    {
+      "id": "cl-nrr-claim",
+      "prop": "Net revenue retention (claimed)",
+      "value": "124%",
+      "status": "disputed",
+      "source": "HelioOps_SeriesB_Deck.pdf · slide 12",
+      "critical": true
+    },
+    {
+      "id": "cl-nrr-calc",
+      "prop": "Net revenue retention (recomputed)",
+      "value": "113%",
+      "status": "calculated",
+      "source": "customer_cohort_FY26.csv · rows 2–17",
+      "critical": true
+    },
+    {
+      "id": "cl-grr",
+      "prop": "Gross revenue retention",
+      "value": "90%",
+      "status": "calculated",
+      "source": "customer_cohort_FY26.csv · rows 2–17",
+      "critical": true
+    },
+    {
+      "id": "cl-gm",
+      "prop": "Gross margin",
+      "value": "78%",
+      "status": "company",
+      "source": "management_PL_Q3.xlsx · P&L tab, unaudited",
+      "critical": true
+    },
+    {
+      "id": "cl-cash",
+      "prop": "Cash and monthly burn",
+      "value": "$4.9M · $0.35M/mo",
+      "status": "company",
+      "source": "management_PL_Q3.xlsx · cash flow tab",
+      "critical": true
+    },
+    {
+      "id": "cl-conc",
+      "prop": "Largest customer share of ARR",
+      "value": "21.5%",
+      "status": "calculated",
+      "source": "arr_ledger_sep2026.csv · C01",
+      "critical": true
+    },
+    {
+      "id": "cl-renew",
+      "prop": "Largest customer renewal date",
+      "value": "—",
+      "status": "missing",
+      "source": "Not in data room",
+      "critical": true
+    },
+    {
+      "id": "cl-svc",
+      "prop": "Services share of revenue",
+      "value": "—",
+      "status": "missing",
+      "source": "Not in data room",
+      "critical": true
+    },
+    {
+      "id": "cl-cac",
+      "prop": "CAC payback",
+      "value": "—",
+      "status": "missing",
+      "source": "Not in data room",
+      "critical": false
+    },
+    {
+      "id": "cl-founder",
+      "prop": "CEO field-service experience",
+      "value": "8+ years",
+      "status": "company",
+      "source": "HelioOps_SeriesB_Deck.pdf · slide 15",
+      "critical": false
+    },
+    {
+      "id": "cl-moat",
+      "prop": "Proprietary execution-data advantage",
+      "value": "Asserted",
+      "status": "inferred",
+      "source": "HelioOps_SeriesB_Deck.pdf · slide 9",
+      "critical": false
+    },
+    {
+      "id": "cl-tam",
+      "prop": "Bottom-up TAM",
+      "value": "$9.75B",
+      "status": "assumption",
+      "source": "Analyst model · 65k buyers × $150k",
+      "critical": false
+    }
+  ],
+  "deals": [
+    {
+      "id": "d1",
+      "company": "HelioOps",
+      "round": "Series B · $14M",
+      "seg": "po",
+      "stage": "Diligence",
+      "owner": "H. Kishore",
+      "flag": "NRR disputed"
+    },
+    {
+      "id": "d2",
+      "company": "Servient",
+      "round": "Series B ext.",
+      "seg": "po",
+      "stage": "Initial Screen",
+      "owner": "A. Romero",
+      "flag": null
+    },
+    {
+      "id": "d3",
+      "company": "Tracewell",
+      "round": "Series B · $20M",
+      "seg": "me",
+      "stage": "Qualified",
+      "owner": "J. Park",
+      "flag": null
+    },
+    {
+      "id": "d4",
+      "company": "KeyPath AI",
+      "round": "Series B",
+      "seg": "as",
+      "stage": "Identified",
+      "owner": "H. Kishore",
+      "flag": null
+    },
+    {
+      "id": "d5",
+      "company": "Crestline Field Systems",
+      "round": "Buyout",
+      "seg": "po",
+      "stage": "Diligence",
+      "owner": "M. Osei",
+      "flag": "EBITDA adjustments unverified"
+    },
+    {
+      "id": "d6",
+      "company": "ThermaGrid",
+      "round": "Series B ext.",
+      "seg": "dc",
+      "stage": "Partner Review",
+      "owner": "J. Park",
+      "flag": null
+    },
+    {
+      "id": "d7",
+      "company": "PriorAuth Labs",
+      "round": "Series A",
+      "seg": "ha",
+      "stage": "Closed / Passed",
+      "owner": "A. Romero",
+      "flag": "Passed: regulated GTM"
+    }
+  ]
+}
