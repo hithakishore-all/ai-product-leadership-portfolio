@@ -29,15 +29,16 @@ It comes as two front ends on one engine:
 5. [Using the Slack bot](#using-the-slack-bot)
 6. [The 10 demo accounts](#the-10-demo-accounts)
 7. [How it works](#how-it-works)
-8. [Full setup: live Salesforce, Snowflake and Slack](#full-setup-live-salesforce-snowflake-and-slack)
-9. [Configuration reference](#configuration-reference)
-10. [HTTP API](#http-api)
-11. [Testing](#testing)
-12. [Project layout](#project-layout)
-13. [Security and data handling](#security-and-data-handling)
-14. [Troubleshooting](#troubleshooting)
-15. [FAQ and limitations](#faq-and-limitations)
-16. [License](#license)
+8. [Beyond the prototype](#beyond-the-prototype)
+9. [Full setup: live Salesforce, Snowflake and Slack](#full-setup-live-salesforce-snowflake-and-slack)
+10. [Configuration reference](#configuration-reference)
+11. [HTTP API](#http-api)
+12. [Testing](#testing)
+13. [Project layout](#project-layout)
+14. [Security and data handling](#security-and-data-handling)
+15. [Troubleshooting](#troubleshooting)
+16. [FAQ and limitations](#faq-and-limitations)
+17. [License](#license)
 
 ---
 
@@ -253,6 +254,23 @@ real model through Snowflake Cortex, see [Switching to a live model](docs/SETUP_
 
 More detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) covers the data model, every view and procedure, the
 flow states and the event catalog.
+
+---
+
+## Beyond the prototype
+
+This prototype uses **Node.js** (Express web console plus a Slack bot on Bolt) on top of Snowflake. The flow,
+guardrails and audit trail live in Snowflake, so other front ends can plug into the same engine. Options for a
+more agentic version:
+
+- **Claude via MCP:** expose Orbit's actions ("show my queue", "who's missing at Northstar", "prepare a brief") as
+  MCP tools, so sellers ask in plain English and Claude calls Orbit, with Validate and approval still enforced.
+- **Glean:** surface Orbit as a Glean action or agent, next to the company's docs and Slack history.
+- **Hex:** RevOps and manager dashboards on the same Snowflake data, such as queue health, validator catch rate,
+  approval rate and stale scores.
+- **Streamlit in Snowflake:** a web app that runs inside Snowflake, so nothing leaves the warehouse.
+- **Salesforce:** a panel on the account page, where account executives already work.
+- **Snowflake Cortex:** switch the agents from scripted wording to a live model with one setting.
 
 ---
 
