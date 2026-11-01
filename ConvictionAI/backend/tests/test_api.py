@@ -16,10 +16,11 @@ def fresh_db():
 
 
 def test_accounts_by_record_type():
-    # 30 synthetic demo Accounts + ClearOps and its 3 investors from packs/clearops.json
-    assert client.get("/api/health").json()["accounts"] == 34
-    types = {t: len(client.get("/api/accounts", params={"record_type": t}).json()) for t in ["Startup", "PE Target", "Investor"]}
-    assert types == {"Startup": 22, "PE Target": 1, "Investor": 11}
+    # 30 synthetic demo Accounts, plus ClearOps, its 3 investors and any other researched packs in packs/
+    assert client.get("/api/health").json()["accounts"] >= 34
+    rows = {t: client.get("/api/accounts", params={"record_type": t}).json() for t in ["Startup", "PE Target", "Investor"]}
+    assert {t: sum(a["is_synthetic"] for a in r) for t, r in rows.items()} == {"Startup": 21, "PE Target": 1, "Investor": 8}
+    assert "clearops" in {a["slug"] for a in rows["Startup"]}
     helio = client.get("/api/accounts/helioops").json()
     assert helio["record_type"] == "Startup" and len(helio["contacts"]) == 2
 

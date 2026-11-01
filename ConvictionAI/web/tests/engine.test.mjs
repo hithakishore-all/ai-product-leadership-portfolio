@@ -74,3 +74,24 @@ test("LBO: paying for unverified EBITDA lowers returns", () => {
   assert.ok(overpay.irr < clean.irr);
   near(overpay.actualLeverage, 44 / 9.4);
 });
+
+// ---------- value creation (same expected numbers as backend/tests/test_value_creation.py) ----------
+import { readFileSync } from "node:fs";
+const PS = JSON.parse(readFileSync(new URL("../../packs/parentsquare.json", import.meta.url)));
+const targets = PS.addon_targets.map((t) => ({ ...t, is_available: t.available !== false }));
+
+test("add-on ranking: Onflo 75, Edlio 66, Apptegy 62, Bloomz 57, SchoolStatus 40; KEV unranked", () => {
+  const r = E.rankAddons(targets);
+  assert.deepEqual(r.map((t) => [t.slug, t.score == null ? null : Math.round(t.score * 10) / 10]),
+    [["onflo", 75], ["edlio", 66], ["apptegy", 62], ["bloomz", 57], ["schoolstatus", 40], ["kevgroup", null]]);
+  // weighting availability heavily moves the small, likely-seller Bloomz ahead of Apptegy
+  const r2 = E.rankAddons(targets, { ...E.ADDON_WEIGHTS, availability: 0.6 });
+  assert.ok(r2.findIndex((t) => t.slug === "bloomz") < r2.findIndex((t) => t.slug === "apptegy"));
+});
+
+test("exit readiness from ParentSquare's public evidence is 17%", () => {
+  const r = E.exitReadiness(PS.claims);
+  near(r.score, 17, 1e-9);
+  assert.deepEqual(r.counts, { ready: 2, partial: 4, gap: 7 });
+  assert.deepEqual(r.plan.slice(0, 3).map((i) => i.key), ["arr", "qoe", "ebitda"]);
+});

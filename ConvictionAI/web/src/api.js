@@ -29,5 +29,10 @@ export const api = {
   reset: () => call("/api/demo/reset", { method: "POST" }),
   companies: () => call("/api/accounts?with_evidence=true"),
   profile: (slug) => call(`/api/accounts/${slug}/profile`),
+  addons: (slug, weights) => call(`/api/accounts/${slug}/addons`, { method: "POST", body: JSON.stringify(weights || {}) }),
+  exitReadiness: (slug) => call(`/api/accounts/${slug}/exit-readiness`),
+  researchStatus: () => call("/api/research/status"),
+  startResearch: (company, hint) => call("/api/research", { method: "POST", body: JSON.stringify({ company, hint }) }),
+  researchJob: (id) => call(`/api/research/${id}`),
   importPack: (file) => { const fd = new FormData(); fd.append("file", file); return call("/api/packs", { method: "POST", body: fd }); },
 };

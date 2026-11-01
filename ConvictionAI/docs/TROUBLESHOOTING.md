@@ -38,6 +38,11 @@ Start with `make doctor`. It checks every prerequisite and prints the fix under 
 | Screens show old data after editing `web/src` | Browser cached the old build, or it wasn't rebuilt | `make build` and hard-reload (Cmd+Shift+R) |
 | Pipeline shows moves you didn't make | Demo state from an earlier session | **Reset demo** (bottom left) |
 | ClearOps isn't in the company picker | Offline mode, or packs not imported | Use live mode; run `make db` or `make import PACK=packs/clearops.json` |
+| **Research a company** says live research is off | No API key | Add `ANTHROPIC_API_KEY=sk-ant-…` to `.env`, then stop (Ctrl+C) and restart `make run` |
+| Research stops with `authentication_error` | The key is wrong or revoked | Create a new key at console.anthropic.com and update `.env` |
+| Research stops with a 400 about web search | Web search is turned off for your Anthropic organization | An admin can turn it on in the Claude Console |
+| Research stops: "could not produce a valid pack" | The agent kept citing pages it didn't find, or guessing private numbers | Try again with a hint (city, sector, round); obscure companies may not have enough public sources |
+| Research found the wrong company | The name is common | Add a hint, or delete `packs/<slug>.json` and run `make db` |
 | `Import failed: Pack is not valid` | The pack breaks a rule | The message lists each problem; see [packs/README.md](../packs/README.md) |
 
 ## Tests
@@ -45,7 +50,6 @@ Start with `make doctor`. It checks every prerequisite and prints the fix under 
 | Symptom | Cause | Fix |
 | --- | --- | --- |
 | API tests **skipped** | Postgres not reachable | Start Postgres; check `make doctor` |
-| `test_accounts_by_record_type` fails on counts | Extra packs in `packs/` add accounts | Expected when you add companies; update the counts in the test |
 | `e2e_live.py` can't find Chromium | Playwright browsers not installed | `python -m playwright install chromium` |
 
 [← Back to README](../README.md)

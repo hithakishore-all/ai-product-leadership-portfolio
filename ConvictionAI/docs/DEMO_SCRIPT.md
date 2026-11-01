@@ -59,9 +59,29 @@ Point at **What changed this week**: a contradiction (HelioOps NRR), a capital s
 
 > "This is what honest AI research looks like: it tells you what it couldn't find, and turns that into the first email to the founder."
 
-## 9:30 · Close
+## 9:30 · Optional: research a company live (needs an API key)
+
+1. In Company 360, click **✦ Research a company**. Ask the audience for a recently funded startup, or use one you've tried before.
+2. Type the name and a hint (city or sector), click **Start research**. Talk over the agent log as searches appear.
+3. When it finishes, click **Open in Company 360**: sourced facts, *Missing* financials, *More diligence*.
+
+> "Same rules as the hand-built pack: if the agent cites a page it didn't actually find, or puts a number on a private metric, the validator sends it back."
+
+Live research depends on Wi-Fi and the web, and takes 1–3 minutes. If it's slow, switch to ClearOps and come back.
+
+## 10:30 · Close
 
 > "Four questions in one workflow: where is the market going, which companies could win, is the story true, and should we invest. The model never does the math, conflicts are kept, unknowns stay unknown, and people make the calls. Under the hood it's Postgres shaped like Salesforce, so it fits how investment teams already work."
+
+## Serent version (10 minutes)
+
+For a growth-equity sponsor such as Serent Capital: Opening (sponsor framing) → Radar with **Exclude top 5** → HelioOps NRR (Company 360) → PE mode LBO-lite → **ParentSquare** in Company 360 → **Add-on Screener** → **Exit Readiness** → close. Needs live mode (`make db`, `make run`) for ParentSquare in Company 360; the two value-creation screens also work offline.
+
+1. **Company 360 → ParentSquare · researched.** Serent's 2021 growth investment; amount shows **Undisclosed**; 8 private metrics Missing; the 99.4% figure is district (logo) retention, not revenue retention; HQ is Disputed (Goleta vs Santa Barbara).
+2. **Add-on Screener.** Onflo 75, Edlio 66, Apptegy 62, Bloomz 57, SchoolStatus 40. Expand Onflo: inbound service desk + ParentSquare's outbound messaging. Drag **Availability** right: Bloomz passes Apptegy. KEV Group is a comparable exit, not a target.
+3. **Exit Readiness.** 17% on public evidence; Serent's hold 5.2 years vs KEV Group's 6.5; the timing callout is labelled Inferred. **Copy sale-prep plan**: ARR ledger, sell-side QoE, monthly P&L, customer-level ARR first.
+
+> "Diligence that recomputes what it can and flags what it can't, a buy-and-build screen whose reasoning you can argue with, and an exit checklist built from evidence. Where would you push on it?"
 
 ## Likely questions
 
@@ -71,6 +91,6 @@ Point at **What changed this week**: a contradiction (HelioOps NRR), a capital s
 | Where's the LLM? | Kept out of the math on purpose. This version's Ask box and bear case are rule-based and cite records; an LLM analyst is next, behind an interface, with this as the fallback. |
 | Why not just use Salesforce? | The schema mirrors it, so it can sync later. Salesforce stores deals; it doesn't recompute NRR or score market inflection. |
 | How would you add a company? | Research it into a pack and import it. See [COMPANY_PACKS.md](COMPANY_PACKS.md). |
-| How do you know the math is right? | 32 automated tests, plus the same engine in Python and JavaScript held to the same answers. |
+| How do you know the math is right? | 38 automated tests, plus the same engine in Python and JavaScript held to the same answers. |
 
 [← Back to README](../README.md)

@@ -34,15 +34,20 @@ flowchart TB
     MAIN["main.py<br/>/api/* · serves / "]
     ENG["engine.py<br/>deterministic math"]
     PK["packs.py<br/>validate · import"]
+    RS["research.py<br/>Claude agent → pack"]
     DBP["db.py<br/>.env · connections"]
     MAIN --> ENG
     MAIN --> PK
+    MAIN --> RS
+    RS --> PK
     MAIN --> DBP
     PK --> DBP
   end
   PG[("PostgreSQL<br/>conviction_ai")]
   SEED["seed.py + db/seed.json"]
   PACKS["packs/*.json"]
+  CL["Anthropic API<br/>Claude + web search<br/>(optional)"]
+  RS -- "company name only" --> CL
   A -- "HTTP JSON" --> MAIN
   DBP --> PG
   SEED --> PG
@@ -58,6 +63,7 @@ flowchart TB
 | `web/build.mjs` | Build | esbuild bundles React and all code, inlines CSS, writes one `dist/index.html` (~270 KB) |
 | `backend/app/main.py` | API | Endpoints named after the objects they serve; serves the UI at `/` |
 | `backend/app/packs.py` | Company packs | Validates rules (sources, statuses, segments) and imports in one transaction |
+| `backend/app/research.py` | Live research | Runs a Claude agent with web search until it submits a pack that passes validation; optional, needs `ANTHROPIC_API_KEY` |
 | `backend/seed.py` | Seeding | Creates the database if missing, runs `schema.sql`, loads `seed.json`, imports every pack |
 | `scripts/export-seed.mjs` | Single source of truth | Writes `db/seed.json` from the same fixtures the offline UI uses, so live and offline can't drift |
 
@@ -84,6 +90,8 @@ erDiagram
   account ||--o{ content_document : "data room"
   content_document ||--o{ customer_arr__c : "rows from"
   account ||--o{ customer_arr__c : "customer ARR"
+  account ||--o{ addon_target__c : "platform considers"
+  account ||--o{ addon_target__c : "is candidate"
 
   account {
     serial id PK
@@ -178,6 +186,43 @@ sequenceDiagram
   end
 ```
 
+### Research: any company, live (optional)
+
+```mermaid
+sequenceDiagram
+  actor U as Investor
+  participant UI as Research drawer
+  participant API as FastAPI
+  participant AG as research.py
+  participant C as Claude + web search
+  participant P as packs.py
+  participant DB as Postgres
+  U->>UI: "Acme Robotics" + hint
+  UI->>API: POST /api/research → job_id
+  API->>AG: background thread
+  loop until a valid pack (max 3 fixes)
+    AG->>C: messages.create(web_search, submit_pack)
+    C-->>AG: searches + results (URLs recorded)
+    C-->>AG: submit_pack(pack)
+    AG->>P: validate + "every source URL was found by a search" + 10 critical claims present
+    P-->>AG: problems → sent back as a tool error
+  end
+  AG->>P: import_pack
+  P->>DB: account, contacts, rounds, investors, claims, opportunity
+  AG->>API: save packs/<slug>.json
+  UI->>API: GET /api/research/{job_id} every 1.2 s → log lines
+  UI-->>U: Open in Company 360
+```
+
+Why it's built this way:
+
+- **A tool call, not free text.** The agent returns the pack by calling `submit_pack`, whose input schema is the pack format, so the output is structured JSON rather than prose to parse.
+- **The validator is the gate, not the prompt.** The prompt asks for honesty; the code enforces it. A URL the agent didn't get from a search is rejected, a value on a `missing` claim is rejected, an unsourced fact is rejected. Problems go back to the agent as a tool error so it can fix them.
+- **No metrics from the model.** The agent may not use `verified` or `calculated`; NRR and the rest only ever come from customer rows through the engine.
+- **Saved as a file.** The pack lands in `packs/`, so `make db` and **Reset demo** keep it, and it can be reviewed or committed like a hand-made pack. It's marked *not yet reviewed*.
+- **Fictional companies are protected.** Research can't replace HelioOps or the other demo accounts.
+- **Testable without a key.** `test_research.py` plays back scripted API responses.
+
 ### Offline
 
 Opened as a file, `api.js` sees a `file:` URL and sets its base to `null`. Every call throws `offline`; each screen catches it and uses `data.js`. State is saved to `localStorage`. The same HTML file serves both modes.
@@ -233,6 +278,10 @@ A pack turns web research into rows. `packs.py` enforces:
 
 Re-importing a pack deletes the company's previous opportunity and account (cascading to its rows) and inserts it again, so imports are idempotent. Investor accounts are matched by name and reused. See [COMPANY_PACKS.md](COMPANY_PACKS.md).
 
+## Value creation
+
+Two sponsor screens reuse the evidence model. The **Add-on Screener** ranks `addon_target__c` rows for a platform account: `engine.rank_addons` takes the five 1–5 analyst scores and the user's weights (normalised) and returns a 0–100 score; unavailable candidates are listed unscored. **Exit Readiness** (`engine.exit_readiness`) maps 13 buyer-diligence items to claim-id patterns, takes the strongest matching claim's credit (verified 1.0 … missing 0) and weights it, so the score changes only when evidence does. Both functions exist in Python and JavaScript and are tested against the same expected numbers, so the offline file and the API agree. Candidates are `PE Target` accounts whose facts are evidence claims; they have no critical claims, so they stay out of the Company 360 picker.
+
 ## Security model
 
 | Area | Approach |
@@ -241,7 +290,7 @@ Re-importing a pack deletes the company's previous opportunity and account (casc
 | Secrets | Only the Postgres password, in `.env`, ignored by git |
 | SQL | Parameterised queries throughout (psycopg 3) |
 | Uploads | CSV parsed as numbers with header validation (422 on bad input); packs parsed as JSON and validated before any write |
-| External calls | None at runtime |
+| External calls | None, unless `ANTHROPIC_API_KEY` is set; then research sends the company name and hint to the Anthropic API. No database content is sent |
 | Data | Fictional, except ClearOps and its investors (public sources, linked) |
 
 ## Design decisions
@@ -254,6 +303,7 @@ Re-importing a pack deletes the company's previous opportunity and account (casc
 | `api.js` as the only server client | Screens stay unchanged when the data source changes | A mapping layer to maintain |
 | Deterministic engines in Python and JavaScript | The offline demo needs the math in the browser; the API needs it on the server; tests in both pin the same answers | Two implementations to keep in sync |
 | No LLM in the calculation path | Reproducible numbers; no confident wrong figures | The *Ask* box is rule-based in this version |
+| LLM for research, gated by code | Finding and organising public facts is what language models are good at; checking them is what code is good at | Each run costs searches and tokens and takes 1–3 minutes; results need a human review |
 | Keep conflicting values | The disagreement is itself diligence evidence | More complex UI than "the latest value wins" |
 | Missing never passes | Thin evidence must lower confidence, not hide | Researched companies look worse than their decks, which is the point |
 | Seed generated from UI fixtures | One source of truth for demo data | `make db` needs Node as well as Python |

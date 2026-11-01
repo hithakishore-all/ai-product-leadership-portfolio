@@ -51,7 +51,7 @@ psql -h localhost -U postgres -d conviction_ai     # Postgres.app: psql convicti
 ```
 
 ```sql
-\dt                                               -- list the 13 tables
+\dt                                               -- list the 14 tables
 SELECT name, record_type FROM account ORDER BY record_type, name;
 SELECT id, stage_name, flag FROM opportunity ORDER BY id;
 SELECT name, value_text, status FROM evidence_claim__c

@@ -1,0 +1,741 @@
+{
+  "pack_version": "1.0",
+  "generated_at": "2026-11-01",
+  "generated_by": "Web research in Claude (company-intel-pack process) · for review by H. Kishore",
+  "is_synthetic": false,
+  "sources": [
+    {
+      "id": "s1",
+      "publisher": "Business Wire (Serent Capital release)",
+      "title": "Serent Capital Announces Growth Investment in ParentSquare",
+      "url": "https://www.businesswire.com/news/home/20210803005121/en/Serent-Capital-Announces-Growth-Investment-in-ParentSquare",
+      "published": "2021-08-03",
+      "retrieved": "2026-11-01",
+      "kind": "company"
+    },
+    {
+      "id": "s2",
+      "publisher": "Serent Capital",
+      "title": "Serent-Backed ParentSquare Acquires Remind to Increase Student Success Through Expanded Communications Platform",
+      "url": "https://serentcapital.com/news/serent-backed-parentsquare-acquires-remind-to-increase-student-success-through-expanded-communications-platform/",
+      "published": "2023-12-01",
+      "retrieved": "2026-11-01",
+      "kind": "company"
+    },
+    {
+      "id": "s3",
+      "publisher": "Santa Barbara Independent",
+      "title": "From Santa Barbara Schools to 22 Million Students: How ParentSquare Connected the Dots",
+      "url": "https://independent.com/2026/08/12/from-santa-barbara-schools-to-22-million-students-how-parentsquare-connected-the-dots/",
+      "published": "2026-08-12",
+      "retrieved": "2026-11-01",
+      "kind": "press"
+    },
+    {
+      "id": "s4",
+      "publisher": "ParentSquare",
+      "title": "ParentSquare Named to 2025 Inc. 5000 List, Ranking No. 962 with Three-Year 444% Revenue Growth",
+      "url": "https://www.parentsquare.com/blog/parentsquare-named-to-2025-inc-5000-list/",
+      "published": "2025-08-12",
+      "retrieved": "2026-11-01",
+      "kind": "company"
+    },
+    {
+      "id": "s5",
+      "publisher": "EdCircuit (ParentSquare press release)",
+      "title": "ParentSquare Named to the 2026 Inc. 5000 List for the Fourth Consecutive Year",
+      "url": "https://edcircuit.com/press_releases/parentsquare-named-to-the-2026-inc-5000-list-of-americas-fastest-growing-private-companies-for-the-fourth-consecutive-year/",
+      "published": "2026-08-17",
+      "retrieved": "2026-11-01",
+      "kind": "company"
+    },
+    {
+      "id": "s6",
+      "publisher": "Startland News",
+      "title": "ParentSquare notches growth investment, fueled by KC startup acquisition, pandemic trends",
+      "url": "https://www.startlandnews.com/2021/08/parentsquare-signal-kit-2",
+      "published": "2021-08-05",
+      "retrieved": "2026-11-01",
+      "kind": "press"
+    },
+    {
+      "id": "s7",
+      "publisher": "EdSurge",
+      "title": "ParentSquare Becomes a Parent Company After Acquiring School Communication App",
+      "url": "https://www.edsurge.com/news/2020-03-02-parentsquare-becomes-a-parent-company-after-acquiring-school-communication-app",
+      "published": "2020-03-02",
+      "retrieved": "2026-11-01",
+      "kind": "press"
+    },
+    {
+      "id": "s8",
+      "publisher": "eSchool News (ParentSquare press release)",
+      "title": "ParentSquare Named to 2024 Inc. 5000 List, Ranking No. 763 with Three-Year 665% Revenue Growth",
+      "url": "https://www.eschoolnews.com/newsline/2024/08/13/parentsquare-named-to-2024-inc-5000-list-ranking-no-763-with-three-year-665-revenue-growth/",
+      "published": "2024-08-13",
+      "retrieved": "2026-11-01",
+      "kind": "company"
+    },
+    {
+      "id": "s9",
+      "publisher": "SchoolStatus",
+      "title": "SchoolStatus Announces Acquisition of SchoolNow",
+      "url": "https://www.schoolstatus.com/blog/schoolstatus-announces-acquisition-of-schoolnow",
+      "published": "2024-02-13",
+      "retrieved": "2026-11-01",
+      "kind": "company"
+    },
+    {
+      "id": "s10",
+      "publisher": "Mergr",
+      "title": "PSG invests in SchoolStatus",
+      "url": "https://mergr.com/transaction/psg-invests-in-schoolstatus",
+      "published": "2021-07-13",
+      "retrieved": "2026-11-01",
+      "kind": "database"
+    },
+    {
+      "id": "s11",
+      "publisher": "THE Journal",
+      "title": "Website and Communications Provider Edlio Acquires App-Maker SchoolInfo, Expands K-12 Product Suite",
+      "url": "https://thejournal.com/articles/2022/09/19/edlio-acquires-schoolinfo-app-maker.aspx",
+      "published": "2022-09-19",
+      "retrieved": "2026-11-01",
+      "kind": "press"
+    },
+    {
+      "id": "s12",
+      "publisher": "L Squared Capital Partners",
+      "title": "L Squared Completes Growth Investment in Edlio",
+      "url": "https://www.lsquaredcap.com/2016/06/22/",
+      "published": "2016-06-22",
+      "retrieved": "2026-11-01",
+      "kind": "company"
+    },
+    {
+      "id": "s13",
+      "publisher": "Private Equity Wire",
+      "title": "L Squared commits USD40m to Edlio",
+      "url": "https://www.privateequitywire.co.uk/l-squared-commits-usd40m-edlio/",
+      "retrieved": "2026-11-01",
+      "kind": "press"
+    },
+    {
+      "id": "s14",
+      "publisher": "Newswire (Apptegy release)",
+      "title": "Apptegy Secures Growth Funding From Five Elms Capital",
+      "url": "https://www.newswire.com/news/apptegy-secures-growth-funding-from-five-elms-capital-19577389",
+      "published": "2017-05-30",
+      "retrieved": "2026-11-01",
+      "kind": "company"
+    },
+    {
+      "id": "s15",
+      "publisher": "TechCrunch",
+      "title": "Bloomz raises $2.3 million to connect teachers and students' families",
+      "url": "https://techcrunch.com/2016/05/24/bloomz-raises-2-3-million-to-connect-teachers-and-students-families",
+      "published": "2016-05-24",
+      "retrieved": "2026-11-01",
+      "kind": "press"
+    },
+    {
+      "id": "s16",
+      "publisher": "EIN Presswire (K12 Insight release)",
+      "title": "K12 Insight Announces Company Rebrand to Onflo",
+      "url": "https://www.einpresswire.com/article/922507955/k12-insight-announces-company-rebrand-to-onflo",
+      "published": "2026-06-26",
+      "retrieved": "2026-11-01",
+      "kind": "company"
+    },
+    {
+      "id": "s17",
+      "publisher": "Business Wire (KEV Group release)",
+      "title": "KEV Group Enters Next Phase with Five Arrows Following Successful Serent Capital Partnership",
+      "url": "https://www.businesswire.com/news/home/20250226970563/en",
+      "published": "2025-02-26",
+      "retrieved": "2026-11-01",
+      "kind": "company"
+    },
+    {
+      "id": "s18",
+      "publisher": "Serent Capital",
+      "title": "Private Equity & Growth Investment for Founders (homepage)",
+      "url": "https://www.serentcapital.com/",
+      "retrieved": "2026-11-01",
+      "kind": "company"
+    }
+  ],
+  "account": {
+    "name": "ParentSquare",
+    "slug": "parentsquare",
+    "record_type": "Startup",
+    "description": "Unified school-to-home communication platform for K-12 districts: alerts, messaging, attendance, forms and two-way translation",
+    "website": "parentsquare.com",
+    "billing_city": "Goleta",
+    "billing_country": "United States",
+    "founded_year": 2011,
+    "number_of_employees": 400,
+    "company_stage": "PE-backed (Serent Capital, 2021)",
+    "sub_segment": "K-12 Family Engagement Software · outside the six tracked AI segments",
+    "segments": []
+  },
+  "contacts": [
+    {
+      "name": "Anupama Vaid",
+      "title": "Founder & President",
+      "domain_evidence": "Computer engineer and parent in Goleta who built the first version for her children's school (Santa Barbara Independent, 2026). Named Founder & President in the 2025 and 2026 Inc. 5000 releases.",
+      "evidence_status": "third",
+      "source": "s3"
+    },
+    {
+      "name": "Sohit Wadhwa",
+      "title": "Co-founder & CEO (as of Dec 2023)",
+      "domain_evidence": "Named co-founder and CEO in the 2021 Serent investment release and the 2023 Remind acquisition release. The 2025–2026 sources name no CEO: confirm the current role.",
+      "evidence_status": "third",
+      "source": "s2"
+    }
+  ],
+  "funding_rounds": [
+    {
+      "id": "parentsquare-serent-2021",
+      "stage": "Growth equity",
+      "quarter": "2021 Q3",
+      "announced": "2021-08",
+      "amount_local": "Undisclosed",
+      "amount_usd_m": null,
+      "investors": [
+        {
+          "name": "Serent Capital",
+          "role": "lead"
+        }
+      ],
+      "source": "s1"
+    }
+  ],
+  "claims": [
+    {
+      "id": "parentsquare-arr",
+      "name": "ARR",
+      "value": null,
+      "status": "missing",
+      "critical": true,
+      "note": "Not public; the 2026 Independent article says revenue and licensing fees are not disclosed. Request an ARR ledger by district."
+    },
+    {
+      "id": "parentsquare-nrr",
+      "name": "Net revenue retention",
+      "value": null,
+      "status": "missing",
+      "critical": true,
+      "note": "Not public. Request customer-level ARR (opening and ending by district) to recompute it."
+    },
+    {
+      "id": "parentsquare-grr",
+      "name": "Gross revenue retention",
+      "value": null,
+      "status": "missing",
+      "critical": true,
+      "note": "Not public. The 99.4% figure below is customer (district) retention, not revenue retention."
+    },
+    {
+      "id": "parentsquare-gm",
+      "name": "Gross margin",
+      "value": null,
+      "status": "missing",
+      "critical": true,
+      "note": "Not public. Ask for SMS/voice messaging costs separately; they drive margin for school-communication platforms."
+    },
+    {
+      "id": "parentsquare-burn",
+      "name": "Cash and monthly burn",
+      "value": null,
+      "status": "missing",
+      "critical": true,
+      "note": "Not public. Request EBITDA and cash flow; as a sponsor-backed company, also debt and covenants."
+    },
+    {
+      "id": "parentsquare-conc",
+      "name": "Largest customer share of ARR",
+      "value": null,
+      "status": "missing",
+      "critical": true,
+      "note": "Not public. Request top-20 districts by ARR and contract renewal dates."
+    },
+    {
+      "id": "parentsquare-raise",
+      "name": "Latest round amount (local currency)",
+      "value": null,
+      "status": "missing",
+      "critical": true,
+      "note": "Serent's 2021 growth investment was described as significant but the amount was not released."
+    },
+    {
+      "id": "parentsquare-raise-usd",
+      "name": "Latest round amount in USD",
+      "value": null,
+      "status": "missing",
+      "critical": true,
+      "note": "Undisclosed; valuation also not public."
+    },
+    {
+      "id": "parentsquare-customers",
+      "name": "Named customers",
+      "value": "Santa Barbara Unified School District; Evergreen Learning Center (first adopter)",
+      "status": "third",
+      "critical": true,
+      "source": "s3",
+      "note": "Early customers named in the Independent profile. District websites list many more; sample them in diligence."
+    },
+    {
+      "id": "parentsquare-impact",
+      "name": "Customer outcomes",
+      "value": "Adams Elementary: 'marked increase in parent participation' (no figure)",
+      "status": "company",
+      "critical": true,
+      "source": "s3",
+      "note": "Company case study, unquantified. Ask for attendance and contactability outcomes by district."
+    },
+    {
+      "id": "parentsquare-reach",
+      "name": "Students reached",
+      "value": "22M+ students, 42,000+ schools, all 50 states",
+      "status": "company",
+      "source": "s3",
+      "note": "Company figures reported in Aug 2026. For comparison: 44+ states in 2021 (s1), 49 states in 2023 (s2)."
+    },
+    {
+      "id": "parentsquare-families",
+      "name": "Share of US families using it",
+      "value": "About 40%",
+      "status": "company",
+      "source": "s3",
+      "note": "Company statement; likely includes Remind's reach after the 2023 acquisition."
+    },
+    {
+      "id": "parentsquare-logo-retention",
+      "name": "Customer (district) retention",
+      "value": "99.4%",
+      "status": "company",
+      "source": "s3",
+      "note": "Logo retention, not revenue retention. Definition and period not stated."
+    },
+    {
+      "id": "parentsquare-growth-2024",
+      "name": "Revenue growth 2021–2024",
+      "value": "444% (Inc. 5000 2025, No. 962)",
+      "status": "third",
+      "source": "s4",
+      "note": "Inc. ranks on revenue the company submits; reported here via the company's own release. Implies roughly 1.8x a year."
+    },
+    {
+      "id": "parentsquare-growth-2023",
+      "name": "Revenue growth 2020–2023",
+      "value": "665% (Inc. 5000 2024, No. 763)",
+      "status": "third",
+      "source": "s8",
+      "note": "Earlier three-year window. Growth rate slowing as the base grows: 665% → 444%."
+    },
+    {
+      "id": "parentsquare-inc-2026",
+      "name": "Inc. 5000 2026",
+      "value": "No. 788, fourth consecutive year (growth % not stated)",
+      "status": "third",
+      "source": "s5"
+    },
+    {
+      "id": "parentsquare-employees-2026",
+      "name": "Employees",
+      "value": "~400",
+      "status": "third",
+      "source": "s3",
+      "note": "About 30–40 in the Santa Barbara area, the rest remote. Was 33 full-time in March 2020 (s7)."
+    },
+    {
+      "id": "parentsquare-hq-a",
+      "name": "Headquarters",
+      "value": "Goleta, CA",
+      "status": "disputed",
+      "source": "s3",
+      "note": "Independent (2026) and the 2026 release say Goleta; the 2025 release dateline says Santa Barbara. Neighbouring cities; confirm the registered address."
+    },
+    {
+      "id": "parentsquare-hq-b",
+      "name": "Headquarters",
+      "value": "Santa Barbara, CA",
+      "status": "disputed",
+      "source": "s4",
+      "note": "2025 company release dateline and About section. See the Goleta claim."
+    },
+    {
+      "id": "parentsquare-sponsor",
+      "name": "Financial sponsor",
+      "value": "Serent Capital (growth investment, Aug 2021; partner Lance Fenton)",
+      "status": "third",
+      "source": "s1",
+      "note": "Serent's 10th education platform investment. Ownership stake not disclosed."
+    },
+    {
+      "id": "parentsquare-prior-funding",
+      "name": "Funding before Serent",
+      "value": "More than $12M over six rounds since 2011",
+      "status": "third",
+      "source": "s6",
+      "note": "Investors not named. Unclear whether this total includes the Serent investment."
+    },
+    {
+      "id": "parentsquare-acq-remind",
+      "name": "Acquisition: Remind",
+      "value": "Dec 2023; Remind used in 80%+ of US public schools and by 60% of US teachers",
+      "status": "company",
+      "source": "s2",
+      "note": "Terms not disclosed. Reach figures are Remind's own. Key diligence item: integration and overlap of the two user bases."
+    },
+    {
+      "id": "parentsquare-acq-signalkit",
+      "name": "Acquisition: Signal Kit",
+      "value": "Mar 2020; Kansas City school-messaging startup, ~200 districts",
+      "status": "third",
+      "source": "s7"
+    },
+    {
+      "id": "parentsquare-signalkit-founded-a",
+      "name": "Signal Kit founding year",
+      "value": "2014",
+      "status": "disputed",
+      "source": "s7",
+      "note": "EdSurge says 2014; Startland News says 2015. Minor, but shows why each fact keeps its source."
+    },
+    {
+      "id": "parentsquare-signalkit-founded-b",
+      "name": "Signal Kit founding year",
+      "value": "2015",
+      "status": "disputed",
+      "source": "s6"
+    },
+    {
+      "id": "parentsquare-ai",
+      "name": "AI product",
+      "value": "ParentSquare Intelligence: insights and next steps from communication, engagement and attendance data; off by default, enabled per district",
+      "status": "company",
+      "source": "s5"
+    },
+    {
+      "id": "parentsquare-languages",
+      "name": "Translation",
+      "value": "Two-way translation into 190+ languages",
+      "status": "company",
+      "source": "s5"
+    },
+    {
+      "id": "parentsquare-exit-watch",
+      "name": "Sponsor holding period",
+      "value": "About 5 years at Nov 2026 (invested Aug 2021)",
+      "status": "inferred",
+      "source": "s1",
+      "note": "Typical growth-equity holds run 4–6 years, so a recapitalisation or sale process is plausible. Inference only; verify before acting."
+    },
+    {
+      "id": "parentsquare-qoe",
+      "name": "Audited financials / Quality of Earnings",
+      "value": null,
+      "status": "missing",
+      "note": "Not public. A sell-side QoE is the first thing a buyer will ask for."
+    },
+    {
+      "id": "parentsquare-mgmt",
+      "name": "Management continuity",
+      "value": "CEO named in 2021–2023 releases (Sohit Wadhwa); 2025–2026 releases quote only the Founder & President",
+      "status": "inferred",
+      "source": "s5",
+      "note": "May be nothing, but buyers will ask who runs the company after a sale. Confirm the current CEO and leadership tenure."
+    },
+    {
+      "id": "parentsquare-playbook",
+      "name": "Sponsor playbook",
+      "value": "Serent: 'Accelerate Growth Through Accretive M&A'; 25+ person Growth Team; $7B AUM; 150+ platform investments and add-ons",
+      "status": "company",
+      "source": "s18"
+    },
+    {
+      "id": "parentsquare-comp-kev",
+      "name": "Comparable sponsor exit",
+      "value": "KEV Group (K-12 school payments): Serent invested Sep 2018, sold to Five Arrows Feb 2025 (~6.5-year hold), several add-ons along the way",
+      "status": "third",
+      "source": "s17",
+      "note": "Same sponsor, same buyer type (K-12 districts). Terms not disclosed."
+    }
+  ],
+  "customer_arr": [],
+  "opportunity": {
+    "id": "parentsquare",
+    "fund_id": "f4",
+    "stage_name": "Identified",
+    "round_label": "Serent-backed · exit watch",
+    "owner_name": "H. Kishore",
+    "flag": "Financials not public"
+  },
+  "addon_targets": [
+    {
+      "id": "ps-addon-onflo",
+      "name": "Onflo (formerly K12 Insight)",
+      "slug": "onflo",
+      "website": "k12insight.com",
+      "hq": "Herndon, VA",
+      "description": "AI-powered service operations platform for K-12 districts: support desk, process flows, messaging, phone systems",
+      "adds": "Inbound family service desk and phone: questions coming in, to pair with ParentSquare's messages going out",
+      "ownership": "Not found in public sources",
+      "available": true,
+      "scores": {
+        "product_gap": 5,
+        "cross_sell": 3,
+        "availability": 3,
+        "integration": 3,
+        "size_fit": 4
+      },
+      "rationale": {
+        "product_gap": "ParentSquare's listed features (s1, s5) are outbound: alerts, messaging, forms. A district service desk closes the loop.",
+        "cross_sell": "Same buyer (district communications office); 'trusted by districts nationwide' but no count published.",
+        "availability": "Ownership not found. Scored neutral until verified.",
+        "integration": "Different product (ticketing and phone) on shared district data; moderate effort.",
+        "size_fit": "No size published; rebrand and single product suggest a tuck-in. Verify revenue."
+      },
+      "facts": [
+        {
+          "name": "Rebrand",
+          "value": "K12 Insight became Onflo (Jun 2026); flagship Let's Talk renamed Onflo in 2025",
+          "status": "company",
+          "source": "s16"
+        },
+        {
+          "name": "CEO",
+          "value": "Suhail Farooqui",
+          "status": "company",
+          "source": "s16"
+        }
+      ],
+      "unknowns": [
+        "Revenue",
+        "Ownership",
+        "District count"
+      ]
+    },
+    {
+      "id": "ps-addon-edlio",
+      "name": "Edlio",
+      "slug": "edlio",
+      "website": "edlio.com",
+      "hq": "Los Angeles, CA",
+      "description": "K-12 websites (CMS), digital payments and communications",
+      "adds": "District and school websites, mobile apps and payments",
+      "ownership": "L Squared Capital Partners (growth investment, Jun 2016; $40M committed)",
+      "available": true,
+      "scores": {
+        "product_gap": 4,
+        "cross_sell": 3,
+        "availability": 3,
+        "integration": 3,
+        "size_fit": 3
+      },
+      "rationale": {
+        "product_gap": "Websites and payments are not among ParentSquare's listed features (verify).",
+        "cross_sell": "16,000+ schools; overlap with ParentSquare's 42,000 is unknown.",
+        "availability": "Sponsor-backed since 2016, about 10 years: a long hold, so the owner may be open to a sale. Inference.",
+        "integration": "Separate product (CMS) sharing district contacts and SSO; moderate.",
+        "size_fit": "Acquisitive itself (eChalk, SchoolInfo, Scholantis): a mid-sized deal, not a tuck-in."
+      },
+      "facts": [
+        {
+          "name": "Scale",
+          "value": "Used by 16,000+ schools across North America",
+          "status": "third",
+          "source": "s11"
+        },
+        {
+          "name": "Sponsor",
+          "value": "L Squared Capital Partners, growth investment Jun 2016",
+          "status": "company",
+          "source": "s12"
+        },
+        {
+          "name": "Capital",
+          "value": "$40M growth investment; plans include acquisitions",
+          "status": "third",
+          "source": "s13"
+        },
+        {
+          "name": "Acquisition",
+          "value": "SchoolInfo (school mobile apps), Sep 2022",
+          "status": "third",
+          "source": "s11"
+        }
+      ],
+      "unknowns": [
+        "Revenue",
+        "Customer overlap with ParentSquare"
+      ]
+    },
+    {
+      "id": "ps-addon-apptegy",
+      "name": "Apptegy",
+      "slug": "apptegy",
+      "website": "apptegy.com",
+      "hq": "Little Rock, AR",
+      "description": "Thrillshare: school websites, mobile apps and communications",
+      "adds": "Branded district websites and apps",
+      "ownership": "Five Elms Capital growth investment in 2017; current owners not verified",
+      "available": true,
+      "scores": {
+        "product_gap": 4,
+        "cross_sell": 3,
+        "availability": 2,
+        "integration": 3,
+        "size_fit": 3
+      },
+      "rationale": {
+        "product_gap": "Websites and apps extend ParentSquare's channel set (verify existing offering).",
+        "cross_sell": "Strong in smaller districts per its 2017 release; current footprint not public.",
+        "availability": "Latest sourced funding is from 2017; ownership since then is unverified, so scored low until checked.",
+        "integration": "Overlapping messaging features would need consolidation.",
+        "size_fit": "Current size unknown; data is stale."
+      },
+      "facts": [
+        {
+          "name": "Growth funding",
+          "value": "$5.7M from Five Elms Capital, May 2017",
+          "status": "company",
+          "source": "s14"
+        },
+        {
+          "name": "Scale (2017)",
+          "value": "Hundreds of districts in 38 states",
+          "status": "company",
+          "source": "s14"
+        }
+      ],
+      "unknowns": [
+        "Revenue",
+        "Current ownership",
+        "Current scale"
+      ]
+    },
+    {
+      "id": "ps-addon-bloomz",
+      "name": "Bloomz",
+      "slug": "bloomz",
+      "website": "bloomz.com",
+      "hq": null,
+      "description": "Teacher-parent communication app; also used by daycares and camps",
+      "adds": "Classroom app users and early-childhood customers",
+      "ownership": "Venture-backed (seed 2016: 8VC, ff Venture Capital and others)",
+      "available": true,
+      "scores": {
+        "product_gap": 1,
+        "cross_sell": 2,
+        "availability": 4,
+        "integration": 4,
+        "size_fit": 5
+      },
+      "rationale": {
+        "product_gap": "Classroom messaging is what Remind already brought; little new capability.",
+        "cross_sell": "Some reach into daycares and camps outside K-12 districts.",
+        "availability": "Small, seed-funded, no later rounds found: likely open to a sale.",
+        "integration": "Users migrate onto an existing classroom product.",
+        "size_fit": "Small tuck-in."
+      },
+      "facts": [
+        {
+          "name": "Seed funding",
+          "value": "$2.3M, May 2016 (8VC, ff Venture Capital, Founder's Co-op and others)",
+          "status": "third",
+          "source": "s15"
+        },
+        {
+          "name": "Scale (2016)",
+          "value": "Used in 10,000 schools (company claim)",
+          "status": "company",
+          "source": "s15"
+        }
+      ],
+      "unknowns": [
+        "Revenue",
+        "Current users",
+        "Later funding"
+      ]
+    },
+    {
+      "id": "ps-addon-schoolstatus",
+      "name": "SchoolStatus",
+      "slug": "schoolstatus",
+      "website": "schoolstatus.com",
+      "hq": "Ridgeland, MS",
+      "description": "K-12 communications and student data analytics, attendance; acquired Smore (2022) and SchoolNow (2024)",
+      "adds": "Attendance analytics and SchoolNow websites; mostly the same buyers",
+      "ownership": "PSG (growth capital, Jul 2021)",
+      "available": true,
+      "scores": {
+        "product_gap": 3,
+        "cross_sell": 2,
+        "availability": 2,
+        "integration": 1,
+        "size_fit": 1
+      },
+      "rationale": {
+        "product_gap": "Attendance analytics and websites add something; core messaging overlaps.",
+        "cross_sell": "Both claim 22M students and all 50 states: heavy overlap.",
+        "availability": "Its own sponsor (PSG) runs it as a platform; a sale to a competitor is possible but contested.",
+        "integration": "Two full communication platforms: hardest integration on the list.",
+        "size_fit": "Comparable size: a merger, not an add-on."
+      },
+      "facts": [
+        {
+          "name": "Scale",
+          "value": "22M+ students, districts in all 50 states",
+          "status": "company",
+          "source": "s9"
+        },
+        {
+          "name": "Sponsor",
+          "value": "PSG growth capital, Jul 2021",
+          "status": "third",
+          "source": "s10"
+        },
+        {
+          "name": "Acquisitions",
+          "value": "Smore (Dec 2022), SchoolNow (Feb 2024)",
+          "status": "company",
+          "source": "s9"
+        }
+      ],
+      "unknowns": [
+        "Revenue"
+      ]
+    },
+    {
+      "id": "ps-addon-kev",
+      "name": "KEV Group",
+      "slug": "kevgroup",
+      "website": "kevgroup.com",
+      "hq": "Toronto, ON",
+      "description": "School activity-fee management and payments (SchoolCash)",
+      "adds": "School payments: a partner, not a target",
+      "ownership": "Five Arrows (Rothschild & Co), since Feb 2025",
+      "available": false,
+      "unavailable_reason": "Serent sold KEV Group to Five Arrows in Feb 2025. Use it as a payments partner and as Serent's comparable K-12 exit.",
+      "facts": [
+        {
+          "name": "Serent hold",
+          "value": "Invested Sep 2018; sold to Five Arrows Feb 2025",
+          "status": "company",
+          "source": "s17"
+        },
+        {
+          "name": "Scale",
+          "value": "Manages $4B+ in school funds a year",
+          "status": "company",
+          "source": "s17"
+        }
+      ],
+      "unknowns": []
+    }
+  ]
+}

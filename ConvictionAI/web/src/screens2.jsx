@@ -32,6 +32,7 @@ export function Company(props) {
 // Live mode only: choose which Account Company 360 shows, or import a new company pack.
 function CompanyPicker({ st, set, conn, toast }) {
   const [list, setList] = useState(null);
+  const [researching, setResearching] = useState(false);
   const live = conn && conn.mode === "api";
   const load = () => api.companies().then(setList).catch(() => setList([]));
   useEffect(() => { if (live) load(); }, [live]);
@@ -48,7 +49,57 @@ function CompanyPicker({ st, set, conn, toast }) {
       </select>
       <label className="btn" htmlFor="pack-in">Import pack</label>
       <input id="pack-in" type="file" accept=".json,application/json" hidden onChange={onPack} />
+      <button className="btn" onClick={() => setResearching(true)}>✦ Research a company</button>
+      {researching && <ResearchDrawer onClose={() => setResearching(false)} onDone={(slug) => { load(); set({ company: slug }); setResearching(false); toast(`Research imported: ${slug}`); }} />}
     </>
+  );
+}
+
+// Live research: a Claude agent searches the web and builds a company pack; the validator gates it before import.
+function ResearchDrawer({ onClose, onDone }) {
+  const [status, setStatus] = useState(null);
+  const [company, setCompany] = useState("");
+  const [hint, setHint] = useState("");
+  const [job, setJob] = useState(null);
+  const [err, setErr] = useState(null);
+  useEffect(() => { api.researchStatus().then(setStatus).catch(() => setStatus({ enabled: false })); }, []);
+  useEffect(() => {
+    if (!job || job.status !== "running") return;
+    const t = setTimeout(() => api.researchJob(job.id).then(setJob).catch((x) => setErr(x.message)), 1200);
+    return () => clearTimeout(t);
+  }, [job]);
+  const start = () => { setErr(null); api.startResearch(company.trim(), hint.trim()).then((r) => setJob({ id: r.job_id, status: "running", events: [] })).catch((x) => setErr(x.message)); };
+  const running = job && job.status === "running";
+  return (
+    <div className="overlay" onClick={() => !running && onClose()}>
+      <aside className="drawer" role="dialog" aria-label="Research a company" onClick={(e) => e.stopPropagation()}>
+        <div className="row between"><span className="eyebrow">Live research · public sources only</span><button className="btn sm" onClick={onClose} disabled={running}>Close</button></div>
+        <h2 style={{ margin: 0 }}>Research a company</h2>
+        <p className="small muted" style={{ margin: 0 }}>A research agent (Claude with web search) reads funding news, the company site and startup databases, then submits a company pack. The same validator as a hand-made pack checks it: every fact needs a source the agent actually found, and private financials stay Missing. Takes 1–3 minutes.</p>
+        {status && !status.enabled && (
+          <div className="panel small" style={{ background: "var(--bg)" }}>
+            <b>Live research is off.</b>
+            <span>Add your Anthropic API key to <code>.env</code> as <code>ANTHROPIC_API_KEY=sk-ant-…</code>, then stop and restart <code>make run</code>. Without a key, use <b>Import pack</b> or the researched ClearOps example.</span>
+          </div>
+        )}
+        {status && status.enabled && (
+          <div className="stack">
+            <div className="field"><label htmlFor="rs-co">Company name</label><input id="rs-co" type="text" value={company} placeholder="e.g. ClearOps" disabled={!!job} onChange={(e) => setCompany(e.target.value)} onKeyDown={(e) => e.key === "Enter" && company.trim() && !job && start()} /></div>
+            <div className="field"><label htmlFor="rs-hint">Hint (optional) <span>helps with common names</span></label><input id="rs-hint" type="text" value={hint} placeholder="e.g. Munich, industrial after-sales, Series A 2026" disabled={!!job} onChange={(e) => setHint(e.target.value)} /></div>
+            <div className="row"><button className="btn primary" disabled={!company.trim() || !!job} onClick={start}>{running ? "Researching…" : "Start research"}</button><span className="small muted">Model: {status.model}</span></div>
+          </div>
+        )}
+        {err && <div className="small" style={{ color: "var(--risk)" }}>{err}</div>}
+        {job && (
+          <div className="panel" style={{ background: "var(--bg)" }}>
+            <div className="panel-head"><h3 style={{ margin: 0 }}>Agent log</h3><span className="small muted">{job.status === "running" ? "running" : job.status === "done" ? "finished" : "stopped"}</span></div>
+            <ol className="small stack" style={{ margin: 0, paddingLeft: 18, gap: 4 }}>{(job.events || []).map((m, i) => <li key={i}>{m}</li>)}</ol>
+            {job.status === "done" && <div className="row"><button className="btn primary" onClick={() => onDone(job.account)}>Open in Company 360 →</button><span className="small muted">Saved as packs/{job.account}.json · marked not yet reviewed</span></div>}
+            {job.status === "error" && <div className="row"><span className="small">{(job.error || "").split("\n")[0]}</span><button className="btn sm" onClick={() => setJob(null)}>Try again</button></div>}
+          </div>
+        )}
+      </aside>
+    </div>
   );
 }
 
@@ -470,7 +521,7 @@ function ResearchedCompany({ st, set, go, toast, conn }) {
       </div>
 
       <div className="grid g4">
-        <div className="panel"><Num label={round ? `Last round · ${round.stage}` : "Last round"} value={raise && raise.value_text !== "—" ? raise.value_text : round ? fmtM(round.amount_usd_m) : "—"} status={raise ? raise.status : "missing"} sub={round ? round.quarter : null} src={round && round.investors.length ? `${round.investors.length} investors` : null} /></div>
+        <div className="panel"><Num label={round ? `Last round · ${round.stage}` : "Last round"} value={raise && raise.value_text !== "—" ? raise.value_text : round ? (round.amount_usd_m == null ? "Undisclosed" : fmtM(round.amount_usd_m)) : "—"} status={raise ? raise.status : "missing"} sub={round ? round.quarter : null} src={round && round.investors.length ? `${round.investors.length} investors` : null} /></div>
         <div className="panel"><Num label="Net revenue retention" value={p.retention ? pct(p.retention.nrr, 0) : "—"} status={p.retention ? "calculated" : "missing"} sub={p.retention ? `GRR ${pct(p.retention.grr)}` : "Not public"} src={p.retention ? "Recomputed · rows from Postgres" : "Needs customer-level ARR"} /></div>
         <div className="panel"><Num label="Employees" value={emp ? emp.value_text : a.number_of_employees || "—"} status={emp ? emp.status : "missing"} src={emp && emp.locator} /></div>
         <div className="panel"><Num label="Evidence coverage" value={pct(p.coverage.pct)} sub={`${p.coverage.ok}/${p.coverage.total} critical claims evidenced`} src="≥65% to discuss, ≥85% for IC" /></div>
@@ -497,7 +548,7 @@ function ResearchedCompany({ st, set, go, toast, conn }) {
             <div className="stack"><span className="eyebrow">Funding history</span>
               <div className="table-wrap"><table>
                 <thead><tr><th>Round</th><th>Quarter</th><th className="r">USD</th><th>Investors</th></tr></thead>
-                <tbody>{p.funding_rounds.map((r) => <tr key={r.id}><td><b>{r.stage}</b></td><td className="num">{r.quarter}</td><td className="r num">{fmtM(r.amount_usd_m)}</td>
+                <tbody>{p.funding_rounds.map((r) => <tr key={r.id}><td><b>{r.stage}</b></td><td className="num">{r.quarter}</td><td className="r num">{r.amount_usd_m == null ? "Undisclosed" : fmtM(r.amount_usd_m)}</td>
                   <td className="small">{r.investors.join(", ")}<br /><a href={r.source} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)" }}>source</a></td></tr>)}</tbody>
               </table></div>
               {p.opportunity && <span className="small">In pipeline: <b>{p.opportunity.stage_name}</b> · {p.opportunity.round_label} · {p.opportunity.owner_name}{p.opportunity.flag ? ` · ${p.opportunity.flag}` : ""} <button className="linkish" onClick={() => go("pipeline")}>Open pipeline →</button></span>}

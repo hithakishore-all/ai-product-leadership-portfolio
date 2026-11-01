@@ -60,4 +60,13 @@ def test_upload_pack_replaces_and_rejects_bad_files():
 
 def test_listing_for_company_360():
     slugs = [a["slug"] for a in client.get("/api/accounts", params={"with_evidence": "true"}).json()]
-    assert slugs == ["helioops", "clearops"]
+    assert slugs[:2] == ["helioops", "clearops"] and "parentsquare" in slugs  # synthetic first, then researched packs
+
+
+def test_company_outside_tracked_segments_with_undisclosed_round():
+    p = client.get("/api/accounts/parentsquare/profile").json()
+    assert p["segments"] == [] and p["funding_rounds"][0]["amount_usd_m"] is None
+    assert p["funding_rounds"][0]["investors"] == ["Serent Capital"]
+    assert p["coverage"]["ok"] == 2 and p["opportunity"]["stage_name"] == "Identified"
+    # Not in a tracked segment, so the Opportunity Radar is unchanged
+    assert client.get("/api/segments").json()[0]["id"] == "as"

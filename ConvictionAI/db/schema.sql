@@ -78,10 +78,10 @@ CREATE UNIQUE INDEX one_primary_segment ON account_segment__c (account_id) WHERE
 CREATE TABLE funding_round__c (
   id            TEXT PRIMARY KEY,                 -- 'r01'
   account_id    INTEGER NOT NULL REFERENCES account(id) ON DELETE CASCADE,
-  segment_id    TEXT    NOT NULL REFERENCES segment__c(id),
+  segment_id    TEXT    REFERENCES segment__c(id),       -- NULL: company outside the six tracked segments
   stage         TEXT    NOT NULL,                 -- 'Series A'
   quarter       TEXT    NOT NULL,                 -- '2026 Q3'
-  amount_usd_m  NUMERIC(12,2) NOT NULL CHECK (amount_usd_m >= 0),
+  amount_usd_m  NUMERIC(12,2) CHECK (amount_usd_m >= 0), -- NULL: amount not disclosed
   source        TEXT    NOT NULL DEFAULT 'synthetic'
 );
 CREATE INDEX funding_round_segment ON funding_round__c (segment_id, quarter);
@@ -170,4 +170,23 @@ CREATE TABLE task (
   status        TEXT NOT NULL DEFAULT 'Open' CHECK (status IN ('Open', 'Completed')),
   description   TEXT,                             -- decision impact
   created_date  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- Buy-and-build: candidate add-on acquisitions for a platform company (custom object).
+-- Scores are analyst judgments (1-5); the ranking is computed by engine.rank_addons, never stored.
+CREATE TABLE addon_target__c (
+  id                   TEXT PRIMARY KEY,           -- 'ps-addon-onflo'
+  platform_account_id  INTEGER NOT NULL REFERENCES account(id) ON DELETE CASCADE,
+  target_account_id    INTEGER NOT NULL REFERENCES account(id) ON DELETE CASCADE,
+  adds                 TEXT NOT NULL,              -- the capability or customers it brings to the platform
+  ownership            TEXT,                       -- current owner, as sourced
+  is_available         BOOLEAN NOT NULL DEFAULT TRUE,
+  unavailable_reason   TEXT,
+  product_gap          SMALLINT CHECK (product_gap BETWEEN 1 AND 5),
+  cross_sell           SMALLINT CHECK (cross_sell BETWEEN 1 AND 5),
+  availability         SMALLINT CHECK (availability BETWEEN 1 AND 5),
+  integration          SMALLINT CHECK (integration BETWEEN 1 AND 5),
+  size_fit             SMALLINT CHECK (size_fit BETWEEN 1 AND 5),
+  rationale            JSONB NOT NULL DEFAULT '{}'::jsonb,   -- one sentence per criterion
+  stage                TEXT NOT NULL DEFAULT 'Screen' CHECK (stage IN ('Screen', 'Approach', 'Diligence', 'Passed'))
 );

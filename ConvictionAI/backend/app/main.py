@@ -14,6 +14,10 @@ from pydantic import BaseModel
 
 import json
 
+import os
+import threading
+import uuid
+
 from . import engine
 from .packs import import_pack
 from .db import ROOT, connect
@@ -77,7 +81,8 @@ def segments(exclude_top: int = 0):
     """Opportunity Radar ranking from segment__c. exclude_top removes the N largest rounds before scoring."""
     with connect() as conn:
         segs = conn.execute("SELECT * FROM segment__c").fetchall()
-        rounds = conn.execute("SELECT id, segment_id, amount_usd_m::float AS amount FROM funding_round__c").fetchall()
+        rounds = conn.execute("SELECT id, segment_id, amount_usd_m::float AS amount FROM funding_round__c "
+                              "WHERE segment_id IS NOT NULL AND amount_usd_m IS NOT NULL").fetchall()
     for s in segs:
         s["evidence_coverage"] = float(s["evidence_coverage"])
         s["tam_mid_usd_b"] = float(s["tam_mid_usd_b"]) if s["tam_mid_usd_b"] is not None else None
@@ -102,11 +107,12 @@ def funding_rounds(segment: Optional[str] = None, investor: Optional[str] = None
 # ---------- Accounts, Contacts and evidence ----------
 @app.get("/api/accounts")
 def accounts(record_type: Optional[str] = None, with_evidence: bool = False):
-    """with_evidence=true lists only Accounts that have evidence claims (the ones Company 360 can open)."""
+    """with_evidence=true lists only Accounts with critical evidence claims (the ones Company 360 can open).
+    Add-on candidates have facts but no critical claims, so they appear in the Add-on Screener instead."""
     with connect() as conn:
         return conn.execute("""SELECT a.id, a.slug, a.name, a.record_type, a.company_stage, a.sub_segment, a.is_synthetic
                                FROM account a WHERE (%(rt)s::text IS NULL OR a.record_type = %(rt)s)
-                               AND (NOT %(ev)s OR EXISTS (SELECT 1 FROM evidence_claim__c c WHERE c.account_id = a.id))
+                               AND (NOT %(ev)s OR EXISTS (SELECT 1 FROM evidence_claim__c c WHERE c.account_id = a.id AND c.is_critical))
                                ORDER BY a.is_synthetic DESC, a.name""", {"rt": record_type, "ev": with_evidence}).fetchall()
 
 
@@ -159,6 +165,127 @@ async def upload_pack(file: UploadFile = File(...)):
             return import_pack(conn, pack, file.filename or "pack.json")
     except ValueError as e:
         raise HTTPException(422, str(e))
+
+
+# ---------- live research (needs ANTHROPIC_API_KEY) ----------
+class ResearchIn(BaseModel):
+    company: str
+    hint: str = ""
+
+
+JOBS: dict = {}
+
+
+def research_client():
+    """The Anthropic client, or None when no API key is configured. Tests replace this."""
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        return None
+    import anthropic
+    return anthropic.Anthropic()
+
+
+def _run_job(job_id: str, company: str, hint: str, client) -> None:
+    from .research import run_research
+    job = JOBS[job_id]
+    log = lambda m: job["events"].append(m)
+    try:
+        with connect() as conn:
+            segments = conn.execute("SELECT id, name FROM segment__c ORDER BY id").fetchall()
+        pack = run_research(company, client, segments, on_event=log, hint=hint)
+        slug = pack["account"]["slug"]
+        with connect() as conn:
+            old = conn.execute("SELECT is_synthetic FROM account WHERE slug = %s", (slug,)).fetchone()
+            if old and old["is_synthetic"]:
+                raise RuntimeError(f"'{slug}' is a fictional demo company; refusing to overwrite it with research.")
+            summary = import_pack(conn, pack, f"{slug}.json")
+        (ROOT / "packs" / f"{slug}.json").write_text(json.dumps(pack, indent=2, ensure_ascii=False) + "\n")
+        log(f"Imported into Postgres and saved packs/{slug}.json")
+        job.update(status="done", account=summary["account"], summary=summary)
+    except Exception as e:  # report every failure to the UI rather than leaving the job running
+        log(f"Stopped: {str(e).splitlines()[0]}")
+        job.update(status="error", error=str(e))
+
+
+@app.get("/api/research/status")
+def research_status():
+    """Whether live research is available (an API key is configured)."""
+    return {"enabled": bool(os.environ.get("ANTHROPIC_API_KEY")), "model": os.environ.get("RESEARCH_MODEL", "claude-sonnet-5-5")}
+
+
+@app.post("/api/research", status_code=202)
+def start_research(body: ResearchIn):
+    """Start a research agent for one company. Poll GET /api/research/{job_id} for progress."""
+    company = body.company.strip()
+    if not company or len(company) > 120:
+        raise HTTPException(422, "Give a company name (up to 120 characters).")
+    client = research_client()
+    if client is None:
+        raise HTTPException(503, "Live research needs ANTHROPIC_API_KEY in .env. Add it and restart make run.")
+    job_id = uuid.uuid4().hex[:12]
+    JOBS[job_id] = {"id": job_id, "company": company, "status": "running", "events": [], "account": None, "error": None}
+    threading.Thread(target=_run_job, args=(job_id, company, body.hint.strip(), client), daemon=True).start()
+    return {"job_id": job_id}
+
+
+@app.get("/api/research/{job_id}")
+def research_job(job_id: str):
+    if job_id not in JOBS:
+        raise HTTPException(404, "No such research job")
+    return JOBS[job_id]
+
+
+# ---------- value creation: buy-and-build and exit readiness ----------
+class AddonWeights(BaseModel):
+    product_gap: float = engine.ADDON_WEIGHTS["product_gap"]
+    cross_sell: float = engine.ADDON_WEIGHTS["cross_sell"]
+    availability: float = engine.ADDON_WEIGHTS["availability"]
+    integration: float = engine.ADDON_WEIGHTS["integration"]
+    size_fit: float = engine.ADDON_WEIGHTS["size_fit"]
+
+
+def addon_targets(conn, platform_id: int) -> List[dict]:
+    rows = conn.execute(
+        """SELECT x.*, t.slug, t.name, t.description, t.website, t.billing_city, t.billing_country
+           FROM addon_target__c x JOIN account t ON t.id = x.target_account_id
+           WHERE x.platform_account_id = %s ORDER BY t.name""", (platform_id,)).fetchall()
+    out = []
+    for r in rows:
+        facts = conn.execute("""SELECT id, name, value_text, status, locator, note, source_title, source_url
+                                FROM evidence_claim__c WHERE account_id = %s ORDER BY status = 'missing', id""",
+                             (r["target_account_id"],)).fetchall()
+        known = sum(f["status"] != "missing" for f in facts)
+        out.append({"id": r["id"], "slug": r["slug"], "name": r["name"], "description": r["description"], "website": r["website"],
+                    "hq": ", ".join(x for x in (r["billing_city"], r["billing_country"]) if x), "adds": r["adds"],
+                    "ownership": r["ownership"], "is_available": r["is_available"], "unavailable_reason": r["unavailable_reason"],
+                    "stage": r["stage"], "rationale": r["rationale"], "facts": facts,
+                    "confidence": known / len(facts) if facts else 0,
+                    "scores": {k: r[k] for k in engine.ADDON_WEIGHTS}})
+    return out
+
+
+@app.post("/api/accounts/{slug}/addons")
+def rank_addons(slug: str, weights: AddonWeights = AddonWeights()):
+    """Add-on acquisition candidates for a platform company, ranked by engine.rank_addons with the given weights."""
+    with connect() as conn:
+        a = account_or_404(conn, slug)
+        targets = addon_targets(conn, a["id"])
+    if not targets:
+        raise HTTPException(404, f"No add-on candidates recorded for {slug}")
+    return {"platform": a["name"], "weights": weights.model_dump(), "targets": engine.rank_addons(targets, weights.model_dump())}
+
+
+@app.get("/api/accounts/{slug}/exit-readiness")
+def exit_readiness(slug: str):
+    """What a buyer's diligence will ask for, scored from the evidence on file. Gaps become the sale-prep plan."""
+    with connect() as conn:
+        a = account_or_404(conn, slug)
+        claims = conn.execute("""SELECT id, name, value_text, status, source_title, source_url, note
+                                 FROM evidence_claim__c WHERE account_id = %s""", (a["id"],)).fetchall()
+        rounds = conn.execute("""SELECT f.stage, f.quarter, coalesce(array_agg(i.name) FILTER (WHERE i.name IS NOT NULL), '{}') AS investors
+                                 FROM funding_round__c f LEFT JOIN round_participant__c rp ON rp.round_id = f.id
+                                 LEFT JOIN account i ON i.id = rp.investor_account_id WHERE f.account_id = %s
+                                 GROUP BY f.id ORDER BY f.quarter""", (a["id"],)).fetchall()
+    return {"account": a["name"], "slug": a["slug"], "rounds": rounds, **engine.exit_readiness(claims)}
 
 
 @app.get("/api/accounts/{slug}/claims")

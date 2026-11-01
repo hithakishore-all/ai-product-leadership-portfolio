@@ -17,7 +17,13 @@ The demo story (HelioOps) is fictional so it can show a clean contradiction. To 
 
 That gap is the point of the demo: a researched company shows low evidence coverage and the recommendation **More diligence**, with a data-room request listing exactly what's missing.
 
-## The process
+## The fast way: let the agent do it
+
+With `ANTHROPIC_API_KEY` in `.env`, click **✦ Research a company** in Company 360. A Claude agent with web search follows the process below, submits the pack, and the server checks it with the same validator plus one more rule: every source URL must be a page the agent's searches actually returned. If anything fails, the problems go back to the agent to fix (up to three times). The result is imported and saved to `packs/<slug>.json`, marked *not yet reviewed*. Open the sources and check them before you rely on it.
+
+The agent's instructions are in [`backend/app/research.py`](../backend/app/research.py) (`system_prompt`).
+
+## The process (by hand, or what the agent does)
 
 1. **Find the anchor.** Search for the latest funding announcement. Pick a recent, small round (Seed to Series B) so there's news coverage but no deep public financials.
 2. **Open every page you cite.** Add each to `sources` with publisher, title, URL, published date and retrieved date. Only pages actually read go in.

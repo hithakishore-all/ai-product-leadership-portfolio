@@ -16,6 +16,7 @@ Conviction AI is an investment-intelligence workspace for venture capital and pr
 - [Using the UI: the 5-minute walkthrough](#using-the-ui-the-5-minute-walkthrough)
 - [The demo companies](#the-demo-companies)
 - [How it works](#how-it-works)
+- [Value creation: buy-and-build and exit readiness](#value-creation-buy-and-build-and-exit-readiness)
 - [Data model](#data-model)
 - [Real companies: company packs](#real-companies-company-packs)
 - [Full setup](#full-setup)
@@ -82,7 +83,8 @@ That's the **offline demo**: every screen works, and your changes (deal moves, r
 | --- | --- | --- | --- |
 | **Offline demo** | A browser | All screens, bundled demo data, changes saved in your browser | `open web/dist/index.html` |
 | **Full stack (live)** | Postgres, Python 3.9+, Node 18+ | UI served by FastAPI, every read and write goes to Postgres, cohort CSV upload, company-pack import, audit trail, API docs at `/docs` | `make doctor` → `make setup` → `make db` → `make run` |
-| **Developer** | Same as full stack | Edit `web/src`, rebuild the single HTML file, run 32 automated tests | `make build`, `make test` |
+| **Live research** (optional) | Full stack + an [Anthropic API key](https://console.anthropic.com) | Type any company name; a Claude research agent searches the web and builds a sourced company pack in 1–3 minutes | Add `ANTHROPIC_API_KEY` to `.env`, restart `make run` |
+| **Developer** | Same as full stack | Edit `web/src`, rebuild the single HTML file, run 46 automated tests | `make build`, `make test` |
 
 The UI decides its mode by itself. Served by the API at `http://localhost:8000`, the top-right badge reads **● Live · Postgres via API**. Opened as a file, it reads **Offline**. The screens and the design are identical in both.
 
@@ -100,6 +102,8 @@ The left navigation follows the investment workflow: **Discover → Qualify → 
 8. **Decision & IC Memo.** The recommendation is rule-based: *More diligence* below 65% evidence coverage, *Advance with conditions* while blockers remain or coverage is below 85%, *Advance to IC* only when both clear. Click **Make the bear case**, then **Prepare IC memo** for a sourced draft ([bear case](docs/screenshots/05-decision-bear-case.png) · [memo](docs/screenshots/06-ic-memo.png)).
 9. **PE mode.** Switch to **PE Buyout**. Crestline Field Systems replaces HelioOps; the question becomes "can we buy durable cash flow at a price that returns capital?" In **LBO-lite**, tick which EBITDA adjustments you accept: pricing the deal on seller-adjusted EBITDA while accepting only $9.4M cuts IRR from 15.9% to 9.9% and pushes leverage to 4.68x against a 4.0x cap.
 10. **Researched company.** In Company 360, choose **ClearOps · researched** from the company picker (live mode). Everything shown came from five public sources; six critical metrics are *Missing* and three facts are *Disputed*, so coverage is 30% and the recommendation is *More diligence*. **Copy data-room request** lists exactly what to ask the company for.
+11. **Research any company live** (needs an API key). In Company 360, click **✦ Research a company**, type a name (and an optional hint such as city or sector) and click **Start research**. The agent log shows each web search as it happens. When it finishes, **Open in Company 360** shows the new company with every fact linked, private financials *Missing*, and the recommendation *More diligence*. The pack is also saved to `packs/` so it survives **Reset demo** ([screenshot](docs/screenshots/09-live-research.png)).
+12. **Value creation (sponsor view).** Under **Value creation**, open **Add-on Screener** and **Exit Readiness** for ParentSquare, a real Serent Capital company. See the next section. Both work offline too.
 
 **Reset demo** (bottom left) puts everything back. In live mode it reseeds Postgres.
 
@@ -115,6 +119,8 @@ A longer, timed presenter script is in [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md
 | 15 more startups and 8 investors | Startups and Investor accounts | Market map and capital flows | Fictional |
 | **ClearOps** (Munich) | Startup · Series A · Parts & Service Orchestration | A real company built from public sources: €8.6M Series A (May 2026) led by Hitachi Ventures with Schoeller Group and Barkawi Group | **Real, sourced** |
 | Hitachi Ventures, Schoeller Group, Barkawi Group | Investor accounts | ClearOps's round participants | Real, sourced |
+| **ParentSquare** (Goleta, CA) | PE-backed growth company · K-12 family engagement | A sponsor-backed company tracked by Fund IV: Serent Capital's 2021 growth investment (amount undisclosed), the 2023 Remind acquisition, 444% three-year revenue growth per Inc. 5000. Sits outside the six AI segments, so it doesn't move the Radar ([screenshot](docs/screenshots/10-researched-company-parentsquare.png)) | **Real, sourced** |
+| Serent Capital | Investor account | ParentSquare's sponsor | Real, sourced |
 
 Funds: **Fund II · Growth** (Growth VC) and **Fund IV · Buyout** (PE). The demo date is **Sep 30, 2026**.
 
@@ -158,6 +164,19 @@ The full component and sequence diagrams, and the reasons behind each design dec
 
 ![Architecture](docs/architecture.svg)
 
+## Value creation: buy-and-build and exit readiness
+
+A growth-equity sponsor makes money after the deal: buying add-ons that make the platform worth more, and selling when the company is ready. Two screens apply the same evidence rules to those decisions, using ParentSquare (Serent Capital's 2021 growth investment) and six real candidates researched from public sources.
+
+| | |
+| --- | --- |
+| ![Add-on Screener](docs/screenshots/11-addon-screener.png) | ![Exit Readiness](docs/screenshots/12-exit-readiness.png) |
+| **Add-on Screener**: candidates ranked on product gap, cross-sell, availability, integration and size. Facts are sourced; the 1–5 scores are analyst judgments with their reasoning. Move the weights and the ranking recomputes | **Exit Readiness**: 13 items a buyer's diligence asks for, scored from the evidence on file (17% on public evidence), the sponsor's holding period against Serent's KEV Group exit, and a sale-prep plan ordered by what matters most |
+
+- Default ranking: Onflo (formerly K12 Insight) 75, Edlio 66, Apptegy 62, Bloomz 57, SchoolStatus 40. KEV Group is listed as a partner and comparable exit, not a target: Serent sold it to Five Arrows in February 2025.
+- Formulas: add-on score = weighted average of the five scores on 0–100; readiness = weighted credit per item (verified 100%, third-party 75%, company-reported 50%, inferred 25%, missing 0%). Both are in `engine.py` and `engine.js`, tested to give the same numbers.
+- Data: an `addon_targets` section in [`packs/parentsquare.json`](packs/parentsquare.json) becomes `addon_target__c` rows plus a `PE Target` account per candidate with its facts as evidence claims.
+
 ## Data model
 
 Postgres uses **Salesforce names on purpose**. Standard objects keep their Salesforce names; anything a CRM doesn't model ends in `__c`, exactly as a custom object would in Salesforce.
@@ -177,6 +196,7 @@ Postgres uses **Salesforce names on purpose**. Standard objects keep their Sales
 | `round_participant__c` | Custom | Investor accounts on each round (lead or participant) |
 | `evidence_claim__c` | Custom | Every fact: value, status, source, locator, critical flag, resolution |
 | `customer_arr__c` | Custom | Customer-level opening and ending ARR; NRR/GRR are computed from these rows |
+| `addon_target__c` | Custom | Add-on candidates for a platform company: what each adds, owner, availability, five 1–5 scores and their reasoning |
 
 Evidence statuses: `verified`, `calculated`, `company` (company-reported), `third` (third-party), `inferred`, `assumption`, `missing`, `disputed`. Schema: [`db/schema.sql`](db/schema.sql). Entity diagram: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#data-model).
 
@@ -189,7 +209,7 @@ make import PACK=packs/clearops.json   # add or refresh one company (re-import r
 make db                                # rebuild everything; imports every pack in packs/
 ```
 
-Or in the app: **Company 360 → Import pack**. The importer validates the pack and refuses facts without sources. Format and rules: [packs/README.md](packs/README.md). How to research a new company: [docs/COMPANY_PACKS.md](docs/COMPANY_PACKS.md).
+Or in the app: **Company 360 → Import pack**, or let the research agent build the pack for you with **✦ Research a company** (needs an API key). Either way, the importer validates the pack and refuses facts without sources. Format and rules: [packs/README.md](packs/README.md). How to research a new company: [docs/COMPANY_PACKS.md](docs/COMPANY_PACKS.md).
 
 ## Full setup
 
@@ -220,6 +240,8 @@ All settings live in `.env` (created from [`.env.example`](.env.example) by `mak
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `DATABASE_URL` | `host=localhost port=5432 dbname=conviction_ai user=postgres password=CHANGE_ME` | Postgres connection. Accepts key=value form or a URL (`postgresql://localhost:5432/conviction_ai` for Postgres.app). The seed script creates the database if it doesn't exist. |
+| `ANTHROPIC_API_KEY` | not set | Optional. Turns on **Research a company**. Without it, everything else works and the button explains how to enable it. |
+| `RESEARCH_MODEL` | `claude-sonnet-5-5` | Optional. The Claude model the research agent uses. |
 
 | Make target | Does |
 | --- | --- |
@@ -253,6 +275,11 @@ Interactive docs at **http://localhost:8000/docs** while the app runs. Endpoints
 | GET / POST | `/api/opportunities/{id}/tasks` | Diligence tasks on a deal |
 | POST | `/api/packs` | Import a company pack (validated; re-import replaces) |
 | POST | `/api/returns` | VC exit scenarios: MOIC and IRR |
+| GET | `/api/research/status` | Whether live research is enabled, and the model |
+| POST | `/api/research` | Start a research agent: `{"company": "…", "hint": "…"}` → `{job_id}` (503 without an API key) |
+| GET | `/api/research/{job_id}` | Progress log, then the imported account or the error |
+| POST | `/api/accounts/{slug}/addons` | Add-on candidates ranked with the weights in the body (any of the five criteria) |
+| GET | `/api/accounts/{slug}/exit-readiness` | Buyer-diligence checklist, readiness score and sale-prep plan from the evidence on file |
 | POST | `/api/demo/reset` | Reseed the database |
 
 Try it:
@@ -277,7 +304,9 @@ make test
 | `backend/tests/test_engine.py` | 9 | Cohort bridge, NRR 113% / GRR 90%, new logos excluded, growth/runway/market size, VC scenarios, inflection index with mega-rounds excluded |
 | `backend/tests/test_api.py` | 8 | Every main endpoint against a real Postgres: record types, recomputed retention, CSV upload and validation, stage history, claim resolution, returns, tasks |
 | `backend/tests/test_packs.py` | 5 | ClearOps pack is valid, unsourced facts and invented metrics are rejected, profile shows gaps and conflicts, re-upload replaces |
-| `web/tests/engine.test.mjs` | 10 | The browser engine: cohort bridge, NRR/GRR, scenarios, inflection index, no double counting, unknowns lower coverage not score, LBO |
+| `backend/tests/test_research.py` | 6 | The research agent, against a scripted fake of the API (no key or network needed): valid pack and progress log, uncited URLs sent back to fix, invented numbers rejected, pause/resume, gives up cleanly, endpoint imports and saves, demo companies protected |
+| `backend/tests/test_value_creation.py` | 6 | Add-on ranking and weights, exit readiness from evidence, add-on pack rules, both endpoints, candidates kept out of Company 360 |
+| `web/tests/engine.test.mjs` | 12 | The browser engine: cohort bridge, NRR/GRR, scenarios, inflection index, no double counting, unknowns lower coverage not score, LBO, add-on ranking and exit readiness matching the server |
 | `web/tests/e2e_live.py` | end to end | A real browser against the running app: data room loads from Postgres, CSV upload persists, pipeline move is audited, reset reseeds |
 
 The end-to-end test needs Playwright (`pip install playwright && python -m playwright install chromium`); start the app, then run `python web/tests/e2e_live.py http://localhost:8000 /tmp/shots`.
@@ -294,26 +323,28 @@ ConvictionAI/
 ├── .env.example               connection settings template
 ├── CLAUDE.md                  project rules for AI coding assistants
 ├── db/
-│   ├── schema.sql             Salesforce-shaped data model (13 objects)
+│   ├── schema.sql             Salesforce-shaped data model (14 objects)
 │   └── seed.json              demo data, generated from web/src/data.js
 ├── backend/
 │   ├── app/
 │   │   ├── main.py            FastAPI app and endpoints
 │   │   ├── engine.py          deterministic financial engine
 │   │   ├── packs.py           company-pack validation and import
+│   │   ├── research.py        live research agent (Claude + web search → pack)
 │   │   └── db.py              .env loading and connections
 │   ├── seed.py                creates the database, loads seed data and packs
 │   ├── import_pack.py         CLI: import one pack
 │   ├── requirements.txt
 │   └── tests/                 pytest: engine, API, packs
 ├── web/
-│   ├── src/                   React screens, UI engine, API client, styles
+│   ├── src/                   React screens (screens4.jsx = value creation), UI engine, API client, styles
 │   ├── build.mjs              bundles everything into one HTML file
 │   ├── dist/index.html        the built app (also the offline demo)
 │   └── tests/                 engine tests + end-to-end browser test
 ├── packs/
 │   ├── README.md              pack format and rules
-│   └── clearops.json          a real company, researched with sources
+│   ├── clearops.json          a real company, researched with sources
+│   └── parentsquare.json      a real PE-backed company, researched with sources
 ├── scripts/
 │   ├── doctor.sh              environment checks
 │   └── export-seed.mjs        writes db/seed.json from the UI fixtures
@@ -327,7 +358,7 @@ ConvictionAI/
 
 - **Runs locally.** The server listens on `localhost:8000`. There is no authentication, so don't expose it to a network as-is.
 - **No secrets in the repo.** The only secret is your local Postgres password, in `.env`, which git ignores.
-- **No external calls.** The app calls no data provider, LLM or analytics service at runtime. Company packs are researched separately and imported as files.
+- **External calls only for live research.** Without `ANTHROPIC_API_KEY` the app makes no external calls. With it, **Research a company** sends the company name and hint to the Anthropic API, which runs the web searches. Nothing from your database is sent. Each run costs a few web searches plus model tokens.
 - **Packs are validated** before import: unknown statuses, missing sources and invalid segments are rejected.
 - **Demo data is fictional**, except ClearOps and its investors, which use only public information with links.
 - Uploaded CSVs are parsed as plain numbers, never executed. SQL uses parameters throughout.
@@ -352,7 +383,9 @@ More in [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md).
 
 **Is any of this real data?** The demo companies, rounds and metrics are fictional. ClearOps and its three investors are real and every fact about them links to a public source.
 
-**Where's the AI?** In this version, deliberately small. The *Ask Conviction* box and the bear case are rule-based and cite the records they draw on, so the demo is reproducible and runs offline. The design keeps language models away from arithmetic and lets them only phrase and suggest. An LLM analyst behind a provider interface is on the roadmap, with the deterministic version kept as fallback.
+**Where's the AI?** In research, where it's useful, and kept out of the math. **Research a company** is a Claude agent that searches the web and writes a company pack; the validator checks every fact has a source the agent actually found before anything reaches the database, and private metrics stay *Missing*. The *Ask Conviction* box and the bear case are rule-based and cite the records they draw on, so the scripted demo is reproducible and runs offline.
+
+**Can it research any company?** Any company with a public footprint: funding news, a website, database profiles. You'll get the profile, founders, funding, investors and claimed outcomes. You won't get ARR, retention, margins or burn; those need the company's data room, which is exactly what the app then asks for. Common names are ambiguous, so add a hint (city, sector, round). Always check the sources before relying on a researched pack; it's marked *not yet reviewed*.
 
 **Why Postgres and not Snowflake?** Postgres is free, runs on a laptop and handles transactional writes (stage changes, resolutions) well. Market-signal data at scale is a natural Snowflake workload later; the schema doesn't need to change for that.
 
@@ -365,7 +398,8 @@ More in [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md).
 ## Roadmap
 
 - Parse real PDFs and spreadsheets with page-level source locators
-- LLM analyst behind a provider interface, deterministic fallback kept
+- **Enrich** an existing company: news since the last check, competitor moves, hiring signals
+- Read an uploaded pitch deck into claims with page numbers, then check them against the data room
 - Authentication and multiple users
 - Salesforce sync (the model already mirrors its objects)
 - Snowflake for market-signal data

@@ -23,16 +23,17 @@ or in the app: **Company 360 → Import pack** (live mode).
 
 The critical metrics a VC needs (ARR, NRR, GRR, gross margin, burn, customer concentration) are almost never public. A good pack lists them as `missing` claims with a note on what to request. That is what drives evidence coverage down and the recommendation to **More diligence**: the honest answer.
 
-## Rules (the importer enforces the first four)
+## Rules (the importer enforces the first five)
 
 1. Every claim that isn't `missing` or `assumption` points to a `source` id.
 2. A `missing` claim has no value.
 3. Status is one of: `verified`, `calculated`, `company` (the company says so), `third` (reported by press or a database), `inferred`, `assumption`, `missing`, `disputed`.
-4. Exactly one primary segment, and it must exist (`po`, `me`, `as`, `ha`, `ir`, `dc`).
-5. When sources disagree, add one claim per value, both `disputed`, with a note naming each source.
-6. Company-reported results (e.g. "up to 40% better parts availability") stay `company`, never `verified`.
-7. Inferences about people are limited to professional facts and are phrased as questions to verify.
-8. Never invent private numbers. A pack with honest gaps beats a full one.
+4. At most one primary segment, and it must exist (`po`, `me`, `as`, `ha`, `ir`, `dc`). A company outside the six tracked segments leaves `segments` empty and describes its market in `sub_segment`; it then doesn't affect the Opportunity Radar.
+5. A round whose amount isn't public has `"amount_usd_m": null` and `"amount_local": "Undisclosed"`.
+6. When sources disagree, add one claim per value, both `disputed`, with a note naming each source.
+7. Company-reported results (e.g. "up to 40% better parts availability") stay `company`, never `verified`.
+8. Inferences about people are limited to professional facts and are phrased as questions to verify.
+9. Never invent private numbers. A pack with honest gaps beats a full one.
 
 ## Format
 
@@ -57,5 +58,7 @@ The critical metrics a VC needs (ARR, NRR, GRR, gross margin, burn, customer con
 ```
 
 Mark the same ten claims `critical` in every pack (the six financial metrics, the latest round amount in local and USD terms, named customers, customer outcomes) so coverage is comparable across companies.
+
+**Add-on candidates (optional).** A platform company's pack can carry `addon_targets`: each has `id`, `name`, `slug`, `adds`, `ownership`, `available`, five `scores` from 1 to 5 (`product_gap`, `cross_sell`, `availability`, `integration`, `size_fit`) with one sentence of `rationale` each, sourced `facts`, and `unknowns` (shown as Missing). An unavailable candidate gives `unavailable_reason` instead of scores. See `parentsquare.json`.
 
 `clearops.json` is a complete, real example researched on 2026-10-28.

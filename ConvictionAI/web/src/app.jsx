@@ -4,6 +4,7 @@ import { helioMetrics, thesisFit } from "./model.js";
 import { Overview, Markets, Flows, MarketMap, Thesis, Pipeline } from "./screens1.jsx";
 import { Company, Underwriting, DEFAULT_UW, DEFAULT_LBO } from "./screens2.jsx";
 import { Decision, SUGGESTIONS, answer } from "./screens3.jsx";
+import { AddonScreener, ExitReadiness } from "./screens4.jsx";
 import { api } from "./api.js";
 const { useState, useEffect, useRef } = React;
 
@@ -11,6 +12,7 @@ const ROUTES = [
   ["Discover", [["overview", "Overview"], ["markets", "Opportunity Radar"], ["flows", "Capital Flows"], ["map", "Market Map"]]],
   ["Qualify", [["thesis", "Fund Thesis"], ["pipeline", "Deal Pipeline"], ["company", "Company 360"]]],
   ["Decide", [["underwriting", "Underwriting"], ["decision", "Decision & IC Memo"]]],
+  ["Value creation", [["addons", "Add-on Screener"], ["exit", "Exit Readiness"]]],
 ];
 const TOKENS = ROUTES.flatMap(([, r]) => r.map(([k]) => k));
 
@@ -53,7 +55,7 @@ function App() {
   const m = helioMetrics(st);
   const fit = thesisFit(st.thesis, m, st);
   const props = { st, set, go, toast, fit, conn };
-  const Screen = { overview: Overview, markets: Markets, flows: Flows, map: MarketMap, thesis: Thesis, pipeline: Pipeline, company: Company, underwriting: Underwriting, decision: Decision }[route];
+  const Screen = { overview: Overview, markets: Markets, flows: Flows, map: MarketMap, thesis: Thesis, pipeline: Pipeline, company: Company, underwriting: Underwriting, decision: Decision, addons: AddonScreener, exit: ExitReadiness }[route];
   const exceptions = st.mode === "vc" ? (st.dataRoom && !st.nrrResolution ? 1 : 0) : st.qoeReviewed ? 0 : 1;
 
   const submitAsk = (q) => { const text = q || ask; if (!text.trim()) return; setReply({ q: text, ...answer(text, st) }); setAskOpen(false); };
