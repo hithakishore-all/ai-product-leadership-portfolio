@@ -25,7 +25,7 @@ Sellers spend only about 40% of their time selling, and 69% of B2B buyers double
 **GTM Orbit turns a ranked account into a cited, validated outreach brief in under a minute, and the seller stays in control.**
 
 - 🔍 **Discover:** finds the buying group, flags missing roles, and never uses opted-out contacts
-- 📚 **Research:** pulls only facts with a source and a date from Salesforce, gong call transcripts and product signals
+- 📚 **Research:** pulls only facts with a source and a date from Salesforce, gong call(transcripts,trackers,insights etc) and product signals
 - ✍️ **Compose:** writes the first email, mapping every claim to its evidence
 - 🛡️ **Validate:** rejects made-up claims ("Series C", "three new regions") and sends the draft back to be rewritten
 - ✅ **Human approval:** only the account owner can approve, and nothing is ever sent automatically
@@ -34,6 +34,6 @@ Sellers spend only about 40% of their time selling, and 69% of B2B buyers double
 - 💬 **Where sellers work:** the same flow runs in a web console and in Slack (`/orbit brief northstar`)
 - 🔐 **Governed by design:** agents read one governed view; the app logs in as a key-pair service user with least-privilege access
 
-**Stack:** Salesforce · Snowflake (agents run in the warehouse) · Slack Bolt · Node.js · runs offline in 2 minutes, no accounts needed
+**Stack:** Salesforce · Snowflake (agents run in the warehouse) · Slack Bot · Node.js · runs offline in 2 minutes, no accounts needed
 
 ▶️ **Watch the demo:** [Loom walkthrough](YOUR-LOOM-LINK)
