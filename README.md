@@ -16,7 +16,7 @@
 
 **Stack:** PostgreSQL · FastAPI · React (one self-contained HTML file) · Claude research agent with web search · open the HTML file to try it, no install needed
 
-▶️ **Watch the demo:** [Loom walkthrough](YOUR-LOOM-LINK)
+▶️ **Watch the demo:** (https://www.loom.com/share/427af746c17e42399474bbfe055c6cf6)
 
  ## GTM Orbit - Every account has a next move. Orbit helps you find it.
 
