@@ -36,4 +36,4 @@ Sellers spend only about 40% of their time selling, and 69% of B2B buyers double
 
 **Stack:** Salesforce · Snowflake (agents run in the warehouse) · Slack Bot · Node.js · runs offline in 2 minutes, no accounts needed
 
-▶️ **Watch the demo:** [Loom walkthrough](YOUR-LOOM-LINK)
+▶️ **Watch the demo:** (https://www.loom.com/share/7c63280e62d94164bc1f6162bdc25c4c)
