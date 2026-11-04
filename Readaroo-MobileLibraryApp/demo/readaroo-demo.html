@@ -1,0 +1,2386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Readaroo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Readaroo demo: a family library app prototype. All data is synthetic.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Baloo+2:wght@600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: one phone-width app column. On phones a bottom tab bar holds the main sections;
+   on wide screens a top nav and a demo-guide panel sit beside the app.
+   Light, playful palette: a dotted sky-wash ground, grape for actions, sunshine for kid moments,
+   mint for good news, coral for warnings. Light theme only, by design. */
+:root {
+  color-scheme: light;
+  --bg: #F2F7FF;
+  --dot: #DCE8FA;
+  --surface: #FFFFFF;
+  --sunk: #EEF3FB;
+  --ink: #1D2A44;
+  --muted: #56627A;
+  --line: #DCE5F2;
+  --accent: #5B3FE0;          /* grape */
+  --accent-deep: #4029B8;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #EEEAFE;
+  --sun: #FFC93C;             /* sunshine */
+  --sun-deep: #E5A800;
+  --sun-ink: #5C3E00;
+  --sun-soft: #FFF4D1;
+  --mint: #19A47A;
+  --mint-soft: #DDF6EC;
+  --good: #0E7552;
+  --sky: #49A8FF;
+  --sky-soft: #E3F2FF;
+  --sky-ink: #0B5394;
+  --coral: #FF6F61;
+  --coral-soft: #FFE6E2;
+  --bad: #B42318;
+  --warn: #8A4B00;
+  --warn-soft: #FFF0DB;
+  --font-display: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --radius: 20px;
+  --lift: 0 3px 0 var(--line);
+  --bounce: cubic-bezier(.34, 1.56, .64, 1);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(var(--dot) 1.3px, transparent 1.5px) 0 0 / 22px 22px, var(--bg);
+  color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 12px 40px;
+  -webkit-tap-highlight-color: transparent;
+}
+@media (display-mode: standalone) { body { padding-top: max(12px, env(safe-area-inset-top, 0px)); } }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; margin: 0; text-wrap: balance; }
+h1 { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 1.3rem; font-weight: 800; }
+h3 { font-size: 1.1rem; font-weight: 700; }
+p { margin: 0; }
+button, select, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; border-radius: 10px; }
+.mono { font-family: var(--font-mono); font-size: 0.78rem; overflow-wrap: anywhere; }
+.muted { color: var(--muted); }
+.small { font-size: 0.875rem; }
+.accent { color: var(--accent); font-weight: 700; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- frame ---------- */
+.shell { display: flex; gap: 24px; align-items: flex-start; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+.app { flex: 1 1 360px; max-width: 500px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+.guide { flex: 0 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+@media (max-width: 899px) { .guide.side { display: none; } }
+@media (min-width: 900px) { .nav-guide { display: none !important; } }
+
+.topbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; max-width: 904px; margin-inline: auto; }
+.brand { font-family: var(--font-display); font-weight: 800; font-size: 1.7rem; color: var(--accent); letter-spacing: -0.02em; display: flex; align-items: center; gap: 6px; }
+.brand .roo { width: 42px; height: 42px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; background: var(--sunk); color: var(--muted); }
+.chip.demo { background: var(--sun-soft); color: var(--sun-ink); }
+.actor { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 0.875rem; font-weight: 700; color: var(--muted); }
+.actor select { min-height: 44px; border-radius: 14px; border: 2px solid var(--line); background: var(--surface); padding: 0 10px; font-weight: 700; color: var(--ink); }
+#install { min-height: 40px; }
+
+/* ---------- building blocks ---------- */
+.card { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: var(--lift); }
+.section { display: flex; flex-direction: column; gap: 10px; }
+.row { display: flex; gap: 12px; align-items: center; }
+.row > .grow, .grow { flex: 1; min-width: 0; }
+.list { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.list.compact { gap: 8px; }
+.list.compact li { gap: 8px; flex-wrap: wrap; font-size: 0.92rem; }
+.item { display: flex; gap: 14px; align-items: center; background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius); padding: 12px 14px; text-align: left; width: 100%; box-shadow: var(--lift); }
+button.item:hover { border-color: var(--accent); }
+.cover { width: 48px; height: 68px; border-radius: 6px 10px 10px 6px; flex: none; color: #fff; font-size: 0.55rem; font-weight: 700; padding: 6px; line-height: 1.1; overflow: hidden; box-shadow: inset 4px 0 0 rgba(0,0,0,.18), 0 3px 6px rgba(29,42,68,.15); }
+.cover.big { width: 104px; height: 148px; font-size: 0.8rem; padding: 12px; }
+.title { font-weight: 700; }
+.linkish { background: none; border: none; padding: 0; text-align: left; color: var(--ink); font-weight: 700; text-decoration: underline; text-decoration-color: var(--line); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.linkish:hover { text-decoration-color: var(--accent); }
+
+.btn { min-height: 46px; padding: 0 18px; border-radius: 999px; border: 2px solid transparent; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 4px 0 var(--accent-deep); }
+.btn.sun { background: var(--sun); color: #3A2A00; box-shadow: 0 4px 0 var(--sun-deep); }
+.btn.ghost { background: var(--surface); border-color: var(--line); color: var(--ink); box-shadow: 0 3px 0 var(--line); }
+.btn.quiet { background: transparent; color: var(--accent); padding: 0 6px; }
+.btn.small { min-height: 38px; padding: 0 14px; font-size: 0.875rem; }
+.btn.back { align-self: flex-start; }
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--line); }
+.btn.primary:active { box-shadow: 0 1px 0 var(--accent-deep); }
+.btn.sun:active { box-shadow: 0 1px 0 var(--sun-deep); }
+.btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; }
+.pill.ok { background: var(--mint-soft); color: var(--good); }
+.pill.wait { background: var(--sunk); color: var(--muted); }
+.pill.check { background: var(--warn-soft); color: var(--warn); }
+.pill.bad { background: var(--coral-soft); color: var(--bad); }
+.pill.kid { background: var(--sun-soft); color: var(--sun-ink); }
+.pill.sky { background: var(--sky-soft); color: var(--sky-ink); }
+
+.notice { border-radius: var(--radius); padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; border: 2px solid transparent; }
+.notice.sun { background: var(--sun-soft); color: var(--sun-ink); border-color: #FBE3A0; }
+.notice.warn { background: var(--warn-soft); color: var(--warn); border-color: #F8D9B0; }
+.notice.ok { background: var(--mint-soft); color: var(--good); border-color: #BDEBD7; }
+.notice.bad { background: var(--coral-soft); color: var(--bad); border-color: #FBCAC3; }
+button.notice { text-align: left; width: 100%; }
+
+.nextup { background: var(--sky-soft); color: var(--ink); border: 2px solid #BFE0FF; border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+.nextup .eyebrow { align-self: flex-start; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; background: var(--sun); color: #3A2A00; border-radius: 999px; padding: 2px 10px; }
+
+.avail { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.avail td { padding: 8px 4px; border-top: 2px solid var(--sunk); vertical-align: top; }
+.avail td:last-child { text-align: right; }
+
+.members { display: flex; gap: 14px; flex-wrap: wrap; }
+.member { display: flex; flex-direction: column; align-items: center; gap: 4px; background: none; border: none; padding: 0; font-size: 0.82rem; font-weight: 700; }
+.avatar { width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; background: var(--accent-soft); color: var(--accent); border: 3px solid var(--surface); box-shadow: 0 3px 0 var(--line); }
+.members .member:nth-child(2) .avatar, .avatar.kid { background: var(--sun-soft); color: var(--sun-ink); }
+.members .member:nth-child(3) .avatar { background: var(--mint-soft); color: var(--good); }
+.members .member:nth-child(4) .avatar { background: var(--sky-soft); color: var(--sky-ink); }
+.streak-chip { font-size: 0.7rem; font-weight: 700; color: var(--sun-ink); background: var(--sun-soft); border-radius: 999px; padding: 1px 8px; }
+.streak-chip.zero { color: var(--muted); background: var(--sunk); }
+
+.bar { height: 12px; border-radius: 6px; background: var(--sunk); overflow: hidden; }
+.bar > span { display: block; height: 100%; background: var(--mint); border-radius: 6px; }
+.bar.full > span { background: var(--coral); }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.stat { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius); padding: 12px; box-shadow: var(--lift); }
+.stat b { font-family: var(--font-display); font-size: 1.6rem; display: block; font-variant-numeric: tabular-nums; color: var(--accent); }
+
+.nav { display: flex; gap: 6px; flex-wrap: wrap; }
+.nav button { min-height: 42px; border-radius: 999px; border: 2px solid var(--line); background: var(--surface); padding: 0 14px; font-weight: 700; font-size: 0.875rem; }
+.nav button[aria-current="page"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+/* ---------- mascot and hero ---------- */
+.hero { display: flex; align-items: flex-end; gap: 10px; }
+.hero .roo { width: 110px; height: 110px; flex: none; }
+.bubble { position: relative; background: var(--surface); border: 2px solid var(--line); border-radius: 22px; padding: 14px 16px; box-shadow: var(--lift); flex: 1; min-width: 0; margin-bottom: 26px; }
+.bubble::before { content: ""; position: absolute; left: -11px; bottom: 18px; width: 18px; height: 18px; background: var(--surface); border-left: 2px solid var(--line); border-bottom: 2px solid var(--line); transform: rotate(45deg); }
+.bubble h1 { font-size: 1.7rem; }
+.roo-empty { display: flex; align-items: center; gap: 12px; }
+.roo-empty .roo { width: 64px; height: 64px; flex: none; }
+
+/* ---------- streaks ---------- */
+.streak { gap: 12px; }
+.streak.big { border-color: var(--sun); box-shadow: 0 4px 0 var(--sun-deep); }
+.streak-num { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 80px; height: 80px; border-radius: 50%; background: var(--sun); color: #3A2A00; flex: none; }
+.streak-num b { font-family: var(--font-display); font-size: 2.1rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.streak-num span { font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
+.dots { display: grid; grid-template-columns: repeat(14, minmax(0, 1fr)); gap: 5px; }
+.dot { display: inline-block; aspect-ratio: 1; width: 100%; max-width: 24px; border-radius: 50%; background: var(--sunk); }
+.legend .dot { width: 12px; height: 12px; vertical-align: -2px; margin-left: 6px; }
+.dot.on { background: var(--sun); }
+.dot.rest { background: transparent; border: 2px dashed var(--sun-deep); }
+.dot.today { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- reader ---------- */
+.reader .title { font-family: var(--font-display); font-size: 1.4rem; }
+.reader .bar { height: 16px; border-radius: 8px; position: relative; overflow: visible; }
+.reader .bar > span { border-radius: 8px; position: relative; }
+.reader .bar > span::after { content: ""; position: absolute; right: -12px; top: -9px; width: 26px; height: 26px; border-radius: 50%; background: var(--sun) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 7h5a2 2 0 0 1 1 .3A2 2 0 0 1 13 7h5v10h-5a2 2 0 0 0-1 .3 2 2 0 0 0-1-.3H6z' fill='none' stroke='%233A2A00' stroke-width='1.8' stroke-linejoin='round'/%3E%3C/svg%3E") center / 18px no-repeat; border: 2px solid var(--surface); box-shadow: 0 2px 4px rgba(29,42,68,.2); }
+details summary { cursor: pointer; color: var(--accent); font-weight: 700; margin-top: 8px; min-height: 36px; display: flex; align-items: center; }
+
+/* ---------- events ---------- */
+.attendees { border: 2px solid var(--line); border-radius: 16px; padding: 8px 12px; display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 0; }
+.attendees legend { padding: 0 4px; }
+.check { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; }
+.check input { width: 22px; height: 22px; accent-color: var(--accent); }
+
+/* ---------- payments ---------- */
+.flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; align-items: stretch; }
+.flow .step { background: var(--sunk); border-radius: 16px; padding: 10px; font-size: 0.82rem; display: flex; flex-direction: column; gap: 4px; position: relative; }
+.flow .step b { font-family: var(--font-display); font-size: 1rem; color: var(--accent); }
+.flow .step + .step::before { content: "\2192"; position: absolute; left: -9px; top: 50%; transform: translate(-50%, -50%); color: var(--accent); font-weight: 800; }
+.invoice { width: 100%; border-collapse: collapse; font-size: 0.875rem; font-variant-numeric: tabular-nums; }
+.invoice th, .invoice td { text-align: left; padding: 6px 4px; border-top: 2px solid var(--sunk); }
+.invoice td:last-child, .invoice th:last-child { text-align: right; }
+.invoice tfoot td { font-weight: 800; }
+@media (max-width: 420px) { .flow { grid-template-columns: 1fr; } .flow .step + .step::before { content: "\2193"; left: 50%; top: -6px; } }
+
+/* ---------- guide panel ---------- */
+.record { display: flex; flex-direction: column; gap: 4px; padding: 10px 0; border-top: 2px solid var(--sunk); }
+.record:first-of-type { border-top: none; }
+.record .rid { font-family: var(--font-mono); font-weight: 600; color: var(--accent); }
+.log { font-size: 0.8rem; display: flex; flex-direction: column; gap: 6px; max-height: 360px; overflow: auto; }
+.log div { display: flex; gap: 8px; }
+.log .type { font-family: var(--font-mono); color: var(--accent); flex: none; }
+.more-list .item svg { width: 28px; height: 28px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* ---------- toast, search, footer ---------- */
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); max-width: min(440px, calc(100% - 32px)); background: var(--ink); color: #fff; padding: 13px 18px; border-radius: 18px; font-size: 0.92rem; z-index: 40; box-shadow: 0 10px 30px rgba(29,42,68,.25); }
+.reactions { display: flex; gap: 6px; flex-wrap: wrap; }
+.search { display: flex; gap: 8px; }
+.search input { flex: 1; min-width: 0; min-height: 48px; border-radius: 999px; border: 2px solid var(--line); background: var(--surface); padding: 0 18px; }
+footer { font-size: 0.75rem; color: var(--muted); text-align: center; }
+.confetti { position: fixed; inset: 0; pointer-events: none; z-index: 60; width: 100%; height: 100%; }
+
+/* ---------- bottom tab bar (phones) ---------- */
+.tabbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: none; background: rgba(255, 255, 255, 0.97); border-top: 2px solid var(--line);
+  padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px)); }
+.tabbar ul { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; list-style: none; margin: 0 auto; padding: 0; max-width: 520px; }
+.tab { width: 100%; min-height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border: none; background: none; color: var(--muted); font-size: 0.72rem; font-weight: 700; border-radius: 16px; position: relative; }
+.tab svg { width: 26px; height: 26px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.tab[aria-current="page"] { color: var(--accent); background: var(--accent-soft); }
+.tab .badge { position: absolute; top: 4px; right: calc(50% - 24px); min-width: 20px; height: 20px; border-radius: 10px; background: var(--bad); color: #fff; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; padding: 0 5px; }
+@media (max-width: 719px) {
+  .tabbar { display: block; }
+  .topnav { display: none !important; }
+  body { padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px)); }
+  .toast { bottom: calc(92px + env(safe-area-inset-bottom, 0px)); }
+  h1 { font-size: 1.7rem; }
+}
+
+/* ---------- kid mode: bigger, sunnier ---------- */
+body.kid { font-size: 17px; }
+body.kid .btn { min-height: 50px; font-size: 1rem; }
+body.kid .btn.small { min-height: 42px; }
+body.kid .item, body.kid .card { border-radius: 24px; }
+body.kid .tab[aria-current="page"] { color: var(--sun-ink); background: var(--sun-soft); }
+
+/* ---------- motion (off when people ask for less) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .btn, .tab, .nav button { transition: transform 120ms ease, box-shadow 120ms ease, background-color 160ms ease; }
+  .btn:hover:not(:active) { transform: translateY(-1px); }
+  .item, .card { transition: transform 180ms var(--bounce), border-color 160ms ease; }
+  button.item:hover, .list > li > .item:hover { transform: translateY(-2px); }
+  .cover { transition: transform 240ms var(--bounce); }
+  .item:hover .cover { transform: rotate(-5deg) scale(1.06); }
+  .member .avatar { transition: transform 240ms var(--bounce); }
+  .member:hover .avatar { transform: translateY(-4px) rotate(-6deg); }
+  .bar > span { transition: width 700ms var(--bounce); }
+
+  .enter > * { animation: rise 460ms var(--bounce) both; }
+  .enter > .topnav { animation: none; }
+  .enter > *:nth-child(2) { animation-delay: 50ms; }
+  .enter > *:nth-child(3) { animation-delay: 100ms; }
+  .enter > *:nth-child(4) { animation-delay: 150ms; }
+  .enter > *:nth-child(5) { animation-delay: 200ms; }
+  .enter > *:nth-child(6) { animation-delay: 250ms; }
+  .enter > *:nth-child(n+7) { animation-delay: 300ms; }
+  .enter .list > li { animation: rise 420ms var(--bounce) both; }
+  .enter .list > li:nth-child(2) { animation-delay: 70ms; }
+  .enter .list > li:nth-child(3) { animation-delay: 140ms; }
+  .enter .list > li:nth-child(n+4) { animation-delay: 200ms; }
+
+  .roo.hop { animation: hop 2.6s ease-in-out infinite; transform-origin: 50% 100%; }
+  .roo .ear-l { animation: wiggle 3.2s ease-in-out infinite; transform-origin: 50px 30px; }
+  .brand .roo { animation: none; }
+  .streak-num { animation: glow 2.6s ease-in-out infinite; }
+  .dots .dot { animation: pop 380ms var(--bounce) both; animation-delay: calc(var(--d, 0) * 35ms); }
+  .tab[aria-current="page"] svg { animation: tabpop 420ms var(--bounce); }
+  .nextup .eyebrow { animation: tabpop 600ms var(--bounce) 300ms both; }
+  .toast { animation: toastpop 380ms var(--bounce); }
+}
+@keyframes rise { from { opacity: 0; transform: translateY(16px) scale(.98); } }
+@keyframes hop {
+  0%, 55%, 100% { transform: translateY(0) scale(1, 1); }
+  62% { transform: translateY(0) scale(1.04, .94); }
+  74% { transform: translateY(-16px) scale(.97, 1.04); }
+  86% { transform: translateY(0) scale(1.03, .96); }
+  92% { transform: translateY(0) scale(1, 1); }
+}
+@keyframes wiggle { 0%, 80%, 100% { transform: rotate(0); } 85% { transform: rotate(-10deg); } 90% { transform: rotate(6deg); } }
+@keyframes pop { from { transform: scale(0); } }
+@keyframes glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 201, 60, 0); } 50% { box-shadow: 0 0 0 10px rgba(255, 201, 60, .28); } }
+@keyframes toastpop { from { transform: translate(-50%, 18px) scale(.9); opacity: 0; } }
+@keyframes tabpop { 40% { transform: translateY(-5px) scale(1.18); } }
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand" id="brand">Readaroo</div>
+  <span class="chip demo">Synthetic demo</span>
+  <button type="button" class="btn ghost small" id="install" hidden>Install app</button>
+  <label class="actor" for="actor">Acting as <select id="actor"></select></label>
+</header>
+<div class="shell">
+  <main class="app" id="main" aria-live="polite"><p class="muted">Loading…</p></main>
+  <aside class="guide side" id="guide" aria-label="Demo guide"></aside>
+</div>
+<nav class="tabbar" id="tabbar" aria-label="Main"></nav>
+<div class="toast" id="toast" role="status" hidden></div>
+<script>
+/*
+ * Readaroo engine: every product rule lives here.
+ * Works in Node (require) and in the browser (window.ReadarooEngine), so the
+ * server, the tests and the offline HTML demo all run the same code.
+ *
+ * createEngine({ store, meter }) returns { handle(method, path, body, query) }.
+ *   store  an object with the async methods listed in docs/ARCHITECTURE.md
+ *   meter  async ({ libraryId, customerId, valueCents, idempotencyKey }) => { id, mode }
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.ReadarooEngine = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+
+  class HttpError extends Error {
+    constructor(status, message, extra) {
+      super(message);
+      this.status = status;
+      this.extra = extra || {};
+    }
+  }
+
+  const DAY_MS = 86400000;
+
+  function createEngine({ store, meter }) {
+    let counter = 0;
+    const newId = (prefix) => `${prefix}-${Date.now().toString(36)}${(++counter).toString(36)}`;
+
+    async function cfg() {
+      const c = await store.getConfig();
+      return {
+        now: c.now,
+        nowMs: Date.parse(c.now),
+        today: c.now.slice(0, 10),
+        threshold: Number(c.instantWaitThresholdDays),
+        staleHours: Number(c.staleHours),
+        daysPerTurn: Number(c.daysPerQueueTurn),
+        streakMin: Number(c.streakMinMinutes || 5),
+        weeklyGoal: Number(c.weeklyGoalDays || 5),
+        secondsPerMinute: Number(c.readingSecondsPerMinute || 60),
+        newArrivalDays: Number(c.newArrivalDays || 30),
+      };
+    }
+
+    const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    function prettyDate(iso) {
+      return `${MONTHS[Number(iso.slice(5, 7)) - 1]} ${Number(iso.slice(8, 10))}`;
+    }
+    function dayShift(day, n) {
+      return new Date(Date.parse(`${day}T00:00:00Z`) + n * DAY_MS).toISOString().slice(0, 10);
+    }
+
+    // ---------- helpers ----------
+    function levelKnown(t) {
+      return t.minAge !== null && t.minAge !== undefined && t.maxAge !== null && t.maxAge !== undefined;
+    }
+    function inBand(member, t) {
+      if (member.role === 'parent') return true;
+      if (!levelKnown(t)) return false;
+      return t.minAge <= member.bandMax && t.maxAge >= member.bandMin;
+    }
+    function levelLabel(t) {
+      if (!levelKnown(t)) return 'Level unknown';
+      if (t.minAge >= 18) return 'Adult';
+      return `Ages ${t.minAge}–${t.maxAge}`;
+    }
+    function isFresh(copy, c) {
+      return c.nowMs - Date.parse(copy.asOf) <= c.staleHours * 3600000;
+    }
+    function waitDays(owned, position, c) {
+      if (owned <= 0) return null;
+      return Math.ceil(position / owned) * c.daysPerTurn;
+    }
+    // Wait for an existing hold; for an unreleased title, count from release day using copies on order
+    function holdWaitDays(t, cp, position, c) {
+      if (t.releaseDate && t.releaseDate > c.today) {
+        if (!cp.onOrder) return null;
+        const until = Math.round((Date.parse(t.releaseDate) - Date.parse(c.today)) / DAY_MS);
+        return until + Math.ceil(position / cp.onOrder) * c.daysPerTurn;
+      }
+      return waitDays(cp.owned, position, c);
+    }
+    function waitLabel(days) {
+      if (days === null) return 'Not owned';
+      if (days <= 7) return 'About a week';
+      const lo = Math.max(1, Math.round((days * 0.6) / 7));
+      const hi = Math.max(lo + 1, Math.round(days / 7));
+      return `${lo}–${hi} weeks`;
+    }
+    function familyLibraryIds(fam) {
+      return fam.cards.map((c) => c.libraryId);
+    }
+    async function loadFamilyFor(actorId) {
+      if (!actorId || typeof actorId !== 'string') throw new HttpError(400, 'Missing "actor": the member making the request.');
+      const actor = await store.getMember(actorId);
+      if (!actor) throw new HttpError(404, `No family member with id "${actorId}".`);
+      const fam = await store.getFamily(actor.familyId);
+      return { actor, fam };
+    }
+    function memberIn(fam, memberId) {
+      const m = fam.members.find((x) => x.id === memberId);
+      if (!m) throw new HttpError(404, `No member "${memberId}" in this family.`);
+      return m;
+    }
+    function assertCanActFor(actor, member) {
+      if (actor.role === 'parent') return;
+      if (actor.id !== member.id) throw new HttpError(403, 'Kids can only borrow or place holds for themselves.');
+    }
+    async function title(id) {
+      if (!id || typeof id !== 'string') throw new HttpError(400, 'Missing "titleId".');
+      const t = await store.getTitle(id);
+      if (!t) throw new HttpError(404, `No title "${id}".`);
+      return t;
+    }
+    async function log(familyId, actor, type, data) {
+      const c = await cfg();
+      await store.addEvent({ id: newId('evt'), familyId, actor, type, data: data || {}, at: c.now });
+    }
+
+    // Availability for one title across the family's libraries
+    async function availability(t, fam, c) {
+      const libs = familyLibraryIds(fam);
+      const copies = (await store.listCopies(t.id)).filter((cp) => libs.includes(cp.libraryId));
+      const libraries = await store.listLibraries();
+      const unreleased = t.releaseDate && t.releaseDate > c.today;
+      return copies.map((cp) => {
+        const lib = libraries.find((l) => l.id === cp.libraryId);
+        if (unreleased) {
+          const untilRelease = Math.max(0, Math.round((Date.parse(t.releaseDate) - Date.parse(c.today)) / DAY_MS));
+          const days = cp.onOrder > 0 ? untilRelease + Math.ceil((cp.queue + 1) / cp.onOrder) * c.daysPerTurn : null;
+          return {
+            libraryId: cp.libraryId, libraryName: lib ? lib.name : cp.libraryId, owned: cp.owned, onOrder: cp.onOrder || 0,
+            available: 0, status: 'coming', statusLabel: `Out ${prettyDate(t.releaseDate)}`, asOf: cp.asOf,
+            newHoldWaitDays: days, newHoldWaitLabel: days === null ? 'Not ordered' : `${waitLabel(days - untilRelease)} after ${prettyDate(t.releaseDate)}`,
+            ppuCents: null,
+          };
+        }
+        const fresh = isFresh(cp, c);
+        const days = waitDays(cp.owned, cp.queue + 1, c);
+        return {
+          libraryId: cp.libraryId,
+          libraryName: lib ? lib.name : cp.libraryId,
+          owned: cp.owned,
+          onOrder: cp.onOrder || 0,
+          available: fresh ? cp.available : null,
+          status: !fresh ? 'check' : cp.available > 0 ? 'available' : 'waitlist',
+          statusLabel: !fresh ? 'Check availability' : cp.available > 0 ? 'Available now' : `${cp.queue} waiting`,
+          asOf: cp.asOf,
+          newHoldWaitDays: cp.available > 0 && fresh ? 0 : days,
+          newHoldWaitLabel: cp.available > 0 && fresh ? 'Now' : waitLabel(days),
+          ppuCents: cp.ppuCents,
+        };
+      });
+    }
+
+    async function activeBorrow(memberId, titleId) {
+      return (await store.listBorrows()).find((b) => b.memberId === memberId && b.titleId === titleId && !b.finishedAt) || null;
+    }
+    async function assertNotAlreadyBorrowed(member, t) {
+      if (await activeBorrow(member.id, t.id)) {
+        throw new HttpError(409, `${member.name} already has ${t.title} checked out.`, { code: 'already_borrowed' });
+      }
+    }
+
+    async function borrowedTitleIds(memberId) {
+      const bs = await store.listBorrows();
+      return new Set(bs.filter((b) => b.memberId === memberId).map((b) => b.titleId));
+    }
+
+    // ---------- Next-Up ----------
+    async function nextUp(held, member, fam, c) {
+      const read = await borrowedTitleIds(member.id);
+      const all = await store.listTitles();
+      const scored = [];
+      const excluded = [];
+      for (const t of all) {
+        if (t.id === held.id || read.has(t.id)) continue;
+        if (!levelKnown(t)) { excluded.push({ titleId: t.id, title: t.title, reason: 'Reading level unknown' }); continue; }
+        if (!inBand(member, t)) continue;
+        if (member.role === 'parent' && t.minAge < 18 && held.minAge >= 18) continue;
+        const av = await availability(t, fam, c);
+        const ready = av.filter((a) => a.status === 'available');
+        if (!ready.length) {
+          if (av.some((a) => a.status === 'check')) excluded.push({ titleId: t.id, title: t.title, reason: 'Availability out of date' });
+          continue;
+        }
+        const reasons = [];
+        let score = 0;
+        if (held.series && t.series === held.series) { score += 3; reasons.push('same series'); }
+        if (t.author === held.author) { score += 2; reasons.push(`also by ${t.author}`); }
+        const shared = (t.themes || []).filter((x) => (held.themes || []).includes(x));
+        if (shared.length) { score += shared.length; reasons.push(shared.join(', ')); }
+        if (!score) continue;
+        scored.push({
+          titleId: t.id, title: t.title, author: t.author, color: t.color, level: levelLabel(t), score,
+          why: reasons.join(' · '),
+          libraryId: ready[0].libraryId, libraryName: ready[0].libraryName,
+        });
+      }
+      scored.sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
+      return { suggestions: scored.slice(0, 3), excluded };
+    }
+
+    // ---------- views ----------
+    async function titleDetail(q) {
+      const { actor, fam } = await loadFamilyFor(q.actor);
+      const member = memberIn(fam, q.member || q.actor);
+      const t = await title(q.id);
+      const c = await cfg();
+      const av = await availability(t, fam, c);
+      const holds = (await store.listHolds()).filter((h) => h.memberId === member.id && h.titleId === t.id && h.status === 'waiting');
+      const hold = holds[0] || null;
+      const anyAvailable = av.some((a) => a.status === 'available');
+      let instant = instantEligibility(t, av, c);
+      if (instant.eligible) {
+        const lib = await store.getLibrary(instant.libraryId);
+        const today = lib.spentDay === c.now.slice(0, 10) ? lib.spentTodayCents : 0;
+        if (today + instant.priceCents > lib.dailyCapCents || lib.spentMonthCents + instant.priceCents > lib.monthlyCapCents) {
+          instant = { eligible: false, capReached: true, reason: `${lib.name}'s instant-borrow budget is used up for now, so we won't offer one. Place a hold or pick a Next-Up book.` };
+        }
+      }
+      const pending = (await store.listApprovals()).find((a) => a.memberId === member.id && a.titleId === t.id && a.status === 'pending');
+      const active = await activeBorrow(member.id, t.id);
+      let next = null;
+      if (!anyAvailable && !active) next = await nextUp(t, member, fam, c);
+      let holdInfo = null;
+      if (hold) {
+        const cp = (await store.listCopies(t.id)).find((x) => x.libraryId === hold.libraryId);
+        const days = holdWaitDays(t, cp, hold.position, c);
+        const lib = await store.getLibrary(hold.libraryId);
+        holdInfo = { id: hold.id, libraryName: lib.name, position: hold.position, waitDays: days, waitLabel: waitLabel(days) };
+      }
+      return {
+        title: { ...t, level: levelLabel(t), levelKnown: levelKnown(t) },
+        member: { id: member.id, name: member.name, role: member.role },
+        inBand: inBand(member, t),
+        needsApproval: member.role === 'kid' && actor.role !== 'parent' && !inBand(member, t),
+        pendingApprovalId: pending ? pending.id : null,
+        borrowed: active ? { id: active.id, kind: active.kind } : null,
+        onList: (await store.listTbr()).some((x) => x.memberId === member.id && x.titleId === t.id),
+        followingSeries: Boolean(t.series) && (await store.listFollows()).some((f) => f.memberId === member.id && f.kind === 'series' && f.value === t.series),
+        availability: av,
+        hold: holdInfo,
+        instant,
+        nextUp: next,
+      };
+    }
+
+    function instantEligibility(t, av, c) {
+      if (!t.seriesNo || t.seriesNo < 2) return { eligible: false, reason: 'Instant borrows are for series continuations only.' };
+      const anyReady = av.some((a) => a.status === 'available');
+      if (anyReady) return { eligible: false, reason: 'A copy is available now.' };
+      const rights = av.filter((a) => a.ppuCents !== null && a.ppuCents !== undefined);
+      if (!rights.length) return { eligible: false, reason: 'No pay-per-use rights for this title at your libraries.' };
+      const best = rights.slice().sort((a, b) => (a.newHoldWaitDays || 0) - (b.newHoldWaitDays || 0))[0];
+      if ((best.newHoldWaitDays || 0) < c.threshold) return { eligible: false, reason: `Wait is under ${c.threshold} days.` };
+      return { eligible: true, libraryId: best.libraryId, libraryName: best.libraryName, priceCents: best.ppuCents, waitLabel: best.newHoldWaitLabel };
+    }
+
+    async function home(q) {
+      const { fam } = await loadFamilyFor(q.actor);
+      const c = await cfg();
+      const titles = await store.listTitles();
+      const tById = Object.fromEntries(titles.map((t) => [t.id, t]));
+      const borrows = (await store.listBorrows()).filter((b) => b.familyId === fam.id);
+      const holds = (await store.listHolds()).filter((h) => h.familyId === fam.id && h.status === 'waiting');
+      const approvals = (await store.listApprovals()).filter((a) => a.familyId === fam.id);
+      const libraries = await store.listLibraries();
+      const holdRows = [];
+      for (const h of holds) {
+        const cp = (await store.listCopies(h.titleId)).find((x) => x.libraryId === h.libraryId);
+        const days = holdWaitDays(tById[h.titleId], cp, h.position, c);
+        holdRows.push({
+          id: h.id, memberId: h.memberId, titleId: h.titleId, title: tById[h.titleId].title, color: tById[h.titleId].color,
+          libraryName: (libraries.find((l) => l.id === h.libraryId) || {}).name, position: h.position, waitLabel: waitLabel(days),
+        });
+      }
+      return {
+        now: c.now,
+        family: { id: fam.id, name: fam.name },
+        members: fam.members,
+        cards: fam.cards.map((cd) => ({ ...cd, libraryName: (libraries.find((l) => l.id === cd.libraryId) || {}).name })),
+        reading: borrows.filter((b) => !b.finishedAt).map((b) => ({
+          id: b.id, memberId: b.memberId, titleId: b.titleId, title: tById[b.titleId].title, color: tById[b.titleId].color, kind: b.kind,
+          currentPage: b.currentPage || 0, pages: tById[b.titleId].pages, pct: Math.round(((b.currentPage || 0) / tById[b.titleId].pages) * 100),
+          lastReadAt: b.lastReadAt,
+        })),
+        streaks: await Promise.all(fam.members.map(async (m) => {
+          const s = await streakFor(m, c);
+          return { memberId: m.id, current: s.current, readToday: s.readToday, minutesNeeded: s.minutesNeeded, weekDays: s.weekDays, weeklyGoal: s.weeklyGoal, message: s.message };
+        })),
+        listReady: await listReadyCounts(fam, c),
+        meetupRequests: await meetupRequests(fam),
+        nextMeetup: await nextMeetupFor(fam, c),
+        holds: holdRows,
+        pendingApprovals: approvals.filter((a) => a.status === 'pending').map((a) => ({
+          id: a.id, memberId: a.memberId, titleId: a.titleId, title: tById[a.titleId].title, reason: a.reason, requestedAt: a.requestedAt,
+        })),
+      };
+    }
+
+    async function listReadyCounts(fam, c) {
+      const out = {};
+      const tbr = await store.listTbr();
+      for (const m of fam.members) {
+        let n = 0;
+        for (const x of tbr.filter((y) => y.memberId === m.id)) {
+          const t = await store.getTitle(x.titleId);
+          if ((await availability(t, fam, c)).some((a) => a.status === 'available')) n++;
+        }
+        out[m.id] = n;
+      }
+      return out;
+    }
+    async function meetupRequests(fam) {
+      const meets = Object.fromEntries((await store.listMeetups()).map((m) => [m.id, m]));
+      return (await store.listRsvps()).filter((r) => r.familyId === fam.id && r.status === 'requested')
+        .map((r) => ({ id: r.id, meetupId: r.meetupId, title: meets[r.meetupId].title, startsAt: meets[r.meetupId].startsAt, by: r.requestedBy }));
+    }
+    async function nextMeetupFor(fam, c) {
+      const links = await familyReadingLinks(fam);
+      const all = (await store.listMeetups()).filter((m) => Date.parse(m.startsAt) > c.nowMs);
+      const rows = [];
+      for (const m of all) rows.push(await meetupRow(m, fam, links, c, fam.members[0]));
+      const pick = rows.filter((r) => r.forYou && r.availability !== 'full').sort((a, b) => a.startsAt.localeCompare(b.startsAt))[0];
+      return pick ? { id: pick.id, title: pick.title, startsAt: pick.startsAt, venue: pick.venue, why: pick.why, seatsLeft: pick.seatsLeft } : null;
+    }
+
+    async function search(q) {
+      const { fam } = await loadFamilyFor(q.actor);
+      const member = memberIn(fam, q.member || q.actor);
+      const c = await cfg();
+      const term = String(q.q || '').trim().toLowerCase();
+      const titles = await store.listTitles();
+      const out = [];
+      for (const t of titles) {
+        if (term && !(`${t.title} ${t.author} ${t.series || ''}`.toLowerCase().includes(term))) continue;
+        if (member.role === 'kid' && levelKnown(t) && t.minAge >= 18) continue;
+        const av = await availability(t, fam, c);
+        out.push({
+          id: t.id, title: t.title, author: t.author, color: t.color, level: levelLabel(t), inBand: inBand(member, t),
+          status: av.some((a) => a.status === 'available') ? 'available' : av.some((a) => a.status === 'check') ? 'check' : 'waitlist',
+        });
+      }
+      return { member: member.id, results: out };
+    }
+
+    // ---------- actions ----------
+    async function requireApprovalIfNeeded(actor, member, t, fam) {
+      // A parent acting for their kid is the approver, so only kid-initiated requests are gated.
+      if (member.role !== 'kid' || actor.role === 'parent' || inBand(member, t)) return null;
+      const existing = (await store.listApprovals()).find((a) => a.memberId === member.id && a.titleId === t.id && a.status === 'approved');
+      if (existing) return null;
+      const pending = (await store.listApprovals()).find((a) => a.memberId === member.id && a.titleId === t.id && a.status === 'pending');
+      if (pending) return { outcome: 'approval_pending', approvalId: pending.id, message: `Waiting for a parent to approve ${t.title}.` };
+      const c = await cfg();
+      const reason = levelKnown(t)
+        ? `${levelLabel(t)} is outside ${member.name}'s band (${member.bandMin}–${member.bandMax}).`
+        : 'Reading level is unknown.';
+      const approval = {
+        id: newId('appr'), familyId: fam.id, memberId: member.id, titleId: t.id, reason, status: 'pending',
+        scope: null, requestedAt: c.now, decidedAt: null, decidedBy: null,
+      };
+      await store.addApproval(approval);
+      await log(fam.id, actor.id, 'approval.requested', { approvalId: approval.id, titleId: t.id, memberId: member.id, reason });
+      return { outcome: 'approval_required', approvalId: approval.id, message: `Asked a parent to approve ${t.title}. ${reason}` };
+    }
+
+    async function borrow(body) {
+      const { actor, fam } = await loadFamilyFor(body.actor);
+      const member = memberIn(fam, body.member || body.actor);
+      assertCanActFor(actor, member);
+      const t = await title(body.titleId);
+      const gate = await requireApprovalIfNeeded(actor, member, t, fam);
+      if (gate) return gate;
+      return doStandardBorrow(actor, member, t, fam, body.libraryId);
+    }
+
+    async function doStandardBorrow(actor, member, t, fam, preferredLibraryId) {
+      await assertNotAlreadyBorrowed(member, t);
+      const c = await cfg();
+      const av = await availability(t, fam, c);
+      const ready = av.filter((a) => a.status === 'available' && (!preferredLibraryId || a.libraryId === preferredLibraryId));
+      if (!ready.length) {
+        if (av.some((a) => a.status === 'check')) {
+          throw new HttpError(409, 'Availability is out of date. Refresh it from the library before borrowing.', { code: 'stale' });
+        }
+        throw new HttpError(409, `No copy of ${t.title} is available. Place a hold or pick a Next-Up book.`, { code: 'unavailable' });
+      }
+      const lib = ready[0];
+      const ok = await store.takeCopy(t.id, lib.libraryId);
+      if (!ok) throw new HttpError(409, 'That copy was just borrowed by someone else. Try again.', { code: 'race' });
+      const b = {
+        id: newId('borrow'), familyId: fam.id, memberId: member.id, titleId: t.id, libraryId: lib.libraryId,
+        kind: 'standard', borrowedAt: c.now, finishedAt: null, minutesRead: 0, costCents: 0,
+      };
+      await store.addBorrow(b);
+      await log(fam.id, actor.id, 'borrow.created', { borrowId: b.id, titleId: t.id, memberId: member.id, libraryId: lib.libraryId, kind: 'standard' });
+      return { outcome: 'borrowed', borrowId: b.id, message: `${member.name} borrowed ${t.title} from ${lib.libraryName}. Due in 21 days.` };
+    }
+
+    async function placeHold(actor, member, t, fam) {
+      const c = await cfg();
+      const existing = (await store.listHolds()).find((h) => h.memberId === member.id && h.titleId === t.id && h.status === 'waiting');
+      if (existing) {
+        const lib = await store.getLibrary(existing.libraryId);
+        return { outcome: 'already_on_hold', holdId: existing.id, libraryName: lib.name, position: existing.position, message: `Already on hold at ${lib.name}.` };
+      }
+      const av = (await availability(t, fam, c)).filter((a) => a.owned > 0 || a.onOrder > 0);
+      if (!av.length) throw new HttpError(409, `None of your libraries own ${t.title}.`, { code: 'not_owned' });
+      av.sort((a, b) => (a.newHoldWaitDays || 0) - (b.newHoldWaitDays || 0));
+      const best = av[0];
+      const position = await store.joinQueue(t.id, best.libraryId);
+      const h = { id: newId('hold'), familyId: fam.id, memberId: member.id, titleId: t.id, libraryId: best.libraryId, position, status: 'waiting', createdAt: c.now };
+      await store.addHold(h);
+      const compared = av.map((a) => ({ libraryName: a.libraryName, waitLabel: a.newHoldWaitLabel }));
+      await log(fam.id, actor.id, 'hold.placed', { holdId: h.id, titleId: t.id, memberId: member.id, libraryId: best.libraryId, position, compared });
+      return {
+        outcome: 'hold_placed', holdId: h.id, libraryName: best.libraryName, position, waitLabel: best.newHoldWaitLabel, compared,
+        message: `Hold placed at ${best.libraryName}, the shortest line (#${position}, ${best.newHoldWaitLabel}).`,
+      };
+    }
+
+    async function hold(body) {
+      const { actor, fam } = await loadFamilyFor(body.actor);
+      const member = memberIn(fam, body.member || body.actor);
+      assertCanActFor(actor, member);
+      const t = await title(body.titleId);
+      const gate = await requireApprovalIfNeeded(actor, member, t, fam);
+      if (gate) return gate;
+      return placeHold(actor, member, t, fam);
+    }
+
+    async function instant(body) {
+      const { actor, fam } = await loadFamilyFor(body.actor);
+      const member = memberIn(fam, body.member || body.actor);
+      assertCanActFor(actor, member);
+      const t = await title(body.titleId);
+      const gate = await requireApprovalIfNeeded(actor, member, t, fam);
+      if (gate) return gate;
+      await assertNotAlreadyBorrowed(member, t);
+      const c = await cfg();
+      const av = await availability(t, fam, c);
+      const elig = instantEligibility(t, av, c);
+      if (!elig.eligible) throw new HttpError(409, `Instant borrow not offered: ${elig.reason}`, { code: 'not_eligible' });
+
+      const borrowId = newId('borrow');
+      const key = `borrow:${borrowId}`;
+      const reserve = await store.reserveBudget(elig.libraryId, elig.priceCents, c.now.slice(0, 10));
+      if (!reserve.ok) {
+        await log(fam.id, actor.id, 'instant.refused', { titleId: t.id, memberId: member.id, libraryId: elig.libraryId, reason: reserve.reason, priceCents: elig.priceCents });
+        const fallback = await placeHold(actor, member, t, fam);
+        const next = await nextUp(t, member, fam, c);
+        return {
+          outcome: 'instant_refused', reason: reserve.reason, charged: false, hold: fallback, nextUp: next,
+          message: `${elig.libraryName} can't fund an instant borrow right now (${reserve.reason}). Nothing was charged. ${fallback.message}`,
+        };
+      }
+      const lib = await store.getLibrary(elig.libraryId);
+      let metered;
+      try {
+        metered = await meter({ libraryId: lib.id, customerId: lib.stripeCustomerId, valueCents: elig.priceCents, idempotencyKey: key });
+      } catch (err) {
+        await store.releaseBudget(elig.libraryId, elig.priceCents);
+        await log(fam.id, actor.id, 'instant.meter_failed', { titleId: t.id, libraryId: lib.id, error: String(err && err.message || err) });
+        throw new HttpError(502, 'Could not record the charge with Stripe, so the borrow was cancelled. Nothing was charged.', { code: 'meter_failed' });
+      }
+      await store.addMeterEvent({ idempotencyKey: key, libraryId: lib.id, valueCents: elig.priceCents, stripeId: metered.id, mode: metered.mode, at: c.now });
+      const b = {
+        id: borrowId, familyId: fam.id, memberId: member.id, titleId: t.id, libraryId: lib.id,
+        kind: 'instant', borrowedAt: c.now, finishedAt: null, minutesRead: 0, costCents: elig.priceCents,
+      };
+      await store.addBorrow(b);
+      await log(fam.id, actor.id, 'instant.borrowed', { borrowId, titleId: t.id, memberId: member.id, libraryId: lib.id, priceCents: elig.priceCents, meterId: metered.id, mode: metered.mode });
+      return {
+        outcome: 'instant_borrowed', borrowId, charged: true, priceCents: elig.priceCents, meterId: metered.id, mode: metered.mode,
+        remainingDailyCents: reserve.remainingDailyCents, remainingMonthlyCents: reserve.remainingMonthlyCents,
+        message: `${lib.name} funded an instant borrow of ${t.title} ($${(elig.priceCents / 100).toFixed(2)}, ${metered.mode}).`,
+      };
+    }
+
+    async function decide(id, body) {
+      const { actor, fam } = await loadFamilyFor(body.actor);
+      if (actor.role !== 'parent') throw new HttpError(403, 'Only a parent can approve or decline requests.');
+      const decision = body.decision;
+      if (!['approve', 'approve_series', 'decline'].includes(decision)) throw new HttpError(400, '"decision" must be approve, approve_series or decline.');
+      const a = (await store.listApprovals()).find((x) => x.id === id && x.familyId === fam.id);
+      if (!a) throw new HttpError(404, `No approval "${id}".`);
+      if (a.status !== 'pending') throw new HttpError(409, `This request was already ${a.status}.`, { code: 'already_decided' });
+      const c = await cfg();
+      const t = await store.getTitle(a.titleId);
+      const member = memberIn(fam, a.memberId);
+      if (decision === 'decline') {
+        await store.updateApproval(id, { status: 'declined', decidedAt: c.now, decidedBy: actor.id });
+        await log(fam.id, actor.id, 'approval.declined', { approvalId: id, titleId: t.id });
+        const alt = await nextUp(t, member, fam, c);
+        return { outcome: 'declined', alternatives: alt.suggestions, message: `Declined. Suggested ${alt.suggestions.length} books in ${member.name}'s band instead.` };
+      }
+      const scope = decision === 'approve_series' && t.series ? 'series' : 'title';
+      await store.updateApproval(id, { status: 'approved', scope, decidedAt: c.now, decidedBy: actor.id });
+      if (scope === 'series') {
+        const siblings = (await store.listTitles()).filter((x) => x.series === t.series && x.id !== t.id);
+        for (const s of siblings) {
+          await store.addApproval({ id: newId('appr'), familyId: fam.id, memberId: member.id, titleId: s.id, reason: `Series approved with ${t.title}`, status: 'approved', scope: 'series', requestedAt: c.now, decidedAt: c.now, decidedBy: actor.id });
+        }
+      }
+      await log(fam.id, actor.id, 'approval.approved', { approvalId: id, titleId: t.id, scope });
+      // Fulfil the request: borrow if a fresh copy is ready, otherwise hold.
+      const av = await availability(t, fam, c);
+      const result = av.some((x) => x.status === 'available')
+        ? await doStandardBorrow(actor, member, t, fam)
+        : await placeHold(actor, member, t, fam);
+      return { outcome: 'approved', scope, fulfilment: result, message: `Approved. ${result.message}` };
+    }
+
+    async function react(body) {
+      const { actor, fam } = await loadFamilyFor(body.actor);
+      if (!['loved', 'ok', 'not_for_me'].includes(body.reaction)) throw new HttpError(400, '"reaction" must be loved, ok or not_for_me.');
+      const b = (await store.listBorrows()).find((x) => x.id === body.borrowId && x.familyId === fam.id);
+      if (!b) throw new HttpError(404, `No borrow "${body.borrowId}".`);
+      if (actor.role === 'kid' && b.memberId !== actor.id) throw new HttpError(403, 'Kids can only react to their own books.');
+      const c = await cfg();
+      if (!b.finishedAt) await store.updateBorrow(b.id, { finishedAt: c.now, minutesRead: b.minutesRead || 0 });
+      const r = { id: newId('react'), borrowId: b.id, memberId: b.memberId, reaction: body.reaction, at: c.now };
+      await store.addReaction(r);
+      await log(fam.id, actor.id, 'reaction.added', { borrowId: b.id, reaction: body.reaction });
+      return { outcome: 'reacted', message: 'Saved. A parent will see this in the weekly digest.' };
+    }
+
+    async function feedback(body) {
+      const { actor, fam } = await loadFamilyFor(body.actor);
+      if (!['up', 'down'].includes(body.vote)) throw new HttpError(400, '"vote" must be up or down.');
+      await title(body.heldTitleId);
+      await title(body.suggestedTitleId);
+      const c = await cfg();
+      await store.addFeedback({ id: newId('fb'), memberId: actor.id, heldTitleId: body.heldTitleId, suggestedTitleId: body.suggestedTitleId, vote: body.vote, at: c.now });
+      await log(fam.id, actor.id, 'nextup.feedback', { heldTitleId: body.heldTitleId, suggestedTitleId: body.suggestedTitleId, vote: body.vote });
+      return { outcome: 'recorded', message: 'Thanks. This tunes future suggestions.' };
+    }
+
+    async function refresh(body) {
+      const { actor, fam } = await loadFamilyFor(body.actor);
+      const t = await title(body.titleId);
+      const c = await cfg();
+      const copies = (await store.listCopies(t.id)).filter((cp) => familyLibraryIds(fam).includes(cp.libraryId));
+      for (const cp of copies) await store.touchCopy(t.id, cp.libraryId, c.now);
+      await log(fam.id, actor.id, 'availability.refreshed', { titleId: t.id, libraries: copies.map((x) => x.libraryId) });
+      return { outcome: 'refreshed', message: `Checked ${copies.length} library catalog${copies.length === 1 ? '' : 's'} (simulated sync).` };
+    }
+
+    async function digest(q) {
+      const { actor, fam } = await loadFamilyFor(q.actor);
+      if (actor.role !== 'parent') throw new HttpError(403, 'Only parents see the family digest.');
+      const c = await cfg();
+      const since = c.nowMs - 7 * DAY_MS;
+      const titles = Object.fromEntries((await store.listTitles()).map((t) => [t.id, t]));
+      const borrows = (await store.listBorrows()).filter((b) => b.familyId === fam.id);
+      const reactions = await store.listReactions();
+      const events = (await store.listEvents()).filter((e) => e.familyId === fam.id && Date.parse(e.at) >= since);
+      const finished = borrows.filter((b) => b.finishedAt && Date.parse(b.finishedAt) >= since);
+      const sinceDay = dayShift(c.today, -6);
+      const sessions = (await store.listSessions()).filter((x) => x.day >= sinceDay && x.day <= c.today);
+      const streaks = {};
+      for (const m of fam.members) streaks[m.id] = await streakFor(m, c);
+      const perMember = fam.members.map((m) => {
+        const mine = finished.filter((b) => b.memberId === m.id);
+        return {
+          memberId: m.id, name: m.name, role: m.role,
+          booksFinished: mine.length,
+          minutes: sessions.filter((x) => x.memberId === m.id).reduce((s, x) => s + x.minutes, 0),
+          daysRead: streaks[m.id].weekDays, streak: streaks[m.id].current, streakMessage: streaks[m.id].message,
+          books: mine.map((b) => {
+            const r = reactions.filter((x) => x.borrowId === b.id).slice(-1)[0];
+            const t = titles[b.titleId];
+            return { title: t.title, reaction: r ? r.reaction : null, prompt: conversationPrompt(t) };
+          }),
+        };
+      });
+      const instantCount = events.filter((e) => e.type === 'instant.borrowed').length;
+      const nextUpBorrows = events.filter((e) => e.type === 'borrow.created').length;
+      return {
+        weekEnding: c.now.slice(0, 10),
+        totals: {
+          booksFinished: finished.length,
+          minutes: sessions.reduce((s, x) => s + x.minutes, 0),
+          instantBorrows: instantCount,
+          borrowsThisWeek: nextUpBorrows + instantCount,
+        },
+        members: perMember,
+      };
+    }
+
+    function conversationPrompt(t) {
+      const th = (t.themes || [])[0];
+      const prompts = {
+        animals: `Which animal in ${t.title} would you want as a friend, and why?`,
+        quest: `What was the bravest choice in ${t.title}?`,
+        rain: `What would you do on a rainy day like in ${t.title}?`,
+        space: `If you could visit one place from ${t.title}, where would you go?`,
+        family: `What did ${t.title} make you think about?`,
+      };
+      return prompts[th] || `What was your favorite part of ${t.title}?`;
+    }
+
+    async function library() {
+      const c = await cfg();
+      const libs = await store.listLibraries();
+      const meters = await store.listMeterEvents();
+      const events = await store.listEvents();
+      return {
+        today: c.now.slice(0, 10),
+        libraries: libs.map((l) => {
+          const today = l.spentDay === c.now.slice(0, 10) ? l.spentTodayCents : 0;
+          return {
+            id: l.id, name: l.name, dailyCapCents: l.dailyCapCents, spentTodayCents: today, monthlyCapCents: l.monthlyCapCents,
+            spentMonthCents: l.spentMonthCents, stripeConnected: Boolean(l.stripeCustomerId),
+            meterEvents: meters.filter((m) => m.libraryId === l.id),
+            refusals: events.filter((e) => e.type === 'instant.refused' && e.data.libraryId === l.id).length,
+          };
+        }),
+      };
+    }
+
+    async function eventsView(q) {
+      const { fam } = await loadFamilyFor(q.actor);
+      const evts = (await store.listEvents()).filter((e) => e.familyId === fam.id);
+      return { events: evts.slice(-50).reverse() };
+    }
+
+    // =====================================================================
+    // v1.1: reading tracker, streaks, lists, picks, releases, meetups
+    // =====================================================================
+    const BAND_LABEL = (m) => (m.role === 'kid' ? `${m.bandMin}\u2013${m.bandMax}` : 'grown-ups');
+
+    // ---------- streaks ----------
+    async function minutesByDay(memberId) {
+      const by = {};
+      for (const s of await store.listSessions()) if (s.memberId === memberId) by[s.day] = (by[s.day] || 0) + s.minutes;
+      return by;
+    }
+    // Walk back from `anchor`. Each reading day counts. One missed day in any 7 is a rest day and
+    // doesn't break the streak; a second miss inside 7 days ends it. Today is never a miss (it isn't over).
+    function streakEnding(by, anchor, c, todayOpen) {
+      let count = 0;
+      let lastRest = null;
+      let pendingRest = null;
+      const restDays = [];
+      for (let d = 0; d < 400; d++) {
+        const day = dayShift(anchor, -d);
+        if ((by[day] || 0) >= c.streakMin) {
+          count++;
+          if (pendingRest !== null) { restDays.push(pendingRest); pendingRest = null; }
+          continue;
+        }
+        if (d === 0 && todayOpen) continue;
+        if (count > 0 && pendingRest === null && (lastRest === null || d - lastRest >= 7)) {
+          pendingRest = day;
+          lastRest = d;
+          continue;
+        }
+        if (count === 0 && d <= 1 && todayOpen && pendingRest === null) { pendingRest = day; lastRest = d; continue; }
+        break;
+      }
+      return { count, restDays };
+    }
+    async function streakFor(member, c) {
+      const by = await minutesByDay(member.id);
+      const cur = streakEnding(by, c.today, c, true);
+      let longest = cur.count;
+      for (const day of Object.keys(by)) {
+        if (by[day] >= c.streakMin) longest = Math.max(longest, streakEnding(by, day, c, false).count);
+      }
+      const minutesToday = by[c.today] || 0;
+      const readToday = minutesToday >= c.streakMin;
+      const need = Math.max(0, c.streakMin - minutesToday);
+      let weekDays = 0;
+      for (let d = 0; d < 7; d++) if ((by[dayShift(c.today, -d)] || 0) >= c.streakMin) weekDays++;
+      const calendar = [];
+      for (let d = 13; d >= 0; d--) {
+        const day = dayShift(c.today, -d);
+        calendar.push({ day, minutes: by[day] || 0, read: (by[day] || 0) >= c.streakMin, rest: cur.restDays.includes(day), today: d === 0 });
+      }
+      const finished = (await store.listBorrows()).filter((b) => b.memberId === member.id && b.finishedAt).length;
+      const badges = [];
+      if (finished >= 1) badges.push('First book');
+      for (const n of [5, 10, 25]) if (finished >= n) badges.push(`${n} books`);
+      for (const n of [3, 7, 14, 30]) if (longest >= n) badges.push(`${n}-day streak`);
+      let message;
+      if (cur.count > 0 && readToday) message = `${cur.count}-day streak. You read today. Nice.`;
+      else if (cur.count > 0) message = `${cur.count}-day streak. Read ${need} minute${need === 1 ? '' : 's'} today to make it ${cur.count + 1}.`;
+      else if (longest > 0) message = `Fresh start: read ${c.streakMin} minutes today to begin a new streak. Your best is ${longest} days.`;
+      else message = `Read ${c.streakMin} minutes today to start a streak.`;
+      return {
+        current: cur.count, longest, readToday, minutesToday, minutesNeeded: need, restDays: cur.restDays,
+        weekDays, weeklyGoal: c.weeklyGoal, calendar, badges, booksFinished: finished, message,
+      };
+    }
+
+    // ---------- reading tracker ----------
+    async function familyBorrow(fam, actor, borrowId) {
+      if (!borrowId || typeof borrowId !== 'string') throw new HttpError(400, 'Missing "borrowId".');
+      const b = (await store.listBorrows()).find((x) => x.id === borrowId && x.familyId === fam.id);
+      if (!b) throw new HttpError(404, `No borrow "${borrowId}" in this family.`);
+      if (actor.role === 'kid' && b.memberId !== actor.id) throw new HttpError(403, 'Kids can only open their own books.');
+      return b;
+    }
+    async function readerView(borrowId, q) {
+      const { actor, fam } = await loadFamilyFor(q.actor);
+      const b = await familyBorrow(fam, actor, borrowId);
+      const t = await store.getTitle(b.titleId);
+      const c = await cfg();
+      const member = memberIn(fam, b.memberId);
+      return {
+        borrowId: b.id, finished: Boolean(b.finishedAt),
+        title: { id: t.id, title: t.title, author: t.author, color: t.color, pages: t.pages },
+        member: { id: member.id, name: member.name, role: member.role },
+        currentPage: b.currentPage || 0, pages: t.pages, pct: Math.round(((b.currentPage || 0) / t.pages) * 100),
+        lastReadAt: b.lastReadAt, minutesRead: b.minutesRead || 0,
+        secondsPerMinute: c.secondsPerMinute,
+        streak: await streakFor(member, c),
+      };
+    }
+    async function saveSession(body) {
+      const { actor, fam } = await loadFamilyFor(body.actor);
+      const b = await familyBorrow(fam, actor, body.borrowId);
+      const clientId = body.clientId;
+      if (typeof clientId !== 'string' || clientId.length < 4 || clientId.length > 80) throw new HttpError(400, '"clientId" must be a string of 4 to 80 characters.');
+      const minutes = Number(body.minutes);
+      if (!Number.isInteger(minutes) || minutes < 1 || minutes > 600) throw new HttpError(400, '"minutes" must be a whole number from 1 to 600.');
+      const t = await store.getTitle(b.titleId);
+      const toPage = body.toPage === undefined || body.toPage === null ? (b.currentPage || 0) : Number(body.toPage);
+      if (!Number.isInteger(toPage) || toPage < 0 || toPage > t.pages) throw new HttpError(400, `"toPage" must be between 0 and ${t.pages}.`);
+      if (b.finishedAt) throw new HttpError(409, `${t.title} is already finished.`, { code: 'already_finished' });
+      const c = await cfg();
+      const member = memberIn(fam, b.memberId);
+      const res = await store.saveSession({
+        id: newId('sess'), clientId, borrowId: b.id, memberId: b.memberId, day: c.today, minutes, toPage, at: c.now,
+      });
+      const page = Math.max(b.currentPage || 0, toPage);
+      const finished = page >= t.pages;
+      await store.updateBorrow(b.id, {
+        minutesRead: (b.minutesRead || 0) + res.addedMinutes, currentPage: page, lastReadAt: c.now, finishedAt: finished ? c.now : null,
+      });
+      if (res.created || res.addedMinutes > 0) {
+        await log(fam.id, actor.id, 'reading.saved', { borrowId: b.id, titleId: t.id, memberId: member.id, minutes: res.addedMinutes, toPage: page, retry: !res.created });
+      }
+      if (finished) await log(fam.id, actor.id, 'reading.finished', { borrowId: b.id, titleId: t.id, memberId: member.id });
+      const streak = await streakFor(member, c);
+      return {
+        outcome: finished ? 'finished' : 'saved', currentPage: page, pages: t.pages, pct: Math.round((page / t.pages) * 100),
+        finished, savedMinutes: res.addedMinutes, duplicate: !res.created, streak,
+        message: finished
+          ? `${member.name} finished ${t.title}! ${streak.message}`
+          : `Saved at page ${page} of ${t.pages}. ${streak.message}`,
+      };
+    }
+
+    // ---------- shared title row ----------
+    async function titleRow(t, member, fam, c, extra) {
+      const av = await availability(t, fam, c);
+      const status = av.some((a) => a.status === 'available') ? 'available'
+        : av.some((a) => a.status === 'coming') ? 'coming'
+          : av.some((a) => a.status === 'check') ? 'check' : av.length ? 'waitlist' : 'none';
+      return {
+        id: t.id, title: t.title, author: t.author, color: t.color, level: levelLabel(t), series: t.series, seriesNo: t.seriesNo,
+        releaseDate: t.releaseDate, status, statusLabel: status === 'coming' ? `Out ${prettyDate(t.releaseDate)}` : null,
+        inBand: inBand(member, t), needsOk: member.role === 'kid' && !inBand(member, t),
+        rating: t.ratingPct && t.ratingCount >= 20 ? { pct: t.ratingPct, count: t.ratingCount } : null,
+        ...(extra || {}),
+      };
+    }
+    function kidMayList(member, t) {
+      return !(member.role === 'kid' && levelKnown(t) && t.minAge >= 18);
+    }
+
+    // ---------- want-to-read lists by age group ----------
+    async function lists(q) {
+      const { actor, fam } = await loadFamilyFor(q.actor);
+      const member = memberIn(fam, q.member || q.actor);
+      if (actor.role === 'kid' && member.id !== actor.id) throw new HttpError(403, 'Kids can only see their own list.');
+      const c = await cfg();
+      const titles = Object.fromEntries((await store.listTitles()).map((t) => [t.id, t]));
+      const tbr = (await store.listTbr()).filter((x) => x.memberId === member.id);
+      const onList = new Set(tbr.map((x) => x.titleId));
+      const rows = [];
+      for (const x of tbr) {
+        rows.push(await titleRow(titles[x.titleId], member, fam, c, { addedBy: nameIn(fam, x.addedBy), source: x.source, addedAt: x.addedAt }));
+      }
+      const order = { available: 0, check: 1, waitlist: 2, coming: 3, none: 4 };
+      rows.sort((a, b) => order[a.status] - order[b.status] || a.title.localeCompare(b.title));
+      const kids = fam.members.filter((m) => m.role === 'kid');
+      const shelves = [];
+      for (const sh of await store.listShelves()) {
+        const forWhom = sh.minAge >= 18 ? fam.members.filter((m) => m.role === 'parent').map((m) => m.name)
+          : kids.filter((k) => sh.minAge <= k.bandMax && sh.maxAge >= k.bandMin).map((k) => k.name);
+        const fitsBand = member.role !== 'kid' || (sh.minAge <= member.bandMax && sh.maxAge >= member.bandMin);
+        // Kids also see the next age group up, so they can reach for it with a grown-up's OK
+        const stretch = member.role === 'kid' && !fitsBand && sh.minAge === member.bandMax + 1;
+        if (member.role === 'kid' && !fitsBand && !stretch) continue;
+        const items = [];
+        for (const id of sh.titleIds) {
+          const t = titles[id];
+          if (!t || !kidMayList(member, t)) continue;
+          items.push(await titleRow(t, member, fam, c, { onList: onList.has(id) }));
+        }
+        shelves.push({ id: sh.id, name: sh.name, minAge: sh.minAge, maxAge: sh.maxAge, curator: sh.curator, forWhom, items, stretch: Boolean(stretch) });
+      }
+      // A kid's own age group first
+      if (member.role === 'kid') shelves.sort((a, b) => Math.abs(a.minAge - member.bandMin) - Math.abs(b.minAge - member.bandMin));
+      return {
+        member: { id: member.id, name: member.name, role: member.role, band: BAND_LABEL(member) },
+        list: rows, readyCount: rows.filter((r) => r.status === 'available').length, shelves,
+      };
+    }
+    function nameIn(fam, id) {
+      const m = fam.members.find((x) => x.id === id);
+      return m ? m.name : id;
+    }
+    async function addToList(body) {
+      const { actor, fam } = await loadFamilyFor(body.actor);
+      const member = memberIn(fam, body.member || body.actor);
+      if (actor.role === 'kid' && member.id !== actor.id) throw new HttpError(403, 'Kids can only change their own list.');
+      const t = await title(body.titleId);
+      if (!kidMayList(member, t)) throw new HttpError(403, `${t.title} is on the grown-ups shelf.`);
+      const c = await cfg();
+      const added = await store.addTbr({ memberId: member.id, titleId: t.id, addedBy: actor.id, source: actor.id === member.id ? 'self' : 'parent', addedAt: c.now });
+      if (!added) return { outcome: 'already_listed', message: `${t.title} is already on ${member.name}'s list.` };
+      await log(fam.id, actor.id, 'list.added', { titleId: t.id, memberId: member.id });
+      const note = member.role === 'kid' && !inBand(member, t) ? ' Borrowing it will need a grown-up\u2019s OK.' : '';
+      return { outcome: 'listed', message: `Added ${t.title} to ${actor.id === member.id ? 'your' : `${member.name}'s`} list.${note}` };
+    }
+    async function removeFromList(body) {
+      const { actor, fam } = await loadFamilyFor(body.actor);
+      const member = memberIn(fam, body.member || body.actor);
+      if (actor.role === 'kid' && member.id !== actor.id) throw new HttpError(403, 'Kids can only change their own list.');
+      const t = await title(body.titleId);
+      const removed = await store.removeTbr(member.id, t.id);
+      if (!removed) throw new HttpError(404, `${t.title} isn't on that list.`);
+      await log(fam.id, actor.id, 'list.removed', { titleId: t.id, memberId: member.id });
+      return { outcome: 'removed', message: `Removed ${t.title}.` };
+    }
+
+    // ---------- good picks, new releases, follows ----------
+    async function recommend(member, fam, c) {
+      const titles = await store.listTitles();
+      const tById = Object.fromEntries(titles.map((t) => [t.id, t]));
+      const borrows = (await store.listBorrows()).filter((b) => b.memberId === member.id);
+      const reactions = await store.listReactions();
+      const latest = {};
+      for (const r of reactions) latest[r.borrowId] = r.reaction;
+      const read = new Set(borrows.map((b) => b.titleId));
+      const finished = borrows.filter((b) => b.finishedAt).map((b) => tById[b.titleId]);
+      const loved = borrows.filter((b) => latest[b.id] === 'loved').map((b) => tById[b.titleId]);
+      const disliked = borrows.filter((b) => latest[b.id] === 'not_for_me').map((b) => tById[b.titleId]);
+      const listed = new Set((await store.listTbr()).filter((x) => x.memberId === member.id).map((x) => x.titleId));
+      const follows = (await store.listFollows()).filter((f) => f.memberId === member.id);
+      const holds = new Set((await store.listHolds()).filter((h) => h.memberId === member.id && h.status === 'waiting').map((h) => h.titleId));
+      const out = [];
+      for (const t of titles) {
+        if (read.has(t.id) || !levelKnown(t)) continue;
+        if (t.releaseDate > c.today) continue;
+        if (member.role === 'kid' ? !inBand(member, t) : t.minAge < 18) continue;
+        let score = 0;
+        const why = [];
+        const prev = finished.find((f) => f.series && f.series === t.series && f.seriesNo === t.seriesNo - 1);
+        if (prev) { score += 5; why.push(`Next in ${t.series} after ${prev.title}`); }
+        const byLovedAuthor = loved.find((l) => l.author === t.author);
+        if (byLovedAuthor && !prev) { score += 3; why.push(`More by ${t.author}, who wrote ${byLovedAuthor.title}`); }
+        for (const l of loved) {
+          const shared = (t.themes || []).filter((x) => (l.themes || []).includes(x));
+          if (shared.length && !prev && !byLovedAuthor) { score += shared.length; why.push(`Like ${l.title}: ${shared.join(', ')}`); break; }
+          if (shared.length) score += shared.length;
+        }
+        for (const d of disliked) score -= (t.themes || []).filter((x) => (d.themes || []).includes(x)).length;
+        if (follows.some((f) => (f.kind === 'series' && f.value === t.series) || (f.kind === 'author' && f.value === t.author))) {
+          score += 2; why.push(`You follow ${t.series || t.author}`);
+        }
+        if (t.ratingPct >= 85 && t.ratingCount >= 20) { score += 1; why.push(`Loved by ${t.ratingPct}% of readers ${BAND_LABEL(member)}`); }
+        if (listed.has(t.id)) { score += 1; why.push('On your list'); }
+        if (score <= 0) continue;
+        out.push(await titleRow(t, member, fam, c, { score, why, onList: listed.has(t.id), onHold: holds.has(t.id) }));
+      }
+      out.sort((a, b) => b.score - a.score || (a.status === 'available' ? -1 : 0) - (b.status === 'available' ? -1 : 0) || a.title.localeCompare(b.title));
+      return out.slice(0, 6);
+    }
+    async function discover(q) {
+      const { actor, fam } = await loadFamilyFor(q.actor);
+      const member = memberIn(fam, q.member || q.actor);
+      if (actor.role === 'kid' && member.id !== actor.id) throw new HttpError(403, 'Kids can only see their own picks.');
+      const c = await cfg();
+      const titles = await store.listTitles();
+      const follows = (await store.listFollows()).filter((f) => f.memberId === member.id);
+      const holds = new Set((await store.listHolds()).filter((h) => h.memberId === member.id && h.status === 'waiting').map((h) => h.titleId));
+      const libs = familyLibraryIds(fam);
+      const copies = await store.listCopies();
+      const atLibs = (t) => copies.some((cp) => cp.titleId === t.id && libs.includes(cp.libraryId));
+      const fits = (t) => (member.role === 'kid' ? kidMayList(member, t) && (inBand(member, t) || !levelKnown(t)) : true);
+      const isFollowed = (t) => follows.some((f) => (f.kind === 'series' && f.value === t.series) || (f.kind === 'author' && f.value === t.author));
+      const since = dayShift(c.today, -c.newArrivalDays);
+      const newArrivals = [];
+      for (const t of titles.filter((x) => x.releaseDate <= c.today && x.releaseDate >= since && atLibs(x) && fits(x)).sort((a, b) => b.releaseDate.localeCompare(a.releaseDate))) {
+        newArrivals.push(await titleRow(t, member, fam, c, { followed: isFollowed(t), released: prettyDate(t.releaseDate) }));
+      }
+      const comingSoon = [];
+      for (const t of titles.filter((x) => x.releaseDate > c.today && atLibs(x) && fits(x))) {
+        comingSoon.push(await titleRow(t, member, fam, c, { followed: isFollowed(t), onHold: holds.has(t.id) }));
+      }
+      comingSoon.sort((a, b) => Number(b.followed) - Number(a.followed) || a.releaseDate.localeCompare(b.releaseDate));
+      return {
+        member: { id: member.id, name: member.name, role: member.role, band: BAND_LABEL(member) },
+        picks: await recommend(member, fam, c), newArrivals, comingSoon, follows,
+      };
+    }
+    async function follow(body) {
+      const { actor, fam } = await loadFamilyFor(body.actor);
+      const member = memberIn(fam, body.member || body.actor);
+      if (actor.role === 'kid' && member.id !== actor.id) throw new HttpError(403, 'Kids can only follow for themselves.');
+      if (!['author', 'series'].includes(body.kind)) throw new HttpError(400, '"kind" must be author or series.');
+      const titles = await store.listTitles();
+      if (!titles.some((t) => (body.kind === 'author' ? t.author : t.series) === body.value)) throw new HttpError(404, `No ${body.kind} called "${body.value}".`);
+      const f = { memberId: member.id, kind: body.kind, value: body.value };
+      if (body.on === false) {
+        await store.removeFollow(f);
+        await log(fam.id, actor.id, 'follow.removed', f);
+        return { outcome: 'unfollowed', message: `Stopped following ${body.value}.` };
+      }
+      await store.addFollow(f);
+      await log(fam.id, actor.id, 'follow.added', f);
+      return { outcome: 'followed', message: `Following ${body.value}. New books show up first in Discover.` };
+    }
+
+    // ---------- author talks and meetups ----------
+    async function familyReadingLinks(fam) {
+      const titles = Object.fromEntries((await store.listTitles()).map((t) => [t.id, t]));
+      const ids = new Set(fam.members.map((m) => m.id));
+      const borrows = (await store.listBorrows()).filter((b) => ids.has(b.memberId));
+      const reactions = await store.listReactions();
+      const loved = new Set(reactions.filter((r) => r.reaction === 'loved').map((r) => r.borrowId));
+      const links = [];
+      for (const b of borrows) links.push({ memberId: b.memberId, title: titles[b.titleId], loved: loved.has(b.id), how: loved.has(b.id) ? 'loved' : b.finishedAt ? 'read' : 'is reading' });
+      for (const x of await store.listTbr()) if (ids.has(x.memberId)) links.push({ memberId: x.memberId, title: titles[x.titleId], how: 'wants to read' });
+      for (const f of await store.listFollows()) if (ids.has(f.memberId)) links.push({ memberId: f.memberId, follow: f, how: 'follows' });
+      return links;
+    }
+    function ageFits(m, meet) {
+      if (m.role === 'parent') return meet.maxAge >= 18 || meet.minAge < 13;
+      return m.age >= meet.minAge && m.age <= meet.maxAge;
+    }
+    async function meetupRow(meet, fam, links, c, viewer) {
+      const why = [];
+      for (const l of links) {
+        const name = nameIn(fam, l.memberId);
+        if (l.follow && ((l.follow.kind === 'author' && l.follow.value === meet.author) || (l.follow.kind === 'series' && l.follow.value === meet.series))) why.push(`${name} follows ${l.follow.value}`);
+        else if (l.title && ((meet.author && l.title.author === meet.author) || (meet.series && l.title.series === meet.series))) why.push(`${name} ${l.how} ${l.title.title}`);
+      }
+      const uniqueWhy = [...new Set(why)].sort((a, b) => (b.includes(' loved ') ? 1 : 0) - (a.includes(' loved ') ? 1 : 0)).slice(0, 2);
+      const rsvps = (await store.listRsvps()).filter((r) => r.meetupId === meet.id && r.familyId === fam.id && r.status !== 'cancelled');
+      const mine = rsvps.find((r) => r.status === 'going' || r.status === 'waitlist') || null;
+      const requests = rsvps.filter((r) => r.status === 'requested');
+      const left = meet.capacity - meet.seatsTaken;
+      return {
+        id: meet.id, title: meet.title, kind: meet.kind, author: meet.author, venue: meet.venue, venueKind: meet.venueKind, address: meet.address,
+        startsAt: meet.startsAt, endsAt: meet.endsAt, minAge: meet.minAge, maxAge: meet.maxAge,
+        ages: meet.maxAge >= 99 ? `${meet.minAge}+` : `Ages ${meet.minAge}\u2013${meet.maxAge}`,
+        priceLabel: meet.priceCents ? `$${(meet.priceCents / 100).toFixed(2)}` : 'Free',
+        description: meet.description, seatsLeft: left, availability: left <= 0 ? 'full' : left <= 5 ? 'few' : 'open',
+        goodFor: fam.members.filter((m) => ageFits(m, meet) && (m.role === 'kid' || meet.maxAge >= 18)).map((m) => m.name),
+        why: uniqueWhy, forYou: uniqueWhy.length > 0,
+        needsAdult: meet.minAge < 13,
+        rsvp: mine ? { id: mine.id, status: mine.status, attendees: mine.attendees.map((id) => nameIn(fam, id)) } : null,
+        requests: requests.map((r) => ({ id: r.id, by: nameIn(fam, r.requestedBy) })),
+        viewerRequested: requests.some((r) => r.requestedBy === viewer.id),
+      };
+    }
+    async function meetups(q) {
+      const { actor, fam } = await loadFamilyFor(q.actor);
+      const c = await cfg();
+      const links = await familyReadingLinks(fam);
+      const all = (await store.listMeetups()).filter((m) => Date.parse(m.startsAt) > c.nowMs);
+      const visible = actor.role === 'kid' ? all.filter((m) => ageFits(actor, m)) : all;
+      const rows = [];
+      for (const m of visible) rows.push(await meetupRow(m, fam, links, c, actor));
+      rows.sort((a, b) => Number(b.forYou) - Number(a.forYou) || a.startsAt.localeCompare(b.startsAt));
+      return { meetups: rows };
+    }
+    async function upcomingMeetup(id, c) {
+      const m = await store.getMeetup(id);
+      if (!m) throw new HttpError(404, `No event "${id}".`);
+      if (Date.parse(m.startsAt) <= c.nowMs) throw new HttpError(409, 'That event already happened.', { code: 'past' });
+      return m;
+    }
+    async function bookSeats(actor, fam, meet, attendeeIds, c, existingRequest) {
+      const members = attendeeIds.map((id) => memberIn(fam, id));
+      for (const m of members) {
+        if (m.role === 'kid' && !ageFits(m, meet)) {
+          throw new HttpError(409, `${m.name} (${m.age}) is outside this event's ages (${meet.minAge}\u2013${meet.maxAge}).`, { code: 'age' });
+        }
+      }
+      if (meet.minAge >= 18 && members.some((m) => m.role === 'kid')) throw new HttpError(409, 'This event is for grown-ups only.', { code: 'age' });
+      // Kids under 13 go with a grown-up: add the parent who is booking
+      let addedAdult = false;
+      if (members.some((m) => m.role === 'kid' && m.age < 13) && !members.some((m) => m.role === 'parent')) {
+        attendeeIds = [...attendeeIds, actor.id];
+        addedAdult = true;
+      }
+      const active = (await store.listRsvps()).find((r) => r.meetupId === meet.id && r.familyId === fam.id && (r.status === 'going' || r.status === 'waitlist'));
+      if (active) throw new HttpError(409, `Your family is already ${active.status === 'going' ? 'going' : 'on the waitlist'}. Cancel first to change who's coming.`, { code: 'already_rsvped' });
+      const seats = await store.takeSeats(meet.id, attendeeIds.length);
+      const status = seats.ok ? 'going' : 'waitlist';
+      let id;
+      if (existingRequest) {
+        id = existingRequest.id;
+        await store.updateRsvp(id, { status, attendees: attendeeIds });
+      } else {
+        id = newId('rsvp');
+        await store.addRsvp({ id, meetupId: meet.id, familyId: fam.id, attendees: attendeeIds, status, requestedBy: actor.id, createdAt: c.now });
+      }
+      await log(fam.id, actor.id, 'meetup.rsvp', { meetupId: meet.id, status, attendees: attendeeIds });
+      const names = attendeeIds.map((x) => nameIn(fam, x)).join(', ');
+      return {
+        outcome: status, rsvpId: id, attendees: attendeeIds, seatsLeft: seats.seatsLeft, addedAdult,
+        message: status === 'going'
+          ? `You're going to ${meet.title}: ${names}.${addedAdult ? ' Kids under 13 come with a grown-up, so you were added.' : ''} ${seats.seatsLeft} seat${seats.seatsLeft === 1 ? '' : 's'} left.`
+          : `${meet.title} is full, so ${names} ${attendeeIds.length === 1 ? 'is' : 'are'} on the waitlist. No seats were taken.`,
+      };
+    }
+    async function rsvp(id, body) {
+      const { actor, fam } = await loadFamilyFor(body.actor);
+      const c = await cfg();
+      const meet = await upcomingMeetup(id, c);
+      let attendees = body.attendees;
+      if (!Array.isArray(attendees) || !attendees.length || attendees.some((x) => typeof x !== 'string')) {
+        throw new HttpError(400, '"attendees" must be a list of family member ids.');
+      }
+      attendees = [...new Set(attendees)];
+      attendees.forEach((x) => memberIn(fam, x));
+      if (actor.role === 'kid') {
+        if (attendees.length !== 1 || attendees[0] !== actor.id) throw new HttpError(403, 'Kids can ask to go themselves; a grown-up books the seats.');
+        if (!ageFits(actor, meet)) throw new HttpError(409, `This event is for ages ${meet.minAge}\u2013${meet.maxAge}.`, { code: 'age' });
+        const dup = (await store.listRsvps()).find((r) => r.meetupId === meet.id && r.familyId === fam.id && r.requestedBy === actor.id && r.status === 'requested');
+        if (dup) return { outcome: 'requested', rsvpId: dup.id, message: 'You already asked. A grown-up will see it in Approvals.' };
+        const rid = newId('rsvp');
+        await store.addRsvp({ id: rid, meetupId: meet.id, familyId: fam.id, attendees: [actor.id], status: 'requested', requestedBy: actor.id, createdAt: c.now });
+        await log(fam.id, actor.id, 'meetup.requested', { meetupId: meet.id });
+        return { outcome: 'requested', rsvpId: rid, message: `Asked a grown-up to take you to ${meet.title}.` };
+      }
+      return bookSeats(actor, fam, meet, attendees, c, null);
+    }
+    async function decideRsvp(id, body) {
+      const { actor, fam } = await loadFamilyFor(body.actor);
+      if (actor.role !== 'parent') throw new HttpError(403, 'Only a parent can answer event requests.');
+      if (!['approve', 'decline'].includes(body.decision)) throw new HttpError(400, '"decision" must be approve or decline.');
+      const r = (await store.listRsvps()).find((x) => x.id === id && x.familyId === fam.id);
+      if (!r) throw new HttpError(404, `No event request "${id}".`);
+      if (r.status !== 'requested') throw new HttpError(409, 'That request was already answered.', { code: 'already_decided' });
+      const c = await cfg();
+      const meet = await upcomingMeetup(r.meetupId, c);
+      if (body.decision === 'decline') {
+        await store.updateRsvp(id, { status: 'cancelled' });
+        await log(fam.id, actor.id, 'meetup.declined', { meetupId: meet.id, rsvpId: id });
+        return { outcome: 'declined', message: 'Declined. No seats were booked.' };
+      }
+      return bookSeats(actor, fam, meet, [r.requestedBy], c, r);
+    }
+    async function cancelRsvp(id, body) {
+      const { actor, fam } = await loadFamilyFor(body.actor);
+      if (actor.role !== 'parent') throw new HttpError(403, 'Only a parent can cancel a booking.');
+      const c = await cfg();
+      const meet = await upcomingMeetup(id, c);
+      const r = (await store.listRsvps()).find((x) => x.meetupId === meet.id && x.familyId === fam.id && (x.status === 'going' || x.status === 'waitlist'));
+      if (!r) throw new HttpError(404, 'Your family has no booking for this event.');
+      await store.updateRsvp(r.id, { status: 'cancelled' });
+      if (r.status === 'going') await store.releaseSeats(meet.id, r.attendees.length);
+      await log(fam.id, actor.id, 'meetup.cancelled', { meetupId: meet.id, released: r.status === 'going' ? r.attendees.length : 0 });
+      return { outcome: 'cancelled', message: r.status === 'going' ? `Cancelled. ${r.attendees.length} seat${r.attendees.length === 1 ? '' : 's'} freed for other families.` : 'Left the waitlist.' };
+    }
+    async function meetupIcs(id) {
+      const m = await store.getMeetup(id);
+      if (!m) throw new HttpError(404, `No event "${id}".`);
+      const c = await cfg();
+      const stamp = (iso) => iso.replace(/[-:]/g, '').replace(/\.\d+/, '').slice(0, 15) + 'Z';
+      const esc = (s) => String(s || '').replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+      const text = [
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Readaroo//Prototype//EN', 'BEGIN:VEVENT',
+        `UID:${m.id}@readaroo.example`, `DTSTAMP:${stamp(c.now)}`, `DTSTART:${stamp(m.startsAt)}`, `DTEND:${stamp(m.endsAt)}`,
+        `SUMMARY:${esc(m.title)}`, `LOCATION:${esc(`${m.venue}, ${m.address}`)}`, `DESCRIPTION:${esc(`${m.description} (Synthetic Readaroo demo event.)`)}`,
+        'END:VEVENT', 'END:VCALENDAR', '',
+      ].join('\r\n');
+      return { __raw: text, contentType: 'text/calendar; charset=utf-8', filename: `${m.id}.ics` };
+    }
+
+    async function streaksView(q) {
+      const { actor, fam } = await loadFamilyFor(q.actor);
+      const c = await cfg();
+      const people = actor.role === 'kid' ? [actor] : fam.members;
+      const out = [];
+      for (const m of people) out.push({ memberId: m.id, name: m.name, role: m.role, ...(await streakFor(m, c)) });
+      return { streaks: out };
+    }
+
+    // ---------- router ----------
+    async function route(method, path, body, query) {
+      const m = method.toUpperCase();
+      const seg = path.replace(/^\/api\/?/, '').split('/').filter(Boolean);
+      if (m === 'GET' && seg[0] === 'health') return { ok: true, service: 'readaroo' };
+      if (m === 'GET' && seg[0] === 'demo-records') return { records: await store.listDemoRecords() };
+      if (m === 'GET' && seg[0] === 'home') return home(query);
+      if (m === 'GET' && seg[0] === 'titles' && !seg[1]) return search(query);
+      if (m === 'GET' && seg[0] === 'titles' && seg[1]) return titleDetail({ ...query, id: seg[1] });
+      if (m === 'POST' && seg[0] === 'borrow') return borrow(body);
+      if (m === 'POST' && seg[0] === 'holds') return hold(body);
+      if (m === 'POST' && seg[0] === 'instant') return instant(body);
+      if (m === 'POST' && seg[0] === 'approvals' && seg[1]) return decide(seg[1], body);
+      if (m === 'POST' && seg[0] === 'reactions') return react(body);
+      if (m === 'POST' && seg[0] === 'feedback') return feedback(body);
+      if (m === 'POST' && seg[0] === 'refresh') return refresh(body);
+      if (m === 'GET' && seg[0] === 'digest') return digest(query);
+      if (m === 'GET' && seg[0] === 'library') return library();
+      if (m === 'GET' && seg[0] === 'events') return eventsView(query);
+      if (m === 'GET' && seg[0] === 'reading' && seg[1]) return readerView(seg[1], query);
+      if (m === 'POST' && seg[0] === 'sessions') return saveSession(body);
+      if (m === 'GET' && seg[0] === 'streaks') return streaksView(query);
+      if (m === 'GET' && seg[0] === 'lists') return lists(query);
+      if (m === 'POST' && seg[0] === 'tbr' && seg[1] === 'remove') return removeFromList(body);
+      if (m === 'POST' && seg[0] === 'tbr' && !seg[1]) return addToList(body);
+      if (m === 'GET' && seg[0] === 'discover') return discover(query);
+      if (m === 'POST' && seg[0] === 'follow') return follow(body);
+      if (m === 'GET' && seg[0] === 'meetups' && !seg[1]) return meetups(query);
+      if (m === 'GET' && seg[0] === 'meetups' && seg[1] && seg[2] === 'ics') return meetupIcs(seg[1]);
+      if (m === 'POST' && seg[0] === 'meetups' && seg[1] && seg[2] === 'rsvp') return rsvp(seg[1], body);
+      if (m === 'POST' && seg[0] === 'meetups' && seg[1] && seg[2] === 'cancel') return cancelRsvp(seg[1], body);
+      if (m === 'POST' && seg[0] === 'rsvps' && seg[1]) return decideRsvp(seg[1], body);
+      if (m === 'POST' && seg[0] === 'reset') {
+        if (!store.reset) throw new HttpError(403, 'Reset is only available in offline mode. In live mode, re-run npm run db:seed.');
+        await store.reset();
+        return { outcome: 'reset', message: 'Demo data restored.' };
+      }
+      throw new HttpError(404, `No route ${m} ${path}`);
+    }
+
+    async function handle(method, path, body, query) {
+      try {
+        const out = await route(method, path, body || {}, query || {});
+        if (out && out.__raw !== undefined) return { status: 200, body: out.__raw, contentType: out.contentType, filename: out.filename };
+        return { status: 200, body: out };
+      } catch (err) {
+        if (err instanceof HttpError) return { status: err.status, body: { error: err.message, ...err.extra } };
+        return { status: 500, body: { error: 'Something went wrong on the server. Check the server log.', detail: String(err && err.message || err) } };
+      }
+    }
+
+    return { handle };
+  }
+
+  return { createEngine, HttpError };
+});
+
+</script>
+<script>
+/*
+ * In-memory store and fake Stripe meter for offline mode, tests and the HTML demo.
+ * Same interface as src/postgresStore.js. Works in Node and the browser.
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.ReadarooMemory = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+
+  const clone = (x) => JSON.parse(JSON.stringify(x));
+
+  function createMemoryStore(seed) {
+    let db;
+    function load() {
+      const s = clone(seed);
+      db = {
+        config: s.config, libraries: s.libraries, family: s.family, members: s.members, cards: s.cards,
+        titles: s.titles, copies: s.copies, holds: s.holds, borrows: s.borrows, reactions: s.reactions,
+        approvals: [], feedback: [], meterEvents: [], events: [], demoRecords: s.demoRecords || [],
+        sessions: s.sessions || [], tbr: s.tbr || [], shelves: s.shelves || [], follows: s.follows || [],
+        meetups: s.meetups || [], rsvps: [],
+      };
+    }
+    load();
+    const copy = (titleId, libraryId) => db.copies.find((c) => c.titleId === titleId && c.libraryId === libraryId);
+
+    return {
+      mode: 'offline',
+      async getConfig() { return clone(db.config); },
+      async getMember(id) { const m = db.members.find((x) => x.id === id); return m ? clone(m) : null; },
+      async getFamily(id) {
+        if (db.family.id !== id) return null;
+        return { ...clone(db.family), members: clone(db.members.filter((m) => m.familyId === id)), cards: clone(db.cards.filter((c) => c.familyId === id)) };
+      },
+      async getTitle(id) { const t = db.titles.find((x) => x.id === id); return t ? clone(t) : null; },
+      async listTitles() { return clone(db.titles); },
+      async listCopies(titleId) { return clone(db.copies.filter((c) => !titleId || c.titleId === titleId)); },
+      async listLibraries() { return clone(db.libraries); },
+      async getLibrary(id) { const l = db.libraries.find((x) => x.id === id); return l ? clone(l) : null; },
+      async listBorrows() { return clone(db.borrows); },
+      async addBorrow(b) { db.borrows.push(clone(b)); },
+      async updateBorrow(id, patch) { Object.assign(db.borrows.find((b) => b.id === id), patch); },
+      async listHolds() { return clone(db.holds); },
+      async addHold(h) { db.holds.push(clone(h)); },
+      async listApprovals() { return clone(db.approvals); },
+      async addApproval(a) { db.approvals.push(clone(a)); },
+      async updateApproval(id, patch) { Object.assign(db.approvals.find((a) => a.id === id), patch); },
+      async listReactions() { return clone(db.reactions); },
+      async addReaction(r) { db.reactions.push(clone(r)); },
+      async addFeedback(f) { db.feedback.push(clone(f)); },
+      async addEvent(e) { db.events.push(clone(e)); },
+      async listEvents() { return clone(db.events); },
+      async listMeterEvents() { return clone(db.meterEvents); },
+      async addMeterEvent(m) { if (!db.meterEvents.some((x) => x.idempotencyKey === m.idempotencyKey)) db.meterEvents.push(clone(m)); },
+      async listDemoRecords() { return clone(db.demoRecords); },
+      async takeCopy(titleId, libraryId) {
+        const c = copy(titleId, libraryId);
+        if (!c || c.available < 1) return false;
+        c.available -= 1;
+        return true;
+      },
+      async joinQueue(titleId, libraryId) {
+        const c = copy(titleId, libraryId);
+        c.queue += 1;
+        return c.queue;
+      },
+      async touchCopy(titleId, libraryId, asOf) { copy(titleId, libraryId).asOf = asOf; },
+      // Atomic in a single JS turn: check both caps, then spend.
+      async reserveBudget(libraryId, cents, day) {
+        const l = db.libraries.find((x) => x.id === libraryId);
+        if (l.spentDay !== day) { l.spentDay = day; l.spentTodayCents = 0; }
+        if (l.spentTodayCents + cents > l.dailyCapCents) return { ok: false, reason: 'daily cap reached' };
+        if (l.spentMonthCents + cents > l.monthlyCapCents) return { ok: false, reason: 'monthly cap reached' };
+        l.spentTodayCents += cents;
+        l.spentMonthCents += cents;
+        return { ok: true, remainingDailyCents: l.dailyCapCents - l.spentTodayCents, remainingMonthlyCents: l.monthlyCapCents - l.spentMonthCents };
+      },
+      async releaseBudget(libraryId, cents) {
+        const l = db.libraries.find((x) => x.id === libraryId);
+        l.spentTodayCents = Math.max(0, l.spentTodayCents - cents);
+        l.spentMonthCents = Math.max(0, l.spentMonthCents - cents);
+      },
+      // ---- reading sessions (idempotent by clientId: a second save of the same session keeps the larger values)
+      async listSessions() { return clone(db.sessions); },
+      async saveSession(sess) {
+        const existing = db.sessions.find((x) => x.clientId === sess.clientId);
+        if (existing) {
+          const added = Math.max(0, sess.minutes - existing.minutes);
+          existing.minutes = Math.max(existing.minutes, sess.minutes);
+          existing.toPage = Math.max(existing.toPage || 0, sess.toPage || 0);
+          existing.at = sess.at;
+          return { created: false, addedMinutes: added, session: clone(existing) };
+        }
+        db.sessions.push(clone(sess));
+        return { created: true, addedMinutes: sess.minutes, session: clone(sess) };
+      },
+      // ---- want-to-read lists, shelves, follows
+      async listTbr() { return clone(db.tbr); },
+      async addTbr(row) {
+        if (db.tbr.some((x) => x.memberId === row.memberId && x.titleId === row.titleId)) return false;
+        db.tbr.push(clone(row));
+        return true;
+      },
+      async removeTbr(memberId, titleId) {
+        const before = db.tbr.length;
+        db.tbr = db.tbr.filter((x) => !(x.memberId === memberId && x.titleId === titleId));
+        return db.tbr.length < before;
+      },
+      async listShelves() { return clone(db.shelves); },
+      async listFollows() { return clone(db.follows); },
+      async addFollow(f) {
+        if (db.follows.some((x) => x.memberId === f.memberId && x.kind === f.kind && x.value === f.value)) return false;
+        db.follows.push(clone(f));
+        return true;
+      },
+      async removeFollow(f) {
+        const before = db.follows.length;
+        db.follows = db.follows.filter((x) => !(x.memberId === f.memberId && x.kind === f.kind && x.value === f.value));
+        return db.follows.length < before;
+      },
+      // ---- meetups and RSVPs
+      async listMeetups() { return clone(db.meetups); },
+      async getMeetup(id) { const m = db.meetups.find((x) => x.id === id); return m ? clone(m) : null; },
+      async listRsvps() { return clone(db.rsvps); },
+      async addRsvp(r) { db.rsvps.push(clone(r)); },
+      async updateRsvp(id, patch) { Object.assign(db.rsvps.find((r) => r.id === id), patch); },
+      // Atomic seat check: never more people than the room holds
+      async takeSeats(meetupId, n) {
+        const m = db.meetups.find((x) => x.id === meetupId);
+        if (m.seatsTaken + n > m.capacity) return { ok: false, seatsLeft: m.capacity - m.seatsTaken };
+        m.seatsTaken += n;
+        return { ok: true, seatsLeft: m.capacity - m.seatsTaken };
+      },
+      async releaseSeats(meetupId, n) {
+        const m = db.meetups.find((x) => x.id === meetupId);
+        m.seatsTaken = Math.max(0, m.seatsTaken - n);
+      },
+      async reset() { load(); },
+    };
+  }
+
+  // Fake Stripe meter: idempotent by key, never touches the network.
+  function createFakeMeter() {
+    const seen = new Map();
+    return async function meter({ idempotencyKey }) {
+      if (!seen.has(idempotencyKey)) seen.set(idempotencyKey, `mtr_fake_${(seen.size + 1).toString().padStart(4, '0')}`);
+      return { id: seen.get(idempotencyKey), mode: 'simulated' };
+    };
+  }
+
+  return { createMemoryStore, createFakeMeter };
+});
+
+</script>
+<script>
+
+(function () {
+  var engine = ReadarooEngine.createEngine({
+    store: ReadarooMemory.createMemoryStore({"config":{"now":"2026-11-03T19:00:00Z","instantWaitThresholdDays":28,"staleHours":24,"daysPerQueueTurn":10,"streakMinMinutes":5,"weeklyGoalDays":5,"readingSecondsPerMinute":1,"newArrivalDays":30},"libraries":[{"id":"lib-county","name":"Maple County Library","dailyCapCents":800,"monthlyCapCents":6000,"spentDay":"2026-11-03","spentTodayCents":0,"spentMonthCents":1200,"stripeCustomerId":null},{"id":"lib-city","name":"Riverbend City Library","dailyCapCents":300,"monthlyCapCents":4000,"spentDay":"2026-11-03","spentTodayCents":300,"spentMonthCents":2100,"stripeCustomerId":null}],"family":{"id":"fam-1","name":"Our family"},"members":[{"id":"m-priya","familyId":"fam-1","name":"Priya","role":"parent","age":null,"bandMin":null,"bandMax":null,"email":"priya@readaroo.example"},{"id":"m-arjun","familyId":"fam-1","name":"Arjun","role":"kid","age":9,"bandMin":8,"bandMax":10,"email":null},{"id":"m-maya","familyId":"fam-1","name":"Maya","role":"kid","age":6,"bandMin":5,"bandMax":7,"email":null}],"cards":[{"id":"card-1","familyId":"fam-1","libraryId":"lib-county","label":"Maple County card"},{"id":"card-2","familyId":"fam-1","libraryId":"lib-city","label":"Riverbend City card"}],"titles":[{"id":"t-moonfox-1","title":"The Moon Fox","author":"Lena Okafor","series":"Moon Fox","seriesNo":1,"minAge":8,"maxAge":11,"themes":["animals","quest","night"],"color":"#2E4A7A","pages":212,"releaseDate":"2025-03-04","ratingPct":91,"ratingCount":318},{"id":"t-moonfox-2","title":"The Moon Fox: River of Stars","author":"Lena Okafor","series":"Moon Fox","seriesNo":2,"minAge":8,"maxAge":11,"themes":["animals","quest","night"],"color":"#34558C","pages":236,"releaseDate":"2026-04-14","ratingPct":89,"ratingCount":141},{"id":"t-comet-1","title":"The Comet Kids","author":"Lena Okafor","series":"Comet Kids","seriesNo":1,"minAge":8,"maxAge":11,"themes":["space","quest","friendship"],"color":"#C9572E","pages":198,"releaseDate":"2024-09-10","ratingPct":86,"ratingCount":260},{"id":"t-comet-2","title":"The Comet Kids: Orbit Street","author":"Lena Okafor","series":"Comet Kids","seriesNo":2,"minAge":8,"maxAge":11,"themes":["space","quest","friendship"],"color":"#B04A26","pages":204,"releaseDate":"2025-10-07","ratingPct":84,"ratingCount":97},{"id":"t-owl","title":"Owl Lantern Nights","author":"Sam Whitlow","series":null,"seriesNo":null,"minAge":8,"maxAge":10,"themes":["animals","night","friendship"],"color":"#3B6E4F","pages":164,"releaseDate":"2023-05-02","ratingPct":82,"ratingCount":201},{"id":"t-badger","title":"Badger Builds a Boat","author":"Tomas Reyes","series":null,"seriesNo":null,"minAge":7,"maxAge":10,"themes":["animals","quest"],"color":"#7A5A2E","pages":96,"releaseDate":"2022-08-16","ratingPct":78,"ratingCount":88},{"id":"t-starlight","title":"Starlight Express Club","author":"June Adeyemi","series":null,"seriesNo":null,"minAge":8,"maxAge":11,"themes":["trains","friendship"],"color":"#6F5AA8","pages":184,"releaseDate":"2024-02-20","ratingPct":80,"ratingCount":77},{"id":"t-tide-2","title":"Tidecallers: The Salt Gate","author":"Ines Marlow","series":"Tidecallers","seriesNo":2,"minAge":9,"maxAge":12,"themes":["ocean","quest"],"color":"#1F6E7A","pages":260,"releaseDate":"2025-06-03","ratingPct":83,"ratingCount":64},{"id":"t-deepsea","title":"Deep Sea Detectives","author":"Ines Marlow","series":"Deep Sea Detectives","seriesNo":1,"minAge":11,"maxAge":13,"themes":["ocean","mystery"],"color":"#1F3D4A","pages":288,"releaseDate":"2024-11-12","ratingPct":88,"ratingCount":120},{"id":"t-lighthouse","title":"The Lighthouse Mice","author":"Sam Whitlow","series":null,"seriesNo":null,"minAge":7,"maxAge":10,"themes":["animals","quest","night"],"color":"#5C6B8A","pages":148,"releaseDate":"2023-10-03","ratingPct":79,"ratingCount":54},{"id":"t-whiskers","title":"Inspector Whiskers","author":"Dana Pell","series":null,"seriesNo":null,"minAge":null,"maxAge":null,"themes":["animals","mystery"],"color":"#8A6D3B","pages":120,"releaseDate":"2021-04-06","ratingPct":null,"ratingCount":0},{"id":"t-garden","title":"The Garden Gnome Club","author":"June Adeyemi","series":null,"seriesNo":null,"minAge":6,"maxAge":8,"themes":["friendship"],"color":"#5E8C3A","pages":72,"releaseDate":"2023-03-14","ratingPct":85,"ratingCount":133},{"id":"t-puddle","title":"Puddle Jumpers","author":"Rosa Lind","series":null,"seriesNo":null,"minAge":4,"maxAge":7,"themes":["rain","friendship"],"color":"#3E7CB1","pages":32,"releaseDate":"2022-04-05","ratingPct":90,"ratingCount":210},{"id":"t-rainy","title":"Rainy Day Rabbit","author":"Rosa Lind","series":null,"seriesNo":null,"minAge":4,"maxAge":6,"themes":["rain","animals"],"color":"#6A8FB3","pages":28,"releaseDate":"2021-09-21","ratingPct":87,"ratingCount":175},{"id":"t-orchard","title":"The Quiet Orchard","author":"Mara Vance","series":null,"seriesNo":null,"minAge":18,"maxAge":99,"themes":["family","literary"],"color":"#8C4A5E","pages":352,"releaseDate":"2026-01-13","ratingPct":81,"ratingCount":402},{"id":"t-kite","title":"The Paper Kite Club","author":"Sam Whitlow","series":null,"seriesNo":null,"minAge":8,"maxAge":10,"themes":["friendship","quest"],"color":"#B5833A","pages":176,"releaseDate":"2025-08-19","ratingPct":87,"ratingCount":156},{"id":"t-snail","title":"The Snail Who Raced","author":"Rosa Lind","series":null,"seriesNo":null,"minAge":4,"maxAge":7,"themes":["animals","friendship"],"color":"#7C9A4B","pages":32,"releaseDate":"2024-05-07","ratingPct":84,"ratingCount":98},{"id":"t-ferry","title":"Night Ferry","author":"Mara Vance","series":null,"seriesNo":null,"minAge":18,"maxAge":99,"themes":["literary","family"],"color":"#3D4E6B","pages":340,"releaseDate":"2026-08-25","ratingPct":79,"ratingCount":233},{"id":"t-moonfox-3","title":"The Moon Fox: Ember Sky","author":"Lena Okafor","series":"Moon Fox","seriesNo":3,"minAge":8,"maxAge":11,"themes":["animals","quest","night"],"color":"#5B3E8C","pages":240,"releaseDate":"2026-12-01","ratingPct":null,"ratingCount":0},{"id":"t-harbor","title":"Kites Over Harbor Street","author":"Sam Whitlow","series":null,"seriesNo":null,"minAge":8,"maxAge":11,"themes":["friendship","ocean"],"color":"#2F7E8C","pages":190,"releaseDate":"2026-10-28","ratingPct":92,"ratingCount":26},{"id":"t-gnome-2","title":"The Garden Gnome Club: Moonlight Market","author":"June Adeyemi","series":"Garden Gnome Club","seriesNo":2,"minAge":5,"maxAge":8,"themes":["friendship","night"],"color":"#4E7A33","pages":80,"releaseDate":"2026-10-21","ratingPct":88,"ratingCount":31}],"copies":[{"titleId":"t-moonfox-1","libraryId":"lib-county","owned":3,"available":1,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-moonfox-2","libraryId":"lib-county","owned":3,"available":0,"queue":14,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-moonfox-2","libraryId":"lib-city","owned":1,"available":0,"queue":6,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-comet-1","libraryId":"lib-county","owned":2,"available":1,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-comet-2","libraryId":"lib-county","owned":1,"available":0,"queue":7,"asOf":"2026-11-03T18:00:00Z","ppuCents":249,"onOrder":0},{"titleId":"t-owl","libraryId":"lib-county","owned":2,"available":2,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-owl","libraryId":"lib-city","owned":1,"available":1,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-badger","libraryId":"lib-county","owned":1,"available":1,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-starlight","libraryId":"lib-county","owned":1,"available":0,"queue":8,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-starlight","libraryId":"lib-city","owned":2,"available":0,"queue":2,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-tide-2","libraryId":"lib-city","owned":1,"available":0,"queue":5,"asOf":"2026-11-03T18:00:00Z","ppuCents":299,"onOrder":0},{"titleId":"t-deepsea","libraryId":"lib-county","owned":2,"available":1,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-lighthouse","libraryId":"lib-city","owned":1,"available":1,"queue":0,"asOf":"2026-10-31T09:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-whiskers","libraryId":"lib-county","owned":1,"available":1,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-garden","libraryId":"lib-city","owned":1,"available":1,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-puddle","libraryId":"lib-county","owned":2,"available":2,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-rainy","libraryId":"lib-county","owned":1,"available":1,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-orchard","libraryId":"lib-city","owned":2,"available":1,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-kite","libraryId":"lib-county","owned":2,"available":1,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-snail","libraryId":"lib-county","owned":2,"available":1,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-ferry","libraryId":"lib-city","owned":3,"available":0,"queue":2,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-moonfox-3","libraryId":"lib-county","owned":0,"available":0,"queue":9,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":3},{"titleId":"t-harbor","libraryId":"lib-county","owned":2,"available":1,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0},{"titleId":"t-gnome-2","libraryId":"lib-city","owned":1,"available":1,"queue":0,"asOf":"2026-11-03T18:00:00Z","ppuCents":null,"onOrder":0}],"holds":[{"id":"hold-1","familyId":"fam-1","memberId":"m-arjun","titleId":"t-moonfox-2","libraryId":"lib-county","position":14,"status":"waiting","createdAt":"2026-10-30T20:00:00Z"}],"borrows":[{"id":"borrow-1","familyId":"fam-1","memberId":"m-arjun","titleId":"t-moonfox-1","libraryId":"lib-county","kind":"standard","borrowedAt":"2026-10-20T19:00:00Z","finishedAt":"2026-10-30T19:30:00Z","minutesRead":240,"costCents":0,"currentPage":212,"lastReadAt":"2026-10-30T19:30:00Z"},{"id":"borrow-2","familyId":"fam-1","memberId":"m-maya","titleId":"t-rainy","libraryId":"lib-county","kind":"standard","borrowedAt":"2026-10-27T18:00:00Z","finishedAt":"2026-11-01T18:20:00Z","minutesRead":75,"costCents":0,"currentPage":28,"lastReadAt":"2026-11-01T18:20:00Z"},{"id":"borrow-3","familyId":"fam-1","memberId":"m-priya","titleId":"t-orchard","libraryId":"lib-city","kind":"standard","borrowedAt":"2026-10-25T21:00:00Z","finishedAt":"2026-11-02T22:00:00Z","minutesRead":300,"costCents":0,"currentPage":352,"lastReadAt":"2026-11-02T22:00:00Z"},{"id":"borrow-4","familyId":"fam-1","memberId":"m-arjun","titleId":"t-kite","libraryId":"lib-county","kind":"standard","borrowedAt":"2026-10-31T18:00:00Z","finishedAt":null,"minutesRead":70,"costCents":0,"currentPage":112,"lastReadAt":"2026-11-02T19:40:00Z"},{"id":"borrow-5","familyId":"fam-1","memberId":"m-maya","titleId":"t-snail","libraryId":"lib-county","kind":"standard","borrowedAt":"2026-11-01T17:00:00Z","finishedAt":null,"minutesRead":0,"costCents":0,"currentPage":0,"lastReadAt":null},{"id":"borrow-6","familyId":"fam-1","memberId":"m-priya","titleId":"t-ferry","libraryId":"lib-city","kind":"standard","borrowedAt":"2026-11-02T21:00:00Z","finishedAt":null,"minutesRead":35,"costCents":0,"currentPage":31,"lastReadAt":"2026-11-02T22:10:00Z"}],"reactions":[{"id":"react-1","borrowId":"borrow-1","memberId":"m-arjun","reaction":"loved","at":"2026-10-30T19:31:00Z"},{"id":"react-2","borrowId":"borrow-2","memberId":"m-maya","reaction":"ok","at":"2026-11-01T18:21:00Z"}],"sessions":[{"id":"sess-01","clientId":"seed-01","borrowId":"borrow-1","memberId":"m-arjun","day":"2026-10-22","minutes":30,"toPage":null,"at":"2026-10-22T19:30:00Z"},{"id":"sess-02","clientId":"seed-02","borrowId":"borrow-1","memberId":"m-arjun","day":"2026-10-23","minutes":30,"toPage":null,"at":"2026-10-23T19:30:00Z"},{"id":"sess-03","clientId":"seed-03","borrowId":"borrow-1","memberId":"m-arjun","day":"2026-10-25","minutes":30,"toPage":null,"at":"2026-10-25T19:30:00Z"},{"id":"sess-04","clientId":"seed-04","borrowId":"borrow-1","memberId":"m-arjun","day":"2026-10-26","minutes":30,"toPage":null,"at":"2026-10-26T19:30:00Z"},{"id":"sess-05","clientId":"seed-05","borrowId":"borrow-1","memberId":"m-arjun","day":"2026-10-27","minutes":30,"toPage":null,"at":"2026-10-27T19:30:00Z"},{"id":"sess-06","clientId":"seed-06","borrowId":"borrow-1","memberId":"m-arjun","day":"2026-10-29","minutes":30,"toPage":null,"at":"2026-10-29T19:30:00Z"},{"id":"sess-07","clientId":"seed-07","borrowId":"borrow-1","memberId":"m-arjun","day":"2026-10-30","minutes":30,"toPage":null,"at":"2026-10-30T19:30:00Z"},{"id":"sess-08","clientId":"seed-08","borrowId":"borrow-4","memberId":"m-arjun","day":"2026-10-31","minutes":25,"toPage":null,"at":"2026-10-31T19:30:00Z"},{"id":"sess-09","clientId":"seed-09","borrowId":"borrow-4","memberId":"m-arjun","day":"2026-11-01","minutes":25,"toPage":null,"at":"2026-11-01T19:30:00Z"},{"id":"sess-10","clientId":"seed-10","borrowId":"borrow-4","memberId":"m-arjun","day":"2026-11-02","minutes":25,"toPage":null,"at":"2026-11-02T19:30:00Z"},{"id":"sess-11","clientId":"seed-11","borrowId":"borrow-2","memberId":"m-maya","day":"2026-10-28","minutes":25,"toPage":null,"at":"2026-10-28T19:30:00Z"},{"id":"sess-12","clientId":"seed-12","borrowId":"borrow-2","memberId":"m-maya","day":"2026-10-29","minutes":25,"toPage":null,"at":"2026-10-29T19:30:00Z"},{"id":"sess-13","clientId":"seed-13","borrowId":"borrow-2","memberId":"m-maya","day":"2026-10-31","minutes":25,"toPage":null,"at":"2026-10-31T19:30:00Z"},{"id":"sess-14","clientId":"seed-14","borrowId":"borrow-3","memberId":"m-priya","day":"2026-10-30","minutes":60,"toPage":null,"at":"2026-10-30T19:30:00Z"},{"id":"sess-15","clientId":"seed-15","borrowId":"borrow-3","memberId":"m-priya","day":"2026-11-01","minutes":60,"toPage":null,"at":"2026-11-01T19:30:00Z"},{"id":"sess-16","clientId":"seed-16","borrowId":"borrow-6","memberId":"m-priya","day":"2026-11-02","minutes":35,"toPage":null,"at":"2026-11-02T19:30:00Z"}],"tbr":[{"memberId":"m-arjun","titleId":"t-harbor","addedBy":"m-arjun","source":"self","addedAt":"2026-10-29T18:00:00Z"},{"memberId":"m-arjun","titleId":"t-starlight","addedBy":"m-priya","source":"parent","addedAt":"2026-10-30T20:00:00Z"},{"memberId":"m-maya","titleId":"t-gnome-2","addedBy":"m-priya","source":"parent","addedAt":"2026-11-01T09:00:00Z"},{"memberId":"m-priya","titleId":"t-ferry","addedBy":"m-priya","source":"self","addedAt":"2026-10-20T09:00:00Z"}],"shelves":[{"id":"shelf-4-7","name":"Ages 4–7: read-aloud favorites","minAge":4,"maxAge":7,"curator":"Maple County youth librarians","titleIds":["t-puddle","t-rainy","t-snail","t-gnome-2","t-garden"]},{"id":"shelf-8-10","name":"Ages 8–10: first big series","minAge":8,"maxAge":10,"curator":"Maple County youth librarians","titleIds":["t-moonfox-1","t-comet-1","t-kite","t-owl","t-harbor","t-badger"]},{"id":"shelf-11-13","name":"Ages 11–13: mysteries and quests","minAge":11,"maxAge":13,"curator":"Riverbend City teen librarians","titleIds":["t-deepsea","t-tide-2"]},{"id":"shelf-adult","name":"Grown-ups: book club picks","minAge":18,"maxAge":99,"curator":"Riverbend City adult services","titleIds":["t-orchard","t-ferry"]}],"follows":[{"memberId":"m-arjun","kind":"series","value":"Moon Fox"}],"meetups":[{"id":"meet-okafor","title":"Lena Okafor: drawing the Moon Fox","kind":"author talk","author":"Lena Okafor","series":"Moon Fox","venue":"Paper Lantern Books","venueKind":"bookstore","address":"214 Alder Street, Maple County","startsAt":"2026-11-15T18:30:00Z","endsAt":"2026-11-15T19:30:00Z","minAge":7,"maxAge":11,"capacity":40,"seatsTaken":37,"priceCents":0,"description":"The author draws the Moon Fox live, reads from Ember Sky before it comes out, and answers kids' questions."},{"id":"meet-storytime","title":"Rainy Day Storytime with Rosa Lind","kind":"storytime","author":"Rosa Lind","series":null,"venue":"Maple County Library, Main Branch","venueKind":"library","address":"1 Library Plaza, Maple County","startsAt":"2026-11-08T18:00:00Z","endsAt":"2026-11-08T18:45:00Z","minAge":3,"maxAge":7,"capacity":25,"seatsTaken":25,"priceCents":0,"description":"Puddle-jumping stories and a craft table. Bring rain boots if you like."},{"id":"meet-bookclub","title":"Kids' Book Club: The Comet Kids","kind":"book club","author":null,"series":"Comet Kids","venue":"Riverbend City Library, Harbor Branch","venueKind":"library","address":"88 Harbor Way, Riverbend","startsAt":"2026-11-21T00:30:00Z","endsAt":"2026-11-21T01:30:00Z","minAge":8,"maxAge":11,"capacity":15,"seatsTaken":6,"priceCents":0,"description":"Read book 1 before you come. Snacks and a trivia round."},{"id":"meet-vance","title":"Mara Vance signs Night Ferry","kind":"signing","author":"Mara Vance","series":null,"venue":"Owl & Ink Bookshop","venueKind":"bookstore","address":"9 Mill Lane, Riverbend","startsAt":"2026-11-13T03:00:00Z","endsAt":"2026-11-13T04:00:00Z","minAge":18,"maxAge":99,"capacity":60,"seatsTaken":22,"priceCents":0,"description":"Conversation and signing for grown-ups."},{"id":"meet-past","title":"Halloween Spooky Reads","kind":"storytime","author":null,"series":null,"venue":"Maple County Library, Main Branch","venueKind":"library","address":"1 Library Plaza, Maple County","startsAt":"2026-10-31T17:00:00Z","endsAt":"2026-10-31T18:00:00Z","minAge":4,"maxAge":10,"capacity":30,"seatsTaken":30,"priceCents":0,"description":"Already happened; hidden from upcoming lists."}],"demoRecords":[{"id":"R1","titleId":"t-moonfox-2","memberId":"m-arjun","label":"Hero run","proves":"Book 2 is on hold (#14). Next-Up offers 3 available read-alikes to borrow tonight."},{"id":"R2","titleId":"t-starlight","memberId":"m-arjun","label":"Smart holds","proves":"Not available anywhere. The hold goes to the card with the shortest line (Riverbend City)."},{"id":"R3","titleId":"t-comet-2","memberId":"m-arjun","label":"Instant borrow under cap","proves":"Series book 2 with an 11-week wait. Maple County funds an instant borrow and meters it in Stripe test mode."},{"id":"R4","titleId":"t-tide-2","memberId":"m-arjun","label":"Cap reached, product stops","proves":"Riverbend City's daily cap is spent. No instant borrow is offered, the server refuses one if asked, nothing is charged."},{"id":"R5","titleId":"t-deepsea","memberId":"m-arjun","label":"Parent approval","proves":"Ages 11-13 is outside Arjun's band (8-10). His request waits for a parent."},{"id":"R6","titleId":"t-lighthouse","memberId":"m-arjun","label":"Stale availability","proves":"Availability is 3 days old, so it shows 'check availability' until the library syncs."},{"id":"R7","titleId":"t-whiskers","memberId":"m-arjun","label":"Missing data shown as unknown","proves":"No reading level in the catalog. Shown as 'level unknown', kept out of Next-Up, needs approval for kids."},{"id":"R8","titleId":"t-puddle","memberId":"m-maya","label":"Clean run","proves":"In Maya's band and available. Borrowed in one tap, no approval."},{"id":"R9","view":"lists","memberId":"m-arjun","label":"Want-to-read list by age group","proves":"Arjun's list shows what's ready now. Starter shelves are grouped by age; adding a book outside his band is fine, borrowing it needs a parent."},{"id":"R10","view":"reader","borrowId":"borrow-4","memberId":"m-arjun","label":"Pick up where you left off","proves":"The Paper Kite Club opens at page 112. Leave the page mid-chapter and your time and page are still saved."},{"id":"R11","view":"home","memberId":"m-arjun","label":"Streak with a rest day","proves":"Arjun has an 8-day streak; one missed day a week doesn't break it. Read 5 minutes today to make it 9. Maya's broken streak gets a fresh start, not a scolding."},{"id":"R12","view":"discover","memberId":"m-arjun","label":"Good picks for you","proves":"Because Arjun loved The Moon Fox: the next book in the series, more by Lena Okafor, and books rated highly by readers his age, each with its reason."},{"id":"R13","view":"discover","memberId":"m-arjun","label":"New releases and coming soon","proves":"Arjun follows Moon Fox, so Ember Sky (out Dec 1, on order) shows up first with a pre-release hold. New arrivals from the last 30 days follow."},{"id":"R14","view":"events","memberId":"m-priya","label":"Author talks and meetups","proves":"Lena Okafor is at Paper Lantern Books (3 seats left). Kids under 13 go with a grown-up; the full storytime puts you on the waitlist."}]}),
+    meter: ReadarooMemory.createFakeMeter()
+  });
+  window.ReadarooAPI = {
+    call: function (method, path, query, body) {
+      if (path === '/api/health') return Promise.resolve({ status: 200, body: { ok: true, mode: 'demo (runs in your browser)', stripe: 'simulated' } });
+      return engine.handle(method, path, body, query || {});
+    }
+  };
+})();
+</script>
+<script>
+/* Readaroo web app. Talks to window.ReadarooAPI.call(method, path, query, body, opts) -> { status, body }.
+ * The real app uses HTTP (public/api-http.js); the HTML demo runs the same engine in the page. */
+(function () {
+  'use strict';
+  const api = window.ReadarooAPI;
+  const $ = (sel) => document.querySelector(sel);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const money = (c) => `$${(c / 100).toFixed(2)}`;
+  const REACT = { loved: 'Loved it', ok: 'It was OK', not_for_me: 'Not for me' };
+  const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
+
+  const state = {
+    actor: 'm-priya', view: 'home', titleId: null, member: null, q: '', members: [], toastTimer: null,
+    listMember: null, discoverMember: null, borrowId: null, reader: null,
+    animate: true, pending: 0, lastClick: null,
+  };
+
+  async function call(method, path, query, body, opts) {
+    return api.call(method, path, { actor: state.actor, ...(query || {}) }, body ? { actor: state.actor, ...body } : undefined, opts);
+  }
+  function toast(msg) {
+    const el = $('#toast');
+    el.textContent = msg;
+    el.hidden = false;
+    clearTimeout(state.toastTimer);
+    state.toastTimer = setTimeout(() => { el.hidden = true; }, 5600);
+  }
+  const me = () => state.members.find((m) => m.id === state.actor) || { role: 'parent', name: '' };
+  const isKid = () => me().role === 'kid';
+  const nameOf = (id) => (state.members.find((m) => m.id === id) || {}).name || id;
+  const when = (iso) => new Date(iso).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' }) + ' PT';
+
+  // Roo, the Readaroo kangaroo (original artwork, drawn inline so it works offline)
+  function roo(cls) {
+    return `<svg class="roo ${cls || ''}" viewBox="0 0 120 120" aria-hidden="true">
+      <ellipse cx="62" cy="114" rx="34" ry="5" fill="#1D2A44" opacity=".08"/>
+      <path d="M38 98c-16 2-28-2-32-10 10 3 20 2 30-3z" fill="#E39A57"/>
+      <ellipse cx="62" cy="82" rx="27" ry="28" fill="#F2AE6B"/>
+      <ellipse cx="62" cy="90" rx="17" ry="15" fill="#FCDDB6"/>
+      <ellipse cx="44" cy="108" rx="15" ry="5.5" fill="#E39A57"/><ellipse cx="80" cy="108" rx="15" ry="5.5" fill="#E39A57"/>
+      <rect x="48" y="78" width="28" height="19" rx="3" fill="#5B3FE0"/><path d="M62 78v19" stroke="#fff" stroke-width="2"/>
+      <path d="M52 83h6M52 87h6M66 83h6M66 87h6" stroke="#C9BFFF" stroke-width="1.5" stroke-linecap="round"/>
+      <ellipse cx="46" cy="86" rx="5" ry="7" fill="#E39A57"/><ellipse cx="78" cy="86" rx="5" ry="7" fill="#E39A57"/>
+      <g class="ear-l"><path d="M47 30c-8-14-6-26 1-27 6 1 8 13 6 27z" fill="#F2AE6B"/><path d="M49 26c-4-9-3-17 0-18 3 1 4 9 3 18z" fill="#FF9E9E"/></g>
+      <path d="M73 30c8-14 6-26-1-27-6 1-8 13-6 27z" fill="#F2AE6B"/><path d="M71 26c4-9 3-17 0-18-3 1-4 9-3 18z" fill="#FF9E9E"/>
+      <circle cx="60" cy="44" r="22" fill="#F2AE6B"/>
+      <ellipse cx="60" cy="52" rx="12" ry="9" fill="#FCDDB6"/>
+      <circle cx="52" cy="40" r="3.4" fill="#1D2A44"/><circle cx="68" cy="40" r="3.4" fill="#1D2A44"/>
+      <circle cx="53.2" cy="38.8" r="1.1" fill="#fff"/><circle cx="69.2" cy="38.8" r="1.1" fill="#fff"/>
+      <ellipse cx="60" cy="48" rx="3.6" ry="2.6" fill="#1D2A44"/>
+      <path d="M55 54q5 4 10 0" stroke="#1D2A44" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="46" cy="49" r="3.2" fill="#FF8C8C" opacity=".55"/><circle cx="74" cy="49" r="3.2" fill="#FF8C8C" opacity=".55"/>
+    </svg>`;
+  }
+  const ICONS = {
+    home: '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/>',
+    discover: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+    lists: '<path d="M6 3h12v18l-6-4-6 4z"/>',
+    events: '<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M12 13l1 2 2 .3-1.5 1.4.4 2.1-1.9-1-1.9 1 .4-2.1L9 15.3l2-.3z"/>',
+    more: '<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>',
+    guide: '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/>',
+    approvals: '<path d="M12 3l7 3v5c0 5-3 8.5-7 10-4-1.5-7-5-7-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+    digest: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+    payments: '<rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/>',
+  };
+  const icon = (name) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ''}</svg>`;
+
+  // Confetti for wins (skipped when the viewer prefers less motion)
+  const confetti = (() => {
+    let canvas = null;
+    let ctx = null;
+    let parts = [];
+    let raf = null;
+    const colors = ['#5B3FE0', '#FFC93C', '#19A47A', '#FF6F61', '#49A8FF'];
+    function step() {
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      for (const p of parts) {
+        p.vy += 0.22; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life++;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+        ctx.globalAlpha = Math.max(0, 1 - p.life / 120); ctx.fillStyle = p.c;
+        if (p.round) { ctx.beginPath(); ctx.arc(0, 0, p.w / 2, 0, Math.PI * 2); ctx.fill(); } else ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      }
+      parts = parts.filter((p) => p.life < 120 && p.y < innerHeight + 40);
+      if (parts.length) raf = requestAnimationFrame(step);
+      else { raf = null; ctx.clearRect(0, 0, innerWidth, innerHeight); }
+    }
+    return function burst(n, x, y) {
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.className = 'confetti';
+        canvas.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(canvas);
+        ctx = canvas.getContext('2d');
+      }
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = innerWidth * dpr; canvas.height = innerHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const cx = x ?? innerWidth / 2;
+      const cy = y ?? innerHeight * 0.4;
+      for (let i = 0; i < (n || 70); i++) {
+        const a = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.4;
+        const sp = 5 + Math.random() * 8;
+        parts.push({ x: cx, y: cy, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, r: Math.random() * 6, vr: (Math.random() - 0.5) * 0.3,
+          w: 6 + Math.random() * 6, h: 9 + Math.random() * 8, c: colors[i % colors.length], life: 0, round: i % 4 === 0 });
+      }
+      if (!raf) raf = requestAnimationFrame(step);
+    };
+  })();
+  const BIG_WINS = ['finished', 'instant_borrowed', 'going', 'approved'];
+  const SMALL_WINS = ['borrowed', 'listed', 'followed', 'hold_placed', 'reacted', 'requested'];
+  function celebrate(body) {
+    if (!body) return;
+    const at = state.lastClick || {};
+    if (BIG_WINS.includes(body.outcome)) confetti(110, at.x, at.y);
+    else if (SMALL_WINS.includes(body.outcome)) confetti(36, at.x, at.y);
+    else if (body.streak && body.streak.readToday && body.savedMinutes > 0) confetti(60, at.x, at.y);
+  }
+
+  function cover(t, big) {
+    return `<div class="cover${big ? ' big' : ''}" style="background:${esc(t.color || '#556')}" aria-hidden="true">${esc((t.title || '').toUpperCase())}</div>`;
+  }
+  function statusPill(s, label) {
+    if (s === 'available') return '<span class="pill ok">Available now</span>';
+    if (s === 'check') return '<span class="pill check">Check availability</span>';
+    if (s === 'coming') return `<span class="pill kid">${esc(label || 'Coming soon')}</span>`;
+    if (s === 'none') return '<span class="pill wait">Not at your libraries</span>';
+    return '<span class="pill wait">Wait list</span>';
+  }
+  function progressBar(pct, label) {
+    return `<div class="bar" role="img" aria-label="${esc(label || `${pct}% read`)}"><span style="width:${Math.min(100, pct)}%"></span></div>`;
+  }
+  function memberPicker(selected, attr, includeParent) {
+    const people = state.members.filter((m) => includeParent || m.role === 'kid');
+    return `<div class="nav" role="group" aria-label="Whose">${people.map((m) =>
+      `<button type="button" ${attr}="${m.id}" ${m.id === selected ? 'aria-current="page"' : ''}>${esc(m.name)}${m.age ? ` (${m.age})` : ''}</button>`).join('')}</div>`;
+  }
+
+  // ---------- streak card ----------
+  function streakCard(s, big) {
+    const dots = (s.calendar || []).map((d, i) => {
+      const cls = d.read ? 'on' : d.rest ? 'rest' : '';
+      const label = `${d.day}: ${d.read ? `${d.minutes} min` : d.rest ? 'rest day' : 'no reading'}${d.today ? ' (today)' : ''}`;
+      return `<span class="dot ${cls} ${d.today ? 'today' : ''}" style="--d:${i}" title="${esc(label)}" aria-label="${esc(label)}"></span>`;
+    }).join('');
+    return `<div class="card streak ${big ? 'big' : ''}">
+      <div class="row"><div class="streak-num"><b>${s.current}</b><span>day streak</span></div>
+        <div class="grow"><p>${esc(s.message)}</p>
+        <p class="small muted">${s.weekDays} of ${s.weeklyGoal} reading days this week${s.restDays && s.restDays.length ? ' · 1 rest day used' : ''}</p></div></div>
+      ${dots ? `<div class="dots" role="img" aria-label="Last 14 days of reading">${dots}</div>
+      <p class="small muted legend"><span class="dot on"></span> read <span class="dot rest"></span> rest day (one a week keeps your streak) <span class="dot today"></span> today</p>` : ''}
+      ${s.badges && s.badges.length ? `<div class="reactions">${s.badges.map((b) => `<span class="pill kid">${esc(b)}</span>`).join('')}</div>` : ''}
+    </div>`;
+  }
+
+  // ---------- navigation ----------
+  function go(view, extra) {
+    if (state.view === 'reader' && view !== 'reader') { flushReading(false); state.reader = null; }
+    Object.assign(state, { view, animate: true }, extra || {});
+    render();
+    window.scrollTo({ top: 0 });
+  }
+  function navBar() {
+    const tabs = isKid()
+      ? [['home', 'My books'], ['discover', 'Discover'], ['lists', 'My list'], ['events', 'Events'], ['guide', 'Demo guide']]
+      : [['home', 'Home'], ['discover', 'Discover'], ['lists', 'Lists'], ['events', 'Events'], ['approvals', 'Approvals'], ['digest', 'Digest'], ['library', 'Payments'], ['guide', 'Demo guide']];
+    return `<nav class="nav topnav" aria-label="Sections">${tabs.map(([v, l]) =>
+      `<button type="button" data-go="${v}" class="${v === 'guide' ? 'nav-guide' : ''}" ${state.view === v ? 'aria-current="page"' : ''}>${l}</button>`).join('')}</nav>`;
+  }
+
+  function tabBar() {
+    const kid = isKid();
+    const tabs = kid
+      ? [['home', 'My books', 'home'], ['discover', 'Find', 'discover'], ['lists', 'My list', 'lists'], ['events', 'Events', 'events'], ['guide', 'Guide', 'guide']]
+      : [['home', 'Home', 'home'], ['discover', 'Discover', 'discover'], ['lists', 'Lists', 'lists'], ['events', 'Events', 'events'], ['more', 'More', 'more']];
+    const underMore = ['more', 'approvals', 'digest', 'library', 'guide'];
+    const current = (v) => state.view === v || (!kid && v === 'more' && underMore.includes(state.view));
+    return `<ul>${tabs.map(([v, label, ic]) => `<li><button type="button" class="tab" data-go="${v}" ${current(v) ? 'aria-current="page"' : ''}>
+      ${icon(ic)}<span>${label}</span>${v === 'more' && state.pending ? `<span class="badge" aria-label="${state.pending} to review">${state.pending}</span>` : ''}</button></li>`).join('')}</ul>`;
+  }
+
+  // ---------- more (phones: the sections that don't fit the tab bar) ----------
+  function viewMore() {
+    const rows = [
+      ['approvals', 'approvals', 'Approvals', state.pending ? `${plural(state.pending, 'request')} waiting` : 'Book and event requests from the kids'],
+      ['library', 'payments', 'Payments', 'Library-funded instant borrows, budgets and Stripe charges'],
+      ['digest', 'digest', 'Family digest', 'This week: books finished, reading time, streaks'],
+      ['guide', 'guide', 'Demo guide', 'Open any demo record and see the audit log'],
+    ];
+    return `<h1>More</h1><ul class="list more-list">${rows.map(([v, ic, t, d]) => `<li><button type="button" class="item" data-go="${v}">${icon(ic)}
+      <div class="grow"><div class="title">${t}</div><div class="small muted">${d}</div></div></button></li>`).join('')}</ul>`;
+  }
+
+  // ---------- home ----------
+  async function viewHome() {
+    const r = await call('GET', '/api/home');
+    if (r.status !== 200) return errorBox(r);
+    const d = r.body;
+    state.members = d.members;
+    if (isKid()) return kidHome(d);
+    const requests = d.pendingApprovals.length + d.meetupRequests.length;
+    state.pending = requests;
+    return `
+      <div class="hero">${roo('')}<div class="bubble"><p class="muted small">Pinned demo date ${esc(d.now.slice(0, 10))}</p><h1>${esc(d.family.name)} library</h1></div></div>
+      <div class="members">${d.members.map((m) => {
+        const s = d.streaks.find((x) => x.memberId === m.id);
+        return `<button type="button" class="member" data-actor="${m.id}" aria-label="Switch to ${esc(m.name)}'s view">
+          <span class="avatar ${m.role === 'kid' ? 'kid' : ''}">${esc(m.name[0])}</span>
+          <span>${esc(m.name)}${m.age ? `, ${m.age}` : ''}</span>
+          <span class="streak-chip ${s && s.current ? '' : 'zero'}">${s ? s.current : 0}-day streak</span>
+        </button>`;
+      }).join('')}</div>
+      ${requests ? `<button type="button" class="notice sun" data-go="approvals"><b>${plural(requests, 'request')} to review</b>
+        <span class="small">${d.pendingApprovals[0] ? `${esc(nameOf(d.pendingApprovals[0].memberId))} asked for ${esc(d.pendingApprovals[0].title)}` : `${esc(nameOf(d.meetupRequests[0].by))} wants to go to ${esc(d.meetupRequests[0].title)}`}</span></button>` : ''}
+      ${d.nextMeetup ? `<button type="button" class="notice ok" data-go="events"><b>${esc(d.nextMeetup.title)}</b>
+        <span class="small">${esc(when(d.nextMeetup.startsAt))} · ${esc(d.nextMeetup.venue)} · ${esc(d.nextMeetup.why[0] || '')} · ${plural(d.nextMeetup.seatsLeft, 'seat')} left</span></button>` : ''}
+      <div class="section"><h2>Reading now</h2>${readingList(d.reading, false)}</div>
+      <div class="section"><h2>On hold</h2>${holdList(d.holds)}</div>
+      <div class="section"><h2>From your lists</h2>
+        <ul class="list">${d.members.map((m) => `<li><button type="button" class="item" data-list-member="${m.id}">
+          <div class="grow"><div class="title">${esc(m.name)}'s list</div><div class="muted small">${d.listReady[m.id] ? `${plural(d.listReady[m.id], 'book')} ready to borrow now` : 'Nothing ready yet'}</div></div></button></li>`).join('')}</ul>
+      </div>`;
+  }
+
+  async function kidHome(d) {
+    const m = me();
+    const s = await call('GET', '/api/streaks');
+    const streak = s.status === 200 ? s.body.streaks[0] : null;
+    const mine = d.reading.filter((b) => b.memberId === m.id);
+    const holds = d.holds.filter((h) => h.memberId === m.id);
+    return `
+      <div class="hero">${roo('hop')}<div class="bubble"><h1>Hi ${esc(m.name)}!</h1><p class="muted">${streak && streak.readToday ? 'You read today. High five!' : 'Ready for a story?'} Books for ages ${m.bandMin}–${m.bandMax} show up first.</p></div></div>
+      ${streak ? streakCard(streak, true) : ''}
+      <div class="section"><h2>Reading now</h2>${readingList(mine, true)}</div>
+      ${d.listReady[m.id] ? `<button type="button" class="notice ok" data-go="lists"><b>${plural(d.listReady[m.id], 'book')} on your list ${d.listReady[m.id] === 1 ? 'is' : 'are'} ready</b><span class="small">Borrow ${d.listReady[m.id] === 1 ? 'it' : 'one'} tonight</span></button>` : ''}
+      <div class="section"><h2>Coming soon</h2>${holdList(holds)}</div>
+      <button type="button" class="btn sun" data-go="discover">Find something good</button>`;
+  }
+
+  function holdList(holds) {
+    if (!holds.length) return '<p class="muted small">No holds right now.</p>';
+    return `<ul class="list">${holds.map((h) => `<li><button type="button" class="item" data-title="${h.titleId}" data-member="${h.memberId}">
+      ${cover(h)}<div class="grow"><div class="title">${esc(h.title)}</div>
+      <div class="muted small">For ${esc(nameOf(h.memberId))} · #${h.position} at ${esc(h.libraryName)} · ${esc(h.waitLabel)}</div>
+      <div class="small accent">See what to read tonight</div></div></button></li>`).join('')}</ul>`;
+  }
+
+  function readingList(items, kid) {
+    if (!items.length) return `<div class="roo-empty">${roo('')}<p class="muted small">Nothing checked out right now. Find something good in Discover.</p></div>`;
+    return `<ul class="list">${items.map((b) => `<li class="item">${cover(b)}<div class="grow">
+      <div class="title">${esc(b.title)}</div>
+      <div class="muted small">${kid ? '' : `${esc(nameOf(b.memberId))} · `}${b.currentPage ? `page ${b.currentPage} of ${b.pages}` : 'Not started'}${b.kind === 'instant' ? ' · library-funded' : ''}</div>
+      ${progressBar(b.pct, `${b.pct}% read`)}
+      <div class="actions" style="margin-top:8px"><button type="button" class="btn primary small" data-read="${b.id}">${b.currentPage ? 'Continue reading' : 'Start reading'}</button></div>
+      ${kid ? `<details class="small"><summary>Finished? Tell us how it was</summary><div class="reactions">${Object.entries(REACT).map(([k, l]) =>
+        `<button type="button" class="btn ghost small" data-react="${k}" data-borrow="${b.id}">${l}</button>`).join('')}</div></details>` : ''}
+      </div></li>`).join('')}</ul>`;
+  }
+
+  // ---------- reader: tracks time and page, saves even if you leave ----------
+  async function viewReader() {
+    const r = await call('GET', `/api/reading/${encodeURIComponent(state.borrowId)}`);
+    if (r.status !== 200) return errorBox(r);
+    const d = r.body;
+    if (!state.reader || state.reader.borrowId !== d.borrowId) {
+      state.reader = {
+        borrowId: d.borrowId, actor: state.actor, clientId: `rd-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`,
+        page: d.currentPage, startPage: d.currentPage, pages: d.pages, activeMs: 0, since: Date.now(), secondsPerMinute: d.secondsPerMinute,
+        visible: true, flushedMinutes: 0,
+      };
+    }
+    const rd = state.reader;
+    return `
+      <button type="button" class="btn quiet back" data-go="home">← Back</button>
+      <div class="row" style="align-items:flex-start">${cover(d.title, true)}
+        <div class="grow section"><h1 style="font-size:1.4rem">${esc(d.title.title)}</h1><p class="muted">${esc(d.title.author)} · ${esc(d.member.name)} is reading</p>
+        <p class="small muted">${d.lastReadAt ? `Picked up where ${esc(d.member.name)} left off` : 'First time opening this book'}</p></div></div>
+      ${d.finished ? '<div class="notice ok"><b>Finished!</b><span class="small">Tell us how it was from My books.</span></div>' : `
+      <div class="card reader">
+        <div class="row"><div class="grow"><div class="title">Page <span id="rd-page">${rd.page}</span> of ${d.pages}</div>
+          <div class="small muted">Reading time this session: <span id="rd-time">0 min</span></div></div>
+          <span class="pill ok" id="rd-saved">Auto-save on</span></div>
+        ${progressBar(Math.round((rd.page / d.pages) * 100), 'Progress')}
+        <div class="actions">
+          <button type="button" class="btn ghost small" data-page="-1" aria-label="Back one page">− 1 page</button>
+          <button type="button" class="btn ghost small" data-page="1">+ 1 page</button>
+          <button type="button" class="btn ghost small" data-page="10">+ 10 pages</button>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn primary" data-reader="done">Done for now</button>
+          <button type="button" class="btn sun" data-reader="finished">I finished the book</button>
+        </div>
+        <p class="small muted">Close the tab, switch apps or tap Back mid-chapter: your time and page are saved. ${d.secondsPerMinute < 60 ? `Demo speed: each real second counts as ${d.secondsPerMinute === 1 ? 'a minute' : `1/${60 / d.secondsPerMinute} minute`}.` : ''}</p>
+      </div>`}
+      ${streakCard(d.streak, false)}`;
+  }
+  function readerMinutes() {
+    const rd = state.reader;
+    if (!rd) return 0;
+    const ms = rd.activeMs + (rd.visible ? Date.now() - rd.since : 0);
+    return Math.floor(ms / 1000 / rd.secondsPerMinute);
+  }
+  function tickReader() {
+    if (state.view !== 'reader' || !state.reader) return;
+    const el = $('#rd-time');
+    if (el) el.textContent = `${readerMinutes()} min`;
+  }
+  setInterval(tickReader, 1000);
+  async function flushReading(keepalive, opts) {
+    const rd = state.reader;
+    if (!rd) return null;
+    const minutes = readerMinutes();
+    const moved = rd.page !== rd.startPage;
+    if (minutes < 1 && !moved && !(opts && opts.finished)) return null;
+    const r = await call('POST', '/api/sessions', null, {
+      actor: rd.actor, borrowId: rd.borrowId, clientId: rd.clientId, minutes: Math.max(1, minutes), toPage: opts && opts.finished ? rd.pages : rd.page,
+    }, { keepalive });
+    return r;
+  }
+  document.addEventListener('visibilitychange', () => {
+    const rd = state.reader;
+    if (!rd || state.view !== 'reader') return;
+    if (document.visibilityState === 'hidden') {
+      rd.activeMs += Date.now() - rd.since;
+      rd.visible = false;
+      flushReading(true);
+    } else {
+      rd.since = Date.now();
+      rd.visible = true;
+    }
+  });
+  window.addEventListener('pagehide', () => { if (state.view === 'reader') flushReading(true); });
+
+  // ---------- discover: picks, new releases, search ----------
+  async function viewDiscover() {
+    const member = isKid() ? state.actor : (state.discoverMember || state.members.find((m) => m.role === 'kid').id);
+    const [r, s] = await Promise.all([
+      call('GET', '/api/discover', { member }),
+      state.q ? call('GET', '/api/titles', { member, q: state.q }) : Promise.resolve(null),
+    ]);
+    if (r.status !== 200) return errorBox(r);
+    const d = r.body;
+    const who = isKid() ? 'you' : d.member.name;
+    const followed = new Set(d.follows.map((f) => `${f.kind}:${f.value}`));
+    const row = (t, extra) => `<li><div class="item">${cover(t)}<div class="grow">
+        <button type="button" class="linkish title" data-title="${t.id}" data-member="${member}">${esc(t.title)}</button>
+        <div class="muted small">${esc(t.author)} · ${esc(t.level)}${t.rating && !(t.why || []).some((w) => w.startsWith('Loved by')) ? ` · loved by ${t.rating.pct}% of readers ${esc(d.member.band)}` : ''}</div>
+        <div>${statusPill(t.status, t.statusLabel)} ${t.onHold ? '<span class="pill wait">On hold</span>' : ''} ${t.onList ? '<span class="pill wait">On list</span>' : ''} ${t.needsOk ? '<span class="pill kid">Ask a grown-up</span>' : ''}</div>
+        ${extra || ''}</div></div></li>`;
+    return `
+      <h1>Discover</h1>
+      ${isKid() ? '' : memberPicker(member, 'data-discover-member', true)}
+      <form class="search" id="search-form" role="search">
+        <label for="q" class="visually-hidden">Search titles</label>
+        <input id="q" name="q" type="search" placeholder="Title, author or series" value="${esc(state.q)}" autocomplete="off">
+        <button class="btn primary" type="submit">Search</button>
+      </form>
+      ${s && s.status === 200 ? `<div class="section"><h2>Results for “${esc(state.q)}”</h2><ul class="list">${s.body.results.map((t) => row({ ...t, needsOk: isKid() && !t.inBand })).join('') || '<p class="muted">No matches.</p>'}</ul>
+        <button type="button" class="btn quiet back" data-clear-search="1">Clear search</button></div>` : ''}
+      <div class="section"><h2>Good picks for ${esc(who)}</h2>
+        <p class="small muted">Based on what ${esc(who)} loved, finished and saved. Every pick says why.</p>
+        <ul class="list">${d.picks.map((t) => row(t, `<p class="small accent">${t.why.map(esc).join(' · ')}</p>`)).join('') || '<p class="muted small">Finish a book and react to it to get picks.</p>'}</ul></div>
+      ${d.comingSoon.length ? `<div class="section"><h2>Coming soon</h2><ul class="list">${d.comingSoon.map((t) => row(t, `
+        <p class="small muted">${t.series ? `${esc(t.series)} #${t.seriesNo}` : 'New book'}${t.followed ? ' · you follow this' : ''} · your libraries have copies on order</p>
+        <div class="actions">${t.onHold ? '' : `<button type="button" class="btn primary small" data-prehold="${t.id}" data-member="${member}">Get in line now</button>`}
+          ${t.series ? `<button type="button" class="btn ghost small" data-follow="series" data-value="${esc(t.series)}" data-on="${followed.has(`series:${t.series}`) ? 'false' : 'true'}" data-member="${member}">${followed.has(`series:${t.series}`) ? 'Following' : 'Follow series'}</button>` : ''}</div>`)).join('')}</ul></div>` : ''}
+      <div class="section"><h2>New arrivals</h2><p class="small muted">Released in the last 30 days at your libraries.</p>
+        <ul class="list">${d.newArrivals.map((t) => row(t, `<p class="small muted">Released ${esc(t.released)}</p>
+          <div class="actions"><button type="button" class="btn ghost small" data-follow="author" data-value="${esc(t.author)}" data-on="${followed.has(`author:${t.author}`) ? 'false' : 'true'}" data-member="${member}">${followed.has(`author:${t.author}`) ? 'Following' : `Follow ${esc(t.author)}`}</button>
+          ${t.onList ? '' : `<button type="button" class="btn ghost small" data-add-list="${t.id}" data-member="${member}">Add to list</button>`}</div>`)).join('') || '<p class="muted small">Nothing new this month.</p>'}</ul></div>`;
+  }
+
+  // ---------- lists by age group ----------
+  async function viewLists() {
+    const member = isKid() ? state.actor : (state.listMember || state.members.find((m) => m.role === 'kid').id);
+    const r = await call('GET', '/api/lists', { member });
+    if (r.status !== 200) return errorBox(r);
+    const d = r.body;
+    const whose = isKid() ? 'My' : `${esc(d.member.name)}'s`;
+    const listRow = (t) => `<li><div class="item">${cover(t)}<div class="grow">
+        <button type="button" class="linkish title" data-title="${t.id}" data-member="${member}">${esc(t.title)}</button>
+        <div class="muted small">${esc(t.author)} · ${esc(t.level)} · added by ${t.source === 'self' ? (isKid() ? 'you' : esc(t.addedBy)) : esc(t.addedBy)}</div>
+        <div>${statusPill(t.status, t.statusLabel)} ${t.needsOk ? '<span class="pill kid">Ask a grown-up to borrow</span>' : ''}</div>
+        <div class="actions" style="margin-top:6px">
+          ${t.status === 'available' && !t.needsOk ? `<button type="button" class="btn primary small" data-borrow-title="${t.id}" data-member="${member}">Borrow</button>` : `<button type="button" class="btn ghost small" data-title="${t.id}" data-member="${member}">Open</button>`}
+          <button type="button" class="btn ghost small" data-remove-list="${t.id}" data-member="${member}">Remove</button>
+        </div></div></div></li>`;
+    return `
+      <h1>${whose} want-to-read list</h1>
+      ${isKid() ? '' : memberPicker(member, 'data-list-member', true)}
+      <p class="small muted">${d.readyCount ? `${plural(d.readyCount, 'book')} ready to borrow now. ` : ''}Ready books float to the top.</p>
+      <ul class="list">${d.list.map(listRow).join('') || '<p class="muted small">Nothing saved yet. Add books from the shelves below.</p>'}</ul>
+      <div class="section"><h2>Shelves by age group</h2><p class="small muted">Picked by the librarians at your libraries.</p></div>
+      ${d.shelves.map((sh) => `<div class="card"><div class="row"><h3 class="grow">${esc(sh.name)}</h3>${sh.stretch ? '<span class="pill kid">Next level up</span>' : ''}</div>
+        <p class="small muted">${esc(sh.curator)}${sh.forWhom.length ? ` · fits ${esc(sh.forWhom.join(', '))}` : ''}${sh.stretch ? ' · you can save these; borrowing needs a grown-up' : ''}</p>
+        <ul class="list compact">${sh.items.map((t) => `<li class="row"><button type="button" class="linkish grow" data-title="${t.id}" data-member="${member}">${esc(t.title)}</button>
+          ${statusPill(t.status, t.statusLabel)}
+          ${t.onList ? '<span class="pill wait">On list</span>' : `<button type="button" class="btn ghost small" data-add-list="${t.id}" data-member="${member}">Add</button>`}</li>`).join('')}</ul></div>`).join('')}`;
+  }
+
+  // ---------- author talks and meetups ----------
+  async function viewEvents() {
+    const r = await call('GET', '/api/meetups');
+    if (r.status !== 200) return errorBox(r);
+    const kid = isKid();
+    const cards = r.body.meetups.map((m) => {
+      const pre = state.members.filter((x) => m.goodFor.includes(x.name)).map((x) => x.id);
+      if (m.needsAdult && state.members.some((x) => x.role === 'kid' && pre.includes(x.id)) && !pre.includes(state.actor)) pre.push(state.actor);
+      const choose = kid || m.rsvp ? '' : `<fieldset class="attendees"><legend class="small">Who's going?</legend>${state.members.map((x) => {
+        const fits = x.role === 'parent' ? true : (x.age >= m.minAge && x.age <= m.maxAge);
+        return `<label class="check"><input type="checkbox" name="att-${m.id}" value="${x.id}" ${pre.includes(x.id) ? 'checked' : ''} ${fits ? '' : 'disabled'}> ${esc(x.name)}${fits ? '' : ' (ages don’t fit)'}</label>`;
+      }).join('')}</fieldset>`;
+      let action;
+      if (m.rsvp) {
+        action = `<div class="notice ${m.rsvp.status === 'going' ? 'ok' : 'warn'}"><b>${m.rsvp.status === 'going' ? 'You’re going' : 'On the waitlist'}</b><span class="small">${esc(m.rsvp.attendees.join(', '))}</span></div>
+          ${kid ? '' : `<div class="actions"><button type="button" class="btn ghost small" data-cancel-meetup="${m.id}">${m.rsvp.status === 'going' ? 'Cancel and free the seats' : 'Leave the waitlist'}</button>${api.files ? `<a class="btn ghost small" href="/api/meetups/${m.id}/ics">Add to calendar</a>` : ''}</div>`}`;
+      } else if (kid) {
+        action = m.viewerRequested ? '<div class="notice sun"><b>You asked a grown-up</b><span class="small">They’ll see it in Approvals.</span></div>'
+          : `<button type="button" class="btn sun" data-ask-meetup="${m.id}">Ask to go</button>`;
+      } else {
+        action = `${choose}<div class="actions"><button type="button" class="btn ${m.availability === 'full' ? 'ghost' : 'primary'}" data-rsvp="${m.id}">${m.availability === 'full' ? 'Join the waitlist' : 'Book free seats'}</button></div>
+          ${m.requests.length ? `<p class="small">${esc(m.requests.map((q) => q.by).join(', '))} asked to go — answer in Approvals.</p>` : ''}`;
+      }
+      return `<li class="card">
+        <div class="row"><span class="pill ${m.venueKind === 'bookstore' ? 'kid' : 'ok'}">${esc(m.kind)} · ${esc(m.venueKind)}</span>
+          <span class="grow"></span>${m.availability === 'full' ? '<span class="pill bad">Full</span>' : m.availability === 'few' ? `<span class="pill check">${plural(m.seatsLeft, 'seat')} left</span>` : `<span class="pill wait">${m.seatsLeft} seats</span>`}</div>
+        <h3>${esc(m.title)}</h3>
+        <p class="small"><b>${esc(when(m.startsAt))}</b> · ${esc(m.venue)}, ${esc(m.address)}</p>
+        <p class="small muted">${esc(m.ages)} · ${esc(m.priceLabel)}${m.goodFor.length ? ` · good for ${esc(m.goodFor.join(', '))}` : ''}${m.needsAdult ? ' · kids under 13 come with a grown-up' : ''}</p>
+        ${m.why.length ? `<p class="small accent">${m.why.map(esc).join(' · ')}</p>` : ''}
+        <p class="small">${esc(m.description)}</p>
+        ${action}</li>`;
+    }).join('');
+    return `<h1>Author talks and meetups</h1>
+      <p class="small muted">Readings, signings, storytimes and book clubs at your libraries and nearby bookstores. Events tied to books your family reads come first. All venues and events are fictional.</p>
+      <ul class="list">${cards || '<p class="muted">No upcoming events.</p>'}</ul>`;
+  }
+
+  // ---------- title ----------
+  async function viewTitle() {
+    const r = await call('GET', `/api/titles/${encodeURIComponent(state.titleId)}`, { member: state.member || state.actor });
+    if (r.status !== 200) return errorBox(r);
+    const d = r.body;
+    const t = d.title;
+    const anyReady = d.availability.some((a) => a.status === 'available');
+    const anyStale = d.availability.some((a) => a.status === 'check');
+    const coming = d.availability.some((a) => a.status === 'coming');
+    let actions = '';
+    if (d.borrowed) {
+      actions = `<div class="notice ok"><b>${esc(d.member.name)} has this book</b><span class="small">${d.borrowed.kind === 'instant' ? 'Instant borrow, funded by the library.' : 'Checked out for 21 days.'}</span></div>
+        <button type="button" class="btn primary" data-read="${d.borrowed.id}">Continue reading</button>`;
+    } else if (d.pendingApprovalId) {
+      actions = '<div class="notice sun"><b>Waiting for a grown-up</b><span class="small">A parent will see this request in Approvals.</span></div>';
+    } else if (d.needsApproval) {
+      actions = `<div class="notice sun"><b>This one needs a grown-up's OK</b><span class="small">${t.levelKnown ? `${esc(t.level)} is outside your band (${me().bandMin}–${me().bandMax}).` : 'We don’t know this book’s reading level yet.'}</span></div>
+        <button type="button" class="btn sun" data-act="borrow">Ask to borrow</button>`;
+    } else {
+      const btns = [];
+      if (anyReady) btns.push('<button type="button" class="btn primary" data-act="borrow">Borrow now</button>');
+      if (anyStale) btns.push('<button type="button" class="btn ghost" data-act="refresh">Refresh availability</button>');
+      if (!anyReady && !d.hold) btns.push(`<button type="button" class="btn ghost" data-act="hold">${coming ? 'Get in line before release' : 'Place hold (shortest line)'}</button>`);
+      actions = `<div class="actions">${btns.join('')}</div>`;
+    }
+    const extras = `<div class="actions">
+      ${d.onList ? '<span class="pill wait">On the list</span>' : `<button type="button" class="btn ghost small" data-add-list="${t.id}" data-member="${d.member.id}">Add to ${d.member.id === state.actor ? 'my' : `${esc(d.member.name)}'s`} list</button>`}
+      ${t.series ? `<button type="button" class="btn ghost small" data-follow="series" data-value="${esc(t.series)}" data-on="${d.followingSeries ? 'false' : 'true'}" data-member="${d.member.id}">${d.followingSeries ? `Following ${esc(t.series)}` : `Follow ${esc(t.series)}`}</button>` : ''}</div>`;
+    const instant = d.borrowed ? '' : d.instant && d.instant.eligible && !d.needsApproval && !d.pendingApprovalId ? `
+      <div class="card">
+        <h3>Library-funded instant borrow</h3>
+        <p class="small muted">${esc(d.instant.libraryName)} pays ${money(d.instant.priceCents)} so ${esc(d.member.name)} can keep reading the series instead of waiting ${esc(d.instant.waitLabel)}. Recorded in Stripe test mode; never over the library's cap.</p>
+        <button type="button" class="btn sun" data-act="instant">Borrow instantly</button>
+      </div>` : (t.seriesNo >= 2 && d.instant && !anyReady && !coming
+      ? (d.instant.capReached
+        ? `<div class="notice warn"><b>No instant borrow today</b><span class="small">${esc(d.instant.reason)} Nothing is charged.</span></div>`
+        : `<p class="muted small">Instant borrow not offered: ${esc(d.instant.reason)}</p>`)
+      : '');
+    const hold = d.hold ? `<div class="notice ok"><b>On hold for ${esc(d.member.name)}</b><span class="small">#${d.hold.position} at ${esc(d.hold.libraryName)} · likely ${esc(d.hold.waitLabel)}</span></div>` : '';
+    const next = d.nextUp && !coming ? nextUpBlock(d) : '';
+    return `
+      <button type="button" class="btn quiet back" data-go="home">← Back</button>
+      <div class="row" style="align-items:flex-start">${cover(t, true)}
+        <div class="grow section"><h1 style="font-size:1.4rem">${esc(t.title)}</h1>
+          <p class="muted">${esc(t.author)}${t.series ? ` · ${esc(t.series)} #${t.seriesNo}` : ''} · ${t.pages} pages</p>
+          <p><span class="pill ${t.levelKnown ? 'wait' : 'check'}">${esc(t.level)}</span> <span class="small muted">for ${esc(d.member.name)}</span></p>
+        </div></div>
+      ${hold}${actions}${extras}${instant}${next}
+      <div class="card"><h3>At your libraries</h3>
+        <table class="avail"><tbody>${d.availability.map((a) => `<tr>
+          <td><b>${esc(a.libraryName)}</b><br><span class="muted small">${a.status === 'coming' ? `${a.onOrder} on order` : `${a.owned} cop${a.owned === 1 ? 'y' : 'ies'}`}${a.status === 'check' ? ` · last synced ${esc(a.asOf.slice(0, 10))}` : ''}</span></td>
+          <td>${a.status === 'available' ? '<span class="pill ok">Available now</span>' : a.status === 'check' ? '<span class="pill check">Check availability</span>' : a.status === 'coming' ? `<span class="pill kid">${esc(a.statusLabel)}</span><br><span class="small muted">new hold: ${esc(a.newHoldWaitLabel)}</span>` : `<span class="pill wait">${esc(a.statusLabel)}</span><br><span class="small muted">new hold: ${esc(a.newHoldWaitLabel)}</span>`}</td>
+        </tr>`).join('')}</tbody></table></div>`;
+  }
+
+  function nextUpBlock(d) {
+    const n = d.nextUp;
+    const excluded = n.excluded.length ? `<p class="small muted">Not suggested: ${n.excluded.map((x) => `${esc(x.title)} (${esc(x.reason.toLowerCase())})`).join('; ')}.</p>` : '';
+    if (!n.suggestions.length) return `<div class="card"><h3>Next-Up</h3><p class="muted small">No available read-alikes right now.</p>${excluded}</div>`;
+    return `
+      <div class="nextup"><span class="eyebrow">Next-Up · read tonight</span>
+        <b style="font-family:var(--font-display);font-size:1.15rem">Don't wait. These are like ${esc(d.title.title)} and free to borrow now.</b></div>
+      <ul class="list">${n.suggestions.map((s) => `<li class="item">${cover(s)}<div class="grow">
+        <div class="title">${esc(s.title)}</div><div class="muted small">${esc(s.why)}</div>
+        <div class="small accent">${esc(s.level)} · ${esc(s.libraryName)}</div>
+        <div class="actions" style="margin-top:6px">
+          <button type="button" class="btn primary small" data-borrow-title="${s.titleId}">Borrow</button>
+          <button type="button" class="btn ghost small" data-vote="up" data-suggested="${s.titleId}" aria-label="Good suggestion">Good pick</button>
+          <button type="button" class="btn ghost small" data-vote="down" data-suggested="${s.titleId}" aria-label="Not a good suggestion">Not for us</button>
+        </div></div></li>`).join('')}</ul>${excluded}`;
+  }
+
+  // ---------- approvals ----------
+  async function viewApprovals() {
+    if (isKid()) return '<p class="muted">Only parents review requests.</p>';
+    const r = await call('GET', '/api/home');
+    if (r.status !== 200) return errorBox(r);
+    const pend = r.body.pendingApprovals;
+    const ev = r.body.meetupRequests;
+    return `<h1>Approvals</h1><p class="muted small">Books inside each kid's age band are approved automatically. You only see exceptions, and requests to go to events.</p>
+      ${pend.length ? `<ul class="list">${pend.map((a) => `<li class="card">
+        <div><b>${esc(nameOf(a.memberId))}</b> asked to borrow <b>${esc(a.title)}</b></div>
+        <p class="small muted">${esc(a.reason)}</p>
+        <div class="actions">
+          <button type="button" class="btn primary small" data-decide="approve" data-approval="${a.id}">Approve this book</button>
+          <button type="button" class="btn ghost small" data-decide="approve_series" data-approval="${a.id}">Approve the series</button>
+          <button type="button" class="btn ghost small" data-decide="decline" data-approval="${a.id}">Not now</button>
+        </div></li>`).join('')}</ul>` : ''}
+      ${ev.length ? `<h2>Event requests</h2><ul class="list">${ev.map((q) => `<li class="card">
+        <div><b>${esc(nameOf(q.by))}</b> wants to go to <b>${esc(q.title)}</b></div>
+        <p class="small muted">${esc(when(q.startsAt))}. Approving books seats for ${esc(nameOf(q.by))} and you.</p>
+        <div class="actions"><button type="button" class="btn primary small" data-rsvp-decide="approve" data-rsvp-id="${q.id}">Book it</button>
+          <button type="button" class="btn ghost small" data-rsvp-decide="decline" data-rsvp-id="${q.id}">Not this time</button></div></li>`).join('')}</ul>` : ''}
+      ${!pend.length && !ev.length ? '<div class="notice ok"><b>Nothing to review</b><span class="small">Switch to Arjun and ask for Deep Sea Detectives (record R5), or ask to go to an event, to see a request arrive.</span></div>' : ''}`;
+  }
+
+  async function viewDigest() {
+    const r = await call('GET', '/api/digest');
+    if (r.status !== 200) return errorBox(r);
+    const d = r.body;
+    const hrs = (m) => (m >= 60 ? `${(m / 60).toFixed(1).replace(/\.0$/, '')} h` : `${m} min`);
+    return `<p class="muted small">Week ending ${esc(d.weekEnding)} · synthetic data</p>
+      <h1>Your family finished ${plural(d.totals.booksFinished, 'book')}</h1>
+      <div class="stats"><div class="stat"><b>${d.totals.booksFinished}</b><span class="small muted">books finished</span></div>
+        <div class="stat"><b>${hrs(d.totals.minutes)}</b><span class="small muted">reading time</span></div>
+        <div class="stat"><b>${Math.max(...d.members.map((m) => m.streak))}</b><span class="small muted">longest current streak</span></div></div>
+      ${d.members.map((m) => `<div class="card"><div class="row"><span class="avatar ${m.role === 'kid' ? 'kid' : ''}" style="width:40px;height:40px;font-size:1rem">${esc(m.name[0])}</span>
+        <div class="grow"><h3>${esc(m.name)}</h3><p class="small muted">${m.booksFinished} finished · ${hrs(m.minutes)} · read ${m.daysRead} of 7 days · ${m.streak}-day streak</p></div></div>
+        ${m.streak === 0 && m.role === 'kid' ? `<p class="small">${esc(m.name)} could use a nudge: a bedtime chapter together starts a fresh streak.</p>` : ''}
+        ${m.books.map((b) => `<div><b>${esc(b.title)}</b> ${b.reaction ? `<span class="pill kid">${esc(REACT[b.reaction])}</span>` : ''}
+          ${m.role === 'kid' ? `<p class="small muted">Ask tonight: “${esc(b.prompt)}”</p>` : ''}</div>`).join('') || '<p class="small muted">No books finished this week.</p>'}
+      </div>`).join('')}`;
+  }
+
+  async function viewLibrary() {
+    const r = await call('GET', '/api/library');
+    if (r.status !== 200) return errorBox(r);
+    const libs = r.body.libraries;
+    const health = await api.call('GET', '/api/health', {});
+    const stripeMode = (health.body && health.body.stripe) || 'simulated';
+    return `<h1>Payments</h1>
+      <p class="muted small">Families never pay. When a series book has a long wait, the library can pay for an instant copy. Readaroo records each one as a Stripe usage charge and never spends past the library's cap. Stripe mode: <b>${esc(stripeMode)}</b>.</p>
+      <div class="card"><h3>How the money moves</h3>
+        <div class="flow">
+          <div class="step"><b>1. Borrow instantly</b>A kid is mid-series and the wait is 4+ weeks.</div>
+          <div class="step"><b>2. Budget check</b>Readaroo reserves the price under the library's daily and monthly cap, or says no.</div>
+          <div class="step"><b>3. Stripe meter event</b>One usage charge per borrow, keyed <span class="mono">borrow:&lt;id&gt;</span> so retries never double charge.</div>
+        </div>
+        <p class="small muted">At month end, Stripe Billing can turn each library's meter total into an invoice ($0.01 per unit = 1 cent of usage).</p>
+      </div>
+      ${libs.map((l) => {
+        const rows = l.meterEvents.map((m) => `<tr><td class="mono">${esc(m.stripeId)}</td><td>${esc(m.mode)}</td><td>${money(m.valueCents)}</td></tr>`).join('');
+        const total = l.meterEvents.reduce((sum, m) => sum + m.valueCents, 0);
+        return `<div class="card"><div class="row"><h3 class="grow">${esc(l.name)}</h3><span class="pill ${l.stripeConnected ? 'ok' : 'sky'}">${l.stripeConnected ? 'Stripe customer linked' : 'Simulated customer'}</span></div>
+          <table class="invoice"><thead><tr><th>Usage charge</th><th>Mode</th><th>Amount</th></tr></thead>
+            <tbody>${rows || '<tr><td colspan="3" class="muted">No instant borrows yet in this demo. Try record R3.</td></tr>'}</tbody>
+            <tfoot><tr><td colspan="2">Invoice preview from this demo</td><td>${money(total)}</td></tr></tfoot></table>
+        </div>`;
+      }).join('')}
+      <h2>Budgets</h2><p class="muted small">Today is ${esc(r.body.today)}. Earlier spend this month came from other families.</p>
+      ${libs.map((l) => {
+        const dp = Math.min(100, Math.round((l.spentTodayCents / l.dailyCapCents) * 100));
+        const mp = Math.min(100, Math.round((l.spentMonthCents / l.monthlyCapCents) * 100));
+        return `<div class="card"><h3>${esc(l.name)}</h3>
+          <div class="small">Today ${money(l.spentTodayCents)} of ${money(l.dailyCapCents)} ${dp >= 100 ? '<span class="pill bad">Cap reached</span>' : ''}</div>
+          <div class="bar ${dp >= 100 ? 'full' : ''}" role="img" aria-label="${dp}% of daily cap used"><span style="width:${dp}%"></span></div>
+          <div class="small">This month ${money(l.spentMonthCents)} of ${money(l.monthlyCapCents)}</div>
+          <div class="bar" role="img" aria-label="${mp}% of monthly cap used"><span style="width:${mp}%"></span></div>
+          <p class="small muted">${plural(l.meterEvents.length, 'metered instant borrow')} · ${l.refusals} refused at the cap · Stripe customer ${l.stripeConnected ? 'linked' : 'not linked (simulated)'}</p>
+        </div>`;
+      }).join('')}`;
+  }
+
+  async function guidePanel() {
+    const [rec, ev, health] = await Promise.all([
+      api.call('GET', '/api/demo-records', {}), call('GET', '/api/events'), api.call('GET', '/api/health', {}),
+    ]);
+    const records = rec.status === 200 ? rec.body.records : [];
+    const events = ev.status === 200 ? ev.body.events : [];
+    return `<div class="card"><div class="row"><h2 class="grow">Demo records</h2><span class="chip demo">Synthetic</span></div>
+        <p class="small muted">Each record proves one behavior. Open it to jump in as the right family member.</p>
+        ${records.map((r) => `<div class="record"><div class="row"><span class="rid">${esc(r.id)}</span><b class="grow">${esc(r.label)}</b>
+          <button type="button" class="btn ghost small" data-record="${r.id}" data-title="${r.titleId || ''}" data-member="${r.memberId}" data-rview="${r.view || 'title'}" data-rborrow="${r.borrowId || ''}">Open</button></div>
+          <span class="small muted">${esc(r.proves)}</span></div>`).join('')}
+        <button type="button" class="btn ghost small" data-reset="1">Reset demo data</button>
+      </div>
+      <div class="card"><h2>Audit log</h2>
+        <div class="log">${events.length ? events.map((e) => `<div><span class="type">${esc(e.type)}</span><span class="muted">${esc(nameOf(e.actor))} · ${esc(summary(e))}</span></div>`).join('') : '<p class="small muted">Every borrow, hold, approval, reading session, booking and charge appears here.</p>'}</div>
+      </div>
+      <footer>Mode: ${esc(health.body && health.body.mode)} · Stripe: ${esc(health.body && health.body.stripe)}</footer>`;
+  }
+  function summary(e) {
+    const d = e.data || {};
+    if (d.reason) return d.reason;
+    if (d.priceCents) return money(d.priceCents);
+    if (d.vote) return `${d.vote} on ${d.suggestedTitleId}`;
+    if (d.minutes !== undefined && d.toPage !== undefined) return `${d.minutes} min, to page ${d.toPage}${d.retry ? ' (resaved)' : ''}`;
+    if (d.status) return `${d.status}, ${(d.attendees || []).length} people`;
+    if (d.kind && d.value) return `${d.kind} ${d.value}`;
+    return d.titleId || d.meetupId || d.approvalId || '';
+  }
+
+  function errorBox(r) {
+    return `<div class="notice bad"><b>Couldn't load this</b><span class="small">${esc((r.body && r.body.error) || 'Unknown error')}</span></div>`;
+  }
+
+  // ---------- render ----------
+  async function render() {
+    if (!state.members.length) {
+      const h = await api.call('GET', '/api/home', { actor: state.actor });
+      if (h.status === 200) state.members = h.body.members;
+    }
+    $('#actor').innerHTML = state.members.map((m) => `<option value="${m.id}" ${m.id === state.actor ? 'selected' : ''}>${esc(m.name)}${m.role === 'kid' ? ` (${m.age})` : ' (parent)'}</option>`).join('');
+    const views = { home: viewHome, discover: viewDiscover, lists: viewLists, events: viewEvents, title: viewTitle, reader: viewReader, approvals: viewApprovals, digest: viewDigest, library: viewLibrary, guide: guidePanel, more: viewMore };
+    document.body.classList.toggle('kid', isKid());
+    const body = await (views[state.view] || viewHome)();
+    const main = $('#main');
+    main.classList.toggle('enter', state.animate);
+    main.innerHTML = navBar() + body;
+    state.animate = false;
+    $('#guide').innerHTML = await guidePanel();
+    $('#tabbar').innerHTML = tabBar();
+  }
+
+  async function act(method, path, body, after) {
+    const r = await call(method, path, null, body);
+    if (r.status >= 400) { toast((r.body && r.body.error) || 'Something went wrong.'); await render(); return r; }
+    toast(r.body.message || 'Done.');
+    celebrate(r.body);
+    if (after) after(r.body);
+    await render();
+    return r;
+  }
+
+  document.addEventListener('click', async (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    const box = b.getBoundingClientRect();
+    state.lastClick = { x: box.left + box.width / 2, y: box.top + box.height / 2 };
+    if (b.id === 'install') return installApp();
+    const ds = b.dataset;
+    if (ds.go) return go(ds.go);
+    if (ds.actor) { state.actor = ds.actor; return go('home'); }
+    if (ds.record) {
+      state.actor = ds.member;
+      if (ds.rview === 'reader') return go('reader', { borrowId: ds.rborrow });
+      if (ds.rview === 'title') return go('title', { titleId: ds.title, member: ds.member });
+      return go(ds.rview);
+    }
+    if (ds.read) { state.reader = null; return go('reader', { borrowId: ds.read }); }
+    if (ds.listMember) return go('lists', { listMember: ds.listMember });
+    if (ds.discoverMember) return go('discover', { discoverMember: ds.discoverMember });
+    if (ds.clearSearch) { state.q = ''; return render(); }
+    if (ds.title) return go('title', { titleId: ds.title, member: ds.member || state.actor });
+    if (ds.reset) return act('POST', '/api/reset', {}, () => { state.view = 'home'; state.reader = null; });
+    if (ds.page) {
+      const rd = state.reader;
+      rd.page = Math.max(0, Math.min(rd.pages, rd.page + Number(ds.page)));
+      $('#rd-page').textContent = rd.page;
+      const bar = b.closest('.reader').querySelector('.bar > span');
+      if (bar) bar.style.width = `${Math.round((rd.page / rd.pages) * 100)}%`;
+      return;
+    }
+    if (ds.reader) {
+      const r = await flushReading(false, { finished: ds.reader === 'finished' });
+      if (r && r.status >= 400) { toast(r.body.error); return; }
+      toast(r ? r.body.message : 'Nothing to save yet: read for a bit first.');
+      if (r) celebrate(r.body);
+      state.reader = null;
+      return go('home');
+    }
+    if (ds.act === 'borrow') return act('POST', '/api/borrow', { member: state.member, titleId: state.titleId });
+    if (ds.act === 'hold') return act('POST', '/api/holds', { member: state.member, titleId: state.titleId });
+    if (ds.act === 'instant') return act('POST', '/api/instant', { member: state.member, titleId: state.titleId });
+    if (ds.act === 'refresh') return act('POST', '/api/refresh', { titleId: state.titleId });
+    if (ds.borrowTitle) return act('POST', '/api/borrow', { member: ds.member || state.member, titleId: ds.borrowTitle });
+    if (ds.prehold) return act('POST', '/api/holds', { member: ds.member, titleId: ds.prehold });
+    if (ds.addList) return act('POST', '/api/tbr', { member: ds.member, titleId: ds.addList });
+    if (ds.removeList) return act('POST', '/api/tbr/remove', { member: ds.member, titleId: ds.removeList });
+    if (ds.follow) return act('POST', '/api/follow', { member: ds.member, kind: ds.follow, value: ds.value, on: ds.on !== 'false' });
+    if (ds.vote) return act('POST', '/api/feedback', { heldTitleId: state.titleId, suggestedTitleId: ds.suggested, vote: ds.vote });
+    if (ds.decide) return act('POST', `/api/approvals/${ds.approval}`, { decision: ds.decide });
+    if (ds.rsvpDecide) return act('POST', `/api/rsvps/${ds.rsvpId}`, { decision: ds.rsvpDecide });
+    if (ds.react) return act('POST', '/api/reactions', { borrowId: ds.borrow, reaction: ds.react });
+    if (ds.askMeetup) return act('POST', `/api/meetups/${ds.askMeetup}/rsvp`, { attendees: [state.actor] });
+    if (ds.cancelMeetup) return act('POST', `/api/meetups/${ds.cancelMeetup}/cancel`, {});
+    if (ds.rsvp) {
+      const ids = [...document.querySelectorAll(`input[name="att-${ds.rsvp}"]:checked`)].map((x) => x.value);
+      if (!ids.length) { toast('Pick at least one person who is going.'); return; }
+      return act('POST', `/api/meetups/${ds.rsvp}/rsvp`, { attendees: ids });
+    }
+  });
+  document.addEventListener('submit', (e) => {
+    if (e.target.id !== 'search-form') return;
+    e.preventDefault();
+    state.q = String(new FormData(e.target).get('q') || '').trim();
+    render();
+  });
+  document.addEventListener('change', (e) => {
+    if (e.target.id === 'actor') { state.actor = e.target.value; go('home'); }
+  });
+
+  // Brand mark and "Install app" (Android and desktop Chrome; iPhone uses Share > Add to Home Screen)
+  $('#brand').insertAdjacentHTML('afterbegin', roo(''));
+  let installEvent = null;
+  window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); installEvent = e; $('#install').hidden = false; });
+  window.addEventListener('appinstalled', () => { $('#install').hidden = true; toast('Readaroo is on your home screen.'); confetti(90); });
+  async function installApp() {
+    if (!installEvent) return;
+    installEvent.prompt();
+    await installEvent.userChoice.catch(() => null);
+    installEvent = null;
+    $('#install').hidden = true;
+  }
+
+  try {
+    const v = new URLSearchParams(location.search).get('view');
+    if (['discover', 'events', 'lists', 'home'].includes(v)) state.view = v;
+  } catch (e) { /* no query string support: start at home */ }
+  render();
+})();
+
+</script>
+</body>
+</html>

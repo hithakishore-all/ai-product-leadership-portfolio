@@ -1,0 +1,36 @@
+{
+  "name": "readaroo",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Readaroo: a family library app prototype. Never wait for the next book, and never read alone. All data is synthetic.",
+  "license": "MIT",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "offline": "node server.js --offline",
+    "test": "node --test \"test/**/*.test.js\"",
+    "db:setup": "node scripts/db.js setup",
+    "db:seed": "node scripts/db.js seed",
+    "stripe:setup": "node scripts/stripe-setup.js",
+    "data": "python3 data/generate_data.py",
+    "build:demo": "node scripts/build-demo.js",
+    "build:mobile": "node scripts/build-demo.js --mobile --out=mobile/www/index.html",
+    "mobile:android": "npm run build:mobile && npx cap sync android && npx cap open android",
+    "mobile:ios": "npm run build:mobile && npx cap sync ios && npx cap open ios"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.22.3",
+    "pg": "^8.23.1",
+    "stripe": "^17.7.0"
+  },
+  "devDependencies": {
+    "@capacitor/android": "6.2.3",
+    "@capacitor/cli": "6.2.3",
+    "@capacitor/core": "6.2.3",
+    "@capacitor/ios": "6.2.3"
+  }
+}

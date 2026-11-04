@@ -1,0 +1,8 @@
+{
+  "appId": "app.readaroo.demo",
+  "appName": "Readaroo",
+  "webDir": "mobile/www",
+  "backgroundColor": "#F2F7FF",
+  "ios": { "contentInset": "never" },
+  "android": { "backgroundColor": "#F2F7FF" }
+}

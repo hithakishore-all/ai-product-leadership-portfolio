@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Readaroo</title>
+<meta name="description" content="Readaroo: never wait for the next book, and never read alone. A family library app prototype with synthetic data.">
+<meta name="theme-color" content="#F2F7FF">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Readaroo">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Baloo+2:wght@600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--HEADER-->
+<header class="topbar">
+  <div class="brand" id="brand">Readaroo</div>
+  <span class="chip demo">Synthetic demo</span>
+  <button type="button" class="btn ghost small" id="install" hidden>Install app</button>
+  <label class="actor" for="actor">Acting as <select id="actor"></select></label>
+</header>
+<div class="shell">
+  <main class="app" id="main" aria-live="polite"><p class="muted">Loading…</p></main>
+  <aside class="guide side" id="guide" aria-label="Demo guide"></aside>
+</div>
+<nav class="tabbar" id="tabbar" aria-label="Main"></nav>
+<div class="toast" id="toast" role="status" hidden></div>
+<!--SCRIPTS-->
+<script src="api-http.js"></script>
+<script src="app.js"></script>
+<!--/SCRIPTS-->
+<script>
+  // Installable app: register the offline service worker when served over http(s).
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  }
+</script>
+</body>
+</html>

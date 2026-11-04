@@ -1,0 +1,22 @@
+{
+  "name": "Readaroo",
+  "short_name": "Readaroo",
+  "description": "Never wait for the next book, and never read alone. A family library app prototype with synthetic data.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F2F7FF",
+  "theme_color": "#F2F7FF",
+  "categories": ["books", "education", "kids"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Discover", "url": "/?view=discover", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Events", "url": "/?view=events", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}
