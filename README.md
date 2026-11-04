@@ -37,3 +37,8 @@ Sellers spend only about 40% of their time selling, and 69% of B2B buyers double
 **Stack:** Salesforce · Snowflake (agents run in the warehouse) · Slack Bot · Node.js · runs offline in 2 minutes, no accounts needed
 
 ▶️ **Watch the demo:** (https://www.loom.com/share/7c63280e62d94164bc1f6162bdc25c4c)
+
+**Readaroo
+Never wait for the next book, and never read alone.**
+
+Readaroo is a family library app prototype. When a book your kid wants is on hold, it finds similar books you can borrow from your libraries tonight. It keeps one holds list across every library card in the family, lets parents set age bands and approve exceptions, and sends a weekly family reading digest. Libraries can fund instant borrows for series continuations, metered through Stripe in test mode, with a hard daily and monthly cap that is never exceeded.
