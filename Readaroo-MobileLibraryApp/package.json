@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "private": true,
   "description": "Readaroo: a family library app prototype. Never wait for the next book, and never read alone. All data is synthetic.",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "main": "server.js",
   "engines": {
     "node": ">=18"

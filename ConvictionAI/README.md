@@ -407,4 +407,4 @@ More in [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md).
 
 ## License
 
-MIT. See [LICENSE](LICENSE). Fictional demo data included; ClearOps information is from the public sources linked in [packs/clearops.json](packs/clearops.json).
+Apache 2.0. See [LICENSE](LICENSE). Fictional demo data included; ClearOps information is from the public sources linked in [packs/clearops.json](packs/clearops.json).

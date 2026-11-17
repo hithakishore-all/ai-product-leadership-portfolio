@@ -483,4 +483,4 @@ console, and a pilot in shadow mode first.
 
 ## License
 
-[MIT](LICENSE). Fictional data included. Third-party names are used only to describe integrations.
+[Apache 2.0](LICENSE). Fictional data included. Third-party names are used only to describe integrations.
